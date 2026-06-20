@@ -1,0 +1,50 @@
+{
+  "id": "video-to-shorts",
+  "name": "Video → Shorts",
+  "description": "Dán link YouTube → phân tích \"DNA\" video (phong cách, hook, nhịp cắt) → lên kịch bản 3 short → tạo ảnh keyframe và video cho từng short. (Ghép video sẽ là component riêng — đang phát triển.)",
+  "nodes": [
+    {
+      "id": "video-src",
+      "type": "video",
+      "position": { "x": 120, "y": 60 },
+      "config": { "sourceUrl": "" }
+    },
+    {
+      "id": "dna",
+      "type": "text",
+      "position": { "x": 180, "y": 250 },
+      "config": {
+        "provider": "chatgpt",
+        "content": "Phân tích DNA của video này: phong cách hình ảnh, cấu trúc nội dung, hook mở đầu, nhịp cắt, tông màu, giọng kể. Trả lời chi tiết bằng tiếng Việt."
+      }
+    },
+    {
+      "id": "script",
+      "type": "text",
+      "position": { "x": 120, "y": 440 },
+      "config": {
+        "provider": "chatgpt",
+        "content": "Dựa trên DNA ở trên, lên kịch bản 3 short. Trả về DUY NHẤT một JSON array, mỗi phần tử là object: {\"title\": tiêu đề short, \"image_prompt\": prompt tạo keyframe (tiếng Anh, chi tiết bố cục/ánh sáng), \"video_prompt\": prompt tạo video (tiếng Anh, mô tả chuyển động máy quay và chủ thể)}. Không thêm chữ nào ngoài JSON array."
+      }
+    },
+    {
+      "id": "keyframe",
+      "type": "image",
+      "position": { "x": 180, "y": 630 },
+      "config": { "provider": "chatgpt" }
+    },
+    {
+      "id": "short-video",
+      "type": "video",
+      "position": { "x": 120, "y": 820 },
+      "config": { "model": "veo-3.1-fast", "duration": 6, "aspectRatio": "9:16" }
+    }
+  ],
+  "edges": [
+    { "id": "e-src-dna", "source": { "nodeId": "video-src", "port": "out" }, "target": { "nodeId": "dna", "port": "in" } },
+    { "id": "e-dna-script", "source": { "nodeId": "dna", "port": "out" }, "target": { "nodeId": "script", "port": "in" } },
+    { "id": "e-script-keyframe", "source": { "nodeId": "script", "port": "out" }, "target": { "nodeId": "keyframe", "port": "in" } },
+    { "id": "e-keyframe-start", "source": { "nodeId": "keyframe", "port": "out" }, "target": { "nodeId": "short-video", "port": "start" } },
+    { "id": "e-script-prompt", "source": { "nodeId": "script", "port": "out" }, "target": { "nodeId": "short-video", "port": "prompt" } }
+  ]
+}
