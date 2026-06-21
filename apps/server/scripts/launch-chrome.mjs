@@ -1,13 +1,16 @@
 // Mở Google Chrome cho VideoFlow với cổng remote-debugging để server kết nối qua CDP.
-// Dùng profile riêng (data/chrome-cdp-profile) vì Chrome 136+ chặn debugging trên profile mặc định.
+// Dùng profile RIÊNG (Chrome 136+ chặn debugging trên profile mặc định) đặt ở thư mục TOÀN CỤC
+// (~/chrome-cdp-profile) → mọi project/feature nối chung 1 Chrome đã đăng nhập, login 1 lần xài mọi nơi.
 // Chrome KHÔNG bật cờ automation ở đây → đăng nhập Google/ChatGPT/Claude hoạt động bình thường.
 import { spawn } from 'node:child_process';
 import { mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import net from 'node:net';
+import os from 'node:os';
 
 const PORT = Number(process.env.CHROME_CDP_PORT ?? 9222);
-const PROFILE_DIR = path.join(import.meta.dirname, '..', '..', '..', 'data', 'chrome-cdp-profile');
+// Override bằng env CHROME_CDP_PROFILE nếu muốn đặt chỗ khác.
+const PROFILE_DIR = process.env.CHROME_CDP_PROFILE || path.join(os.homedir(), 'chrome-cdp-profile');
 
 const CHROME_PATHS = {
   darwin: [

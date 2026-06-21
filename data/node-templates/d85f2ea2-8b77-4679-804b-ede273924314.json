@@ -12,7 +12,7 @@
       "config": {
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/d78fe11f-8e9b-4d69-9625-ee0c802fa6fa/e05f7791-896a-4e46-914b-2b10fa96595e/image-0.png",
+          "path": "/Users/nguyentruong/video-flow/data/runs/d78fe11f-8e9b-4d69-9625-ee0c802fa6fa/e05f7791-896a-4e46-914b-2b10fa96595e/image-0.png",
           "mime": "image/png"
         },
         "provider": "gemini"
@@ -29,7 +29,7 @@
         "provider": "gemini",
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/ccf88c98-e759-40f6-a39d-98e6aa38810f/eace5c8e-fe28-46a8-be3b-d36cf31251fc/image-0.png",
+          "path": "/Users/nguyentruong/video-flow/data/runs/ccf88c98-e759-40f6-a39d-98e6aa38810f/eace5c8e-fe28-46a8-be3b-d36cf31251fc/image-0.png",
           "mime": "image/png"
         }
       }
@@ -45,7 +45,7 @@
         "model": "omni-flash",
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/16eaa79a-09d9-471e-9439-79c052566875/7c0c8a57-3e3f-4c13-90e4-11aab7cf4958/video-0.mp4",
+          "path": "/Users/nguyentruong/video-flow/data/runs/16eaa79a-09d9-471e-9439-79c052566875/7c0c8a57-3e3f-4c13-90e4-11aab7cf4958/video-0.mp4",
           "mime": "video/mp4"
         }
       },
@@ -90,7 +90,7 @@
         "duration": 6,
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/1ee9897e-c47d-4918-96b0-b27d8127b0e2/b1c03a6e-7c51-438e-9167-41b1d01bc0ef/video-0.mp4",
+          "path": "/Users/nguyentruong/video-flow/data/runs/1ee9897e-c47d-4918-96b0-b27d8127b0e2/b1c03a6e-7c51-438e-9167-41b1d01bc0ef/video-0.mp4",
           "mime": "video/mp4"
         }
       },
@@ -121,7 +121,7 @@
         "model": "omni-flash",
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/7c4598c1-8284-4ea1-ac95-8270c1e3eb08/19f90cee-f296-46de-8b96-e2cda0def148/video-0.mp4",
+          "path": "/Users/nguyentruong/video-flow/data/runs/7c4598c1-8284-4ea1-ac95-8270c1e3eb08/19f90cee-f296-46de-8b96-e2cda0def148/video-0.mp4",
           "mime": "video/mp4"
         }
       },
@@ -138,7 +138,7 @@
       "config": {
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/assets/d08b4460-315c-425b-a9f3-59a4cd11e739.webp",
+          "path": "/Users/nguyentruong/video-flow/data/assets/d08b4460-315c-425b-a9f3-59a4cd11e739.webp",
           "mime": "image/webp"
         }
       }
@@ -179,7 +179,7 @@
       "config": {
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/assets/17facdde-9c07-4ee5-a505-0083f5ab784b.png",
+          "path": "/Users/nguyentruong/video-flow/data/assets/17facdde-9c07-4ee5-a505-0083f5ab784b.png",
           "mime": "image/png"
         }
       }
@@ -208,7 +208,7 @@
         "model": "omni-flash",
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/5030d62a-2b4b-4336-8bd7-fd85c3557d07/8fc9ee22-f3ac-4436-9f0e-0626f86e0252/video-0.mp4",
+          "path": "/Users/nguyentruong/video-flow/data/runs/5030d62a-2b4b-4336-8bd7-fd85c3557d07/8fc9ee22-f3ac-4436-9f0e-0626f86e0252/video-0.mp4",
           "mime": "video/mp4"
         }
       },
@@ -238,7 +238,7 @@
       "config": {
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/assets/7c9741f5-4727-4b40-8ff1-3a2463e32ca2.png",
+          "path": "/Users/nguyentruong/video-flow/data/assets/7c9741f5-4727-4b40-8ff1-3a2463e32ca2.png",
           "mime": "image/png"
         }
       }
@@ -253,7 +253,7 @@
       "config": {
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/1ca1c9be-d55a-4ad7-b3b7-24c8025e6f42/51c1a774-3d75-4ace-b679-f6e66f9f5aab/image-0.png",
+          "path": "/Users/nguyentruong/video-flow/data/runs/1ca1c9be-d55a-4ad7-b3b7-24c8025e6f42/51c1a774-3d75-4ace-b679-f6e66f9f5aab/image-0.png",
           "mime": "image/png"
         },
         "provider": "gemini"
@@ -271,7 +271,7 @@
         "duration": 8,
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/new-project/data/runs/69795040-300d-452f-949a-be3373583837/c7663b52-8298-4229-8284-c913634898cf/video-0.mp4",
+          "path": "/Users/nguyentruong/video-flow/data/runs/69795040-300d-452f-949a-be3373583837/c7663b52-8298-4229-8284-c913634898cf/video-0.mp4",
           "mime": "video/mp4"
         }
       },
