@@ -1,0 +1,493 @@
+{
+  "id": "d85f2ea2-8b77-4679-804b-ede273924314",
+  "name": "Flow tạo 5 video cho quần áo",
+  "nodes": [
+    {
+      "id": "e05f7791-896a-4e46-914b-2b10fa96595e",
+      "type": "image",
+      "position": {
+        "x": 927.8140551421711,
+        "y": 878.09383118627
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/d78fe11f-8e9b-4d69-9625-ee0c802fa6fa/e05f7791-896a-4e46-914b-2b10fa96595e/image-0.png",
+          "mime": "image/png"
+        },
+        "provider": "gemini"
+      }
+    },
+    {
+      "id": "f2181f21-2bc6-4963-839a-22c24f200a01",
+      "type": "image",
+      "position": {
+        "x": 957.0978311421118,
+        "y": 560.853032254304
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/ccf88c98-e759-40f6-a39d-98e6aa38810f/eace5c8e-fe28-46a8-be3b-d36cf31251fc/image-0.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "7c0c8a57-3e3f-4c13-90e4-11aab7cf4958",
+      "type": "video",
+      "position": {
+        "x": 2994.114212411737,
+        "y": 818.1495642666083
+      },
+      "config": {
+        "model": "omni-flash",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/16eaa79a-09d9-471e-9439-79c052566875/7c0c8a57-3e3f-4c13-90e4-11aab7cf4958/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      },
+      "width": 524,
+      "height": 298
+    },
+    {
+      "id": "8cac7456-ba49-4906-a6ae-c1122a377136",
+      "type": "text",
+      "position": {
+        "x": 2327.3873939509303,
+        "y": 832.1188707312219
+      },
+      "config": {
+        "content": "Static locked-off camera, framing unchanged. The woman stands poised and confident, her outfit fully visible. She takes a slow, natural breath — the fabric of her clothing shifts and drapes elegantly with the movement. She gently smooths the outfit with one hand in a calm, graceful gesture, then lowers her arm back to her side. The clothing's texture, cut, and silhouette are showcased clearly throughout. Soft even studio lighting, neutral background."
+      },
+      "width": 324,
+      "height": 293
+    },
+    {
+      "id": "349b2811-54b1-442f-af0d-a1a487e927c7",
+      "type": "text",
+      "position": {
+        "x": 2330.3903762210175,
+        "y": 1263.7100857587466
+      },
+      "config": {
+        "content": "Static locked-off camera, framing unchanged. The woman walks purposefully toward the camera at a brisk but still graceful pace — starting from a full-body wide shot, she strides forward with confidence and comes very close to the camera, ending in a tight mid-body close-up where her torso and outfit fill the frame. She stops right in front of the camera without stepping back. The movement is fluid and direct, the outfit clearly visible and flowing with every step."
+      },
+      "width": 326,
+      "height": 294
+    },
+    {
+      "id": "b1c03a6e-7c51-438e-9167-41b1d01bc0ef",
+      "type": "video",
+      "position": {
+        "x": 2997.379615906583,
+        "y": 1226.470165671154
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 6,
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/1ee9897e-c47d-4918-96b0-b27d8127b0e2/b1c03a6e-7c51-438e-9167-41b1d01bc0ef/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      },
+      "width": 536,
+      "height": 276
+    },
+    {
+      "id": "fda1a9a2-f129-4e86-a68d-34ed9e81a46f",
+      "type": "text",
+      "position": {
+        "x": 2346.8055972509296,
+        "y": 30.56696587537465
+      },
+      "config": {
+        "content": "Static locked-off camera, framing unchanged; she keeps the phone up covering her face the whole time. From the exact pose in the photo, her free hand sweeps up to push her long hair back behind her shoulder, then gives a small relaxed wave near the phone with a light bounce to a slow rhythm, and finally lowers the hand back down to return to the original neutral pose by the end. Hair resettles; the dress and sheer shirt shimmer with the small movements. Keep the outfit, gray wall, white sneakers and soft lighting identical. Photorealistic, smooth, 8 seconds, ends exactly at the starting pose."
+      },
+      "width": 379,
+      "height": 233
+    },
+    {
+      "id": "19f90cee-f296-46de-8b96-e2cda0def148",
+      "type": "video",
+      "position": {
+        "x": 2957.671053082841,
+        "y": 0
+      },
+      "config": {
+        "model": "omni-flash",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/7c4598c1-8284-4ea1-ac95-8270c1e3eb08/19f90cee-f296-46de-8b96-e2cda0def148/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      },
+      "width": 532,
+      "height": 307
+    },
+    {
+      "id": "35c544bf-e428-4e65-b7c5-5ee2fc53a6fd",
+      "type": "image",
+      "position": {
+        "x": 69.03668197488969,
+        "y": 707.1167192314126
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/assets/d08b4460-315c-425b-a9f3-59a4cd11e739.webp",
+          "mime": "image/webp"
+        }
+      }
+    },
+    {
+      "id": "16c40731-b187-4259-82e0-6a4997f97560",
+      "type": "text",
+      "position": {
+        "x": 968.1920446514396,
+        "y": 139.5038444498024
+      },
+      "config": {
+        "content": "Image 1 is a person. Image 2 is a clothing item.\nDress the person in Image 1 with the exact garment from Image 2.\nPreserve the garment's pattern, color, texture and shape faithfully.\nKeep the person's face, hair, body, pose, lighting and background unchanged.\nPhotorealistic, natural fabric folds, correct proportions."
+      },
+      "width": 301,
+      "height": 241
+    },
+    {
+      "id": "8456543c-9251-4007-b5ef-fb47abafcc5e",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 248.27962332070445
+      },
+      "config": {
+        "content": "Analyze the attached image in extreme detail and extract ALL visible clothing items and accessories worn or present in the image.\n\nFor each detected item:\n- Isolate it completely from the original subject and background.\n- Recreate it as a standalone product image.\n- Preserve exact color, fabric texture, stitching, seams, folds, logos (if any), material thickness, proportions, and structural details.\n- Maintain accurate scale and garment construction.\n- Do not redesign or reinterpret the item.\n\nEach clothing item and accessory must be:\n- Fully visible\n- Properly shaped as it would appear naturally laid flat or positioned cleanly\n- Free of distortion\n- Photorealistic\n- High resolution\n- Studio-quality product photography\n\nBACKGROUND:\nPure solid white background (#FFFFFF).\nNo shadows unless soft natural grounding shadow directly beneath the item.\nNo reflections.\nNo gradients.\nNo environmental elements.\n\nLIGHTING:\nSoft studio lighting.\nEven exposure.\nNo dramatic shadows.\nAccurate color reproduction.\nTrue-to-life material rendering.\n\nSTRICT RULES:\n- Do NOT include the model or body parts.\n- Do NOT merge multiple items into one object.\n- Separate each item individually.\n- Maintain 99% visual accuracy compared to the original image.\n- Do NOT stylize.\n- No CGI look.\n- No artistic reinterpretation.\n- No texture smoothing.\n\nNEGATIVE PROMPT:\nblurry, distorted shape, warped fabric, incorrect color, missing details, artificial shine, over-smoothing, CGI, illustration, cartoon, rendering artifacts, merged objects, incomplete garment, cut-off edges."
+      },
+      "width": 430,
+      "height": 299
+    },
+    {
+      "id": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+      "type": "image",
+      "position": {
+        "x": 1575.1321564547254,
+        "y": 410.71337555600394
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/assets/17facdde-9c07-4ee5-a505-0083f5ab784b.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "c02764bf-0cfa-4dad-bda3-6fe0159701b7",
+      "type": "text",
+      "position": {
+        "x": 2301.419357372909,
+        "y": 534.7109537594915
+      },
+      "config": {
+        "content": "Static locked-off camera, framing unchanged. The woman performs a graceful, slow full 360-degree spin in place — rotating smoothly to reveal the outfit from every angle: front, left side, back, right side, then returning to face the camera. One complete rotation, fluid and elegant, no stepping forward or backward."
+      },
+      "width": 411,
+      "height": 182
+    },
+    {
+      "id": "8fc9ee22-f3ac-4436-9f0e-0626f86e0252",
+      "type": "video",
+      "position": {
+        "x": 2958.952303121351,
+        "y": 385.99322732221094
+      },
+      "config": {
+        "model": "omni-flash",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/5030d62a-2b4b-4336-8bd7-fd85c3557d07/8fc9ee22-f3ac-4436-9f0e-0626f86e0252/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      },
+      "width": 524,
+      "height": 298
+    },
+    {
+      "id": "778c2d3e-a7d2-4b78-9363-d44ab76ab2ab",
+      "type": "text",
+      "position": {
+        "x": 2334.67117945702,
+        "y": 1664.44407279755
+      },
+      "config": {
+        "content": " A fictional young woman, holding a phone up near her face with her right hand as if filming a mirror selfie. She keeps the phone in the same right hand the entire time and never switches hands; the phone stays steadily near her face throughout. She shifts her weight from one leg to the other, slowly turning her hips side to side to show her outfit. With her free left hand she lightly touches her waist, then rests it on her hip. She lifts her free left hand toward her shoulder, tilts her head slightly, and turns her body gently from side to side. She lowers her left hand and returns to standing upright. Slow, graceful, natural movements. Soft even indoor lighting, vertical portrait framing, static camera, cinematic and realistic."
+      },
+      "width": 365,
+      "height": 334
+    },
+    {
+      "id": "003e1318-0da6-4bd1-becc-deb52d7ae21f",
+      "type": "image",
+      "position": {
+        "x": 935.6207127312836,
+        "y": 1217.72216047296
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/assets/7c9741f5-4727-4b40-8ff1-3a2463e32ca2.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "51c1a774-3d75-4ace-b679-f6e66f9f5aab",
+      "type": "image",
+      "position": {
+        "x": 1670.4223935251496,
+        "y": 1427.556888202696
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/1ca1c9be-d55a-4ad7-b3b7-24c8025e6f42/51c1a774-3d75-4ace-b679-f6e66f9f5aab/image-0.png",
+          "mime": "image/png"
+        },
+        "provider": "gemini"
+      }
+    },
+    {
+      "id": "c7663b52-8298-4229-8284-c913634898cf",
+      "type": "video",
+      "position": {
+        "x": 3007.680141555718,
+        "y": 1580.7035142126686
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 8,
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/runs/69795040-300d-452f-949a-be3373583837/c7663b52-8298-4229-8284-c913634898cf/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      },
+      "width": 519,
+      "height": 377
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__8cac7456-ba49-4906-a6ae-c1122a377136out-7c0c8a57-3e3f-4c13-90e4-11aab7cf4958prompt",
+      "source": {
+        "nodeId": "8cac7456-ba49-4906-a6ae-c1122a377136",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "7c0c8a57-3e3f-4c13-90e4-11aab7cf4958",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__349b2811-54b1-442f-af0d-a1a487e927c7out-b1c03a6e-7c51-438e-9167-41b1d01bc0efprompt",
+      "source": {
+        "nodeId": "349b2811-54b1-442f-af0d-a1a487e927c7",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "b1c03a6e-7c51-438e-9167-41b1d01bc0ef",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__fda1a9a2-f129-4e86-a68d-34ed9e81a46fout-19f90cee-f296-46de-8b96-e2cda0def148prompt",
+      "source": {
+        "nodeId": "fda1a9a2-f129-4e86-a68d-34ed9e81a46f",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "19f90cee-f296-46de-8b96-e2cda0def148",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__35c544bf-e428-4e65-b7c5-5ee2fc53a6fdout-e05f7791-896a-4e46-914b-2b10fa96595eimage",
+      "source": {
+        "nodeId": "35c544bf-e428-4e65-b7c5-5ee2fc53a6fd",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "e05f7791-896a-4e46-914b-2b10fa96595e",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__8456543c-9251-4007-b5ef-fb47abafcc5eout-e05f7791-896a-4e46-914b-2b10fa96595eprompt",
+      "source": {
+        "nodeId": "8456543c-9251-4007-b5ef-fb47abafcc5e",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "e05f7791-896a-4e46-914b-2b10fa96595e",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__9e403362-7126-40e0-bb30-dc7c8c698a28out-7c0c8a57-3e3f-4c13-90e4-11aab7cf4958start",
+      "source": {
+        "nodeId": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "7c0c8a57-3e3f-4c13-90e4-11aab7cf4958",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__9e403362-7126-40e0-bb30-dc7c8c698a28out-b1c03a6e-7c51-438e-9167-41b1d01bc0efstart",
+      "source": {
+        "nodeId": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "b1c03a6e-7c51-438e-9167-41b1d01bc0ef",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__9e403362-7126-40e0-bb30-dc7c8c698a28out-19f90cee-f296-46de-8b96-e2cda0def148start",
+      "source": {
+        "nodeId": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "19f90cee-f296-46de-8b96-e2cda0def148",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__e05f7791-896a-4e46-914b-2b10fa96595eout-9e403362-7126-40e0-bb30-dc7c8c698a28image",
+      "source": {
+        "nodeId": "e05f7791-896a-4e46-914b-2b10fa96595e",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__16c40731-b187-4259-82e0-6a4997f97560out-9e403362-7126-40e0-bb30-dc7c8c698a28prompt",
+      "source": {
+        "nodeId": "16c40731-b187-4259-82e0-6a4997f97560",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__f2181f21-2bc6-4963-839a-22c24f200a01out-9e403362-7126-40e0-bb30-dc7c8c698a28image",
+      "source": {
+        "nodeId": "f2181f21-2bc6-4963-839a-22c24f200a01",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__c02764bf-0cfa-4dad-bda3-6fe0159701b7out-8fc9ee22-f3ac-4436-9f0e-0626f86e0252prompt",
+      "source": {
+        "nodeId": "c02764bf-0cfa-4dad-bda3-6fe0159701b7",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "8fc9ee22-f3ac-4436-9f0e-0626f86e0252",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__9e403362-7126-40e0-bb30-dc7c8c698a28out-8fc9ee22-f3ac-4436-9f0e-0626f86e0252start",
+      "source": {
+        "nodeId": "9e403362-7126-40e0-bb30-dc7c8c698a28",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "8fc9ee22-f3ac-4436-9f0e-0626f86e0252",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__003e1318-0da6-4bd1-becc-deb52d7ae21fout-51c1a774-3d75-4ace-b679-f6e66f9f5aabimage",
+      "source": {
+        "nodeId": "003e1318-0da6-4bd1-becc-deb52d7ae21f",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "51c1a774-3d75-4ace-b679-f6e66f9f5aab",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__e05f7791-896a-4e46-914b-2b10fa96595eout-51c1a774-3d75-4ace-b679-f6e66f9f5aabimage",
+      "source": {
+        "nodeId": "e05f7791-896a-4e46-914b-2b10fa96595e",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "51c1a774-3d75-4ace-b679-f6e66f9f5aab",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__16c40731-b187-4259-82e0-6a4997f97560out-51c1a774-3d75-4ace-b679-f6e66f9f5aabprompt",
+      "source": {
+        "nodeId": "16c40731-b187-4259-82e0-6a4997f97560",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "51c1a774-3d75-4ace-b679-f6e66f9f5aab",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__51c1a774-3d75-4ace-b679-f6e66f9f5aabout-b1c03a6e-7c51-438e-9167-41b1d01bc0efend",
+      "source": {
+        "nodeId": "51c1a774-3d75-4ace-b679-f6e66f9f5aab",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "b1c03a6e-7c51-438e-9167-41b1d01bc0ef",
+        "port": "end"
+      }
+    },
+    {
+      "id": "xy-edge__51c1a774-3d75-4ace-b679-f6e66f9f5aabout-c7663b52-8298-4229-8284-c913634898cfstart",
+      "source": {
+        "nodeId": "51c1a774-3d75-4ace-b679-f6e66f9f5aab",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "c7663b52-8298-4229-8284-c913634898cf",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__778c2d3e-a7d2-4b78-9363-d44ab76ab2about-c7663b52-8298-4229-8284-c913634898cfprompt",
+      "source": {
+        "nodeId": "778c2d3e-a7d2-4b78-9363-d44ab76ab2ab",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "c7663b52-8298-4229-8284-c913634898cf",
+        "port": "prompt"
+      }
+    }
+  ]
+}

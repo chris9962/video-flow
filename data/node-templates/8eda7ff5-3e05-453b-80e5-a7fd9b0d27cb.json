@@ -1,0 +1,52 @@
+{
+  "id": "8eda7ff5-3e05-453b-80e5-a7fd9b0d27cb",
+  "name": "Mẫu nữ 1",
+  "nodes": [
+    {
+      "id": "b330b86e-e54d-4cf8-8df4-39e794d3cac3",
+      "type": "image",
+      "position": {
+        "x": 605.5,
+        "y": 273.79387279780764
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/assets/b4a9bb49-4a08-4c87-a5bb-bb71d5508224.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "7341e4b3-4894-4cdd-9475-bb4652f01510",
+      "type": "image",
+      "position": {
+        "x": 369.20413254086395,
+        "y": 273.2983696480145
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/assets/6e9a76b0-d80a-4d97-8785-77580530cafa.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "db9fce74-7efd-40bf-9f52-62c8f3b91eb2",
+      "type": "image",
+      "position": {
+        "x": 848.02381008649,
+        "y": 277.1883129159782
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/assets/9c020260-d36a-4f45-98fa-557225acc29a.png",
+          "mime": "image/png"
+        }
+      }
+    }
+  ],
+  "edges": []
+}

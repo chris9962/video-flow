@@ -1,0 +1,20 @@
+{
+  "id": "07464376-573f-4f8b-8619-68a2455c4136",
+  "name": "BƯỚC tới rồi lùi",
+  "nodes": [
+    {
+      "id": "349b2811-54b1-442f-af0d-a1a487e927c7",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": "Static locked-off camera, framing unchanged; she keeps the phone up covering her face the whole time. From the exact pose in the photo, she takes two slow, relaxed steps toward the mirror so she becomes slightly larger in frame, pauses, then steps backward the same way to return to her original standing position and pose by the end. With each step the floral dress hem and the open sheer shirt sway and bounce naturally; hair moves with the walk. Keep the outfit, gray wall, white sneakers and soft lighting identical. Photorealistic, smooth, 8 seconds, ends exactly at the starting pose."
+      },
+      "width": 326,
+      "height": 294
+    }
+  ],
+  "edges": []
+}

@@ -3,6 +3,7 @@ import { useReactFlow, type NodeProps } from '@xyflow/react';
 import { isFileRef } from '@videoflow/shared';
 import { fileUrl, uploadAsset } from '../../api';
 import { NodeShell } from '../NodeShell';
+import { useBrokenSrc } from '../useBrokenSrc';
 import type { FlowNode } from '../types';
 
 /**
@@ -13,7 +14,9 @@ export function MotionBlock({ id, data, selected }: NodeProps<FlowNode>) {
   const { updateNodeData } = useReactFlow();
   const [uploading, setUploading] = useState(false);
   const { config } = data;
-  const video = isFileRef(config.video) ? config.video : null;
+  const { isBroken, markBroken } = useBrokenSrc();
+  // Bỏ qua video tải lỗi (file thiếu/404) → hiện như chưa có video
+  const video = isFileRef(config.video) && !isBroken(config.video.path) ? config.video : null;
   // content = prompt trích ra (output); result mới nhất sau Run ưu tiên hơn config đã lưu
   const extracted = data.result?.content ?? config.content;
   const promptText = typeof extracted === 'string' ? extracted : '';
@@ -49,7 +52,7 @@ export function MotionBlock({ id, data, selected }: NodeProps<FlowNode>) {
     <NodeShell type="motion" id={id} status={data.status} error={data.error} selected={selected} actions={actions}>
       {video ? (
         <div className="media-wrap">
-          <video className="media" controls preload="metadata" src={fileUrl(video)} />
+          <video className="media" controls preload="metadata" src={fileUrl(video)} onError={() => markBroken(video.path)} />
         </div>
       ) : data.hasInput ? (
         // Đã nối 1 video vào cổng Video → dùng video đó, không cần upload

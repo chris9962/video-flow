@@ -3,6 +3,7 @@ import { useReactFlow, type NodeProps } from '@xyflow/react';
 import { isFileRef } from '@videoflow/shared';
 import { fileUrl, uploadAsset } from '../../api';
 import { NodeShell } from '../NodeShell';
+import { useBrokenSrc } from '../useBrokenSrc';
 import type { FlowNode } from '../types';
 
 // Model Google Flow (value khớp FLOW_MODEL_LABELS ở server/flow-impl.ts)
@@ -17,8 +18,13 @@ export function VideoBlock({ id, data, selected }: NodeProps<FlowNode>) {
   const { updateNodeData } = useReactFlow();
   const [uploading, setUploading] = useState(false);
   const { config } = data;
+  const { isBroken, markBroken } = useBrokenSrc();
   const content = data.result?.content ?? config.content;
-  const refs = Array.isArray(content) ? content.filter(isFileRef) : null;
+  // Bỏ qua video tải lỗi (file thiếu/404) → block hiện như chưa có video
+  const okContent = isFileRef(content) && !isBroken(content.path) ? content : null;
+  const refs = Array.isArray(content)
+    ? content.filter(isFileRef).filter((r) => !isBroken(r.path))
+    : null;
   const sourceUrl = typeof config.sourceUrl === 'string' ? config.sourceUrl : '';
   const provider = typeof config.provider === 'string' ? config.provider : 'flow';
   const model = typeof config.model === 'string' ? config.model : MODELS[0].value;
@@ -41,7 +47,7 @@ export function VideoBlock({ id, data, selected }: NodeProps<FlowNode>) {
 
   const isSource = !data.hasInput;
   const actions =
-    isSource && isFileRef(content) ? (
+    isSource && okContent ? (
       <label className="node-tool" aria-label="Đổi video" title="Đổi video khác">
         ⟳
         <input
@@ -56,14 +62,14 @@ export function VideoBlock({ id, data, selected }: NodeProps<FlowNode>) {
 
   return (
     <NodeShell type="video" id={id} status={data.status} error={data.error} selected={selected} actions={actions}>
-      {isFileRef(content) ? (
+      {okContent ? (
         <div className="media-wrap">
-          <video className="media" controls preload="metadata" src={fileUrl(content)} />
+          <video className="media" controls preload="metadata" src={fileUrl(okContent)} onError={() => markBroken(okContent.path)} />
         </div>
       ) : refs && refs.length > 0 ? (
         <div className="media-stack">
           {refs.map((ref) => (
-            <video key={ref.path} className="media" controls preload="metadata" src={fileUrl(ref)} />
+            <video key={ref.path} className="media" controls preload="metadata" src={fileUrl(ref)} onError={() => markBroken(ref.path)} />
           ))}
         </div>
       ) : data.hasInput ? (

@@ -2,6 +2,7 @@ import { useReactFlow, type NodeProps } from '@xyflow/react';
 import { isFileRef } from '@videoflow/shared';
 import { fileUrl } from '../../api';
 import { NodeShell } from '../NodeShell';
+import { useBrokenSrc } from '../useBrokenSrc';
 import type { FlowNode } from '../types';
 
 const MODES = [
@@ -14,7 +15,9 @@ const MODES = [
 export function FaceSwapBlock({ id, data, selected }: NodeProps<FlowNode>) {
   const { updateNodeData } = useReactFlow();
   const { config } = data;
+  const { isBroken, markBroken } = useBrokenSrc();
   const content = data.result?.content ?? config.content;
+  const okContent = isFileRef(content) && !isBroken(content.path) ? content : null;
   const mode = typeof config.mode === 'string' ? config.mode : 'person';
   const resolution = typeof config.resolution === 'string' ? config.resolution : '720p';
 
@@ -23,9 +26,9 @@ export function FaceSwapBlock({ id, data, selected }: NodeProps<FlowNode>) {
 
   return (
     <NodeShell type="faceswap" id={id} status={data.status} error={data.error} selected={selected}>
-      {isFileRef(content) ? (
+      {okContent ? (
         <div className="media-wrap">
-          <video className="media" controls preload="metadata" src={fileUrl(content)} />
+          <video className="media" controls preload="metadata" src={fileUrl(okContent)} onError={() => markBroken(okContent.path)} />
         </div>
       ) : (
         <div className="gen-placeholder" aria-hidden="true" />

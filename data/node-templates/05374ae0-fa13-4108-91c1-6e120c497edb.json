@@ -1,0 +1,22 @@
+{
+  "id": "05374ae0-fa13-4108-91c1-6e120c497edb",
+  "name": "Mẫu chính",
+  "nodes": [
+    {
+      "id": "89b33526-fca3-4de8-a05c-30b460f06bb7",
+      "type": "image",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/new-project/data/assets/2d4badb8-350e-4eda-8889-bb804998f44d.png",
+          "mime": "image/png"
+        }
+      }
+    }
+  ],
+  "edges": []
+}

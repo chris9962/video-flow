@@ -1,5 +1,19 @@
 node_modules/
 dist/
-data/
+
+# data/ bị ignore TRỪ node-templates (node mẫu) + đúng những asset mà node mẫu tham chiếu.
+# Phần "!data/assets/..." dưới đây do scripts/sync-template-gitignore.mjs tự sinh — đừng sửa tay.
+data/*
+!data/node-templates/
+!data/assets/
+data/assets/*
+!data/assets/17facdde-9c07-4ee5-a505-0083f5ab784b.png
+!data/assets/2d4badb8-350e-4eda-8889-bb804998f44d.png
+!data/assets/6e9a76b0-d80a-4d97-8785-77580530cafa.png
+!data/assets/7c9741f5-4727-4b40-8ff1-3a2463e32ca2.png
+!data/assets/9c020260-d36a-4f45-98fa-557225acc29a.png
+!data/assets/b4a9bb49-4a08-4c87-a5bb-bb71d5508224.png
+!data/assets/d08b4460-315c-425b-a9f3-59a4cd11e739.webp
+
 *.local
 .DS_Store

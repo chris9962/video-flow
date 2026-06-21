@@ -1,0 +1,18 @@
+{
+  "id": "952ee147-4357-4901-a10e-046ec9491226",
+  "name": "Ghép túi góc nghiên 90",
+  "nodes": [
+    {
+      "id": "5cdaacfe-38f8-44ed-ac4f-b255bd6308a6",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": "Dáng đứng xoay nghiêng góc 90 độ chính xác, thân người quay hẳn về phía bên trái. Tay phải giơ lên cầm điện thoại che khuất mặt. Tay trái chống chắc chắn trên hông. Chiếc túi lưới móc ảnh 2 được đeo trên vai phải, buông thõng tự nhiên dọc theo phần hông."
+      }
+    }
+  ],
+  "edges": []
+}

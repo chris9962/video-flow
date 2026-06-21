@@ -1,0 +1,18 @@
+{
+  "id": "9fbd4a3f-20ef-40e2-a905-31e94e47a3c7",
+  "name": "VUỐT tóc + vẫy tay",
+  "nodes": [
+    {
+      "id": "fda1a9a2-f129-4e86-a68d-34ed9e81a46f",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": "Static locked-off camera, framing unchanged; she keeps the phone up covering her face the whole time. From the exact pose in the photo, her free hand sweeps up to push her long hair back behind her shoulder, then gives a small relaxed wave near the phone with a light bounce to a slow rhythm, and finally lowers the hand back down to return to the original neutral pose by the end. Hair resettles; the dress and sheer shirt shimmer with the small movements. Keep the outfit, gray wall, white sneakers and soft lighting identical. Photorealistic, smooth, 8 seconds, ends exactly at the starting pose."
+      }
+    }
+  ],
+  "edges": []
+}

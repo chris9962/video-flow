@@ -1,0 +1,18 @@
+{
+  "id": "3d5703aa-fcf6-4fee-ad4f-c22d5248c2bd",
+  "name": "Ghép túi vào mẫu",
+  "nodes": [
+    {
+      "id": "f3d91d76-f5a5-40f5-9d51-52416124f478",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": "Thêm chiếc túi từ ảnh 2 lên người mẫu. Túi có kích thước nhỏ gọn vừa bằng một chiếc điện thoại, đặt chính xác ở vị trí bên thắt lưng/hông bên trái. Dây đeo dài phải được đeo chéo qua người, bắt đầu từ vai phải xuống thắt lưng bên trái, nằm tự nhiên trên trang phục. Đảm bảo đúng tỷ lệ kích thước của một chiếc túi đựng điện thoại."
+      }
+    }
+  ],
+  "edges": []
+}

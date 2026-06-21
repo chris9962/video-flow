@@ -1,0 +1,18 @@
+{
+  "id": "c0b96650-0516-461a-a079-2f17ea7cc991",
+  "name": "Ghép túi lớn đeo 1 bên",
+  "nodes": [
+    {
+      "id": "f3d91d76-f5a5-40f5-9d51-52416124f478",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": "Thêm chiếc túi từ ảnh 2 lên người mẫu. đặt chính xác ở vị trí bên hông bên trái. Dây đeo từ vai trái, nằm tự nhiên trên trang phục. Đảm bảo đúng tỷ lệ kích thước"
+      }
+    }
+  ],
+  "edges": []
+}

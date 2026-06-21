@@ -530,9 +530,15 @@ export function createBrowserPilot(): BrowserPilot {
       try {
         await imgArea.hover({ timeout: 8_000 });
         await page.waitForTimeout(400);
+        // Dùng tên ELEMENT `download-generated-image-button` (KHÔNG phụ thuộc ngôn ngữ) — verified ra file.
+        // aria-label="Download full size image" chỉ đúng khi Gemini hiển thị tiếng Anh; tài khoản tiếng Việt
+        // thì label khác → click trượt → "download failed" dù ảnh đã tạo. Giữ aria-label EN làm fallback.
         const [download] = await Promise.all([
           page.waitForEvent('download', { timeout: 30_000 }),
-          page.locator('button[aria-label="Download full size image"]').last().click({ timeout: 10_000 }),
+          page
+            .locator('download-generated-image-button button, button[aria-label="Download full size image"]')
+            .last()
+            .click({ timeout: 10_000 }),
         ]);
         await download.saveAs(outFile);
         saved = true;

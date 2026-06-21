@@ -4,14 +4,20 @@ import { isFileRef, type FileRef } from '@videoflow/shared';
 import { fileUrl, uploadAsset } from '../../api';
 import { NodeShell } from '../NodeShell';
 import { Lightbox } from '../../components/Lightbox';
+import { useBrokenSrc } from '../useBrokenSrc';
 import type { FlowNode } from '../types';
 
 export function ImageBlock({ id, data, selected }: NodeProps<FlowNode>) {
   const { updateNodeData } = useReactFlow();
   const [uploading, setUploading] = useState(false);
   const [zoom, setZoom] = useState<string | null>(null);
+  const { isBroken, markBroken } = useBrokenSrc();
   const content = data.result?.content ?? data.config.content;
-  const refs = Array.isArray(content) ? content.filter(isFileRef) : null;
+  // Bỏ qua ảnh tải lỗi (file thiếu/404) → block hiện như chưa có ảnh
+  const okContent = isFileRef(content) && !isBroken(content.path) ? content : null;
+  const refs = Array.isArray(content)
+    ? content.filter(isFileRef).filter((r) => !isBroken(r.path))
+    : null;
 
   const handleUpload = async (file: File | undefined) => {
     if (!file) return;
@@ -24,7 +30,7 @@ export function ImageBlock({ id, data, selected }: NodeProps<FlowNode>) {
     }
   };
 
-  const primaryUrl = isFileRef(content) ? fileUrl(content) : refs?.[0] ? fileUrl(refs[0]) : null;
+  const primaryUrl = okContent ? fileUrl(okContent) : refs?.[0] ? fileUrl(refs[0]) : null;
   const isSource = !data.hasInput;
 
   // Action icon ở thanh trên block: ⤢ mở rộng, ⟳ đổi ảnh (block nguồn đã có ảnh)
@@ -63,15 +69,22 @@ export function ImageBlock({ id, data, selected }: NodeProps<FlowNode>) {
     const url = fileUrl(ref);
     return (
       <div className="media-wrap" key={ref.path}>
-        <img className="media" alt={alt} src={url} onDoubleClick={() => setZoom(url)} title="Double-click để xem toàn màn hình" />
+        <img
+          className="media"
+          alt={alt}
+          src={url}
+          onError={() => markBroken(ref.path)}
+          onDoubleClick={() => setZoom(url)}
+          title="Double-click để xem toàn màn hình"
+        />
       </div>
     );
   };
 
   return (
     <NodeShell type="image" id={id} status={data.status} error={data.error} selected={selected} actions={actions}>
-      {isFileRef(content) ? (
-        tile(content, 'Nội dung block ảnh')
+      {okContent ? (
+        tile(okContent, 'Nội dung block ảnh')
       ) : refs && refs.length > 0 ? (
         <div className="media-grid">{refs.map((ref, i) => tile(ref, `Ảnh kết quả ${i + 1}`))}</div>
       ) : data.hasInput ? (

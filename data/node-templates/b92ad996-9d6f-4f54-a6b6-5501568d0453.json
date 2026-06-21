@@ -1,0 +1,18 @@
+{
+  "id": "b92ad996-9d6f-4f54-a6b6-5501568d0453",
+  "name": "Thay đồ",
+  "nodes": [
+    {
+      "id": "de930679-da5f-4253-89c0-e65f249a8fa0",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": "Image 1 is a person. Image 2 is a clothing item.\nDress the person in Image 1 with the exact garment from Image 2.\nPreserve the garment's pattern, color, texture and shape faithfully.\nKeep the person's face, hair, body, pose, lighting and background unchanged.\nPhotorealistic, natural fabric folds, correct proportions."
+      }
+    }
+  ],
+  "edges": []
+}

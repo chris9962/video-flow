@@ -1,0 +1,18 @@
+{
+  "id": "6f477ba7-933c-4cc0-97e2-145ec71d26ca",
+  "name": "Tách tui",
+  "nodes": [
+    {
+      "id": "ad837fe1-149f-48d1-8874-eb8e4347ca40",
+      "type": "text",
+      "position": {
+        "x": 480,
+        "y": 282.5
+      },
+      "config": {
+        "content": "{\n“task”: “extract_and_recreate_product_items”,\n“input_image”: “attached_image”,\n“target_items”: [\nTúi\n],\n“instruction”: {\n“main_goal”: “Analyze the attached image and recreate only the target items listed in target_items as standalone studio product images.”,\n“item_selection”: “Only extract and recreate the specified target items. Ignore all other clothing, accessories, objects, model, hands, body parts, and background.”,\n“accuracy”: “Preserve the visible shape, color palette, fabric texture, material texture, seams, stitching, folds, proportions, thickness, construction, and structural details of each target item as closely as possible based on the visible image.”,\n“hidden_parts”: “If some areas of the item are hidden, blocked, folded, or unclear, reconstruct them naturally based on the visible structure without adding new decorative details.”,\n“copyright_safety”: “Avoid exact reproduction of protected logos, brand marks, or copyrighted character artwork. If such details appear, make them generic and original while keeping the same overall mood, color harmony, and product style.”,\n“separation”: “Each target item must be recreated separately as its own standalone product image. Do not merge multiple items into one object unless the target item is naturally one combined product.”,\n“composition”: “Each item must be fully visible, centered, cleanly positioned, and properly shaped as it would appear in professional product photography.”,\n“background”: {\n“type”: “pure solid white”,\n“color”: “transparent”,\n“shadows”: “No shadows except a very soft natural grounding shadow directly beneath the item.”,\n“forbidden”: [\n“reflections”,\n“gradients”,\n“environmental elements”,\n“original background”\n]\n},\n“lighting”: {\n“type”: “soft studio lighting”,\n“exposure”: “even exposure”,\n“color”: “accurate color reproduction”,\n“material”: “true-to-life material rendering”\n},\n“quality”: {\n“style”: “photorealistic studio product photography”,\n“resolution”: “high resolution, 4K quality”,\n“sharpness”: “sharp focus”,\n“distortion”: “free of distortion”\n},\n“strict_rules”: [\n“Do not include the model.”,\n“Do not include hands, fingers, face, hair, skin, or body parts.”,\n“Do not include unrelated objects.”,\n“Do not include the original background.”,\n“Do not stylize.”,\n“Do not create a CGI look.”,\n“Do not create an illustration or cartoon look.”,\n“Do not over-smooth the texture.”,\n“Do not change the item type.”,\n“Do not redesign the product.”,\n“Do not add new patterns, logos, decorations, text, or accessories that are not visible in the original image.”\n],\n“negative_prompt”: [\n“blurry”,\n“distorted shape”,\n“warped fabric”,\n“incorrect color”,\n“missing details”,\n“artificial shine”,\n“over-smoothing”,\n“CGI”,\n“illustration”,\n“cartoon”,\n“rendering artifacts”,\n“merged objects”,\n“incomplete item”,\n“cut-off edges”,\n“extra objects”,\n“model body parts”,\n“hands”,\n“fingers”,\n“face”,\n“hair”,\n“background clutter”\n]\n},\n“output”: {\n“number_of_images”: “1”,\n“aspect_ratio”: “9:16”,\n“format”: “one clean standalone product image per target item”\n}\n}"
+      }
+    }
+  ],
+  "edges": []
+}

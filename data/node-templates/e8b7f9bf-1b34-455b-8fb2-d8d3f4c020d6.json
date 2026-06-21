@@ -1,0 +1,18 @@
+{
+  "id": "e8b7f9bf-1b34-455b-8fb2-d8d3f4c020d6",
+  "name": "Prompt tạo mẫu nữ",
+  "nodes": [
+    {
+      "id": "c09c6048-bafe-415a-be5e-06cc35272662",
+      "type": "text",
+      "position": {
+        "x": 607,
+        "y": 258.5
+      },
+      "config": {
+        "content": "\n{\n\"scene_type\": \"series chân dung thời trang điện thoại thông minh\",\n\"sáng tác\": {\n\"bố cục\": “1 ảnh 9:16“,\n\"máy ảnh\": \"nhiếp ảnh điện thoại thông minh\",\n\"đóng khung\": \"đứng toàn thân\",,\n\"angle\": \"eye-level, natural candid perspective\",\n\"aspect_ratio\": “9:16”, “chất lượng ảnh: 4k \n},\n\"chủ đề\": {\n\"giới tính\": \"nữ\",\n\"tuổi\": \"đầu 20 tuổi\",\n\"aesthetic\": \"cực đẹp, phong cách đường phố nữ tính mềm mại\",\n\"ngoại hình\": {\n\"skin_tone\": \"làn da mịn màng\",\n\"khuôn mặt\": \"Nét mềm mại nữ tính, đường viền hàm thanh tú, tự nhiên xinh\",\n\"biểu cảm\": \"tự tin, tinh nghịch, thư giãn\",\n\"đôi mắt\": \"biểu cảm với ánh nhìn mềm mại\", “ngực”: đầy đặn, \n\"tóc\": {\n\"màu\": \"đen sâu\",\n\"phong cách\": \"sóng dài lỏng lẻo\",\n\"kết cấu\": \"mượt mà chuyển động tự nhiên\"\n},\n\"trang điểm\": \"trang điểm cô bé sạch sẽ, da sương, má hồng mềm mại, môi căng bóng\"\n},\n\"trang phục\": {\n\"đỉnh\": \"áo denim màu đen không đối xứng với dây mỏng và chi tiết dây rút bên hông\",\n\"đáy\": \"quần jean ống rộng siêu baggy wash nhẹ\",\n\"giày\": \"giày thể thao màu trắng căng đét\",\n\"phong cách\": \"trang phục dạo phố thông thường lấy cảm hứng Hàn Quốc hiện đại, thẩm mỹ chất denim-on-denim không cầu kỳ\"\n},\n\"pose_style\": \"thời trang chân thực thư giãn với sự chuyển động tự nhiên\",\n\"body_language\": \"tự tin mềm mại, năng lượng nữ tính, rung cảm cool-girl không cần thiết\"\n},\n\"môi trường\": {\n\"địa điểm\": \"setup studio tối thiểu\",\n\"phông nền\": \"phông nền không liền mạch màu xám nhạt sạch\",\n\"sàn\": \"sàn studio mờ trung lập\",\n\"ánh sáng\": {\n\"loại\": \"ánh sáng studio khuếch tán mềm\",\n\"tone\": \"trung tính ngầu\",\n\"bóng\": \"bóng thực tế mềm mại\",\n\"điểm nổi bật\": \"tỏa sáng nhẹ nhàng trên da và kết cấu vải bò\"\n}\n},\n\"phong cách\": {\n\"photography_type\": \"nhiếp ảnh thời trang chỉnh sửa điện thoại thông minh\",\n\"visual_tone\": \"tối giản, thoáng mát, thời thượng\",\n\"tâm trạng\": \"tươi trẻ, phong cách, tự tin trẻ trung\",\n\"color_palette\": \"Xanh bò đã giặt, xám mềm, trắng\",\n\"độ tương phản\": \"thấp đến trung bình\",\n\"hạt\": \"hạt nhẹ tự nhiên\"\n},\n\"đang diễn\": {\n\"chủ nghĩa thực\": \"siêu thực\",\n\"detail_level\": \"chi tiết vải và kết cấu da cao\",\n\"sắc\": \"phê\",\n\"sâu_of_field\": \"sâu smartphone tự nhiên\",\n\"post_processing\": \"chỉnh sửa sạch sẽ với hoàn thiện hơi mềm\"\n},\n\"không khí\": \"thẩm mỹ thời trang Gen-Z không tốn sức, năng lượng trang phục dạo phố sang trọng bình dân, quyến rũ nữ tính hiện đại\"\n} "
+      }
+    }
+  ],
+  "edges": []
+}

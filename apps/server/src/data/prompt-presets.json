@@ -1,0 +1,520 @@
+[
+  {
+    "key": "anh",
+    "label": "Ảnh – xử lý đồ & chân dung",
+    "short": "Ảnh",
+    "items": [
+      {
+        "name": "Tách đồ từ chủ thể chính",
+        "prompt": "Analyze the attached image in extreme detail and extract ALL visible clothing items and accessories worn or present in the image.\n\nFor each detected item:\n- Isolate it completely from the original subject and background.\n- Recreate it as a standalone product image.\n- Preserve exact color, fabric texture, stitching, seams, folds, logos (if any), material thickness, proportions, and structural details.\n- Maintain accurate scale and garment construction.\n- Do not redesign or reinterpret the item.\n\nEach clothing item and accessory must be:\n- Fully visible\n- Properly shaped as it would appear naturally laid flat or positioned cleanly\n- Free of distortion\n- Photorealistic\n- High resolution\n- Studio-quality product photography\n\nBACKGROUND:\nPure solid white background (#FFFFFF).\nNo shadows unless soft natural grounding shadow directly beneath the item.\nNo reflections.\nNo gradients.\nNo environmental elements.\n\nLIGHTING:\nSoft studio lighting.\nEven exposure.\nNo dramatic shadows.\nAccurate color reproduction.\nTrue-to-life material rendering.\n\nSTRICT RULES:\n- Do NOT include the model or body parts.\n- Do NOT merge multiple items into one object.\n- Separate each item individually.\n- Maintain 99% visual accuracy compared to the original image.\n- Do NOT stylize.\n- No CGI look.\n- No artistic reinterpretation.\n- No texture smoothing.\n\nNEGATIVE PROMPT:\nblurry, distorted shape, warped fabric, incorrect color, missing details, artificial shine, over-smoothing, CGI, illustration, cartoon, rendering artifacts, merged objects, incomplete garment, cut-off edges."
+      },
+      {
+        "name": "Độ loa",
+        "prompt": "Increase the bust size further, with very full, rounded volume and pronounced cleavage. The chest should appear tight, firm, and visually dominant, Without increasing the waist"
+      },
+      {
+        "name": "Bạn là một người mẫu chuyên nghiệp kiêm ",
+        "prompt": "Bạn là một người mẫu chuyên nghiệp kiêm prompt enginering\nHãy phân tích ảnh này và viết cho tôi prompt để tôi có thể tạo lại ảnh này qua nano banana pro, ít nhất phải nêu cho tôi được 6 điểm \nBỐ CỤC (COMPOSITION)\nBỐI CẢNH (BACKGROUND)\nÁNH SÁNG (LIGHTING)\nNHÂN VẬT (CHARACTER)\nTRANG PHỤC (OUTFIT)\nPHỤ KIỆN (ACCESSORIES)\nCHỈNH DÁNG (POSE)\nCHẤT ẢNH (QUALITY)\nNEGATIVE (LOẠI TRỪ)\nbổ sung thêm các ý khác khi bạn phát hiện"
+      },
+      {
+        "name": "Ultra-photorealistic 8k portrait of a yo",
+        "prompt": "Ultra-photorealistic 8k portrait of a young East Asian woman with a flawless \"glass skin\" complexion and a natural dewy glow, featuring highly visible skin texture and fine pores. She has a soft oval face shape with youthful, natural cheek fullness and a delicate jawline. Her eyes are distinct dark brown almond-shaped with a warm, calm expression, featuring prominent symmetric aegyosal (natural puffy under-eye bags) and fine, realistic lower lashes. Her nose is slender with a well-defined bridge and a softly rounded tip. Her lips are naturally rosy, hydrated, and slightly plump with a soft, clear-gloss finish and a subtle cupid’s bow. Her jet-black hair is styled in a neat high top-knot bun with delicate, wispy strands naturally framing her face. Captured as a high-resolution close-up with soft, natural ambient lighting, extreme detail on eyes and lips, 24mm lens, raw photo style, cinematic realism, no-blur, hyper-detailed."
+      },
+      {
+        "name": "Fashion Pose Tips",
+        "prompt": "Create a hyper-realistic full-body studio fashion photograph of the same woman from the reference image, preserving 100% exact facial identity, bone structure, age, ethnicity, skin tone, hair color, hairstyle, and overall likeness. No alterations.\nBody pose must match the provided pose reference exactly — identical posture, limb positioning, balance, and weight distribution. No interpretation or modification.\nShe wears the exact same outfit from the reference image. Natural fit, realistic fabric drape, no redesign.\nExpression: calm, confident, subtle natural smile, eyes open and forward. No retouching, no skin smoothing. Preserve natural skin texture and pores.\nBackground: clean professional studio, soft neutral beige, evenly lit, minimal gradient, no distractions.\nStyle: high-end editorial fashion photography, ultra-realistic, true-to-life colors, no CGI or stylization.\nLighting: soft diffused studio light, frontal key slightly above eye level, gentle fill, natural contrast, subtle shadow definition.\nCamera: full-body straight-on, 85mm lens feel, f/5.6–f/8 depth, entire body sharp, focus priority on face, ultra-high resolution.\nNegative prompt: identity change, face alteration, beautification, skin smoothing, CGI/plastic look, anatomy distortion, wrong proportions, extra/missing limbs or fingers, deformed hands, closed eyes, exaggerated smile, artificial posing, clothing redesign, unrealistic fabric, harsh lighting, dramatic grading, blur, low resolution, noise, artifacts, text, watermark, logo.\""
+      },
+      {
+        "name": "Lột đồ ver 2",
+        "prompt": "Analyze the clothing worn in the uploaded reference image. Extract the exact outfit and generate a new image featuring ONLY these garments isolated on a pure, solid white background. Present the clothing using a high-end 'flat lay' or 'ghost mannequin' product photography style. Replicate the exact fabric textures, colors, patterns, cuts, and folds from the original image. Absolutely no human body parts, no head, no shadows casting from a wearer, and no background scenery. Clean, minimalist, hyper-detailed, 8K resolution, studio lighting."
+      },
+      {
+        "name": "Đi trên máy chạy bộ VER 1",
+        "prompt": "A super realistic lifestyle portrait of a young Asian woman taking a leisurely walk on a treadmill in a warm, modern interior space\nComposition\nVertical aspect ratio 9:16\nFull body shot, camera positioned at eye level\nSubject stands in the center of the frame\nTreadmill positioned straight, parallel to the camera\nBackground Cozy living room with wooden furniture\nBehind Low wooden cabinet\nLeft Table lamp with warm orange light on\nRight Tall wooden cabinet\nOn the wall \"Ông Chú MMO\" lettering in multicolored LEDs, stylized font, small, thin calligraphic font, illuminated letters\nRecessed ceiling lights with neutral yellow light\nNatural indoor space, no studio, no artificial setup\nCream-toned space, wooden cabinets, with a black leather sofa\nAction adjusted for the trend\nThe girl is walking gently on the treadmill, the treadmill has no handlebars, plugged in\nSlow, natural movement, suitable for filming the clothing transformation trend\nBody maintains balance, even steps, not running fast\nClothing Smooth transitions between frames, maintaining the pose, camera angle, and background\nFace Reference\nUse image #1 as face reference\nMaintain 100% original identity\nFacial structure\nEyes, nose, lips, jawline\nNatural skin tone and makeup style\nOriginal expression\nNo beautification, no face editing\nNo stylizing, no AI skin smoothing\nClothing Reference\nUse image #2\nPosition\nNatural upright stance on the treadmill\nOne foot stepped forward in a walking motion\nCamera looking at the camera\nGentle, feminine, everyday expression\nRight hand raised in a greeting, the other hand hanging naturally\nHair\nReference image #1\nLighting\nWarm, soft yellow room lighting\nSoft, natural shadows\nEven lighting throughout the body\nRealistic skin tone, not harsh\nStyle\nUltra-realistic photography\nYouthful lifestyle fashion calendar\nNatural body proportions\nRealistic, crisp skin texture\nNo cinematic effects\nCamera\n35mm lens style\nf/2.8 aperture\nRealistic depth of field\nQuality\n8K resolution\nHigh detail\nPhoto-realistic\nNegative Prompt Exclusions\nNo face alteration\nNo body proportion alteration\nNo slimming\nNo leg lengthening\nNo breast enlargement\nNo AI face beautification\nNo plastic skin\nNo anime\nNo cartoon\nNo painting\nNo HDR\nNo cinematic lighting\nNo blurring\nNo distortion\nNo adding other people\nNo changing the background\nNo changing the pose\nNo changing the camera angle\nNo changing the treadmill position"
+      }
+    ]
+  },
+  {
+    "key": "seedance",
+    "label": "Video – Seedance",
+    "short": "Seedance",
+    "items": [
+      {
+        "name": "Prompt cô dâu xuyên không",
+        "prompt": "[Phần 1: Technical & Aesthetic]\nMontage, single continuous long-take, no cuts, handheld shake, cinematic lighting, photorealistic, ARRI Alexa 35, 35mm film format, professional color grading, depth of field, 4k resolution, motion blur, immersive visual effects.\n[Phần 2: General Summary & Vibe]\nA magical fourth-wall breaking sequence. The vibe transitions from a shy, traditional romantic atmosphere to a surreal, seductive, and immersive experience as the boundary between the digital screen and reality dissolves.\n[Phần 3: Visual Consistency]\nCharacter: A beautiful young woman with black hair and bangs, wearing a highly detailed traditional red Chinese bridal garment with gold phoenix embroidery.\nHeadpiece: Elaborate golden phoenix crown with dangling tassels.\nObject: A translucent circular silk fan.\nEnvironment: Initially a blurry modern room (foreground) and a warm-toned ancient chamber with red curtains and candles (inside the screen).\n[Phần 4: Shot-by-Shot]\nShot 1 (0-3s): [Medium Shot - Handheld]. The girl is inside the monitor, looking shyly at the camera. She slowly raises her silk fan to partially cover her face, eyes shimmering with bashfulness. The camera has a slight organic handheld tremor.\nShot 2 (3-7s): [Close-up - Interaction]. She reaches her hand out toward the physical world. A male hand enters the foreground. As their hands touch, a magical liquid ripple effect spreads across the monitor's surface. He gently pulls her, and her upper body physically emerges through the \"liquid\" screen.\nShot 3 (7-10s): [Transition - Dolly In]. She gives a playful, seductive wink to the viewer. She then grabs the viewer's/camera's hand and pulls them into her world. The camera performs a smooth Dolly-in, passing through the rippling screen surface. The external room disappears completely.\nShot 4 (10-15s): [Top-down Close-up Shot]. The camera completes the transition into a vertical overhead angle. The girl is now lying back on a traditional bed, her hair spreading out, looking directly into the lens with a seductive and captivating gaze. Faded red curtains and soft candlelight flicker in the background."
+      },
+      {
+        "name": "Prompt thiên thần hạ phàm",
+        "prompt": "The 15-Second Digital Breakthrough\n[Part 1: Technical & Aesthetic]\nSingle continuous 15-second long-take, no cuts, first-person POV, subtle handheld camera movement, highly realistic physical continuity, photorealistic, cinematic lighting, real desktop environment mixed with dark fantasy screen-break VFX, 4k, shallow depth of field, natural motion blur, realistic hand interaction, liquid screen membrane effect, realistic mirror-like glass shatter physics, smooth body motion, clean object permanence, vertical 9:16.\n[Part 2: General Summary & Vibe]\nA dark fantasy fourth-wall-breaking sequence at a real creator desk. A real man reaches his hand toward a mysterious white-haired digital woman inside the monitor. She notices him, softly reaches her hand out, and tightly holds his hand through a liquid-like screen surface. The touch creates a circular water ripple on the monitor. Her blindfold dissolves, revealing glowing eyes that shine through with intense light. The man suddenly grabs and yanks her hard, pulling her violently through the monitor. The screen shatters like a broken mirror, sending fragments outward. Half-emerged into the real world, she is extremely close to the camera, with a striking upper-body silhouette, flowing hair, glowing eyes, and a vulnerable expression mixing innocence, shyness, and fear. Everything feels smooth, immersive, physical, and real.\n[Part 3: Visual Consistency]\nCharacter: a pale fantasy woman with long white-silver hair, slim elegant body, striking upper-body silhouette, soft lips, delicate facial features, dark thorn-like crown, dark blindfold covering the eyes at first, dark organic fantasy outfit wrapping around the neck, shoulders, and torso, subtle black wing-like shadow forms behind her.\nEyes: before the blindfold disappears, glowing blue-white light is already visible faintly from behind the cloth; when the blindfold dissolves, her eyes burst through with matching focused light rays and supernatural glow.\nExpression progression: calm and distant at first, then curious and shy, then startled and frightened during the pull, finally very close to the camera with a vulnerable, embarrassed, overwhelmed look.\nForeground Environment: real modern desk setup matching the reference image, large widescreen monitor with a screen light bar above, mechanical keyboard in cream/orange/black tones, tablet screen below the monitor, desk accessories, warm dim room light, subtle red-orange ambient reflections, the man’s real hand and forearm entering from the lower right.\nDigital Environment: bright ethereal cloudy fantasy background inside the monitor, soft white and pale blue light, dreamy depth, faint storm-like energy.\nEffects: circular water-ripple at finger contact, smooth membrane distortion on the screen surface, dissolving blindfold particles, glowing eye beams, violent mirror-like glass fracture from the monitor surface and edges during the pull, drifting glass fragments, glowing particles, unstable portal energy inside the broken monitor.\n[Part 4: Shot-by-Shot Timeline]\n0.0-2.5s [The Real Desk Establishing]\nFirst-person POV facing the real desk setup. The large monitor dominates the frame, with the screen light bar visible above it, the tablet below, and the cream/orange/black mechanical keyboard in the foreground. On the monitor is the white-haired fantasy woman in close-up, head slightly lowered, almost motionless. The camera has a subtle natural handheld sway. Everything feels grounded and real.\n2.5-4.8s [The Reach]\nThe real man’s hand slowly enters from the lower right and reaches toward the woman on the screen. She notices the movement and gently lifts her own hand toward him from inside the monitor. Her motion is smooth, graceful, and natural. Their hands align precisely at the same point on the display, creating anticipation and realism.\n4.8-6.4s [The Touch]\nTheir hands meet through the screen. The monitor behaves like a thin liquid membrane. A perfectly circular water ripple spreads outward from the contact point across the display surface. Her fingers close around his hand in a firm, believable grip. Behind the blindfold, bright blue-white eyes are already glowing through the fabric. The blindfold begins to dissolve into dark particles, and as it disappears, her eyes flare open with matching radiant beams of light.\n6.4-8.9s [The Pull and Shatter]\nThe man suddenly grips her forearm tightly and yanks her forward with force. This is the key action. Her arm tears through the monitor first, then her shoulder and upper torso are dragged through the screen. At the exact moment of the hard pull, the monitor explodes like shattered mirror glass. Fractures spread from the contact point and across the edges, then sharp reflective shards burst outward in all directions toward the desk and camera. The glass feels physical, heavy, and dangerous, with realistic reflections from the warm desk lighting and screen light bar.\n8.9-11.6s [Halfway Through the Screen]\nShe is now pulled more than halfway out of the monitor, extremely close to the camera. Her white hair spills forward, her upper-body silhouette is clearly defined, her outfit clings around the neck, shoulders, and chest area in a striking but tasteful cinematic way. Her face is near the lens, and her expression is a mix of innocence, embarrassment, shock, and fear from being pulled into the real world. Her glowing eyes remain intense. Broken glass continues falling, bouncing, and sliding across the keyboard and desk below. The broken monitor behind her flickers like an unstable portal.\n11.6-13.6s [Dragged Into Reality]\nThe man keeps pulling, and her body comes farther out over the desk. One hand instinctively braces against the real surface while the rest of her follows through the shattered opening. Tiny glass pieces keep dropping from the broken monitor edges. The camera reacts with a slight backward stumble, increasing immersion. Her face remains very close, breathing visible, expression vulnerable and overwhelmed, while her eyes keep shining unnaturally bright.\n13.6-15.0s [Final Hook]\nNow almost fully in the real world, she pauses and looks directly into the lens from very close range. Small glass particles drift around her face. The shattered monitor behind her pulses with dim portal light. She slowly reaches one hand toward the camera as if trying to cross one final boundary. End at the exact moment her fingertips are about to touch the lens.\n[Optional Negative Guidance]\nno cuts, no extra fingers, no broken anatomy, no duplicated hands, no rubbery limbs, no fake cartoon motion, no random object changes, no weak shatter effect, no floating glass without cause, no stiff hand interaction, no jittery character motion, no inconsistent desk layout"
+      }
+    ]
+  },
+  {
+    "key": "maychaybo",
+    "label": "Máy chạy bộ",
+    "short": "Máy chạy bộ",
+    "items": [
+      {
+        "name": "Đi trên máy chạy bộ VER 1",
+        "prompt": "A super realistic lifestyle portrait of a young Asian woman taking a leisurely walk on a treadmill in a warm, modern interior space\nComposition\nVertical aspect ratio 9:16\nFull body shot, camera positioned at eye level\nSubject stands in the center of the frame\nTreadmill positioned straight, parallel to the camera\nBackground Cozy living room with wooden furniture\nBehind Low wooden cabinet\nLeft Table lamp with warm orange light on\nRight Tall wooden cabinet\nOn the wall \"Ông Chú MMO\" lettering in multicolored LEDs, stylized font, small, thin calligraphic font, illuminated letters\nRecessed ceiling lights with neutral yellow light\nNatural indoor space, no studio, no artificial setup\nCream-toned space, wooden cabinets, with a black leather sofa\nAction adjusted for the trend\nThe girl is walking gently on the treadmill, the treadmill has no handlebars, plugged in\nSlow, natural movement, suitable for filming the clothing transformation trend\nBody maintains balance, even steps, not running fast\nClothing Smooth transitions between frames, maintaining the pose, camera angle, and background\nFace Reference\nUse image #1 as face reference\nMaintain 100% original identity\nFacial structure\nEyes, nose, lips, jawline\nNatural skin tone and makeup style\nOriginal expression\nNo beautification, no face editing\nNo stylizing, no AI skin smoothing\nClothing Reference\nUse image #2\nPosition\nNatural upright stance on the treadmill\nOne foot stepped forward in a walking motion\nCamera looking at the camera\nGentle, feminine, everyday expression\nRight hand raised in a greeting, the other hand hanging naturally\nHair\nReference image #1\nLighting\nWarm, soft yellow room lighting\nSoft, natural shadows\nEven lighting throughout the body\nRealistic skin tone, not harsh\nStyle\nUltra-realistic photography\nYouthful lifestyle fashion calendar\nNatural body proportions\nRealistic, crisp skin texture\nNo cinematic effects\nCamera\n35mm lens style\nf/2.8 aperture\nRealistic depth of field\nQuality\n8K resolution\nHigh detail\nPhoto-realistic\nNegative Prompt Exclusions\nNo face alteration\nNo body proportion alteration\nNo slimming\nNo leg lengthening\nNo breast enlargement\nNo AI face beautification\nNo plastic skin\nNo anime\nNo cartoon\nNo painting\nNo HDR\nNo cinematic lighting\nNo blurring\nNo distortion\nNo adding other people\nNo changing the background\nNo changing the pose\nNo changing the camera angle\nNo changing the treadmill position"
+      },
+      {
+        "name": "Cute 1 đeo kính",
+        "prompt": "Create a full-body, front-view studio photograph of a stunning young woman in her early twenties, portrayed in a respectful, realistic, and natural way. Her face is a sharp, glamorous, and magnetic interpretation of the model from image_1.png, wearing the exact same round black-rimmed glasses. Her hair is voluminous black, styled in voluminous, soft waves and flowing over her shoulders, with neat bangs, directly inspired by image_1.png. She has a charming, subtle expression, winking with one eye, as seen in image_1.png. She wears simple casting-call attire: a tight white cropped tank top and form-fitting neutral (beige) shorts that highlight her physique. She wears a minimalist silver pendant necklace. The skin on her body shows natural, unedited human textures and subtle variations, portraying realistic anatomy respectfully. Body type: An idealized and striking hourglass figure with a slim waist, wide hips, and a well-endowed, ample bust (3-round standard). The skin on her body and legs is smooth but retains realistic porcelain-like texture. The background is a pure white professional photography studio setup. Lighting is soft and cinematic, accentuating her curves and facial features while preserving a high-end, photorealistic quality. Her gaze is bold and beauty-focused."
+      },
+      {
+        "name": "Cute 2 đeo kính",
+        "prompt": "Create a full-body, front-view studio photograph of a stunning young woman in her early twenties, portrayed in a respectful, realistic, and natural way. Her face is a sharp, glamorous, and magnetic interpretation of the model from image_2.png, wearing the same black-rimmed glasses. Her hair is styled in a neat, voluminous high top-knot bun with thick bangs, directly inspired by image_2.png. She has a subtle, composed expression. She wears simple casting-call attire: a tight white cropped tank top and form-fitting neutral (beige) shorts that highlight her physique. She wears a minimalist silver pendant necklace. The skin on her body shows natural, unedited human textures and subtle variations, portraying realistic anatomy respectfully. Body type: An idealized and striking hourglass figure with a slim waist, wide hips, and a well-endowed, ample bust (3-round standard). The skin on her body and legs is smooth but retains realistic porcelain-like texture. The background is a pure white professional photography studio setup. Lighting is soft and cinematic, accentuating her curves and facial features while preserving a high-end, photorealistic quality. Her gaze is bold and beauty-focused."
+      },
+      {
+        "name": "Di chuyển 1",
+        "prompt": "Giữ khuôn mặt gốc, không thay đổi. Cô gái mỉm cười rạng rỡ, đưa tay vẫy chào ống kính, sau đó thả tay xuống và bước đi tự nhiên trên máy. Mắt nhìn thẳng, di chuyển tại chỗ."
+      },
+      {
+        "name": "Di chuyển 2",
+        "prompt": "Giữ khuôn mặt gốc, không thay đổi. Cô gái đặt tay phải chống lên eo, sải bước tự nhiên trên máy đi bộ. Phong thái tự tin, vui vẻ, mắt nhìn thẳng camera, di chuyển tại chỗ."
+      },
+      {
+        "name": "Di chuyển 3",
+        "prompt": "Giữ khuôn mặt gốc, không thay đổi. Cô gái chống tay phải vào eo, bước đi đều đặn trên máy. Mắt nhìn thẳng sâu vào ống kính, biểu cảm lạnh lùng/cuốn hút, hạn chế tối đa nháy mắt, di chuyển tại chỗ."
+      },
+      {
+        "name": "Di chuyển 4",
+        "prompt": "Giữ khuôn mặt gốc, không thay đổi. cô gái khẽ đưa tay vuốt lọn tóc rủ xuống mang tai, mỉm cười nhẹ nhàng, di chuyển tại chỗ."
+      },
+      {
+        "name": "Di chuyển 5",
+        "prompt": "Giữ khuôn mặt gốc, không thay đổi. Cô gái bước đi nhịp nhàng trên máy, bất ngờ nháy mắt tinh nghịch với ống kính (tương tác với người xem), tay đung đưa tự nhiên theo nhịp chân."
+      },
+      {
+        "name": "Di chuyển 6",
+        "prompt": "Giữ khuôn mặt gốc, không thay đổi. Đang đi bộ, cô gái khẽ nghiêng đầu sang một góc 45 độ rồi từ từ quay lại nhìn thẳng ống kính. Biểu cảm kiêu kỳ, bước đi nhịp nhàng, cố định tại một chỗ."
+      }
+    ]
+  },
+  {
+    "key": "aodai",
+    "label": "Video – Áo dài",
+    "short": "Áo dài",
+    "items": [
+      {
+        "name": "Áo dài · dáng 01",
+        "prompt": "nhân vật mỉm cười tươi và đi lên 1 bước về phía trước, sau đó 2 bàn tay đặt sát nhau theo trục giữa cơ thể, lướt từ trên cổ áo xuống dưới theo đường mai của chiếc áo ở giữa đồng thời người phụ nữ cúi nhìn bộ trang phục để tạo thêm sự tự nhiên. Lưu ý, ngón út và ngón áp út chạm nhẹ vào nhau, các ngón còn lại thả lỏng tự nhiên tạo ra hành động giới thiệu tà áo tự nhiên như người mẫu. Sau đó thì nhân vật xoay người sang bên trái đồng thời dùng tay kéo nhẹ chiếc áo để thể hiện sự co giãn của chiếc áo."
+      },
+      {
+        "name": "Áo dài · dáng 02",
+        "prompt": "Nhân vật đứng thẳng, bước nhẹ một bước về phía trước, ánh mắt mỉm cười dịu dàng. Hai tay khép lại trước ngực rồi vuốt chậm dọc theo thân áo từ vai xuống eo, đầu hơi cúi nhìn trang phục, các ngón tay thả lỏng tự nhiên như đang giới thiệu chất liệu vải."
+      },
+      {
+        "name": "Áo dài · dáng 03",
+        "prompt": "Người phụ nữ xoay nhẹ vai phải về phía camera, tay phải đặt lên ngực áo, tay trái lướt dọc đường cúc giữa thân áo. Ánh mắt nhìn xuống tà áo, động tác mềm mại, chậm rãi như người mẫu catwalk."
+      },
+      {
+        "name": "Áo dài · dáng 04",
+        "prompt": "Nhân vật bước lên một nửa bước, hai tay đặt song song trước cơ thể, vuốt nhẹ từ cổ áo xuống thân dưới. Sau đó nghiêng đầu sang trái, mỉm cười, tạo cảm giác thân thiện và tự nhiên khi giới thiệu trang phục."
+      },
+      {
+        "name": "Áo dài · dáng 05",
+        "prompt": "Người mẫu đứng nghiêng 45 độ, tay phải nhẹ nhàng kéo tà áo ra ngoài để khoe độ rũ của vải, tay trái giữ thân áo. Ánh mắt nhìn theo chuyển động của tà áo, cử chỉ chậm và tinh tế."
+      },
+      {
+        "name": "Áo dài · dáng 06",
+        "prompt": "Nhân vật đưa hai tay chạm nhẹ vào nhau trước bụng, rồi tách ra vuốt nhẹ hai bên thân áo. Sau đó xoay người sang trái, kéo nhẹ phần eo áo để thể hiện độ co giãn, gương mặt thư thái."
+      },
+      {
+        "name": "Áo dài · dáng 07",
+        "prompt": "Người phụ nữ mỉm cười, bước tới gần camera một bước nhỏ. Tay phải vuốt từ cổ áo xuống ngực, tay trái giữ nhẹ tà áo, ánh mắt cúi nhìn trang phục như đang tự cảm nhận chất vải."
+      },
+      {
+        "name": "Áo dài · dáng 08",
+        "prompt": "Nhân vật đứng yên, hít thở nhẹ, hai tay đưa lên chỉnh cổ áo rồi trượt xuống thân áo theo đường thẳng giữa. Sau đó xoay người chậm rãi, tạo cảm giác sang trọng và chuyên nghiệp."
+      },
+      {
+        "name": "Áo dài · dáng 09",
+        "prompt": "Người mẫu xoay nhẹ nửa vòng người, tay phải kéo nhẹ vạt áo sang bên, tay trái thả lỏng. Ánh mắt nhìn nghiêng, động tác mềm mại để làm nổi bật form dáng trang phục."
+      },
+      {
+        "name": "Áo dài · dáng 10",
+        "prompt": "Nhân vật bước lên, hai tay đặt sát nhau trước ngực rồi mở ra vuốt dọc hai bên thân áo. Cúi đầu nhẹ, mỉm cười, tạo cảm giác giới thiệu trang phục gần gũi như đời thường."
+      },
+      {
+        "name": "Áo dài · dáng 11",
+        "prompt": "Người phụ nữ đứng thẳng, tay phải đặt lên thân áo, tay trái kéo nhẹ phần tay áo để thể hiện độ mềm và co giãn. Sau đó xoay người chậm rãi, giữ nét mặt tự nhiên, thanh lịch."
+      }
+    ]
+  },
+  {
+    "key": "yoga",
+    "label": "Video – Đồ tập Yoga",
+    "short": "Yoga",
+    "items": [
+      {
+        "name": "Yoga · co giãn linh hoạt",
+        "prompt": "Đồ tập yoga co giãn linh hoạt – Người phụ nữ mỉm cười nhẹ, bước lên một bước nhỏ, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo theo trục giữa, ánh mắt cúi nhìn trang phục, sau đó xoay sang trái và kéo nhẹ áo để thể hiện độ co giãn và ôm dáng khi vận động."
+      },
+      {
+        "name": "Yoga · ôm dáng thoải mái",
+        "prompt": "Đồ tập yoga ôm dáng thoải mái – Nhân vật nữ bước chậm về phía trước, hai tay khép trước thân lướt dọc áo từ cổ xuống eo giới thiệu form ôm, sau đó xoay sang trái kéo nhẹ áo chứng minh độ đàn hồi cao."
+      },
+      {
+        "name": "Yoga · thoáng khí dễ chịu",
+        "prompt": "Đồ tập yoga thoáng khí dễ chịu – Người phụ nữ bước tự nhiên, hai tay vuốt từ cổ áo xuống thân áo tạo cảm giác gọn gàng, sau đó xoay sang trái kéo nhẹ áo thể hiện sự thoáng mát và dễ chịu khi tập luyện."
+      },
+      {
+        "name": "Yoga · vận động nhẹ nhàng",
+        "prompt": "Đồ tập yoga vận động nhẹ nhàng – Nhân vật nữ bước một bước nhỏ, giữ thân thẳng, hai tay vuốt dọc thân áo từ cổ xuống eo, sau đó xoay sang trái kéo nhẹ áo thể hiện sự linh hoạt trong từng chuyển động."
+      },
+      {
+        "name": "Yoga · cho người mới tập",
+        "prompt": "Đồ tập yoga cho người mới tập – Người phụ nữ mỉm cười thân thiện, bước chậm về phía trước, hai tay khép trước thân vuốt từ cổ áo xuống thân áo tạo cảm giác dễ mặc, sau đó xoay sang trái kéo nhẹ áo thể hiện độ mềm và thoải mái."
+      },
+      {
+        "name": "Yoga · form gọn tôn dáng",
+        "prompt": "Đồ tập yoga form gọn tôn dáng – Nhân vật nữ bước tự tin, hai tay đặt sát nhau vuốt dọc thân áo theo trục giữa, sau đó xoay sang trái kéo nhẹ áo thể hiện form gọn và ôm dáng tự nhiên."
+      },
+      {
+        "name": "Yoga · mặc cả ngày",
+        "prompt": "Đồ tập yoga mặc cả ngày – Người phụ nữ bước nhẹ, hai tay vuốt từ cổ áo xuống thân áo với biểu cảm thư giãn, sau đó xoay sang trái kéo nhẹ áo thể hiện sự thoải mái ngay cả khi sinh hoạt thường ngày."
+      },
+      {
+        "name": "Yoga · cho dáng tròn",
+        "prompt": "Đồ tập yoga cho dáng tròn – Nhân vật nữ bước chậm, hai tay vuốt dọc thân áo từ cổ xuống bụng tạo cảm giác thon gọn, sau đó xoay sang trái kéo nhẹ áo thể hiện độ co giãn dễ chịu."
+      },
+      {
+        "name": "Yoga · phong cách tối giản",
+        "prompt": "Đồ tập yoga phong cách tối giản – Người phụ nữ bước tự nhiên, hai tay khép trước thân lướt dọc áo từ cổ xuống eo, ánh mắt nhìn trang phục, sau đó xoay sang trái kéo nhẹ áo thể hiện thiết kế đơn giản và tinh tế."
+      },
+      {
+        "name": "Yoga · chốt đơn",
+        "prompt": "Đồ tập yoga chốt đơn – Nhân vật nữ bước lên một bước nhẹ, hai tay vuốt dọc thân áo từ cổ xuống eo như hành động giới thiệu sản phẩm, sau đó xoay sang trái kéo nhẹ áo thể hiện độ co giãn, ôm dáng và cảm giác thoải mái khi tập."
+      }
+    ]
+  },
+  {
+    "key": "chongnang",
+    "label": "Video – Áo chống nắng",
+    "short": "Áo chống nắng",
+    "items": [
+      {
+        "name": "Áo chống nắng · thoáng mát dễ mặc",
+        "prompt": "Áo chống nắng thoáng mát dễ mặc – Người phụ nữ mỉm cười nhẹ, bước lên một bước nhỏ, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo theo trục giữa, ánh mắt cúi nhìn thiết kế, sau đó xoay sang trái và kéo nhẹ tay áo cùng thân áo để thể hiện độ co giãn, thoáng khí và che phủ tốt."
+      },
+      {
+        "name": "Áo chống nắng · nhẹ mát cả ngày",
+        "prompt": "Áo chống nắng nhẹ mát cả ngày – Nhân vật nữ bước chậm về phía trước, hai tay khép trước thân lướt dọc áo từ cổ xuống bụng giới thiệu chất vải, sau đó xoay sang trái kéo nhẹ áo và tay áo chứng minh sự mềm nhẹ, không bí nóng."
+      },
+      {
+        "name": "Áo chống nắng · che phủ toàn diện",
+        "prompt": "Áo chống nắng che phủ toàn diện – Người phụ nữ bước tự nhiên, hai tay vuốt từ cổ áo xuống thân áo tạo cảm giác gọn gàng, ánh mắt nhìn trang phục, sau đó xoay sang trái kéo nhẹ mũ và tay áo thể hiện khả năng che nắng tốt."
+      },
+      {
+        "name": "Áo chống nắng · co giãn linh hoạt",
+        "prompt": "Áo chống nắng co giãn linh hoạt – Nhân vật nữ bước một bước nhỏ, hai tay đặt sát nhau vuốt dọc thân áo theo trục giữa, sau đó xoay sang trái kéo nhẹ thân áo và tay áo để thể hiện độ đàn hồi khi vận động."
+      },
+      {
+        "name": "Áo chống nắng · mặc đi nắng hằng ngày",
+        "prompt": "Áo chống nắng mặc đi nắng hằng ngày – Người phụ nữ mỉm cười thư giãn, bước chậm về phía trước, hai tay vuốt từ cổ áo xuống thân áo, sau đó xoay sang trái kéo nhẹ áo tạo cảm giác dễ mặc và thoải mái."
+      },
+      {
+        "name": "Áo chống nắng · dáng suông dễ phối",
+        "prompt": "Áo chống nắng dáng suông dễ phối – Nhân vật nữ bước nhẹ, hai tay khép trước thân lướt dọc áo từ cổ xuống bụng, ánh mắt cúi nhìn form áo, sau đó xoay sang trái kéo nhẹ áo thể hiện dáng suông và thoáng."
+      },
+      {
+        "name": "Áo chống nắng · cho người đi đường nhiều",
+        "prompt": "Áo chống nắng cho người đi đường nhiều – Người phụ nữ bước lên một bước tự nhiên, hai tay vuốt dọc thân áo từ cổ xuống eo như hành động giới thiệu sản phẩm, sau đó xoay sang trái kéo nhẹ tay áo thể hiện độ che chắn và thoáng khí."
+      },
+      {
+        "name": "Áo chống nắng · form rộng dễ vận động",
+        "prompt": "Áo chống nắng form rộng dễ vận động – Nhân vật nữ bước chậm, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo, sau đó xoay sang trái kéo nhẹ áo để thể hiện form rộng, thoải mái khi di chuyển."
+      },
+      {
+        "name": "Áo chống nắng · trung niên",
+        "prompt": "Áo chống nắng trung niên – Người phụ nữ mỉm cười hiền, bước một bước nhỏ, hai tay vuốt dọc thân áo từ cổ xuống bụng tạo cảm giác kín đáo, sau đó xoay sang trái kéo nhẹ áo thể hiện sự dễ mặc và nhẹ nhàng."
+      },
+      {
+        "name": "Áo chống nắng · chốt đơn",
+        "prompt": "Áo chống nắng chốt đơn – Nhân vật nữ bước lên một bước nhẹ, hai tay vuốt từ cổ áo xuống thân áo theo trục giữa, sau đó xoay sang trái kéo nhẹ áo và tay áo thể hiện độ co giãn, thoáng mát, biểu cảm thân thiện và tin cậy."
+      }
+    ]
+  },
+  {
+    "key": "congso",
+    "label": "Video – Thời trang công sở",
+    "short": "Công sở",
+    "items": [
+      {
+        "name": "Công sở · thanh lịch",
+        "prompt": "Thời trang công sở thanh lịch – Người phụ nữ mỉm cười tự tin, bước lên một bước nhỏ, hai tay đặt sát nhau vuốt từ cổ áo xuống eo theo trục giữa, ánh mắt cúi nhẹ nhìn trang phục, sau đó xoay sang trái và kéo nhẹ thân áo để thể hiện form đứng và sự chỉn chu."
+      },
+      {
+        "name": "Công sở · gọn gàng dễ mặc",
+        "prompt": "Thời trang công sở gọn gàng dễ mặc – Nhân vật nữ bước chậm về phía trước, hai tay khép trước thân lướt dọc áo từ cổ xuống eo giới thiệu thiết kế, sau đó xoay sang trái kéo nhẹ áo thể hiện độ thoải mái khi làm việc cả ngày."
+      },
+      {
+        "name": "Công sở · chuyên nghiệp",
+        "prompt": "Thời trang công sở chuyên nghiệp – Người phụ nữ giữ lưng thẳng, bước một bước nhẹ, hai tay vuốt dọc thân áo từ cổ xuống eo như người mẫu công sở, sau đó xoay sang trái kéo nhẹ áo thể hiện form chuẩn và lịch sự."
+      },
+      {
+        "name": "Công sở · nữ tính",
+        "prompt": "Thời trang công sở nữ tính – Nhân vật nữ mỉm cười nhẹ, bước tự nhiên, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo tạo cảm giác mềm mại, sau đó xoay sang trái kéo nhẹ áo thể hiện sự thanh thoát và tinh tế."
+      },
+      {
+        "name": "Công sở · che khuyết điểm",
+        "prompt": "Thời trang công sở che khuyết điểm – Người phụ nữ bước chậm, hai tay vuốt dọc thân áo theo trục giữa tạo cảm giác thon gọn, sau đó xoay sang trái kéo nhẹ áo thể hiện dáng suông vừa và dễ mặc."
+      },
+      {
+        "name": "Công sở · mặc hằng ngày",
+        "prompt": "Thời trang công sở mặc hằng ngày – Nhân vật nữ bước một bước nhỏ, hai tay khép trước thân vuốt từ cổ áo xuống eo giới thiệu form gọn gàng, sau đó xoay sang trái kéo nhẹ áo thể hiện sự thoải mái và linh hoạt."
+      },
+      {
+        "name": "Công sở · trung niên",
+        "prompt": "Thời trang công sở trung niên – Người phụ nữ mỉm cười hiền, bước nhẹ về phía trước, hai tay vuốt dọc thân áo từ cổ xuống bụng tạo cảm giác kín đáo, sau đó xoay sang trái kéo nhẹ áo thể hiện sự lịch sự và dễ chịu."
+      },
+      {
+        "name": "Công sở · hiện đại",
+        "prompt": "Thời trang công sở hiện đại – Nhân vật nữ bước tự tin, hai tay đặt sát nhau vuốt từ cổ áo xuống eo theo trục giữa, sau đó xoay sang trái kéo nhẹ áo để thể hiện form đứng và phong thái chuyên nghiệp."
+      },
+      {
+        "name": "Công sở · tối giản",
+        "prompt": "Thời trang công sở tối giản – Người phụ nữ bước chậm, hai tay vuốt nhẹ thân áo từ cổ xuống eo, ánh mắt nhìn trang phục, sau đó xoay sang trái kéo nhẹ áo thể hiện thiết kế đơn giản và tinh tế."
+      },
+      {
+        "name": "Công sở · chốt đơn",
+        "prompt": "Thời trang công sở chốt đơn – Nhân vật nữ bước lên một bước tự nhiên, hai tay vuốt dọc thân áo từ cổ xuống eo như hành động giới thiệu sản phẩm, sau đó xoay sang trái kéo nhẹ áo thể hiện độ co giãn, form chuẩn, biểu cảm thân thiện và tin cậy."
+      }
+    ]
+  },
+  {
+    "key": "trungnien",
+    "label": "Video – Thời trang trung niên",
+    "short": "Trung niên",
+    "items": [
+      {
+        "name": "Trung niên · dáng 01",
+        "prompt": "Người phụ nữ trung niên mỉm cười hiền, bước một bước nhỏ, hai tay khép trước thân vuốt từ cổ áo xuống bụng theo trục giữa, ánh mắt cúi nhẹ, sau đó xoay sang trái kéo nhẹ áo thể hiện form gọn và kín đáo."
+      },
+      {
+        "name": "Trung niên · dáng 02",
+        "prompt": "Nhân vật nữ bước chậm về phía trước, hai tay vuốt dọc thân áo từ cổ xuống eo tạo cảm giác thon gọn, sau đó xoay sang trái kéo nhẹ áo thể hiện độ suông và dễ mặc."
+      },
+      {
+        "name": "Trung niên · dáng 03",
+        "prompt": "Người phụ nữ mỉm cười nhẹ, bước lên một bước, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo, sau đó xoay sang trái kéo nhẹ áo chứng minh độ đứng form và thoải mái."
+      },
+      {
+        "name": "Trung niên · dáng 04",
+        "prompt": "Nhân vật nữ bước tự nhiên, hai tay khép trước thân lướt dọc áo từ cổ xuống bụng, ánh mắt nhìn trang phục, sau đó xoay sang trái kéo nhẹ áo thể hiện sự dễ mặc và tiện lợi."
+      },
+      {
+        "name": "Trung niên · dáng 05",
+        "prompt": "Người phụ nữ bước chậm, giữ thân thẳng, hai tay vuốt từ cổ áo xuống eo tạo dáng lịch sự, sau đó xoay sang trái kéo nhẹ áo thể hiện form chỉn chu."
+      },
+      {
+        "name": "Trung niên · dáng 06",
+        "prompt": "Nhân vật nữ mỉm cười tự tin, bước một bước nhỏ, hai tay vuốt dọc thân áo từ cổ xuống eo, sau đó xoay sang trái kéo nhẹ áo thể hiện sự sang nhã vừa phải."
+      },
+      {
+        "name": "Trung niên · dáng 07",
+        "prompt": "Người phụ nữ bước nhẹ, hai tay khép trước thân vuốt từ cổ áo xuống bụng, biểu cảm thư giãn, sau đó xoay sang trái kéo nhẹ áo thể hiện độ mềm và gọn gàng."
+      },
+      {
+        "name": "Trung niên · dáng 08",
+        "prompt": "Nhân vật nữ bước chậm về phía trước, hai tay vuốt dọc thân áo theo trục giữa, ánh mắt cúi nhìn áo, sau đó xoay sang trái kéo nhẹ áo thể hiện độ thoáng và dễ chịu."
+      },
+      {
+        "name": "Trung niên · dáng 09",
+        "prompt": "Người phụ nữ mỉm cười hiền, bước một bước nhỏ, hai tay vuốt từ cổ áo xuống bụng tạo cảm giác thon gọn, sau đó xoay sang trái kéo nhẹ áo thể hiện form rộng vừa phải."
+      },
+      {
+        "name": "Trung niên · dáng 10",
+        "prompt": "Nhân vật nữ bước lên một bước tự nhiên, hai tay vuốt dọc thân áo từ cổ xuống eo như hành động giới thiệu sản phẩm, sau đó xoay sang trái kéo nhẹ áo thể hiện độ co giãn và dễ mặc."
+      }
+    ]
+  },
+  {
+    "key": "dobo",
+    "label": "Video – Đồ bộ mặc nhà",
+    "short": "Đồ bộ mặc nhà",
+    "items": [
+      {
+        "name": "Đồ bộ mặc nhà · dáng 01",
+        "prompt": "Người phụ nữ mỉm cười thư giãn, bước lên một bước nhỏ, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo theo trục giữa, cúi nhìn bộ đồ, sau đó xoay sang trái và kéo nhẹ áo để thể hiện độ mềm và thoải mái."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 02",
+        "prompt": "Nhân vật nữ bước chậm về phía trước, hai tay khép trước thân lướt từ cổ áo xuống bụng giới thiệu chất vải, ánh mắt nhìn đồ, sau đó xoay sang trái kéo nhẹ áo chứng minh độ mát và dễ chịu."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 03",
+        "prompt": "Người mẫu bước nhẹ một nhịp, hai tay vuốt dọc thân áo từ cổ xuống eo, biểu cảm dễ chịu, sau đó xoay người sang trái và kéo nhẹ áo thể hiện độ thoáng và co giãn."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 04",
+        "prompt": "Nhân vật nữ bước tự nhiên, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo tạo cảm giác suông rộng, sau đó xoay sang trái kéo nhẹ áo thể hiện form rộng và thoải mái."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 05",
+        "prompt": "Người phụ nữ mỉm cười nhẹ, bước chậm về phía trước, hai tay khép trước thân vuốt từ cổ áo xuống bụng tạo cảm giác gọn gàng, sau đó xoay sang trái kéo nhẹ áo thể hiện độ mềm và dễ mặc."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 06",
+        "prompt": "Nhân vật nữ mỉm cười hiền, bước một bước nhỏ, hai tay vuốt dọc thân áo từ cổ xuống bụng tạo cảm giác kín đáo, sau đó xoay sang trái kéo nhẹ áo thể hiện sự thoải mái và lịch sự."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 07",
+        "prompt": "Người phụ nữ bước nhẹ, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo, ánh mắt thư giãn, sau đó xoay người sang trái kéo nhẹ áo tạo cảm giác mềm mại, dễ ngủ."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 08",
+        "prompt": "Nhân vật nữ bước lên một bước tự nhiên, hai tay vuốt từ cổ áo xuống eo như giới thiệu sản phẩm, sau đó xoay sang trái kéo nhẹ áo thể hiện form gọn và dễ nhìn."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 09",
+        "prompt": "Người mẫu bước chậm, hai tay khép trước thân vuốt dọc áo từ cổ xuống bụng, ánh mắt nhìn trang phục, sau đó xoay sang trái kéo nhẹ áo thể hiện độ co giãn và dễ mặc."
+      },
+      {
+        "name": "Đồ bộ mặc nhà · dáng 10",
+        "prompt": "Nhân vật nữ bước lên một bước nhẹ, hai tay vuốt dọc thân áo từ cổ xuống eo theo trục giữa, sau đó xoay sang trái kéo nhẹ áo thể hiện độ mềm và thoải mái, biểu cảm thân thiện."
+      }
+    ]
+  },
+  {
+    "key": "aothun",
+    "label": "Video – Áo thun nữ",
+    "short": "Áo thun nữ",
+    "items": [
+      {
+        "name": "Áo thun nữ · dáng 01",
+        "prompt": "Người phụ nữ mỉm cười tươi, bước lên một bước nhỏ, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo theo trục giữa, cúi nhìn áo, sau đó xoay người sang trái và kéo nhẹ vạt áo để thể hiện form chuẩn và độ co giãn tự nhiên."
+      },
+      {
+        "name": "Áo thun nữ · dáng 02",
+        "prompt": "Nhân vật nữ bước chậm về phía trước, hai tay khép trước thân lướt từ cổ áo xuống bụng để giới thiệu chất vải, ánh mắt nhìn áo, sau đó xoay sang trái và kéo nhẹ áo chứng minh độ mềm và thoải mái khi mặc."
+      },
+      {
+        "name": "Áo thun nữ · dáng 03",
+        "prompt": "Người mẫu bước nhanh một nhịp nhỏ, hai tay vuốt dọc thân áo từ cổ xuống eo, biểu cảm vui tươi, sau đó xoay người sang trái và kéo nhẹ áo thể hiện độ co giãn phù hợp vận động."
+      },
+      {
+        "name": "Áo thun nữ · dáng 04",
+        "prompt": "Nhân vật nữ bước nhẹ về phía trước, hai tay đặt sát nhau vuốt từ cổ áo xuống thân áo tạo cảm giác gọn gàng, ánh mắt cúi nhẹ, sau đó xoay sang trái kéo nhẹ áo thể hiện độ suông và dễ mặc."
+      },
+      {
+        "name": "Áo thun nữ · dáng 05",
+        "prompt": "Người phụ nữ mỉm cười thư giãn, bước một bước nhỏ, hai tay khép trước thân lướt dọc áo từ cổ xuống bụng, sau đó xoay sang trái và kéo nhẹ áo thể hiện sự mềm mại và thoáng mát."
+      },
+      {
+        "name": "Áo thun nữ · dáng 06",
+        "prompt": "Nhân vật nữ bước tự nhiên về phía trước, hai tay vuốt từ cổ áo xuống thân áo theo trục giữa, ánh mắt nhìn áo đầy thích thú, sau đó xoay người sang trái kéo nhẹ vạt áo tạo cảm giác năng động."
+      },
+      {
+        "name": "Áo thun nữ · dáng 07",
+        "prompt": "Người mẫu bước chậm, giữ thân thẳng, hai tay vuốt nhẹ thân áo từ cổ xuống eo để giới thiệu form basic, sau đó xoay sang trái và kéo nhẹ áo thể hiện độ co giãn linh hoạt."
+      },
+      {
+        "name": "Áo thun nữ · dáng 08",
+        "prompt": "Nhân vật nữ bước một bước nhỏ, hai tay đặt sát nhau vuốt dọc thân áo từ cổ xuống bụng, ánh mắt cúi nhìn áo, sau đó xoay sang trái kéo nhẹ áo để thể hiện độ rộng và thoải mái."
+      },
+      {
+        "name": "Áo thun nữ · dáng 09",
+        "prompt": "Người phụ nữ mỉm cười hiền, bước nhẹ về phía trước, hai tay khép trước thân vuốt từ cổ áo xuống thân áo tạo cảm giác kín đáo, sau đó xoay sang trái kéo nhẹ áo thể hiện sự dễ mặc."
+      },
+      {
+        "name": "Áo thun nữ · dáng 10",
+        "prompt": "Nhân vật nữ bước lên một bước tự nhiên, hai tay vuốt dọc thân áo từ cổ xuống eo như hành động giới thiệu sản phẩm, sau đó xoay sang trái kéo nhẹ áo thể hiện độ co giãn, biểu cảm thân thiện, tin cậy."
+      }
+    ]
+  },
+  {
+    "key": "dam",
+    "label": "Video – Đầm nữ",
+    "short": "Đầm nữ",
+    "items": [
+      {
+        "name": "Đầm nữ · dáng 01",
+        "prompt": "Nhân vật nữ mỉm cười nhẹ, bước lên một bước nhỏ, hai tay đặt sát nhau trước thân, lướt từ cổ váy xuống eo theo trục giữa để giới thiệu form dáng, ánh mắt cúi nhìn váy, sau đó xoay người sang trái và kéo nhẹ phần hông váy để thể hiện độ ôm và co giãn tự nhiên."
+      },
+      {
+        "name": "Đầm nữ · dáng 02",
+        "prompt": "Người phụ nữ bước chậm về phía trước, vai thả lỏng, hai tay khép trước ngực rồi trượt dọc thân váy xuống đùi, ánh mắt nhìn xuống chất vải, sau đó xoay nhẹ sang trái, một tay kéo nhẹ vạt váy để thể hiện độ rũ và mềm mại."
+      },
+      {
+        "name": "Đầm nữ · dáng 03",
+        "prompt": "Nhân vật nữ mỉm cười tự tin, bước một bước dứt khoát, hai tay đặt sát thân và vuốt từ cổ váy xuống eo, giữ lưng thẳng như người mẫu runway, sau đó xoay nửa vòng sang trái, kéo nhẹ thân váy thể hiện độ đứng form và cao cấp."
+      },
+      {
+        "name": "Đầm nữ · dáng 04",
+        "prompt": "Người mẫu bước nhanh một nhịp nhỏ, hai tay khép nhẹ trước thân và vuốt từ cổ váy xuống eo, ánh mắt tươi vui, sau đó xoay sang trái, dùng hai ngón tay kéo nhẹ vạt váy chứng minh độ co giãn, phong thái trẻ trung."
+      },
+      {
+        "name": "Đầm nữ · dáng 05",
+        "prompt": "Nhân vật nữ bước chậm rãi về phía trước, hai tay đặt sát nhau và vuốt dọc thân váy theo đường giữa, ánh mắt cúi nhẹ tạo cảm giác kín đáo, sau đó xoay người sang trái, kéo nhẹ váy để thể hiện độ thoải mái và dễ mặc."
+      },
+      {
+        "name": "Đầm nữ · dáng 06",
+        "prompt": "Người phụ nữ mỉm cười chuyên nghiệp, bước một bước nhỏ, hai tay khép trước thân và vuốt từ cổ váy xuống eo tạo dáng gọn gàng, sau đó xoay sang trái, kéo nhẹ váy để thể hiện form đứng và sự chỉn chu."
+      },
+      {
+        "name": "Đầm nữ · dáng 07",
+        "prompt": "Nhân vật nữ bước nhẹ về phía trước, hai tay đặt sát nhau và lướt dọc thân váy từ trên xuống, ánh mắt nhìn váy đầy thích thú, sau đó xoay sang trái, kéo nhẹ vạt váy tạo cảm giác bay nhẹ, tự nhiên."
+      },
+      {
+        "name": "Đầm nữ · dáng 08",
+        "prompt": "Người mẫu bước chậm, giữ thân thẳng, hai tay vuốt từ cổ váy xuống hông theo trục giữa để nhấn mạnh đường cong, sau đó xoay người sang trái, kéo nhẹ thân váy chứng minh độ co giãn và ôm dáng."
+      },
+      {
+        "name": "Đầm nữ · dáng 09",
+        "prompt": "Người phụ nữ mỉm cười hiền, bước một bước nhỏ, hai tay đặt gọn trước thân và vuốt từ cổ váy xuống bụng, ánh mắt cúi nhẹ, sau đó xoay sang trái, kéo nhẹ váy thể hiện sự thoải mái và lịch sự."
+      },
+      {
+        "name": "Đầm nữ · dáng 10",
+        "prompt": "Nhân vật nữ bước lên một bước tự nhiên, hai tay khép sát và vuốt dọc thân váy từ cổ xuống eo như hành động giới thiệu sản phẩm, sau đó xoay người sang trái, kéo nhẹ váy để thể hiện độ co giãn, biểu cảm tự tin, thân thiện."
+      }
+    ]
+  },
+  {
+    "key": "nam",
+    "label": "Video – Thời trang nam",
+    "short": "Nam",
+    "items": [
+      {
+        "name": "Dáng Xoay Người (The Turnaround)",
+        "prompt": "A handsome Asian male model wearing a standing with his back to the camera. He smoothly turns 180 degrees to face the camera, effortlessly putting his hands into his pants pockets.  Minimalist room background with natural sunlight and plants. Cinematic, highly detailed, photorealistic.",
+        "note": "Cần 2 cảnh đầu cuối là mặt trước và mặt sau của đồ"
+      },
+      {
+        "name": "Dáng Bước Đi Confident (The Walk-In)",
+        "prompt": "A stylish Asian male model  slowly towards the camera. He stops smoothly, poses with his hands in his pockets, and looks slightly off-camera. 4k resolution, fashion editorial style, smooth motion."
+      },
+      {
+        "name": "Dáng Tương Tác & Khoanh Tay (The Interactive Pose)",
+        "prompt": "A handsome Asian male model . He naturally adjusts the hem of his shirt with his hands, takes a slight step forward, and casually crosses his arms over his chest. Relaxed and cool expression. Soft, natural daylight from a side window. High quality, realistic human movement."
+      },
+      {
+        "name": "Cảnh Flat Lay (Góc Máy Tĩnh Chụp Sản Phẩm)",
+        "prompt": "A top-down flat lay static shot . Crisp details showing the texture of the shirt, natural warm sunlight. 4k, product photography.",
+        "note": "Góc máy top-down (từ trên xuống), áo được trải phẳng"
+      },
+      {
+        "name": "Dáng Vuốt Tóc Ngước Nhìn (The Casual Look-Up)",
+        "prompt": "Medium shot of a stylish Asian male model. He is slightly looking down, gently brushing his hair with one hand. He then smoothly slowly tilts his head up to look directly into the camera with a confident, relaxed expression.natural window lighting, photorealistic human movement, 4k."
+      },
+      {
+        "name": "Dáng Đi Ngang Màn Hình (The Tracking Stroll)",
+        "prompt": "Cinematic tracking shot of a handsome Asian male model walking slowly from left to right. He looks off-camera casually, then gently turns his head towards the camera with a subtle smile. smooth continuous motion, 8k resolution"
+      },
+      {
+        "name": "Dáng Dựa Tường Thư Giãn (The Casual Lean)",
+        "prompt": "A casual Asian male model leaning relaxed against a plain grey wall, wearing a [mô tả áo]. He shifts his weight naturally, with one hand in his pocket and looking away thoughtfully. very slow and natural human breathing motion. Photorealistic."
+      },
+      {
+        "name": "Hành Động Che Ống Kính (The Swipe Transition)",
+        "prompt": "A stylish male model standing in a bright room. He looks directly at the camera, raises his hand playfully, and smoothly swipes his hand across the camera lens covering it completely. Fluid motion, dynamic transition shot, vlogger style, high quality."
+      },
+      {
+        "name": "Trượt Camera Qua Sào Đồ (The Hanger Pan)",
+        "prompt": "A very smooth, slow camera pan from left to right across a [mô tả áo] hanging neatly on a minimalist metal clothing rack. The shirt sways almost imperceptibly in a soft breeze. Blurred bright room in the background (shallow depth of field). Natural soft lighting, cinematic product b-roll."
+      }
+    ]
+  }
+]
