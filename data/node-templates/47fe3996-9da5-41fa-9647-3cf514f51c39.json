@@ -1,0 +1,1450 @@
+{
+  "id": "47fe3996-9da5-41fa-9647-3cf514f51c39",
+  "name": "Flow nhìu quần áo, vỗ tay chuyển cảnh",
+  "nodes": [
+    {
+      "id": "d68c1f8f-ea0c-45a8-b0b7-b1523dab8d99",
+      "type": "text",
+      "position": {
+        "x": 560,
+        "y": 1999
+      },
+      "config": {
+        "content": "Giữ nguyên hoàn toàn ảnh gốc: trang phục, kiểu tóc, màu tóc, nền, ánh sáng, tư thế, bố cục, màu sắc, kết cấu da toàn thân. Chỉ thay thế duy nhất gương mặt (từ trán đến cằm, bao gồm mắt, mũi, miệng) bằng gương mặt trong ảnh tham chiếu thứ hai. Ánh sáng và tông da trên mặt phải hoà hợp tự nhiên với cổ và thân người trong ảnh gốc. Không thay đổi bất cứ thứ gì khác ngoài gương mặt."
+      },
+      "width": 292,
+      "height": 182
+    },
+    {
+      "id": "85274ef9-fb6e-44d6-a067-f41f7b295262",
+      "type": "image",
+      "position": {
+        "x": 1996,
+        "y": 630
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/0d5183f5-a3d5-4f7e-9f8d-443afe4c38ba.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "848ca406-85dc-4beb-93d0-bca26b01c680",
+      "type": "image",
+      "position": {
+        "x": 2096,
+        "y": 1387
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/769c028c-a471-4fcb-b12b-51507359c8cd.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "9998bca7-b686-465d-b3a3-6630de81184d",
+      "type": "image",
+      "position": {
+        "x": 2147,
+        "y": 2439
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/76bc3a18-75a9-451d-bf36-15f42c996a04.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "89096f92-fd48-4bbb-be51-d1d04da80c88",
+      "type": "image",
+      "position": {
+        "x": 1990,
+        "y": 237
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/4f469a12-2ec7-4564-8233-62a21067978f.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "d4934a77-0ad4-44fc-9232-3bdca1e36226",
+      "type": "image",
+      "position": {
+        "x": 2172,
+        "y": 2860
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/bd27fd42-148e-4ef9-9c95-561bcde340a6.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "1c7729cc-9b7a-4ba3-a0e8-e00bfa9e52e2",
+      "type": "image",
+      "position": {
+        "x": 2143,
+        "y": 2158
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/212dca03-309f-417e-93f9-39a581df396e.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "ab7de688-f442-42f3-bdf9-0b362a30a115",
+      "type": "text",
+      "position": {
+        "x": 2625,
+        "y": 99
+      },
+      "config": {
+        "content": "Người mẫu đứng yên tại chỗ, vỗ nhẹ hai tay và mỉm cười tươi tắn hướng thẳng vào ống kính. Chuyển động nhẹ nhàng, tự nhiên. Nền, trang phục và vị trí người giữ nguyên hoàn toàn."
+      },
+      "width": 498,
+      "height": 158
+    },
+    {
+      "id": "cfb63655-b054-4f46-84d5-15b32b0bdab6",
+      "type": "image",
+      "position": {
+        "x": 1044,
+        "y": 441
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/70a3f6f6-8ad9-4096-9283-f6c03b1e3a0c.webp",
+          "mime": "image/webp"
+        }
+      }
+    },
+    {
+      "id": "f4ff5e98-3265-4dae-baff-ed43aa597848",
+      "type": "text",
+      "position": {
+        "x": 2755,
+        "y": 507
+      },
+      "config": {
+        "content": "The person stands still, gently bobs both shoulders up and down once in a subtle, natural rhythm, tilts their head slightly to one side, and gives a soft delicate smile. Only the shoulders and head move slightly. Outfit, background, and body position remain completely unchanged."
+      },
+      "width": 407,
+      "height": 149
+    },
+    {
+      "id": "f9f5c72b-932d-424f-9dbe-92a71722ef81",
+      "type": "image",
+      "position": {
+        "x": 2097,
+        "y": 1737
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/e2fcd6fc-8f02-481d-ba85-52f51e0dce38.jpeg",
+          "mime": "image/jpeg"
+        }
+      }
+    },
+    {
+      "id": "87a389d1-0d6a-492b-a05f-7652f1eaac0a",
+      "type": "image",
+      "position": {
+        "x": 0,
+        "y": 1675
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/0af2aebd-a663-4acc-bc3c-783eaf4f2b81.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "23f38015-4c6b-4029-89f2-91faa5f4e096",
+      "type": "text",
+      "position": {
+        "x": 2855,
+        "y": 1614
+      },
+      "config": {
+        "content": "Người mẫu đứng tại chỗ, cười nhẹ nhàng duyên dáng, hai vai nhún nhẹ một nhịp, sau đó từ từ di chuyển ngón tay đến vị trí như trong ảnh kết thúc. Chuyển động mượt mà, tự nhiên, trang phục và nền giữ nguyên."
+      },
+      "width": 456,
+      "height": 152
+    },
+    {
+      "id": "201b942b-3953-4324-afab-53227d0a858f",
+      "type": "image",
+      "position": {
+        "x": 1055,
+        "y": 770
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/89d445fe-230a-4939-8f35-93c3830b4efe.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "23bd105a-48a1-4e5b-8ea9-1ce566f15bf4",
+      "type": "image",
+      "position": {
+        "x": 1056,
+        "y": 1299
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/e7c12006-a221-4ff3-9dbf-098074f5b223.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "78e469e4-50f7-4382-b058-320ba49bd0a5",
+      "type": "image",
+      "position": {
+        "x": 1052,
+        "y": 1725
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/be478337-e6d0-4417-a21a-066c42c08be5.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "ec0d2798-4a96-4252-9a63-c86caade2236",
+      "type": "image",
+      "position": {
+        "x": 1040,
+        "y": 2169
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/be917854-71b9-41bf-97f6-adecaff3579a.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "7917ba93-68ee-4ef4-b51c-2f54e79621b1",
+      "type": "image",
+      "position": {
+        "x": 998,
+        "y": 2649
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/567ab80d-361f-461a-9279-c320203c6bb0.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "541ab1a4-3944-4d49-a802-79d5eec9304b",
+      "type": "text",
+      "position": {
+        "x": 703,
+        "y": 1141
+      },
+      "config": {
+        "content": "Analyze the attached image in extreme detail and extract ALL visible clothing items and accessories worn or present in the image.\n\nFor each detected item:\n- Isolate it completely from the original subject and background.\n- Recreate it as a standalone product image.\n- Preserve exact color, fabric texture, stitching, seams, folds, logos (if any), material thickness, proportions, and structural details.\n- Maintain accurate scale and garment construction.\n- Do not redesign or reinterpret the item.\n\nEach clothing item and accessory must be:\n- Fully visible\n- Properly shaped as it would appear naturally laid flat or positioned cleanly\n- Free of distortion\n- Photorealistic\n- High resolution\n- Studio-quality product photography\n\nBACKGROUND:\nPure solid white background (#FFFFFF).\nNo shadows unless soft natural grounding shadow directly beneath the item.\nNo reflections.\nNo gradients.\nNo environmental elements.\n\nLIGHTING:\nSoft studio lighting.\nEven exposure.\nNo dramatic shadows.\nAccurate color reproduction.\nTrue-to-life material rendering.\n\nSTRICT RULES:\n- Do NOT include the model or body parts.\n- Do NOT merge multiple items into one object.\n- Separate each item individually.\n- Maintain 99% visual accuracy compared to the original image.\n- Do NOT stylize.\n- No CGI look.\n- No artistic reinterpretation.\n- No texture smoothing.\n\nNEGATIVE PROMPT:\nblurry, distorted shape, warped fabric, incorrect color, missing details, artificial shine, over-smoothing, CGI, illustration, cartoon, rendering artifacts, merged objects, incomplete garment, cut-off edges."
+      }
+    },
+    {
+      "id": "2b977b9f-66a0-47d4-b909-dc76bed9b41d",
+      "type": "image",
+      "position": {
+        "x": 1841,
+        "y": 1538
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/c8a2e4ae-9c97-48b5-86e7-e0c126486d5d.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "c361c730-90a6-4168-8249-4114ad49c1db",
+      "type": "image",
+      "position": {
+        "x": 2032,
+        "y": 988
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/6d534693-1103-479f-958f-2be5f2a76c1f.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "63ee3edd-96fa-4f88-920c-4469344611d4",
+      "type": "image",
+      "position": {
+        "x": 1974,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/e58f9c48-176e-4ac5-9434-94050e1f80bc.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+      "type": "text",
+      "position": {
+        "x": 1519,
+        "y": 1915
+      },
+      "config": {
+        "content": "Image 1 is a person. Image 2 is a clothing item.\nDress the person in Image 1 with the exact garment from Image 2.\nPreserve the garment's pattern, color, texture and shape faithfully.\nKeep the person's face, hair, body, pose, lighting and background unchanged.\nPhotorealistic, natural fabric folds, correct proportions."
+      }
+    },
+    {
+      "id": "db008fa6-b5b3-41e8-a05b-40b5c2859089",
+      "type": "image",
+      "position": {
+        "x": 2362,
+        "y": 57
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/691b59ef-bad6-488f-a7e1-14f3f85fa77b.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "11d192a5-439f-4e22-82d8-b460e858d573",
+      "type": "image",
+      "position": {
+        "x": 1877,
+        "y": 2332
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/a65ed393-b1a8-47c7-b111-54de3075dfad.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "b11f611f-a99d-46d1-88ff-961a10dc8670",
+      "type": "image",
+      "position": {
+        "x": 1833,
+        "y": 2829
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/35e03a0d-8d9e-444a-a285-17418daf297e.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "bcd60b76-2d8f-4853-a40a-b22b9445de89",
+      "type": "image",
+      "position": {
+        "x": 1876,
+        "y": 3301
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/fbdeed48-493d-4554-8ff9-53fe208f9b04.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "3e8c9a6f-c331-405e-a5ce-d7981fa851f1",
+      "type": "image",
+      "position": {
+        "x": 2498,
+        "y": 605
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/f607afbe-db53-4677-9973-cf4c92872e6d.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "80e3cbe9-f9c2-46fe-be82-f08b896db029",
+      "type": "image",
+      "position": {
+        "x": 2522,
+        "y": 1725
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/2bd54c8c-df9b-4967-8460-b3581f564516.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "fee25b81-7d8a-4bf3-b00b-66a3d0c02609",
+      "type": "image",
+      "position": {
+        "x": 2507,
+        "y": 1368
+      },
+      "config": {
+        "provider": "gemini",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/e232587e-9f8f-44b2-98d4-320c4257204b.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "0daa02fd-f959-4fa2-ba91-2eea551a8187",
+      "type": "image",
+      "position": {
+        "x": 2201,
+        "y": 3319
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/4f469a12-2ec7-4564-8233-62a21067978f.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "fa976eca-66cc-4d18-a5f1-2ecefdb24653",
+      "type": "image",
+      "position": {
+        "x": 2546,
+        "y": 2139
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/8f5ccb58-9489-47fb-9fe9-f64719038e4d.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "717afdbc-6149-4ea1-a443-3465c3b73195",
+      "type": "image",
+      "position": {
+        "x": 2555,
+        "y": 2446
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/3a9d5151-ab30-48ae-9e9e-7265d50cf357.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42",
+      "type": "image",
+      "position": {
+        "x": 2477,
+        "y": 2873
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/52bd9bd0-de14-4ff8-8cb9-f390c18e8edd.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "fde2d1ca-ca2d-476e-8843-6fe4f717f882",
+      "type": "image",
+      "position": {
+        "x": 2551,
+        "y": 3289
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/2ff01950-7fa0-4b01-aa7e-b7460caa4f22.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "0985588c-a36c-4325-a75b-33ad5e2276f5",
+      "type": "video",
+      "position": {
+        "x": 3229,
+        "y": 106
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/48d68bca-5c7e-440f-8359-518128623a92/0985588c-a36c-4325-a75b-33ad5e2276f5/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "d2d574da-8b1c-4e32-a5a7-7be9e329b7eb",
+      "type": "video",
+      "position": {
+        "x": 3086,
+        "y": 574
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/f043365b-3c36-47b0-9fd5-1a85ca0a8d43/d2d574da-8b1c-4e32-a5a7-7be9e329b7eb/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "83fa26cb-de7e-4f34-a4bf-95afd6e7c637",
+      "type": "video",
+      "position": {
+        "x": 3331,
+        "y": 1559
+      },
+      "config": {
+        "model": "veo-3.1-quality",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/d85861a0-7dcc-4fd8-a399-98a995dd9919/83fa26cb-de7e-4f34-a4bf-95afd6e7c637/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "31e322a6-3b84-40ce-8cdd-ca1ac5d9cc84",
+      "type": "text",
+      "position": {
+        "x": 2832,
+        "y": 2333
+      },
+      "config": {
+        "content": "Người mẫu đứng tại chỗ, mỉm cười nhẹ nhàng và nghiêng đầu hơi sang bên phải. Hai tay từ từ đưa ra phía trước vùng bụng, nắm hờ nhẹ vào nhau. Đồng thời một chân từ từ đưa lên theo tư thế như trong ảnh kết thúc. Chuyển động chậm, mượt mà, uyển chuyển. Trang phục, nền và vị trí thân người giữ nguyên."
+      }
+    },
+    {
+      "id": "e951190c-afe0-4fd3-b9e4-23be3a546665",
+      "type": "video",
+      "position": {
+        "x": 3298,
+        "y": 2160
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/d85861a0-7dcc-4fd8-a399-98a995dd9919/e951190c-afe0-4fd3-b9e4-23be3a546665/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "b2154a9e-2069-4b52-b29b-a91e156ebf5c",
+      "type": "text",
+      "position": {
+        "x": 2880,
+        "y": 2916
+      },
+      "config": {
+        "content": "Người mẫu đứng yên tại chỗ, miệng cười mỉm nhẹ nhàng liên tục. Các ngón tay đang dơ lên nhúc nhích uyển chuyển, uốn lượn mượt mà như đang vẫy chào thân thiện. Chuyển động chỉ ở phần ngón tay và biểu cảm khuôn mặt, toàn bộ trang phục, tóc, nền và tư thế thân người giữ nguyên."
+      },
+      "width": 319,
+      "height": 238
+    },
+    {
+      "id": "6555a37b-adb2-474b-a896-4a7dc85db435",
+      "type": "video",
+      "position": {
+        "x": 3402,
+        "y": 2840
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/d85861a0-7dcc-4fd8-a399-98a995dd9919/6555a37b-adb2-474b-a896-4a7dc85db435/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "62ae3cf7-8732-4e63-860d-07af757de399",
+      "type": "text",
+      "position": {
+        "x": 2870,
+        "y": 3552
+      },
+      "config": {
+        "content": "Người mẫu đứng tại chỗ, mỉm cười nhẹ nhàng tươi tắn, sau đó vỗ hai tay vào nhau 1 cái dứt khoát rồi giữ nguyên tư thế. Chuyển động tự nhiên, nền và trang phục giữ nguyên hoàn toàn."
+      }
+    },
+    {
+      "id": "41a0fc8c-fa8e-40f1-ba7c-2333e03dcd52",
+      "type": "video",
+      "position": {
+        "x": 3296,
+        "y": 3408
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/d85861a0-7dcc-4fd8-a399-98a995dd9919/41a0fc8c-fa8e-40f1-ba7c-2333e03dcd52/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "6758c01e-725e-4c27-9a0a-cbc425a70201",
+      "type": "text",
+      "position": {
+        "x": 2940,
+        "y": 1166
+      },
+      "config": {
+        "content": "The subject slowly spins in place with a graceful, smooth full rotation. They smile gently throughout the turn. Hair and clothing flow naturally with the movement. The camera stays fixed. Background remains completely static. Elegant, fluid motion."
+      },
+      "width": 456,
+      "height": 224
+    },
+    {
+      "id": "8cd798dd-4304-4067-b489-19c365f19d73",
+      "type": "video",
+      "position": {
+        "x": 4244,
+        "y": 788
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/15c68d9b-b98f-470b-9718-ac541cd489c6/8cd798dd-4304-4067-b489-19c365f19d73/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "a7a71588-7088-43ac-afa0-94ce9d999610",
+      "type": "video",
+      "position": {
+        "x": 4230,
+        "y": 1030
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16"
+      }
+    },
+    {
+      "id": "33d50b0c-3c51-4324-9b86-5dff5233b2f9",
+      "type": "video",
+      "position": {
+        "x": 4230,
+        "y": 1290
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/e1e6ad68-9fa4-4c79-b979-e35d830ad695/33d50b0c-3c51-4324-9b86-5dff5233b2f9/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "f58475ad-7f2a-4311-a7f8-d76d7c28266f",
+      "type": "video",
+      "position": {
+        "x": 4230,
+        "y": 1550
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/e1e6ad68-9fa4-4c79-b979-e35d830ad695/f58475ad-7f2a-4311-a7f8-d76d7c28266f/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "7897f75c-64d0-4af4-a026-97b560617c05",
+      "type": "video",
+      "position": {
+        "x": 4230,
+        "y": 1810
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/e1e6ad68-9fa4-4c79-b979-e35d830ad695/7897f75c-64d0-4af4-a026-97b560617c05/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    },
+    {
+      "id": "d03549d3-2dae-4ef7-98a6-010e9ba15885",
+      "type": "video",
+      "position": {
+        "x": 4230,
+        "y": 2070
+      },
+      "config": {
+        "model": "omni-flash",
+        "duration": 4,
+        "aspectRatio": "9:16",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/e1e6ad68-9fa4-4c79-b979-e35d830ad695/d03549d3-2dae-4ef7-98a6-010e9ba15885/video-0.mp4",
+          "mime": "video/mp4"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "1da6da24-4c35-4749-85e5-c10414887566",
+      "source": {
+        "nodeId": "d68c1f8f-ea0c-45a8-b0b7-b1523dab8d99",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "85274ef9-fb6e-44d6-a067-f41f7b295262",
+        "port": "in"
+      }
+    },
+    {
+      "id": "d9bd3a53-056d-44fb-92f6-724e74d6399f",
+      "source": {
+        "nodeId": "d68c1f8f-ea0c-45a8-b0b7-b1523dab8d99",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "848ca406-85dc-4beb-93d0-bca26b01c680",
+        "port": "in"
+      }
+    },
+    {
+      "id": "0ae398c4-0a4a-4c56-9758-ef2b1f630098",
+      "source": {
+        "nodeId": "d68c1f8f-ea0c-45a8-b0b7-b1523dab8d99",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "9998bca7-b686-465d-b3a3-6630de81184d",
+        "port": "in"
+      }
+    },
+    {
+      "id": "xy-edge__89096f92-fd48-4bbb-be51-d1d04da80c88out-db008fa6-b5b3-41e8-a05b-40b5c2859089image",
+      "source": {
+        "nodeId": "89096f92-fd48-4bbb-be51-d1d04da80c88",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "db008fa6-b5b3-41e8-a05b-40b5c2859089",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__63ee3edd-96fa-4f88-920c-4469344611d4out-db008fa6-b5b3-41e8-a05b-40b5c2859089image",
+      "source": {
+        "nodeId": "63ee3edd-96fa-4f88-920c-4469344611d4",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "db008fa6-b5b3-41e8-a05b-40b5c2859089",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-db008fa6-b5b3-41e8-a05b-40b5c2859089prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "db008fa6-b5b3-41e8-a05b-40b5c2859089",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__23bd105a-48a1-4e5b-8ea9-1ce566f15bf4out-2b977b9f-66a0-47d4-b909-dc76bed9b41dimage",
+      "source": {
+        "nodeId": "23bd105a-48a1-4e5b-8ea9-1ce566f15bf4",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "2b977b9f-66a0-47d4-b909-dc76bed9b41d",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__541ab1a4-3944-4d49-a802-79d5eec9304bout-2b977b9f-66a0-47d4-b909-dc76bed9b41dprompt",
+      "source": {
+        "nodeId": "541ab1a4-3944-4d49-a802-79d5eec9304b",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "2b977b9f-66a0-47d4-b909-dc76bed9b41d",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__78e469e4-50f7-4382-b058-320ba49bd0a5out-11d192a5-439f-4e22-82d8-b460e858d573image",
+      "source": {
+        "nodeId": "78e469e4-50f7-4382-b058-320ba49bd0a5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "11d192a5-439f-4e22-82d8-b460e858d573",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__541ab1a4-3944-4d49-a802-79d5eec9304bout-11d192a5-439f-4e22-82d8-b460e858d573prompt",
+      "source": {
+        "nodeId": "541ab1a4-3944-4d49-a802-79d5eec9304b",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "11d192a5-439f-4e22-82d8-b460e858d573",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__7917ba93-68ee-4ef4-b51c-2f54e79621b1out-bcd60b76-2d8f-4853-a40a-b22b9445de89image",
+      "source": {
+        "nodeId": "7917ba93-68ee-4ef4-b51c-2f54e79621b1",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "bcd60b76-2d8f-4853-a40a-b22b9445de89",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__ec0d2798-4a96-4252-9a63-c86caade2236out-b11f611f-a99d-46d1-88ff-961a10dc8670image",
+      "source": {
+        "nodeId": "ec0d2798-4a96-4252-9a63-c86caade2236",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "b11f611f-a99d-46d1-88ff-961a10dc8670",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__541ab1a4-3944-4d49-a802-79d5eec9304bout-b11f611f-a99d-46d1-88ff-961a10dc8670prompt",
+      "source": {
+        "nodeId": "541ab1a4-3944-4d49-a802-79d5eec9304b",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "b11f611f-a99d-46d1-88ff-961a10dc8670",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__541ab1a4-3944-4d49-a802-79d5eec9304bout-bcd60b76-2d8f-4853-a40a-b22b9445de89prompt",
+      "source": {
+        "nodeId": "541ab1a4-3944-4d49-a802-79d5eec9304b",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "bcd60b76-2d8f-4853-a40a-b22b9445de89",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__85274ef9-fb6e-44d6-a067-f41f7b295262out-3e8c9a6f-c331-405e-a5ce-d7981fa851f1image",
+      "source": {
+        "nodeId": "85274ef9-fb6e-44d6-a067-f41f7b295262",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "3e8c9a6f-c331-405e-a5ce-d7981fa851f1",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__c361c730-90a6-4168-8249-4114ad49c1dbout-3e8c9a6f-c331-405e-a5ce-d7981fa851f1image",
+      "source": {
+        "nodeId": "c361c730-90a6-4168-8249-4114ad49c1db",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "3e8c9a6f-c331-405e-a5ce-d7981fa851f1",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-3e8c9a6f-c331-405e-a5ce-d7981fa851f1prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "3e8c9a6f-c331-405e-a5ce-d7981fa851f1",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-fee25b81-7d8a-4bf3-b00b-66a3d0c02609prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fee25b81-7d8a-4bf3-b00b-66a3d0c02609",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-80e3cbe9-f9c2-46fe-be82-f08b896db029prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "80e3cbe9-f9c2-46fe-be82-f08b896db029",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__848ca406-85dc-4beb-93d0-bca26b01c680out-fee25b81-7d8a-4bf3-b00b-66a3d0c02609image",
+      "source": {
+        "nodeId": "848ca406-85dc-4beb-93d0-bca26b01c680",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fee25b81-7d8a-4bf3-b00b-66a3d0c02609",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__f9f5c72b-932d-424f-9dbe-92a71722ef81out-80e3cbe9-f9c2-46fe-be82-f08b896db029image",
+      "source": {
+        "nodeId": "f9f5c72b-932d-424f-9dbe-92a71722ef81",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "80e3cbe9-f9c2-46fe-be82-f08b896db029",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__2b977b9f-66a0-47d4-b909-dc76bed9b41dout-fee25b81-7d8a-4bf3-b00b-66a3d0c02609image",
+      "source": {
+        "nodeId": "2b977b9f-66a0-47d4-b909-dc76bed9b41d",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fee25b81-7d8a-4bf3-b00b-66a3d0c02609",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__2b977b9f-66a0-47d4-b909-dc76bed9b41dout-80e3cbe9-f9c2-46fe-be82-f08b896db029image",
+      "source": {
+        "nodeId": "2b977b9f-66a0-47d4-b909-dc76bed9b41d",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "80e3cbe9-f9c2-46fe-be82-f08b896db029",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__1c7729cc-9b7a-4ba3-a0e8-e00bfa9e52e2out-fa976eca-66cc-4d18-a5f1-2ecefdb24653image",
+      "source": {
+        "nodeId": "1c7729cc-9b7a-4ba3-a0e8-e00bfa9e52e2",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fa976eca-66cc-4d18-a5f1-2ecefdb24653",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__9998bca7-b686-465d-b3a3-6630de81184dout-717afdbc-6149-4ea1-a443-3465c3b73195image",
+      "source": {
+        "nodeId": "9998bca7-b686-465d-b3a3-6630de81184d",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "717afdbc-6149-4ea1-a443-3465c3b73195",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__11d192a5-439f-4e22-82d8-b460e858d573out-fa976eca-66cc-4d18-a5f1-2ecefdb24653image",
+      "source": {
+        "nodeId": "11d192a5-439f-4e22-82d8-b460e858d573",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fa976eca-66cc-4d18-a5f1-2ecefdb24653",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__11d192a5-439f-4e22-82d8-b460e858d573out-717afdbc-6149-4ea1-a443-3465c3b73195image",
+      "source": {
+        "nodeId": "11d192a5-439f-4e22-82d8-b460e858d573",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "717afdbc-6149-4ea1-a443-3465c3b73195",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-fa976eca-66cc-4d18-a5f1-2ecefdb24653prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fa976eca-66cc-4d18-a5f1-2ecefdb24653",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-717afdbc-6149-4ea1-a443-3465c3b73195prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "717afdbc-6149-4ea1-a443-3465c3b73195",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__d4934a77-0ad4-44fc-9232-3bdca1e36226out-02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42image",
+      "source": {
+        "nodeId": "d4934a77-0ad4-44fc-9232-3bdca1e36226",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__b11f611f-a99d-46d1-88ff-961a10dc8670out-02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42image",
+      "source": {
+        "nodeId": "b11f611f-a99d-46d1-88ff-961a10dc8670",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5out-fde2d1ca-ca2d-476e-8843-6fe4f717f882prompt",
+      "source": {
+        "nodeId": "15c9ff54-bd73-4b00-aaf5-d27f82ae6cd5",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fde2d1ca-ca2d-476e-8843-6fe4f717f882",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__0daa02fd-f959-4fa2-ba91-2eea551a8187out-fde2d1ca-ca2d-476e-8843-6fe4f717f882image",
+      "source": {
+        "nodeId": "0daa02fd-f959-4fa2-ba91-2eea551a8187",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fde2d1ca-ca2d-476e-8843-6fe4f717f882",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__bcd60b76-2d8f-4853-a40a-b22b9445de89out-fde2d1ca-ca2d-476e-8843-6fe4f717f882image",
+      "source": {
+        "nodeId": "bcd60b76-2d8f-4853-a40a-b22b9445de89",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "fde2d1ca-ca2d-476e-8843-6fe4f717f882",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__db008fa6-b5b3-41e8-a05b-40b5c2859089out-0985588c-a36c-4325-a75b-33ad5e2276f5start",
+      "source": {
+        "nodeId": "db008fa6-b5b3-41e8-a05b-40b5c2859089",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "0985588c-a36c-4325-a75b-33ad5e2276f5",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__ab7de688-f442-42f3-bdf9-0b362a30a115out-0985588c-a36c-4325-a75b-33ad5e2276f5prompt",
+      "source": {
+        "nodeId": "ab7de688-f442-42f3-bdf9-0b362a30a115",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "0985588c-a36c-4325-a75b-33ad5e2276f5",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__3e8c9a6f-c331-405e-a5ce-d7981fa851f1out-d2d574da-8b1c-4e32-a5a7-7be9e329b7ebstart",
+      "source": {
+        "nodeId": "3e8c9a6f-c331-405e-a5ce-d7981fa851f1",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "d2d574da-8b1c-4e32-a5a7-7be9e329b7eb",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__f4ff5e98-3265-4dae-baff-ed43aa597848out-d2d574da-8b1c-4e32-a5a7-7be9e329b7ebprompt",
+      "source": {
+        "nodeId": "f4ff5e98-3265-4dae-baff-ed43aa597848",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "d2d574da-8b1c-4e32-a5a7-7be9e329b7eb",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "xy-edge__fee25b81-7d8a-4bf3-b00b-66a3d0c02609out-83fa26cb-de7e-4f34-a4bf-95afd6e7c637start",
+      "source": {
+        "nodeId": "fee25b81-7d8a-4bf3-b00b-66a3d0c02609",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "83fa26cb-de7e-4f34-a4bf-95afd6e7c637",
+        "port": "start"
+      }
+    },
+    {
+      "id": "xy-edge__80e3cbe9-f9c2-46fe-be82-f08b896db029out-83fa26cb-de7e-4f34-a4bf-95afd6e7c637end",
+      "source": {
+        "nodeId": "80e3cbe9-f9c2-46fe-be82-f08b896db029",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "83fa26cb-de7e-4f34-a4bf-95afd6e7c637",
+        "port": "end"
+      }
+    },
+    {
+      "id": "xy-edge__23f38015-4c6b-4029-89f2-91faa5f4e096out-83fa26cb-de7e-4f34-a4bf-95afd6e7c637prompt",
+      "source": {
+        "nodeId": "23f38015-4c6b-4029-89f2-91faa5f4e096",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "83fa26cb-de7e-4f34-a4bf-95afd6e7c637",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "a5312f7f-d05b-43e3-b04c-de9b639529c5",
+      "source": {
+        "nodeId": "fa976eca-66cc-4d18-a5f1-2ecefdb24653",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "e951190c-afe0-4fd3-b9e4-23be3a546665",
+        "port": "start"
+      }
+    },
+    {
+      "id": "b3ea20d0-51ff-46ec-a83a-14161c3ca1b7",
+      "source": {
+        "nodeId": "717afdbc-6149-4ea1-a443-3465c3b73195",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "e951190c-afe0-4fd3-b9e4-23be3a546665",
+        "port": "end"
+      }
+    },
+    {
+      "id": "afc0bd04-230d-4801-9c77-1a031d130f8b",
+      "source": {
+        "nodeId": "31e322a6-3b84-40ce-8cdd-ca1ac5d9cc84",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "e951190c-afe0-4fd3-b9e4-23be3a546665",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "f8583c6e-d514-4189-8a27-5a9ee9f66412",
+      "source": {
+        "nodeId": "02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "6555a37b-adb2-474b-a896-4a7dc85db435",
+        "port": "start"
+      }
+    },
+    {
+      "id": "4a1eb608-c4de-4bf1-9d00-751b898076ca",
+      "source": {
+        "nodeId": "b2154a9e-2069-4b52-b29b-a91e156ebf5c",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "6555a37b-adb2-474b-a896-4a7dc85db435",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "aa74b915-eadb-4cfa-8f8c-8c5f8abf6bfd",
+      "source": {
+        "nodeId": "fde2d1ca-ca2d-476e-8843-6fe4f717f882",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "41a0fc8c-fa8e-40f1-ba7c-2333e03dcd52",
+        "port": "start"
+      }
+    },
+    {
+      "id": "8185f306-5c7c-4619-b106-85395bee558c",
+      "source": {
+        "nodeId": "62ae3cf7-8732-4e63-860d-07af757de399",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "41a0fc8c-fa8e-40f1-ba7c-2333e03dcd52",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "a8650fd6-c18c-4029-b8b4-71986a795759",
+      "source": {
+        "nodeId": "6758c01e-725e-4c27-9a0a-cbc425a70201",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "8cd798dd-4304-4067-b489-19c365f19d73",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "a7eac7f0-5c41-4817-b132-495c38bf8e4b",
+      "source": {
+        "nodeId": "6758c01e-725e-4c27-9a0a-cbc425a70201",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "a7a71588-7088-43ac-afa0-94ce9d999610",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "b8c7aeee-2a4b-4c95-8c96-04d5d2fe9423",
+      "source": {
+        "nodeId": "6758c01e-725e-4c27-9a0a-cbc425a70201",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "33d50b0c-3c51-4324-9b86-5dff5233b2f9",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "17c5c915-7d7e-4462-a83d-a975d1027ef4",
+      "source": {
+        "nodeId": "6758c01e-725e-4c27-9a0a-cbc425a70201",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "f58475ad-7f2a-4311-a7f8-d76d7c28266f",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "17ea85a2-5043-42e8-8ca6-c10a80d6ab32",
+      "source": {
+        "nodeId": "6758c01e-725e-4c27-9a0a-cbc425a70201",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "7897f75c-64d0-4af4-a026-97b560617c05",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "a26c837e-4ef8-42db-bdba-dcddadd6de89",
+      "source": {
+        "nodeId": "6758c01e-725e-4c27-9a0a-cbc425a70201",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "d03549d3-2dae-4ef7-98a6-010e9ba15885",
+        "port": "prompt"
+      }
+    },
+    {
+      "id": "a225252d-6863-4870-a194-e75a933242c5",
+      "source": {
+        "nodeId": "db008fa6-b5b3-41e8-a05b-40b5c2859089",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "8cd798dd-4304-4067-b489-19c365f19d73",
+        "port": "start"
+      }
+    },
+    {
+      "id": "4119e7b4-061e-4777-ae11-447008128e6c",
+      "source": {
+        "nodeId": "3e8c9a6f-c331-405e-a5ce-d7981fa851f1",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "a7a71588-7088-43ac-afa0-94ce9d999610",
+        "port": "start"
+      }
+    },
+    {
+      "id": "2eb005dd-836e-4971-b77e-cd1601b8ee7c",
+      "source": {
+        "nodeId": "fee25b81-7d8a-4bf3-b00b-66a3d0c02609",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "33d50b0c-3c51-4324-9b86-5dff5233b2f9",
+        "port": "start"
+      }
+    },
+    {
+      "id": "9e1a6637-9b40-4c2e-a154-5e625ebf2f6f",
+      "source": {
+        "nodeId": "fa976eca-66cc-4d18-a5f1-2ecefdb24653",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "f58475ad-7f2a-4311-a7f8-d76d7c28266f",
+        "port": "start"
+      }
+    },
+    {
+      "id": "7ab0c9dd-6378-4556-be51-f3b7d55a3fbe",
+      "source": {
+        "nodeId": "02e5e7ba-31c1-4ce9-80c5-c3c91d8e5c42",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "7897f75c-64d0-4af4-a026-97b560617c05",
+        "port": "start"
+      }
+    },
+    {
+      "id": "f7cceb6c-a077-4d0c-8751-8b0dce7dd4e2",
+      "source": {
+        "nodeId": "fde2d1ca-ca2d-476e-8843-6fe4f717f882",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "d03549d3-2dae-4ef7-98a6-010e9ba15885",
+        "port": "start"
+      }
+    }
+  ]
+}
