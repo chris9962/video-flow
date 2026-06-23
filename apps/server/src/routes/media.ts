@@ -6,7 +6,7 @@ import path from 'node:path';
 import type { FastifyInstance } from 'fastify';
 import multipart from '@fastify/multipart';
 import type { FileRef } from '@videoflow/shared';
-import { ASSETS_DIR, DATA_DIR, RUNS_DIR } from '../paths';
+import { ASSETS_DIR, DATA_DIR, RUNS_DIR, resolveDataPath } from '../paths';
 import { readSettings, writeSettings } from '../settings';
 
 const MIME_BY_EXT: Record<string, string> = {
@@ -39,7 +39,8 @@ export function registerMediaRoutes(app: FastifyInstance): void {
   app.get('/api/files', async (req, reply) => {
     const { path: filePath } = req.query as { path?: string };
     if (!filePath) return reply.code(400).send({ error: 'thiếu path' });
-    const resolved = path.resolve(filePath);
+    // resolveDataPath: path tuyệt đối từ máy khác (node mẫu commit lên git) → map về DATA_DIR máy này
+    const resolved = resolveDataPath(filePath);
     if (!resolved.startsWith(path.resolve(DATA_DIR) + path.sep)) {
       return reply.code(403).send({ error: 'path nằm ngoài data/' });
     }

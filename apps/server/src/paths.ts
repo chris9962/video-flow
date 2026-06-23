@@ -14,3 +14,26 @@ export const CHROME_CDP_PROFILE_DIR =
 export const CHROME_CDP_URL = process.env.CHROME_CDP_URL ?? 'http://127.0.0.1:9222';
 export const BIN_DIR = path.join(DATA_DIR, 'bin');
 export const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+
+/**
+ * Resolve path của FileRef về ĐÚNG DATA_DIR của MÁY HIỆN TẠI — để node mẫu/workflow chuyển máy/folder
+ * vẫn chạy (FileRef cũ lưu path tuyệt đối kiểu `/Users/.../data/assets/X`).
+ * - tương đối → ghép vào DATA_DIR
+ * - tuyệt đối đã nằm trong DATA_DIR này → giữ nguyên
+ * - tuyệt đối từ MÁY KHÁC → lấy phần sau `/data/` rồi ghép vào DATA_DIR local (chạy được trên Windows/home khác)
+ */
+export function resolveDataPath(p: string): string {
+  if (!p) return p;
+  const norm = p.replace(/\\/g, '/'); // chuẩn hoá cả path Windows (\ → /)
+  // Có "/data/" (path tuyệt đối từ MỌI máy/OS) → lấy phần SAU cùng rồi ghép vào DATA_DIR local
+  const i = norm.lastIndexOf('/data/');
+  if (i !== -1) {
+    if (path.isAbsolute(p)) {
+      const abs = path.resolve(p);
+      if (abs.startsWith(path.resolve(DATA_DIR) + path.sep)) return abs; // đã đúng máy này
+    }
+    return path.resolve(DATA_DIR, norm.slice(i + '/data/'.length));
+  }
+  // Không có "/data/" → coi như tương đối với DATA_DIR
+  return path.resolve(DATA_DIR, norm.replace(/^data\//, ''));
+}

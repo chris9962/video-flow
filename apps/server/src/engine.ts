@@ -11,6 +11,7 @@ import {
   type WorkflowEdge,
 } from '@videoflow/shared';
 import { getExecutable, type BlockInputs, type BlockResult, type PortInputs } from './nodes/registry';
+import { resolveDataPath } from './paths';
 
 const DEFAULT_RUNS_DIR = path.join(import.meta.dirname, '..', '..', '..', 'data', 'runs');
 
@@ -37,7 +38,8 @@ function toFileRef(value: unknown, sourceType: DataType): FileRef {
   if (!isFileRef(value)) {
     throw new Error(`Output của block ${sourceType} phía trước không phải file`);
   }
-  return value;
+  // resolve path về DATA_DIR máy hiện tại → node mẫu/workflow chuyển máy vẫn đọc đúng file
+  return { ...value, path: resolveDataPath(value.path) };
 }
 
 export async function runWorkflow(

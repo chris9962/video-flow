@@ -1,5 +1,6 @@
 import { BLOCK_DEFINITIONS, isFileRef } from '@videoflow/shared';
 import { getVideoUnderstanding } from '../services';
+import { resolveDataPath } from '../paths';
 import { type ExecutableBlock } from './registry';
 
 /**
@@ -16,7 +17,7 @@ export const motionBlock: ExecutableBlock = {
         'Block Trích Prompt chưa có video — upload video vào block hoặc nối 1 video nguồn vào cổng Video',
       );
     }
-    const prompt = await getVideoUnderstanding().extractPrompt(source.path);
+    const prompt = await getVideoUnderstanding().extractPrompt(resolveDataPath(source.path));
     return { out: prompt, content: prompt };
   },
 };
