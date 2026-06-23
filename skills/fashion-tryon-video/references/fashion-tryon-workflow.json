@@ -1,0 +1,170 @@
+{
+  "id": "fashion-tryon-v1",
+  "name": "Fashion Try-On Video",
+  "description": "Tách đồ từ ảnh shop → ghép vào 2 người mẫu → 5 video (spin/breathe/walk-transition/selfie x2)",
+
+  "nodes": [
+
+    {
+      "id": "src_shop",
+      "type": "image",
+      "source": "fixed",
+      "path": "assets/shop.webp",
+      "note": "ảnh shop/mannequin trưng bày đồ — INPUT để tách đồ ra nền trắng"
+    },
+
+    {
+      "id": "src_person_2",
+      "type": "image",
+      "source": "fixed",
+      "path": "assets/person_2.png",
+      "note": "người mẫu 2 gốc (áo 2 dây trắng + quần short đen)"
+    },
+
+    {
+      "id": "prompt_extract",
+      "type": "text",
+      "content": "Analyze the attached image in extreme detail and extract ALL visible clothing items and accessories worn or present in the image.\n\nFor each detected item:\n- Isolate it completely from the original subject and background.\n- Recreate it as a standalone product image.\n- Preserve exact color, fabric texture, stitching, seams, folds, logos (if any), material thickness, proportions, and structural details.\n- Maintain accurate scale and garment construction.\n- Do not redesign or reinterpret the item.\n\nEach clothing item and accessory must be:\n- Fully visible\n- Properly shaped as it would appear naturally laid flat or positioned cleanly\n- Free of distortion\n- Photorealistic\n- High resolution\n- Studio-quality product photography\n\nBACKGROUND:\nPure solid white background (#FFFFFF).\nNo shadows unless soft natural grounding shadow directly beneath the item.\nNo reflections.\nNo gradients.\nNo environmental elements.\n\nLIGHTING:\nSoft studio lighting.\nEven exposure.\nNo dramatic shadows.\nAccurate color reproduction.\nTrue-to-life material rendering.\n\nSTRICT RULES:\n- Do NOT include the model or body parts.\n- Do NOT merge multiple items into one object.\n- Separate each item individually.\n- Maintain 99% visual accuracy compared to the original image.\n- Do NOT stylize.\n- No CGI look.\n- No artistic reinterpretation.\n- No texture smoothing.\n\nNEGATIVE PROMPT:\nblurry, distorted shape, warped fabric, incorrect color, missing details, artificial shine, over-smoothing, CGI, illustration, cartoon, rendering artifacts, merged objects, incomplete garment, cut-off edges."
+    },
+
+    {
+      "id": "img_clothing",
+      "type": "image",
+      "provider": "gemini",
+      "output": "step1_clothing_white_bg.png",
+      "note": "Gemini tách đồ từ ảnh shop → ảnh đồ nền trắng"
+    },
+
+    {
+      "id": "prompt_tryon",
+      "type": "text",
+      "content": "Image 1 is a person. Image 2 is a clothing item.\nDress the person in Image 1 with the exact garment from Image 2.\nPreserve the garment's pattern, color, texture and shape faithfully.\nKeep the person's face, hair, body, pose, lighting and background unchanged.\nPhotorealistic, natural fabric folds, correct proportions."
+    },
+
+    {
+      "id": "img_tryon_1",
+      "type": "image",
+      "provider": "gemini",
+      "output": "step2_tryon_person1.png",
+      "note": "Gemini ghép đồ vào người mẫu 1 (img_clothing + src_person_1)"
+    },
+
+    {
+      "id": "img_tryon_2",
+      "type": "image",
+      "provider": "gemini",
+      "output": "step2_tryon_person2.png",
+      "note": "Gemini ghép đồ vào người mẫu 2 (img_clothing + src_person_2)"
+    },
+
+    {
+      "id": "src_person_1",
+      "type": "image",
+      "source": "fixed",
+      "path": "assets/person_1.png",
+      "note": "người mẫu 1 — ảnh Gemini đã gen từ lần trước (cardigan len móc kem + jeans), dùng làm input cho try-on"
+    },
+
+    {
+      "id": "prompt_spin",
+      "type": "text",
+      "content": "Static locked-off camera, framing unchanged. The woman performs a graceful, slow full 360-degree spin in place — rotating smoothly to reveal the outfit from every angle: front, left side, back, right side, then returning to face the camera. One complete rotation, fluid and elegant, no stepping forward or backward."
+    },
+
+    {
+      "id": "prompt_breathe",
+      "type": "text",
+      "content": "Static locked-off camera, framing unchanged. The woman stands poised and confident, her outfit fully visible. She takes a slow, natural breath — the fabric of her clothing shifts and drapes elegantly with the movement. She gently smooths the outfit with one hand in a calm, graceful gesture, then lowers her arm back to her side. The clothing's texture, cut, and silhouette are showcased clearly throughout. Soft even studio lighting, neutral background."
+    },
+
+    {
+      "id": "prompt_walk",
+      "type": "text",
+      "content": "Static locked-off camera, framing unchanged. The woman walks purposefully toward the camera at a brisk but still graceful pace — starting from a full-body wide shot, she strides forward with confidence and comes very close to the camera, ending in a tight mid-body close-up where her torso and outfit fill the frame. She stops right in front of the camera without stepping back. The movement is fluid and direct, the outfit clearly visible and flowing with every step."
+    },
+
+    {
+      "id": "prompt_selfie",
+      "type": "text",
+      "content": "Static locked-off camera, framing unchanged; she keeps the phone up covering her face the whole time. From the exact pose in the photo, her free hand sweeps up to push her long hair back behind her shoulder, then gives a small relaxed wave near the phone with a light bounce to a slow rhythm, and finally lowers the hand back down to return to the original neutral pose by the end. Hair resettles; the dress and sheer shirt shimmer with the small movements. Keep the outfit, gray wall, white sneakers and soft lighting identical. Photorealistic, smooth, 8 seconds, ends exactly at the starting pose."
+    },
+
+    {
+      "id": "prompt_selfie2",
+      "type": "text",
+      "content": "A fictional young woman, holding a phone up near her face with her right hand as if filming a mirror selfie. She keeps the phone in the same right hand the entire time and never switches hands; the phone stays steadily near her face throughout. She shifts her weight from one leg to the other, slowly turning her hips side to side to show her outfit. With her free left hand she lightly touches her waist, then rests it on her hip. She lifts her free left hand toward her shoulder, tilts her head slightly, and turns her body gently from side to side. She lowers her left hand and returns to standing upright. Slow, graceful, natural movements. Soft even indoor lighting, vertical portrait framing, static camera, cinematic and realistic."
+    },
+
+    {
+      "id": "video_spin",
+      "type": "video", "provider": "flow",
+      "output": "video_spin.mp4",
+      "note": "start=người 1 mặc đồ",
+      "config": { "model": "omni-flash", "durationSeconds": 4, "aspectRatio": "9:16" }
+    },
+
+    {
+      "id": "video_breathe",
+      "type": "video", "provider": "flow",
+      "output": "video_breathe.mp4",
+      "note": "start=người 1 mặc đồ",
+      "config": { "model": "omni-flash", "durationSeconds": 4, "aspectRatio": "9:16" }
+    },
+
+    {
+      "id": "video_walk",
+      "type": "video", "provider": "flow",
+      "output": "video_walk.mp4",
+      "note": "start=người 1 mặc đồ, END=người 2 mặc đồ → video chuyển cảnh từ người 1 sang người 2",
+      "config": { "model": "omni-flash", "durationSeconds": 6, "aspectRatio": "9:16" }
+    },
+
+    {
+      "id": "video_selfie",
+      "type": "video", "provider": "flow",
+      "output": "video_selfie.mp4",
+      "note": "start=người 1 mặc đồ",
+      "config": { "model": "omni-flash", "durationSeconds": 4, "aspectRatio": "9:16" }
+    },
+
+    {
+      "id": "video_selfie2",
+      "type": "video", "provider": "flow",
+      "output": "video_selfie2.mp4",
+      "note": "start=người 2 mặc đồ",
+      "config": { "model": "omni-flash", "durationSeconds": 8, "aspectRatio": "9:16" }
+    }
+
+  ],
+
+  "edges": [
+
+    { "id": "e1", "source": { "nodeId": "src_shop",      "port": "out" }, "target": { "nodeId": "img_clothing", "port": "image"  } },
+    { "id": "e2", "source": { "nodeId": "prompt_extract", "port": "out" }, "target": { "nodeId": "img_clothing", "port": "prompt" } },
+
+    { "id": "e3", "source": { "nodeId": "img_clothing",  "port": "out" }, "target": { "nodeId": "img_tryon_1",  "port": "image"  } },
+    { "id": "e4", "source": { "nodeId": "src_person_1",  "port": "out" }, "target": { "nodeId": "img_tryon_1",  "port": "image"  } },
+    { "id": "e5", "source": { "nodeId": "prompt_tryon",  "port": "out" }, "target": { "nodeId": "img_tryon_1",  "port": "prompt" } },
+
+    { "id": "e6", "source": { "nodeId": "img_clothing",  "port": "out" }, "target": { "nodeId": "img_tryon_2",  "port": "image"  } },
+    { "id": "e7", "source": { "nodeId": "src_person_2",  "port": "out" }, "target": { "nodeId": "img_tryon_2",  "port": "image"  } },
+    { "id": "e8", "source": { "nodeId": "prompt_tryon",  "port": "out" }, "target": { "nodeId": "img_tryon_2",  "port": "prompt" } },
+
+    { "id": "e9",  "source": { "nodeId": "img_tryon_1",    "port": "out" }, "target": { "nodeId": "video_spin",    "port": "start"  } },
+    { "id": "e10", "source": { "nodeId": "prompt_spin",    "port": "out" }, "target": { "nodeId": "video_spin",    "port": "prompt" } },
+
+    { "id": "e11", "source": { "nodeId": "img_tryon_1",    "port": "out" }, "target": { "nodeId": "video_breathe", "port": "start"  } },
+    { "id": "e12", "source": { "nodeId": "prompt_breathe", "port": "out" }, "target": { "nodeId": "video_breathe", "port": "prompt" } },
+
+    { "id": "e13", "source": { "nodeId": "img_tryon_1",    "port": "out" }, "target": { "nodeId": "video_walk",    "port": "start"  } },
+    { "id": "e14", "source": { "nodeId": "img_tryon_2",    "port": "out" }, "target": { "nodeId": "video_walk",    "port": "end"    } },
+    { "id": "e15", "source": { "nodeId": "prompt_walk",    "port": "out" }, "target": { "nodeId": "video_walk",    "port": "prompt" } },
+
+    { "id": "e16", "source": { "nodeId": "img_tryon_1",    "port": "out" }, "target": { "nodeId": "video_selfie",  "port": "start"  } },
+    { "id": "e17", "source": { "nodeId": "prompt_selfie",  "port": "out" }, "target": { "nodeId": "video_selfie",  "port": "prompt" } },
+
+    { "id": "e18", "source": { "nodeId": "img_tryon_2",    "port": "out" }, "target": { "nodeId": "video_selfie2", "port": "start"  } },
+    { "id": "e19", "source": { "nodeId": "prompt_selfie2", "port": "out" }, "target": { "nodeId": "video_selfie2", "port": "prompt" } }
+
+  ]
+}
