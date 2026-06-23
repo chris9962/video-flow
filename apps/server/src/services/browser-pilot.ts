@@ -499,17 +499,34 @@ export function createBrowserPilot(): BrowserPilot {
     // generate (nút .send-button mất class 'stop' — lúc generate nó là nút pause).
     const deadline = Date.now() + IMAGE_TIMEOUT_MS;
     let ready = false;
+    let refusalPolls = 0; // số nhịp liên tiếp: đã trả lời xong + có text + KHÔNG có ảnh → Gemini từ chối
     while (Date.now() < deadline) {
       await page.waitForTimeout(3_000);
       const st = await page
         .evaluate(() => ({
           hasImg: !!document.querySelector('single-image.generated-image, download-generated-image-button'),
           generating: (document.querySelector('.send-button')?.getAttribute('class') ?? '').includes('stop'),
+          text:
+            [...document.querySelectorAll('message-content, .model-response-text')]
+              .map((e) => (e as HTMLElement).innerText)
+              .filter(Boolean)
+              .pop() ?? '',
         }))
-        .catch(() => ({ hasImg: false, generating: true }));
+        .catch(() => ({ hasImg: false, generating: true, text: '' }));
       if (st.hasImg && !st.generating) {
         ready = true;
         break;
+      }
+      // Gemini đôi khi TỪ CHỐI ghép ảnh người thật (chính sách) → trả về text, KHÔNG có ảnh. Bắt sớm
+      // để báo lỗi RÕ thay vì chờ tới timeout 10 phút rồi báo mơ hồ. Cần 2 nhịp ổn định tránh false-positive.
+      if (!st.generating && !st.hasImg && st.text.trim().length > 12) {
+        if (++refusalPolls >= 2) {
+          throw new Error(
+            `Gemini KHÔNG tạo ảnh (có thể từ chối ghép ảnh người thật). Gemini trả lời: "${st.text.trim().slice(0, 180)}". Thử lại, đổi prompt, hoặc dùng provider khác.`,
+          );
+        }
+      } else {
+        refusalPolls = 0;
       }
     }
     if (!ready) {

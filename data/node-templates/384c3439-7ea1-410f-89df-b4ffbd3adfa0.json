@@ -1,0 +1,22 @@
+{
+  "id": "384c3439-7ea1-410f-89df-b4ffbd3adfa0",
+  "name": "Mẫu vổ tay",
+  "nodes": [
+    {
+      "id": "d8949879-2a53-4dc9-b78f-646bea0ce9b5",
+      "type": "image",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/4f469a12-2ec7-4564-8233-62a21067978f.png",
+          "mime": "image/png"
+        }
+      }
+    }
+  ],
+  "edges": []
+}
