@@ -13,7 +13,10 @@ Monorepo npm workspaces, TypeScript, ESM:
 - `packages/shared` — types dùng chung (Workflow, BLOCK_DEFINITIONS, ExecutionEvent, RunStatus…)
 - `apps/server` — Fastify local (127.0.0.1:3001): engine, node registry, services (browser pilot/media/fal), routes, WS
 - `apps/web` — React + Vite + @xyflow/react (React Flow v12)
-Dữ liệu: `data/` ở gốc repo (gitignore) — `workflows/*.json`, `runs/<id>/`, `assets/`, `chrome-cdp-profile/`, `settings.json`.
+Dữ liệu: `data/` ở gốc repo (gitignore) — `workflows/*.json`, `runs/<id>/`, `assets/`, `settings.json`.
+Profile Chrome CDP nằm TOÀN CỤC `~/chrome-cdp-profile` (KHÔNG còn trong `data/`).
+**git push:** `.gitignore` ignore cả `data/` TRỪ `data/node-templates/` + đúng ảnh chúng dùng (do `scripts/sync-template-gitignore.mjs`
+tự sinh — chạy script này trước commit khi thêm node mẫu). `settings.json` (token) luôn ignored.
 **TUYỆT ĐỐI không tự chạy lệnh xóa trong `data/workflows/` — đó là dữ liệu user.**
 
 ## Mô hình BLOCK (cốt lõi, đã pivot)
@@ -70,8 +73,11 @@ engine chạy mới ra kết quả. Backend `services/ai-builder.ts` dùng **`@a
 
 ## Chạy app
 - `npm run dev:server` + `npm run dev:web` (web :5173 proxy /api,/ws → :3001)
-- `npm run chrome` — mở Chrome riêng (profile `data/chrome-cdp-profile`) với --remote-debugging-port=9222.
-  User đăng nhập ChatGPT/Claude/Gemini trong cửa sổ này 1 lần. Server CHỈ connectOverCDP vào nó.
+- `npm run chrome` — mở Chrome riêng với --remote-debugging-port=9222. Profile đặt ở **TOÀN CỤC `~/chrome-cdp-profile`**
+  (override env `CHROME_CDP_PROFILE`) → mọi project/feature dùng CHUNG 1 Chrome đã đăng nhập, login 1 lần xài mọi nơi.
+  User đăng nhập ChatGPT/Claude/Gemini trong cửa sổ này 1 lần. Server CHỈ connectOverCDP vào nó (qua :9222, độc lập path).
+  Lỡ đổi/thêm profile → `connectOverCDP` gãy "Browser context management": kill hết Chrome dùng profile đó, set
+  `Local State` → `profile.last_active_profiles=["Default"]` (chặn restore profile khác), dọn SingletonLock, relaunch.
 - Test pilot tay: `cd apps/server && npx tsx scripts/test-pilot.ts chatgpt "..."`
 
 ## Browser Pilot — kiến thức hard-won (KHÔNG đoán selector, soi DOM thật qua CDP)
