@@ -12,7 +12,7 @@
       "config": {
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/video-flow/data/runs/d78fe11f-8e9b-4d69-9625-ee0c802fa6fa/e05f7791-896a-4e46-914b-2b10fa96595e/image-0.png",
+          "path": "/Users/nguyentruong/video-flow/data/assets/73514141-6374-4601-8d44-7c8f417edc3e.png",
           "mime": "image/png"
         },
         "provider": "gemini"
@@ -29,7 +29,7 @@
         "provider": "gemini",
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/video-flow/data/runs/ccf88c98-e759-40f6-a39d-98e6aa38810f/eace5c8e-fe28-46a8-be3b-d36cf31251fc/image-0.png",
+          "path": "/Users/nguyentruong/video-flow/data/assets/f8183fd4-cbcb-43bd-b492-776e8bc2b6f4.png",
           "mime": "image/png"
         }
       }
@@ -253,7 +253,7 @@
       "config": {
         "content": {
           "kind": "file",
-          "path": "/Users/nguyentruong/video-flow/data/runs/1ca1c9be-d55a-4ad7-b3b7-24c8025e6f42/51c1a774-3d75-4ace-b679-f6e66f9f5aab/image-0.png",
+          "path": "/Users/nguyentruong/video-flow/data/assets/75f40566-9f27-423b-b046-b7455bd66954.png",
           "mime": "image/png"
         },
         "provider": "gemini"
