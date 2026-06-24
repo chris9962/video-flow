@@ -71,6 +71,13 @@ engine chạy mới ra kết quả. Backend `services/ai-builder.ts` dùng **`@a
 - **Chậm ~30–120s/request** (claude CLI + model gen + self-review). Không phải treo. Kling web pool song song
   qua `KLING_WEB_POOL_SIZE` (mặc định 3) như Gemini ảnh.
 
+## Tip viết prompt CHUYỂN ĐỘNG (i2v — Flow/Kling/Veo & block motion)
+- Dùng **từ ngữ + cấu trúc câu ĐƠN GIẢN**, tránh diễn đạt quá phức tạp.
+- Chuyển động phải **tuân theo vật lý**; tốt nhất tả động tác **có khả năng xảy ra ngay trong ảnh** (bám subject/tư thế đã có).
+- Mô tả **lệch nhiều so với ảnh** → dễ bị **cắt cảnh / chuyển cảnh** (camera cut/transition) ngoài ý muốn.
+- Giai đoạn này **khó tạo chuyển động vật lý phức tạp** (bóng nảy, quỹ đạo ném từ trên cao…) → tránh.
+- Áp cho: prompt block `motion` trích ra + prompt nối vào cổng Prompt của block video/kling (Start/End→video).
+
 ## Chạy app
 - `npm run dev:server` + `npm run dev:web` (web :5173 proxy /api,/ws → :3001)
 - `npm run chrome` — mở Chrome riêng với --remote-debugging-port=9222. Profile đặt ở **TOÀN CỤC `~/chrome-cdp-profile`**
