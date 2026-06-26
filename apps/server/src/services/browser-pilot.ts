@@ -241,6 +241,11 @@ export function createBrowserPilot(): BrowserPilot {
    */
   async function attachImagesGemini(page: Page, imagePaths: string[]): Promise<void> {
     if (imagePaths.length === 0) return;
+    // Đếm blob ảnh ĐÃ có trước khi đính (conversation nhiều lượt: ảnh message trước cũng là blob:) →
+    // chỉ chờ tới khi có THÊM đủ n blob mới, tránh tưởng upload xong ngay vì đã có ảnh cũ.
+    const baseBlobs = await page
+      .evaluate(() => Array.from(document.querySelectorAll('img')).filter((im) => im.src.startsWith('blob:')).length)
+      .catch(() => 0);
     await page.locator('button[aria-label="Upload & tools"]').first().click({ timeout: 10_000 });
     await page.waitForTimeout(500);
     const [chooser] = await Promise.all([
@@ -251,6 +256,7 @@ export function createBrowserPilot(): BrowserPilot {
     // QUAN TRỌNG: thumbnail blob hiện ra KHÁC với upload-lên-server-xong. Gửi sớm khi spinner
     // còn quay → Gemini lỗi "Something went wrong (1076)". Chờ đủ thumbnail VÀ hết spinner.
     await page.waitForTimeout(1_000); // để spinner kịp xuất hiện
+    const need = baseBlobs + imagePaths.length;
     const deadline = Date.now() + 120_000;
     let stable = 0;
     while (Date.now() < deadline) {
@@ -261,7 +267,7 @@ export function createBrowserPilot(): BrowserPilot {
             'uploader-file-preview [role="progressbar"], gem-media-attachment [role="progressbar"], uploader-file-preview .mat-mdc-progress-spinner',
           ).length;
           return { ready: blobs >= n, uploading };
-        }, imagePaths.length)
+        }, need)
         .catch(() => ({ ready: false, uploading: 1 }));
       if (st.ready && st.uploading === 0) {
         if (++stable >= 2) {
@@ -484,23 +490,15 @@ export function createBrowserPilot(): BrowserPilot {
     }
   }
 
-  async function generateImageGemini(prompt: string, refs: string[], outFile: string): Promise<void> {
-    // Mỗi lần MỞ TAB MỚI (không dùng lại tab cũ), và LUÔN đóng khi xong (finally)
-    const ctx = await ensureContext();
+  // Gửi 1 lượt vào Gemini (đính ảnh nếu có → gõ prompt → chờ enable + hết spinner upload → click Gửi).
+  async function geminiSendTurn(page: Page, prompt: string, refs: string[]): Promise<void> {
     const cfg = PROVIDERS.gemini;
-    const page = await ctx.newPage();
-    try {
-      await page.goto(cfg.newChatUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
-      const composer = await waitForAnyVisible(page, cfg.composer, 30_000);
-      if (!composer) {
-        throw new Error(
-          'Không tìm thấy ô nhập Gemini — có thể chưa đăng nhập. Mở Chrome (npm run chrome), đăng nhập gemini.google.com rồi thử lại',
-        );
-      }
-      await attachImagesGemini(page, refs);
+    const composer = await waitForAnyVisible(page, cfg.composer, 30_000); // re-locate mỗi lượt (UI re-render)
+    if (!composer) throw new Error('Mất ô nhập Gemini giữa chừng');
+    await attachImagesGemini(page, refs);
 
-      // Gemini: Enter = xuống dòng (chế độ mobile) → PHẢI click nút gửi.
-      await composer.click({ timeout: 8_000 });
+    // Gemini: Enter = xuống dòng (chế độ mobile) → PHẢI click nút gửi.
+    await composer.click({ timeout: 8_000 });
     await page.keyboard.insertText(prompt);
     await page.waitForTimeout(1_000); // để Angular nhận prompt, tránh gửi quá sớm
 
@@ -520,7 +518,31 @@ export function createBrowserPilot(): BrowserPilot {
     }
     await page.waitForTimeout(500); // settle thêm trước khi gửi
     await page.locator('button[aria-label="Send message"]').last().click({ timeout: 10_000 });
+  }
 
+  function geminiResponseCount(page: Page): Promise<number> {
+    return page.evaluate(() => document.querySelectorAll('.model-response-text').length).catch(() => 0);
+  }
+
+  // Chờ Gemini trả lời xong 1 lượt TEXT (message KHÔNG-cuối, vd B1 ghi nhớ): có lượt mới + ngừng generate.
+  async function waitGeminiTextReply(page: Page, baseline: number, timeoutMs: number): Promise<void> {
+    const deadline = Date.now() + timeoutMs;
+    await page.waitForTimeout(1_500);
+    while (Date.now() < deadline) {
+      const st = await page
+        .evaluate(() => ({
+          count: document.querySelectorAll('.model-response-text').length,
+          generating: (document.querySelector('.send-button')?.getAttribute('class') ?? '').includes('stop'),
+        }))
+        .catch(() => ({ count: 0, generating: true }));
+      if (st.count > baseline && !st.generating) return;
+      await page.waitForTimeout(1_500);
+    }
+    throw new Error('Gemini chưa trả lời xong bước ghi nhớ — kiểm tra tab Gemini rồi thử lại');
+  }
+
+  // Chờ Gemini tạo xong ảnh (message CUỐI) rồi tải về outFile; bắt sớm khi Gemini từ chối (trả text, không ảnh).
+  async function waitAndDownloadGeminiImage(page: Page, outFile: string): Promise<void> {
     // Ảnh Gemini là blob (không fetch URL được). Xong khi: ảnh sinh ra xuất hiện VÀ không còn
     // generate (nút .send-button mất class 'stop' — lúc generate nó là nút pause).
     const deadline = Date.now() + IMAGE_TIMEOUT_MS;
@@ -593,8 +615,44 @@ export function createBrowserPilot(): BrowserPilot {
     if (!saved) {
       throw new Error('Không tải được ảnh từ Gemini sau vài lần thử — thử lại sau ít giây');
     }
+  }
+
+  async function generateImageGemini(prompt: string, refs: string[], outFile: string): Promise<void> {
+    await generateImageGeminiSteps([{ prompt, refs }], outFile);
+  }
+
+  /**
+   * Gửi NHIỀU message LIÊN TIẾP trong CÙNG 1 tab Gemini (giữ ngữ cảnh) — bản Gemini của block "Ảnh GPT 2 bước".
+   * Message CUỐI tạo ẢNH → chờ ảnh + tải; các message trước chờ Gemini trả lời text rồi mới gửi tiếp.
+   * Mở 1 tab MỚI, gửi tuần tự, LUÔN đóng tab khi xong (login vẫn còn trong profile CDP).
+   */
+  async function generateImageGeminiSteps(
+    steps: { prompt: string; refs: string[] }[],
+    outFile: string,
+  ): Promise<void> {
+    if (steps.length === 0) throw new Error('generateImageGeminiSteps: cần ít nhất 1 message');
+    const ctx = await ensureContext();
+    const cfg = PROVIDERS.gemini;
+    const page = await ctx.newPage();
+    try {
+      await page.goto(cfg.newChatUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+      if (!(await waitForAnyVisible(page, cfg.composer, 30_000))) {
+        throw new Error(
+          'Không tìm thấy ô nhập Gemini — có thể chưa đăng nhập. Mở Chrome (npm run chrome), đăng nhập gemini.google.com rồi thử lại',
+        );
+      }
+      for (let i = 0; i < steps.length; i++) {
+        const isLast = i === steps.length - 1;
+        const baseline = await geminiResponseCount(page);
+        await geminiSendTurn(page, steps[i].prompt, steps[i].refs);
+        if (isLast) {
+          await waitAndDownloadGeminiImage(page, outFile);
+        } else {
+          await waitGeminiTextReply(page, baseline, REPLY_TIMEOUT_MS);
+          await page.waitForTimeout(1_200);
+        }
+      }
     } finally {
-      // Luôn đóng tab vừa mở, kể cả khi lỗi (login vẫn còn trong profile CDP)
       await page.close().catch(() => {});
     }
   }
@@ -612,13 +670,14 @@ export function createBrowserPilot(): BrowserPilot {
       );
     },
 
-    // ChatGPT gửi NHIỀU message liên tiếp cùng 1 tab (block "Ảnh GPT 2 bước")
-    generateImageSteps({ steps, outFile }) {
-      return enqueue('chatgpt', () =>
-        generateImageChatGPTSteps(
-          steps.map((s) => ({ prompt: s.prompt, refs: s.referenceImagePaths })),
-          outFile,
-        ),
+    // Gửi NHIỀU message liên tiếp cùng 1 tab (block "Ảnh GPT 2 bước") — ChatGPT hoặc Gemini tuỳ provider
+    generateImageSteps({ provider, steps, outFile }) {
+      const target: LlmProvider = provider === 'gemini' ? 'gemini' : 'chatgpt';
+      const mapped = steps.map((s) => ({ prompt: s.prompt, refs: s.referenceImagePaths }));
+      return enqueue(target, () =>
+        target === 'gemini'
+          ? generateImageGeminiSteps(mapped, outFile)
+          : generateImageChatGPTSteps(mapped, outFile),
       );
     },
 

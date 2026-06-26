@@ -137,4 +137,4 @@ export const BLOCK_DEFINITIONS: Record<string, BlockTypeDefinition> = {
 export const RESTYLE_DEFAULT_ANALYZE =
   'Xem kỹ ảnh này và GHI NHỚ chính xác: góc máy (hướng, độ cao, độ nghiêng), ánh sáng (tông màu, hướng sáng, độ mềm/đổ bóng), và background. Chỉ cần ghi nhớ, CHƯA tạo ảnh.';
 export const RESTYLE_DEFAULT_GEN =
-  'Tạo một ảnh chân dung của người trong ảnh này, GIỮ NGUYÊN khuôn mặt và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên.';
+  'Đầu tiên hãy ghi nhớ đặt điểm gương mặt của ảnh này, ánh mắt, nụ cười, sóng mũi\nTạo một ảnh chân dung của người trong ảnh này(với các đặt điểm vừa ghi nhớ), GIỮ NGUYÊN khuôn mặt và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên.';

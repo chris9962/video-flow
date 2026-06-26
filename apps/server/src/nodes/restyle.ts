@@ -32,8 +32,10 @@ export const restyleBlock: ExecutableBlock = {
         ? config.genPrompt
         : RESTYLE_DEFAULT_GEN;
 
+    const provider = config.provider === 'gemini' ? 'gemini' : 'chatgpt';
     const outFile = path.join(dir, `restyle-${itemIndex ?? 0}.png`);
     await getPilot().generateImageSteps({
+      provider,
       steps: [
         { prompt: analyzePrompt, referenceImagePaths: [ref.path] },
         { prompt: genPrompt, referenceImagePaths: [face.path] },

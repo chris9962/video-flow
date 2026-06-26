@@ -12,8 +12,10 @@ export interface BrowserPilot {
     referenceImagePaths: string[];
     outFile: string;
   }): Promise<void>;
-  /** ChatGPT: gửi NHIỀU message liên tiếp trong CÙNG 1 tab (giữ ngữ cảnh) — message cuối tạo ảnh → tải vào outFile */
+  /** Gửi NHIỀU message liên tiếp trong CÙNG 1 tab (giữ ngữ cảnh) — message cuối tạo ảnh → tải vào outFile.
+   *  provider: 'chatgpt' (mặc định) hoặc 'gemini'. */
   generateImageSteps(req: {
+    provider?: ImageProvider;
     steps: { prompt: string; referenceImagePaths: string[] }[];
     outFile: string;
   }): Promise<void>;

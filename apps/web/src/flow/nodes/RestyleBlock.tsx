@@ -21,6 +21,7 @@ export function RestyleBlock({ id, data, selected }: NodeProps<FlowNode>) {
   // Prompt mặc định hiện sẵn (editable) để user chỉ cần sửa 1 phần nhỏ — config rỗng vẫn dùng đúng default này.
   const analyzePrompt = typeof config.analyzePrompt === 'string' ? config.analyzePrompt : '';
   const genPrompt = typeof config.genPrompt === 'string' ? config.genPrompt : '';
+  const provider = typeof config.provider === 'string' ? config.provider : 'chatgpt';
   const set = (patch: Record<string, unknown>) =>
     updateNodeData(id, { config: { ...config, ...patch } });
 
@@ -54,6 +55,21 @@ export function RestyleBlock({ id, data, selected }: NodeProps<FlowNode>) {
       ) : (
         <div className="gen-placeholder" aria-hidden="true" />
       )}
+      <div className="config-row">
+        <label className="agent-label">
+          Agent
+          <select
+            aria-label="Provider tạo ảnh"
+            className="nodrag"
+            title="ChatGPT giữ mặt tốt; Gemini có thể từ chối ảnh người thật"
+            value={provider}
+            onChange={(e) => set({ provider: e.target.value })}
+          >
+            <option value="chatgpt">ChatGPT (giữ mặt tốt)</option>
+            <option value="gemini">Gemini</option>
+          </select>
+        </label>
+      </div>
       <div className="restyle-steps">
         <label className="restyle-step">
           <span className="restyle-step-head">
