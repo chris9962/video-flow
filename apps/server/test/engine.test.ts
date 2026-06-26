@@ -14,6 +14,9 @@ setPilot({
   generateImage: async ({ outFile }) => {
     await writeFile(outFile, 'png');
   },
+  generateImageSteps: async ({ outFile }) => {
+    await writeFile(outFile, 'png');
+  },
   openLogin: async () => {},
   openSite: async () => {},
 });

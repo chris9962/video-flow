@@ -14,6 +14,7 @@ function notReady(what: string): never {
 let pilot: BrowserPilot = {
   sendPrompt: async () => notReady('Browser Pilot'),
   generateImage: async () => notReady('Browser Pilot'),
+  generateImageSteps: async () => notReady('Browser Pilot'),
   openLogin: async () => notReady('Browser Pilot'),
   openSite: async () => notReady('Browser Pilot'),
 };

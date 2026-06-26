@@ -117,4 +117,24 @@ export const BLOCK_DEFINITIONS: Record<string, BlockTypeDefinition> = {
     inputs: [{ id: 'video', label: 'Video', accepts: ['video'] }],
     consumeWhole: ['video'],
   },
+  // ChatGPT 2 message LIÊN TIẾP cùng 1 tab: B1 đưa ảnh THAM CHIẾU (GPT ghi nhớ góc máy/ánh sáng/bg),
+  // B2 đưa ảnh MẪU + tạo ảnh áp style đó, giữ nguyên mặt. 2 cổng ảnh: ref + face.
+  restyle: {
+    type: 'restyle',
+    emits: 'image',
+    label: 'Ảnh GPT 2 bước',
+    description:
+      'ChatGPT 2 message liên tiếp cùng 1 tab: B1 đưa ảnh THAM CHIẾU để GPT ghi nhớ góc máy/ánh sáng/background; B2 đưa ảnh MẪU + tạo ảnh áp style đó, GIỮ NGUYÊN gương mặt. Nối Tham chiếu + Mẫu (2 ảnh).',
+    accepts: ['image'],
+    inputs: [
+      { id: 'ref', label: 'Tham chiếu', accepts: ['image'] },
+      { id: 'face', label: 'Mẫu', accepts: ['image'] },
+    ],
+  },
 };
+
+// Prompt mặc định block restyle — dùng chung server (khi config rỗng) lẫn FE (hiện sẵn để user sửa 1 phần).
+export const RESTYLE_DEFAULT_ANALYZE =
+  'Xem kỹ ảnh này và GHI NHỚ chính xác: góc máy (hướng, độ cao, độ nghiêng), ánh sáng (tông màu, hướng sáng, độ mềm/đổ bóng), và background. Chỉ cần ghi nhớ, CHƯA tạo ảnh.';
+export const RESTYLE_DEFAULT_GEN =
+  'Tạo một ảnh chân dung của người trong ảnh này, GIỮ NGUYÊN khuôn mặt và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên.';

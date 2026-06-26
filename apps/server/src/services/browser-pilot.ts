@@ -394,23 +394,8 @@ export function createBrowserPilot(): BrowserPilot {
     });
   }
 
-  async function generateImageChatGPT(prompt: string, refs: string[], outFile: string): Promise<void> {
-    // Mỗi lần MỞ TAB MỚI (không dùng lại tab cũ), và LUÔN đóng khi xong (finally)
-    const ctx = await ensureContext();
-    const cfg = PROVIDERS.chatgpt;
-    const page = await ctx.newPage();
-    try {
-      await page.goto(cfg.newChatUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
-      const composer = await waitForAnyVisible(page, cfg.composer, 30_000);
-      if (!composer) {
-        throw new Error(
-          'Không tìm thấy ô nhập ChatGPT — có thể chưa đăng nhập. Mở Chrome (npm run chrome), đăng nhập chatgpt.com rồi thử lại',
-        );
-      }
-      await attachImages(page, cfg, refs);
-      await typeAndSubmit(page, composer, `Tạo một ảnh: ${prompt}`);
-
-    // Xong khi NÚT HÀNH ĐỘNG TRÊN ẢNH xuất hiện (thích/share/sửa ảnh) — tín hiệu đáng tin nhất.
+  /** Chờ ChatGPT tạo xong ảnh (nút hành động xuất hiện) rồi tải qua UI (click ảnh → dialog → "Lưu"). */
+  async function waitAndDownloadChatGPTImage(page: Page, outFile: string): Promise<void> {
     const deadline = Date.now() + IMAGE_TIMEOUT_MS;
     let ready = false;
     while (Date.now() < deadline) {
@@ -425,7 +410,6 @@ export function createBrowserPilot(): BrowserPilot {
         'Hết thời gian chờ — ChatGPT chưa tạo xong ảnh. Kiểm tra còn lượt tạo ảnh không, hoặc thử prompt khác',
       );
     }
-    // Tải qua UI (page.request.get bị chặn): click ảnh → mở dialog → nút "Lưu" → bắt download
     await page.waitForTimeout(1_500);
     await fs.mkdir(path.dirname(outFile), { recursive: true });
     let saved = false;
@@ -453,8 +437,50 @@ export function createBrowserPilot(): BrowserPilot {
     }
     await page.keyboard.press('Escape').catch(() => {}); // đóng dialog
     if (!saved) throw new Error('Không tải được ảnh từ ChatGPT sau vài lần thử — thử lại sau ít giây');
+  }
+
+  async function generateImageChatGPT(prompt: string, refs: string[], outFile: string): Promise<void> {
+    await generateImageChatGPTSteps([{ prompt, refs }], outFile);
+  }
+
+  /**
+   * Gửi NHIỀU message LIÊN TIẾP trong CÙNG 1 tab ChatGPT (giữ ngữ cảnh hội thoại) — dùng cho block đặc thù
+   * "B1: đưa ảnh tham chiếu cho GPT ghi nhớ góc máy/ánh sáng/bg; B2: đưa ảnh mẫu + tạo ảnh áp style đó".
+   * Message CUỐI tạo ẢNH → chờ ảnh xong + tải; các message trước chờ ChatGPT trả lời (text) rồi mới gửi tiếp.
+   * Mở 1 tab, gửi tuần tự, LUÔN đóng tab khi xong.
+   */
+  async function generateImageChatGPTSteps(
+    steps: { prompt: string; refs: string[] }[],
+    outFile: string,
+  ): Promise<void> {
+    if (steps.length === 0) throw new Error('generateImageChatGPTSteps: cần ít nhất 1 message');
+    const ctx = await ensureContext();
+    const cfg = PROVIDERS.chatgpt;
+    const page = await ctx.newPage();
+    try {
+      await page.goto(cfg.newChatUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+      if (!(await waitForAnyVisible(page, cfg.composer, 30_000))) {
+        throw new Error(
+          'Không tìm thấy ô nhập ChatGPT — có thể chưa đăng nhập. Mở Chrome (npm run chrome), đăng nhập chatgpt.com rồi thử lại',
+        );
+      }
+      for (let i = 0; i < steps.length; i++) {
+        const isLast = i === steps.length - 1;
+        const composer = await waitForAnyVisible(page, cfg.composer, 30_000); // re-locate mỗi turn (UI re-render)
+        if (!composer) throw new Error('Mất ô nhập ChatGPT giữa chừng');
+        const baseline = await countAssistant(page, cfg);
+        await attachImages(page, cfg, steps[i].refs);
+        await typeAndSubmit(page, composer, isLast ? `Tạo một ảnh: ${steps[i].prompt}` : steps[i].prompt);
+        if (isLast) {
+          await waitAndDownloadChatGPTImage(page, outFile);
+        } else {
+          // Chờ GPT trả lời xong message này rồi mới gửi message kế (giữ đúng thứ tự hội thoại)
+          await waitForReply(page, cfg, baseline, REPLY_TIMEOUT_MS);
+          await page.waitForTimeout(1_200);
+        }
+      }
     } finally {
-      await page.close().catch(() => {}); // luôn đóng tab vừa mở
+      await page.close().catch(() => {});
     }
   }
 
@@ -583,6 +609,16 @@ export function createBrowserPilot(): BrowserPilot {
         provider === 'gemini'
           ? generateImageGemini(prompt, referenceImagePaths, outFile)
           : generateImageChatGPT(prompt, referenceImagePaths, outFile),
+      );
+    },
+
+    // ChatGPT gửi NHIỀU message liên tiếp cùng 1 tab (block "Ảnh GPT 2 bước")
+    generateImageSteps({ steps, outFile }) {
+      return enqueue('chatgpt', () =>
+        generateImageChatGPTSteps(
+          steps.map((s) => ({ prompt: s.prompt, refs: s.referenceImagePaths })),
+          outFile,
+        ),
       );
     },
 

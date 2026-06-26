@@ -90,7 +90,7 @@ export function ImageBlock({ id, data, selected }: NodeProps<FlowNode>) {
       ) : data.hasInput ? (
         <div className="gen-placeholder" aria-hidden="true" />
       ) : (
-        <label className="upload-btn nodrag">
+        <label className="upload-btn upload-area nodrag">
           {uploading ? 'Đang tải lên…' : 'Tải ảnh lên'}
           <input
             type="file"

@@ -27,6 +27,7 @@ import { KlingBlock } from '../flow/nodes/KlingBlock';
 import { KlingEditBlock } from '../flow/nodes/KlingEditBlock';
 import { FaceSwapBlock } from '../flow/nodes/FaceSwapBlock';
 import { MotionBlock } from '../flow/nodes/MotionBlock';
+import { RestyleBlock } from '../flow/nodes/RestyleBlock';
 import { canConnect } from '../flow/validation';
 import {
   toFlow,
@@ -61,6 +62,7 @@ const nodeTypes = {
   'kling-edit': KlingEditBlock,
   faceswap: FaceSwapBlock,
   motion: MotionBlock,
+  restyle: RestyleBlock,
 };
 
 const RUN_CHIP_TEXT = {

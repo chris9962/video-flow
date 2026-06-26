@@ -651,6 +651,24 @@ input, select, textarea { font: inherit; color: inherit; }
 .upload-btn:hover { background: var(--raised); border-color: var(--type); }
 .upload-btn:focus-within { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
 
+/* Block ảnh nguồn chưa có ảnh: ô upload chiếm trọn khu ảnh (cao = placeholder) cho cân đối, không phải nút nhỏ */
+.upload-btn.upload-area {
+  align-self: stretch;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 150px;
+  border-style: dashed;
+  border-color: var(--line);
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 7px,
+    var(--surface) 7px,
+    var(--surface) 14px
+  );
+}
+.upload-btn.upload-area:hover { background: var(--raised); border-color: var(--type); }
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -694,8 +712,45 @@ input, select, textarea { font: inherit; color: inherit; }
 }
 .config-row select:focus { border-color: var(--type); outline: none; }
 
+/* Block restyle (Ảnh GPT 2 bước): khu prompt 2 bước — ngăn cách với khu ảnh, title tách khỏi ô nhập */
+.vf-node .restyle-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 1px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line-soft);
+}
+.vf-node .restyle-step {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.vf-node .restyle-step textarea { min-height: 128px; }
+.vf-node .restyle-step-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.vf-node .restyle-step-num {
+  flex-shrink: 0;
+  display: grid;
+  place-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 10px;
+  font-weight: 700;
+}
+
 .vf-node .gen-placeholder {
-  height: 56px;
+  min-height: 150px;
+  flex: 0 0 auto;
   border: 1px dashed var(--line);
   border-radius: var(--r-sm);
   background: repeating-linear-gradient(

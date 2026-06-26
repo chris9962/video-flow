@@ -45,6 +45,7 @@ describe('text block', () => {
       sendPrompt: async (_p, { prompt, imagePaths }) =>
         `got:${imagePaths.length}:${prompt.includes('lời thoại')}`,
       generateImage: async () => {},
+      generateImageSteps: async () => {},
       openLogin: async () => {},
       openSite: async () => {},
     });

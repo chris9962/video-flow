@@ -55,6 +55,14 @@ const GLYPH: Record<string, ReactNode> = {
       <path d="M11 5.4h3M11 8h3M11 10.6h1.8" />
     </svg>
   ),
+  // Ảnh GPT 2 bước — 2 khung ảnh chồng (2 message) + sparkle
+  restyle: (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4.4" width="7.5" height="7" rx="1.4" />
+      <rect x="6.5" y="2" width="7.5" height="7" rx="1.4" />
+      <path d="M11.3 4.1l.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5z" fill="currentColor" stroke="none" />
+    </svg>
+  ),
 };
 
 const BLURB: Record<string, string> = {
@@ -65,6 +73,7 @@ const BLURB: Record<string, string> = {
   'kling-edit': 'Kling Edit · video mẫu + prompt → đổi nền/style',
   faceswap: 'Face Swap · video + ảnh mặt → đổi mặt',
   motion: 'Trích Prompt · Gemini xem video → prompt chuyển động',
+  restyle: 'Ảnh GPT 2 bước · Tham chiếu + Mẫu → giữ mặt, áp style',
 };
 
 export function Palette({ onAdd }: { onAdd: (type: string) => void }) {

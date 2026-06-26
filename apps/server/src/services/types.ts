@@ -12,6 +12,11 @@ export interface BrowserPilot {
     referenceImagePaths: string[];
     outFile: string;
   }): Promise<void>;
+  /** ChatGPT: gửi NHIỀU message liên tiếp trong CÙNG 1 tab (giữ ngữ cảnh) — message cuối tạo ảnh → tải vào outFile */
+  generateImageSteps(req: {
+    steps: { prompt: string; referenceImagePaths: string[] }[];
+    outFile: string;
+  }): Promise<void>;
   /** Mở cửa sổ browser headful để user đăng nhập provider (giữ session trong profile) */
   openLogin(provider: LlmProvider): Promise<void>;
   /** Mở 1 tab tới URL bất kỳ trong Chrome CDP (để user đăng nhập site web khác: kling.ai, Flow…) */
