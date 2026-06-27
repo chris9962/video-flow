@@ -134,7 +134,13 @@ export const BLOCK_DEFINITIONS: Record<string, BlockTypeDefinition> = {
 };
 
 // Prompt mặc định block restyle — dùng chung server (khi config rỗng) lẫn FE (hiện sẵn để user sửa 1 phần).
-export const RESTYLE_DEFAULT_ANALYZE =
-  'Xem kỹ ảnh này và GHI NHỚ chính xác: góc máy (hướng, độ cao, độ nghiêng), ánh sáng (tông màu, hướng sáng, độ mềm/đổ bóng), và background. Chỉ cần ghi nhớ, CHƯA tạo ảnh.';
-export const RESTYLE_DEFAULT_GEN =
-  'Đầu tiên hãy ghi nhớ đặt điểm gương mặt của ảnh này, ánh mắt, nụ cười, sóng mũi\nTạo một ảnh chân dung của người trong ảnh này(với các đặt điểm vừa ghi nhớ), GIỮ NGUYÊN khuôn mặt và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên.';
+export const RESTYLE_DEFAULT_ANALYZE = `Xem kỹ ảnh này và GHI NHỚ chính xác:
+- Góc máy: hướng, độ cao, độ nghiêng.
+- Ánh sáng: tông màu, hướng sáng, độ mềm/đổ bóng.
+- Background.
+- Góc nghiêng của cơ thể, cách chân tạo dáng, cách tay tạo dáng.
+- Hướng nhìn của mắt, góc của mặt so với camera, cách xõa tóc.
+Chỉ cần ghi nhớ, CHƯA tạo ảnh.`;
+export const RESTYLE_DEFAULT_GEN = `Đầu tiên hãy ghi nhớ đặc điểm gương mặt của ảnh này: ánh mắt, nụ cười, sóng mũi.
+Tạo một ảnh chân dung của người trong ảnh này (với các đặc điểm vừa ghi nhớ), GIỮ NGUYÊN khuôn mặt và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên.
+QUAN TRỌNG — đổi góc nhìn của gương mặt cho KHỚP với ảnh mẫu (góc của mặt so với camera), và đổi cả cách xõa tóc cho khớp với ảnh mẫu.`;
