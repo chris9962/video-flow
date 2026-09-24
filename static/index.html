@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voice Studio</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1 class="brand">Voice Studio</h1>
+      <p id="model-status" class="pill" role="status" aria-live="polite">Đang kết nối máy chủ</p>
+    </div>
+    <nav class="tabs" aria-label="Chức năng">
+      <div class="tabs-inner" role="tablist">
+        <button type="button" role="tab" id="tab-tts" aria-controls="panel-tts" aria-selected="true">Đọc văn bản</button>
+        <button type="button" role="tab" id="tab-voices" aria-controls="panel-voices" aria-selected="false" tabindex="-1">Giọng mẫu</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Text to speech -->
+    <section id="panel-tts" role="tabpanel" aria-labelledby="tab-tts" class="grid">
+      <form id="tts-form" class="card" novalidate>
+        <div class="field">
+          <div class="label-row">
+            <label for="tts-text">Văn bản</label>
+            <span id="tts-count" class="muted small">0 ký tự</span>
+          </div>
+          <textarea id="tts-text" rows="8" required placeholder="Nhập nội dung cần đọc"></textarea>
+        </div>
+
+        <fieldset class="field">
+          <legend>Giọng đọc</legend>
+          <div class="segmented" role="radiogroup" aria-label="Cách chọn giọng">
+            <input type="radio" name="mode" id="mode-clone" value="clone" checked>
+            <label for="mode-clone">Giọng mẫu</label>
+            <input type="radio" name="mode" id="mode-design" value="design">
+            <label for="mode-design">Thiết kế giọng</label>
+            <input type="radio" name="mode" id="mode-auto" value="auto">
+            <label for="mode-auto">Tự động</label>
+          </div>
+
+          <div id="clone-options" class="stack">
+            <label for="voice-select" class="sr-only">Chọn giọng mẫu</label>
+            <select id="voice-select"></select>
+            <p id="no-voice" class="muted small" hidden>Thư viện chưa có giọng. Thêm giọng ở tab Giọng mẫu.</p>
+          </div>
+
+          <div id="design-options" class="row-4" hidden>
+            <div class="field"><label for="d-gender">Giới tính</label><select id="d-gender"></select></div>
+            <div class="field"><label for="d-age">Độ tuổi</label><select id="d-age"></select></div>
+            <div class="field"><label for="d-pitch">Cao độ</label><select id="d-pitch"></select></div>
+            <div class="field"><label for="d-accent">Giọng vùng</label><select id="d-accent"></select></div>
+            <label class="check"><input type="checkbox" id="d-whisper"> Nói thì thầm</label>
+          </div>
+        </fieldset>
+
+        <div class="row-3">
+          <div class="field">
+            <label for="language">Ngôn ngữ</label>
+            <select id="language">
+              <option value="vi" selected>Tiếng Việt</option>
+              <option value="">Tự nhận</option>
+              <option value="en">Tiếng Anh</option>
+              <option value="zh">Tiếng Trung</option>
+              <option value="ja">Tiếng Nhật</option>
+              <option value="ko">Tiếng Hàn</option>
+              <option value="fr">Tiếng Pháp</option>
+              <option value="th">Tiếng Thái</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="label-row">
+              <label for="speed">Tốc độ</label>
+              <output id="speed-out" for="speed" class="small">1.00×</output>
+            </div>
+            <input type="range" id="speed" min="0.5" max="2" step="0.05" value="1">
+          </div>
+          <div class="field">
+            <label for="duration">Độ dài cố định (giây)</label>
+            <input type="number" id="duration" min="0.5" step="0.1" placeholder="Tự tính">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="num_step">Chất lượng</label>
+          <select id="num_step">
+            <option value="16">Nhanh (16 bước)</option>
+            <option value="24">Vừa (24 bước)</option>
+            <option value="32" selected>Chuẩn (32 bước)</option>
+            <option value="48">Cao (48 bước)</option>
+            <option value="64">Rất cao (64 bước)</option>
+          </select>
+        </div>
+
+        <details class="advanced">
+          <summary>Tuỳ chọn nâng cao</summary>
+          <div class="row-3">
+            <div class="field"><label for="guidance_scale">Độ bám lời</label><input type="number" id="guidance_scale" step="0.1" min="0" value="2.0"></div>
+            <div class="field"><label for="t_shift">Dịch lịch nhiễu</label><input type="number" id="t_shift" step="0.01" min="0" value="0.1"></div>
+            <div class="field"><label for="class_temperature">Nhiệt độ chọn token</label><input type="number" id="class_temperature" step="0.05" min="0" value="0"></div>
+            <div class="field"><label for="position_temperature">Nhiệt độ chọn vị trí</label><input type="number" id="position_temperature" step="0.5" min="0" value="5"></div>
+            <div class="field"><label for="layer_penalty_factor">Phạt lớp sâu</label><input type="number" id="layer_penalty_factor" step="0.5" min="0" value="5"></div>
+            <div class="field"><label for="audio_chunk_duration">Độ dài mỗi đoạn (giây)</label><input type="number" id="audio_chunk_duration" step="1" min="5" value="15"></div>
+            <div class="field"><label for="audio_chunk_threshold">Ngưỡng chia đoạn (giây)</label><input type="number" id="audio_chunk_threshold" step="1" min="5" value="30"></div>
+          </div>
+          <div class="checks">
+            <label class="check"><input type="checkbox" id="denoise" checked> Khử nhiễu</label>
+            <label class="check"><input type="checkbox" id="postprocess_output" checked> Hậu xử lý âm thanh</label>
+            <label class="check"><input type="checkbox" id="normalize_text"> Chuẩn hoá số và ngày</label>
+          </div>
+          <button type="button" id="reset-advanced" class="btn ghost small-btn">Đặt lại mặc định</button>
+        </details>
+
+        <div class="actions">
+          <button type="submit" id="tts-submit" class="btn primary">Tạo giọng đọc</button>
+          <p id="tts-job" class="muted small" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="stack">
+        <section class="card" aria-labelledby="result-h">
+          <h2 id="result-h">Kết quả</h2>
+          <div id="result-empty" class="muted">Bản đọc mới nhất hiện ở đây.</div>
+          <div id="result" hidden>
+            <audio id="result-audio" controls preload="auto"></audio>
+            <div class="result-meta">
+              <span id="result-info" class="muted small"></span>
+              <a id="result-download" class="btn ghost small-btn" download>Tải file WAV</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="history-h">
+          <div class="label-row">
+            <h2 id="history-h">Lịch sử</h2>
+            <span id="history-count" class="muted small"></span>
+          </div>
+          <ul id="history" class="list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- Voice library -->
+    <section id="panel-voices" role="tabpanel" aria-labelledby="tab-voices" class="grid" hidden>
+      <form id="voice-form" class="card" novalidate>
+        <h2>Thêm giọng mẫu</h2>
+        <div class="field">
+          <label for="v-name">Tên giọng</label>
+          <input type="text" id="v-name" required maxlength="80" placeholder="Ví dụ: Nữ miền Nam - Lan" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="v-file">File ghi âm</label>
+          <input type="file" id="v-file" required accept=".mp3,.mp4,.m4a,.wav,.aac,.ogg,.flac,.mov,.webm,audio/*,video/*">
+          <p class="muted small">MP3, MP4, M4A hoặc WAV. Nên có 3 đến 10 giây một người nói rõ, không nhạc nền.</p>
+        </div>
+        <div class="field">
+          <label for="v-text">Lời trong đoạn ghi âm</label>
+          <textarea id="v-text" rows="3" placeholder="Để trống thì máy tự nghe lời"></textarea>
+          <p class="muted small">Có lời thì máy dùng nguyên file, tối đa 15 giây.</p>
+        </div>
+        <details class="advanced">
+          <summary>Tuỳ chọn thêm</summary>
+          <fieldset class="field">
+            <legend>Cắt đoạn mẫu (giây)</legend>
+            <div class="row-2">
+              <div class="field"><label for="v-start">Bắt đầu</label><input type="number" id="v-start" min="0" step="0.1" placeholder="Tự chọn"></div>
+              <div class="field"><label for="v-end">Kết thúc</label><input type="number" id="v-end" min="0" step="0.1" placeholder="Tự chọn"></div>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="v-note">Ghi chú</label>
+            <input type="text" id="v-note" maxlength="200" placeholder="Người nói, nguồn ghi âm" autocomplete="off">
+          </div>
+        </details>
+        <div class="actions">
+          <button type="submit" id="voice-submit" class="btn primary">Thêm giọng</button>
+          <p id="voice-job" class="muted small" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <section class="card" aria-labelledby="library-h">
+        <div class="label-row">
+          <h2 id="library-h">Thư viện giọng</h2>
+          <span id="library-count" class="muted small"></span>
+        </div>
+        <ul id="library" class="list"></ul>
+      </section>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
