@@ -7,6 +7,8 @@ import { klingEditBlock } from './kling-edit';
 import { faceSwapBlock } from './faceswap';
 import { motionBlock } from './motion';
 import { restyleBlock } from './restyle';
+import { tryOnBlock } from './tryon';
+import { aiDancingBlock } from './aidancing';
 
 export function registerBuiltinNodes(): void {
   registerNode(textBlock);
@@ -17,4 +19,6 @@ export function registerBuiltinNodes(): void {
   registerNode(faceSwapBlock);
   registerNode(motionBlock);
   registerNode(restyleBlock);
+  registerNode(tryOnBlock);
+  registerNode(aiDancingBlock);
 }

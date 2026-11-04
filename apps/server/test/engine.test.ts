@@ -30,6 +30,11 @@ setMedia({
   stitchVideos: async (paths, outFile) => {
     await writeFile(outFile, `stitch:${paths.length}`);
   },
+  extractFrame: async () => {},
+  imageSize: async () => ({ width: 1024, height: 1536 }),
+  padToAspect: async () => {},
+  cropToAspect: async () => {},
+  videoDuration: async () => 12.35,
 });
 setVideoGen({
   generateVideo: async ({ outFile }) => {

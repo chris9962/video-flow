@@ -1,0 +1,26 @@
+{
+  "id": "1903240d-71e9-4a11-a6ff-7069e0f48f1c",
+  "name": "Thay đổi gương mặt từ của ảnh góc",
+  "nodes": [
+    {
+      "id": "2b960adc-9d7c-4919-9ca1-ecd3ab593067",
+      "type": "restyle",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/08de675b-510e-4c44-9924-0fddbf47f1e7/2b960adc-9d7c-4919-9ca1-ecd3ab593067/restyle-0.png",
+          "mime": "image/png"
+        },
+        "analyzePrompt": "Xem kỹ ảnh này và GHI NHỚ chính xác: góc máy (hướng, độ cao, độ nghiêng), ánh sáng (tông màu, hướng sáng, độ mềm/đổ bóng), và background. Quấn áo, độ căng của vòng 1, cách đôi môi đang mở hờ nhẹ\nChỉ cần ghi nhớ, CHƯA tạo ảnh.",
+        "genPrompt": "ĐÂy là ảnh mẫu của tôi\ntôi muôn sử tạo 1 ảnh với gương mặt là mẫu của tôi nhưng với background, cách đổi môi mở hờ của ảnh trươc đó, cahcs pose dáng của anh trước đó, góc máy phong cach tổng thê, ảnh sáng từ thông tin của bạn trươc đó"
+      },
+      "width": 430,
+      "height": 555
+    }
+  ],
+  "edges": []
+}

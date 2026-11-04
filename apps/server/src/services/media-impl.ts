@@ -97,6 +97,13 @@ async function findSubtitleFile(videoPath: string): Promise<string | undefined> 
   return subs[0] ? path.join(dir, subs[0]) : undefined;
 }
 
+async function readImageSize(imagePath: string): Promise<{ width: number; height: number }> {
+  const stderr = await ffmpegStderr(['-i', imagePath]);
+  const m = stderr.match(/Video:.*?, (\d{2,5})x(\d{2,5})/);
+  if (!m) throw new Error(`Không đọc được kích thước ảnh ${path.basename(imagePath)}`);
+  return { width: Number(m[1]), height: Number(m[2]) };
+}
+
 export function createMediaService(): MediaService {
   return {
     async downloadVideo(url, outDir) {
@@ -133,6 +140,51 @@ export function createMediaService(): MediaService {
         // info.json chỉ là metadata phụ — thiếu cũng không chặn download
       }
       return { file, info };
+    },
+
+    async extractFrame(videoPath, seconds, outFile) {
+      await mkdir(path.dirname(outFile), { recursive: true });
+      const duration = parseDuration(await ffmpegStderr(['-i', videoPath]));
+      // -ss bằng đúng độ dài thì ffmpeg không ra khung nào → lùi 0,1 giây
+      const t = Math.min(Math.max(0, seconds), Math.max(0, duration - 0.1));
+      await execFileAsync(
+        ffmpeg(),
+        ['-ss', t.toFixed(2), '-i', videoPath, '-frames:v', '1', '-y', outFile],
+        EXEC_OPTS,
+      );
+    },
+
+    imageSize: readImageSize,
+
+    async videoDuration(videoPath) {
+      return parseDuration(await ffmpegStderr(['-i', videoPath]));
+    },
+
+    async padToAspect(imagePath, aspect, outFile) {
+      const { width, height } = await readImageSize(imagePath);
+      // Kích thước chẵn: một số encoder ảnh/video báo lỗi với cạnh lẻ.
+      const even = (n: number) => Math.round(n / 2) * 2;
+      const w = width / height < aspect ? even(height * aspect) : even(width);
+      const h = width / height < aspect ? even(height) : even(width / aspect);
+      await execFileAsync(
+        ffmpeg(),
+        [
+          '-i', imagePath,
+          '-filter_complex',
+          `[0]scale=${w}:${h},boxblur=20:5[bg];[bg][0]overlay=(W-w)/2:(H-h)/2`,
+          '-frames:v', '1', '-y', outFile,
+        ],
+        EXEC_OPTS,
+      );
+    },
+
+    async cropToAspect(imagePath, aspect, outFile) {
+      const a = aspect.toFixed(6);
+      await execFileAsync(
+        ffmpeg(),
+        ['-i', imagePath, '-vf', `crop=w='min(iw,ih*${a})':h='min(ih,iw/${a})'`, '-frames:v', '1', '-y', outFile],
+        EXEC_OPTS,
+      );
     },
 
     async extractVideoContext(videoPath, outDir) {

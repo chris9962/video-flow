@@ -63,6 +63,21 @@ const GLYPH: Record<string, ReactNode> = {
       <path d="M11.3 4.1l.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5z" fill="currentColor" stroke="none" />
     </svg>
   ),
+  // Ghép mẫu — người (đầu + thân áo) + dấu cộng
+  tryon: (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="6.5" cy="3.8" r="2" />
+      <path d="M3 14V9.6c0-1.6 1.4-2.8 3.5-2.8S10 8 10 9.6V14" />
+      <path d="M12.6 3.2v4M10.6 5.2h4" />
+    </svg>
+  ),
+  // AI Dancing — người giơ tay nhảy
+  aidancing: (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="3" r="1.6" />
+      <path d="M8 5v4.5M8 6.2L4.3 4.2M8 6.2l3.4 2.2M8 9.5l-2.6 4.3M8 9.5l2.8 4" />
+    </svg>
+  ),
 };
 
 const BLURB: Record<string, string> = {
@@ -74,6 +89,8 @@ const BLURB: Record<string, string> = {
   faceswap: 'Face Swap · video + ảnh mặt → đổi mặt',
   motion: 'Trích Prompt · Gemini xem video → prompt chuyển động',
   restyle: 'Ảnh GPT 2 bước · Tham chiếu + Mẫu → giữ mặt, áp style',
+  tryon: 'Ghép mẫu · Mặt mẫu + Trang phục + Ảnh dáng/Clip → ảnh giữ tư thế',
+  aidancing: 'AI Dancing · Ảnh mẫu + Video mẫu → nhân vật nhảy theo video',
 };
 
 export function Palette({ onAdd }: { onAdd: (type: string) => void }) {

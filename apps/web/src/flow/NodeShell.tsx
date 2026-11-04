@@ -40,6 +40,8 @@ function PortGlyph({ type }: { type: DataType }) {
  * Vỏ chung của block. Action (xoá + tuỳ block: upload/mở rộng) nằm ở thanh nổi PHÍA TRÊN block
  * (NodeToolbar) — tách khỏi thân; config (model/agent…) do block tự render ở ĐÁY thân (children).
  */
+const TYPE_NAME: Record<string, string> = { text: 'Text', image: 'Ảnh', video: 'Video', json: 'JSON', any: 'Bất kỳ' };
+
 export function NodeShell({
   type,
   id,
@@ -60,6 +62,7 @@ export function NodeShell({
   const def = BLOCK_DEFINITIONS[type];
   const { deleteElements } = useReactFlow();
   const ports = def.inputs ?? [{ id: 'in', label: '', accepts: def.accepts }];
+  const typeNames = (types: string[]) => types.map((t) => TYPE_NAME[t] ?? t).join(', ');
 
   return (
     <div className="vf-node" data-type={def.emits} data-status={status}>
@@ -93,7 +96,8 @@ export function NodeShell({
 
       {ports.map((port, i) => {
         const top = `${((i + 1) / (ports.length + 1)) * 100}%`;
-        // Bỏ nhãn chữ; tên cổng để ở title (hover hiện) cho block nhiều cổng (Start/Prompt/End)
+        // Tên cổng hiện bằng nhãn CSS (data-label) ngay khi hover; title của trình duyệt hiện chậm và hay không hiện trên canvas
+        const label = port.label || `Vào: ${typeNames(port.accepts)}`;
         return (
           <Handle
             key={port.id}
@@ -102,14 +106,23 @@ export function NodeShell({
             id={port.id}
             className="vf-handle"
             data-type={port.accepts[0]}
+            data-label={label}
+            aria-label={label}
             style={{ top }}
-            title={port.label || undefined}
           >
             <PortGlyph type={port.accepts[0]} />
           </Handle>
         );
       })}
-      <Handle type="source" position={Position.Right} id="out" className="vf-handle" data-type={def.emits}>
+      <Handle
+        type="source"
+        position={Position.Right}
+        id="out"
+        className="vf-handle"
+        data-type={def.emits}
+        data-label={`Ra: ${typeNames([def.emits])}`}
+        aria-label={`Ra: ${typeNames([def.emits])}`}
+      >
         <PortGlyph type={def.emits} />
       </Handle>
     </div>

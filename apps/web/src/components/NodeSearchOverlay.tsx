@@ -8,6 +8,8 @@ const TYPE_LABEL: Record<string, string> = {
   kling: 'Kling',
   'kling-edit': 'Kling Edit',
   faceswap: 'Face Swap',
+  tryon: 'Ghép mẫu',
+  aidancing: 'AI Dancing',
 };
 const ALIAS: Record<string, string> = {
   text: 'text van ban prompt',
@@ -16,6 +18,8 @@ const ALIAS: Record<string, string> = {
   kling: 'kling video fal tao video',
   'kling-edit': 'kling edit video to video doi nen swap',
   faceswap: 'face swap doi mat pixverse',
+  tryon: 'ghep mau thu do try on trang phuc quan ao mat mau',
+  aidancing: 'ai dancing nhay copy chuyen dong motion aidancing',
 };
 
 type Entry = NodeTemplate & { isDefault?: boolean };
@@ -45,6 +49,8 @@ const SHORT_DESC: Record<string, string> = {
   kling: 'Tạo video Kling (fal.ai): Start · Prompt · End',
   'kling-edit': 'Đổi nền / nhân vật / style từ 1 video mẫu (Kling O1)',
   faceswap: 'Đổi mặt trong video bằng 1 ảnh mặt (Pixverse)',
+  tryon: 'Mặt mẫu + trang phục ghép vào ảnh dáng cắt từ clip',
+  aidancing: 'Ảnh mẫu nhảy theo động tác của video mẫu (aidancing.net)',
 };
 const entryDesc = (e: Entry): string => {
   if (e.isDefault) return SHORT_DESC[firstType(e)] ?? '';

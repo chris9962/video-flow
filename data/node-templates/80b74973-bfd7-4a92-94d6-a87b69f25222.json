@@ -1,0 +1,26 @@
+{
+  "id": "80b74973-bfd7-4a92-94d6-a87b69f25222",
+  "name": "Thêm - Ghép mẫu vào background",
+  "nodes": [
+    {
+      "id": "4b0b7e87-3745-4d9f-89ff-01ee0fb8a37b",
+      "type": "restyle",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/c043f908-4c39-41ac-be53-d9c53cd3ec39/4b0b7e87-3745-4d9f-89ff-01ee0fb8a37b/restyle-0.png",
+          "mime": "image/png"
+        },
+        "genPrompt": "Thêm ảnh mẫu đã ghi nhớ ở trên vào backgroun này giúp tôi, chính xác 100%",
+        "analyzePrompt": "Xem kỹ ảnh này và GHI NHỚ chính xác: góc máy (hướng, độ cao, độ nghiêng). Góc nghiên của cơ thê, cách chân tạo dáng, cách tay tạo dáng, hướng nhìn của mắt, góc của mặt đối với camera, cách xoả tốc\nChỉ cần ghi nhớ, CHƯA tạo ảnh."
+      },
+      "width": 512,
+      "height": 633
+    }
+  ],
+  "edges": []
+}

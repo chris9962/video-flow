@@ -1,0 +1,79 @@
+{
+  "id": "08fda217-61d9-43d2-8924-d2eb1d79e5df",
+  "name": "Sao chép ảnh chỉ đổi gương mặt",
+  "nodes": [
+    {
+      "id": "70e69c74-ce55-4426-ba21-5a8a23ffe99a",
+      "type": "image",
+      "position": {
+        "x": 0,
+        "y": 444.57488527975124
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/602e653f-4b3d-435c-9b57-5e568dee9e38.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "52606f77-3518-4d0e-b4bf-d5cddbf433f7",
+      "type": "image",
+      "position": {
+        "x": 6.304967204354398,
+        "y": 115.44165861684519
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/d5c7ce93-4c53-4b0c-82b5-b536968fd7b5.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "5da141d2-7dd5-40b1-99f5-8bddbcba98ac",
+      "type": "restyle",
+      "position": {
+        "x": 281.9772935091405,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/8d994798-1551-4f11-bf60-400fdde7abd8/5da141d2-7dd5-40b1-99f5-8bddbcba98ac/restyle-0.png",
+          "mime": "image/png"
+        },
+        "genPrompt": "Đầu tiên hãy ghi nhớ đặt điểm gương mặt của ảnh này, ánh mắt, nụ cười, sóng mũi. \nTạo một ảnh chân dung của người trong ảnh này(với các đặt điểm vừa ghi nhớ), GIỮ NGUYÊN khuôn mặt(có thể thay đổi góc măt để phù hợp với ảnh mẫu trươc đó) và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên. thay đổi góc nhìn của mặt đây là quan trong, hay thay đổi góc nhìn của gương mặt này để khớp với ảnh mẫu, thay đổi cả cách xoả tóc cho khớp với ảnh mẫu",
+        "analyzePrompt": "Xem kỹ ảnh này và GHI NHỚ chính xác: góc máy (hướng, độ cao, độ nghiêng), ánh sáng (tông màu, hướng sáng, độ mềm/đổ bóng), và background. Góc nghiên của cơ thê, cách chân tạo dáng, cách tay tạo dáng, hướng nhìn của mắt, góc của mặt đối với camera, cách xoả tốc\nChỉ cần ghi nhớ, CHƯA tạo ảnh."
+      },
+      "width": 488,
+      "height": 504
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__70e69c74-ce55-4426-ba21-5a8a23ffe99aout-5da141d2-7dd5-40b1-99f5-8bddbcba98acface",
+      "source": {
+        "nodeId": "70e69c74-ce55-4426-ba21-5a8a23ffe99a",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "5da141d2-7dd5-40b1-99f5-8bddbcba98ac",
+        "port": "face"
+      }
+    },
+    {
+      "id": "xy-edge__52606f77-3518-4d0e-b4bf-d5cddbf433f7out-5da141d2-7dd5-40b1-99f5-8bddbcba98acref",
+      "source": {
+        "nodeId": "52606f77-3518-4d0e-b4bf-d5cddbf433f7",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "5da141d2-7dd5-40b1-99f5-8bddbcba98ac",
+        "port": "ref"
+      }
+    }
+  ]
+}

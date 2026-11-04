@@ -1,0 +1,79 @@
+{
+  "id": "9f03be6e-926a-4974-9747-e2c586afd07d",
+  "name": "Thay đồ ver2 - trực tiếp - ghép đồ",
+  "nodes": [
+    {
+      "id": "d21d5db9-576f-4dee-9e88-682bbb75fb09",
+      "type": "image",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/1359b428-d76a-445c-a986-e634fa01ea02.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "f2667506-44e8-43b9-9dae-73554efe396d",
+      "type": "image",
+      "position": {
+        "x": 21.67609126068055,
+        "y": 392.79259576618267
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/assets/1ae5ddf1-587c-471e-bbcb-74650e3268eb.png",
+          "mime": "image/png"
+        }
+      }
+    },
+    {
+      "id": "1e5d32db-6a53-4ba2-ba4a-cb8805cb7cd8",
+      "type": "restyle",
+      "position": {
+        "x": 401.54866416813366,
+        "y": 4.012044892871785
+      },
+      "config": {
+        "analyzePrompt": "Xem kỹ ảnh này và GHI NHỚ chính xác:\n- Ánh sáng: tông màu,\n- Góc nghiêng của cơ thể, cách chân tạo dáng, cách tay tạo dáng.\n- Chi tiết quần áo, độ dài ngắn của áo( drop top, 2 dây, cổ áo, độ dài của quần, độ ôm của quần áo)\n",
+        "genPrompt": "Đầu tiên hãy ghi nhớ đặc điểm gương mặt của ảnh này: ánh mắt, nụ cười, sóng mũi.\nTạo một từ ảnh này với các phụ kiện quần áo chi tiết đã ghi nhớ bên trên ",
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/2fb33589-c14d-4460-9f51-7d76bc1d9d59/1e5d32db-6a53-4ba2-ba4a-cb8805cb7cd8/restyle-0.png",
+          "mime": "image/png"
+        }
+      },
+      "width": 470,
+      "height": 544
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__d21d5db9-576f-4dee-9e88-682bbb75fb09out-1e5d32db-6a53-4ba2-ba4a-cb8805cb7cd8ref",
+      "source": {
+        "nodeId": "d21d5db9-576f-4dee-9e88-682bbb75fb09",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "1e5d32db-6a53-4ba2-ba4a-cb8805cb7cd8",
+        "port": "ref"
+      }
+    },
+    {
+      "id": "xy-edge__f2667506-44e8-43b9-9dae-73554efe396dout-1e5d32db-6a53-4ba2-ba4a-cb8805cb7cd8face",
+      "source": {
+        "nodeId": "f2667506-44e8-43b9-9dae-73554efe396d",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "1e5d32db-6a53-4ba2-ba4a-cb8805cb7cd8",
+        "port": "face"
+      }
+    }
+  ]
+}

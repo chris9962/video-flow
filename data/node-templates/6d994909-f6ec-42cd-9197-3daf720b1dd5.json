@@ -1,0 +1,27 @@
+{
+  "id": "6d994909-f6ec-42cd-9197-3daf720b1dd5",
+  "name": "Clone cách tạo dáng",
+  "nodes": [
+    {
+      "id": "1f6980b4-44ee-4ed2-86e4-f9bc0b3abd94",
+      "type": "restyle",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": {
+          "kind": "file",
+          "path": "/Users/nguyentruong/video-flow/data/runs/e99b9750-60bd-47e8-8415-04e8ce718d83/1f6980b4-44ee-4ed2-86e4-f9bc0b3abd94/restyle-0.png",
+          "mime": "image/png"
+        },
+        "genPrompt": "Nhìn vào mô tả dáng ở trên. Áp dụng đúng cách tạo dáng đó vào người trong ảnh đính kèm. Giữ nguyên toàn bộ: khuôn mặt, trang phục, màu da, nền ảnh. Chỉ thay đổi tư thế theo đúng mô tả.",
+        "analyzePrompt": "Quan sát kỹ ảnh này và ghi lại chi tiết cách tạo dáng của người trong ảnh. Mô tả: tư thế tổng thể (đứng thẳng / nghiêng / ngồi), hướng thân người so với camera, chân nào chịu trọng lực, góc nghiêng hông, vị trí hai tay (buông / chống hông / giơ lên / đặt trước ngực), hướng mặt và ánh mắt, độ nghiêng vai. Chỉ dùng ngôn ngữ trung tính chuẩn nhiếp ảnh thời trang, không dùng từ nhạy cảm hoặc mô tả cơ thể chi tiết có thể vi phạm chính sách AI.",
+        "provider": "chatgpt"
+      },
+      "width": 512,
+      "height": 633
+    }
+  ],
+  "edges": []
+}

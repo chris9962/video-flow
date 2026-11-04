@@ -6,7 +6,9 @@ import type { FileRef } from '@videoflow/shared';
 import { textBlock } from '../src/nodes/text';
 import { imageBlock } from '../src/nodes/image';
 import { videoBlock } from '../src/nodes/video';
-import { setMedia, setPilot, setVideoGen } from '../src/services';
+import { tryOnBlock } from '../src/nodes/tryon';
+import { aiDancingBlock, pickDuration } from '../src/nodes/aidancing';
+import { setAiDancing, setMedia, setPilot, setVideoGen } from '../src/services';
 import type { BlockInputs, PortInputs } from '../src/nodes/registry';
 
 const empty = (): BlockInputs => ({ texts: [], images: [], videos: [], byPort: {} });
@@ -53,6 +55,11 @@ describe('text block', () => {
       downloadVideo: async () => ({ file: '', info: {} }),
       extractVideoContext: async () => ({ framePaths: ['/f1.png', '/f2.png'], transcript: 'lời thoại' }),
       stitchVideos: async () => {},
+      extractFrame: async () => {},
+      imageSize: async () => ({ width: 1024, height: 1536 }),
+      padToAspect: async () => {},
+      cropToAspect: async () => {},
+      videoDuration: async () => 12.35,
     });
     const video: FileRef = { kind: 'file', path: '/v.mp4', mime: 'video/mp4' };
     const r = await textBlock.execute({
@@ -98,6 +105,11 @@ describe('video block', () => {
       },
       extractVideoContext: async () => ({ framePaths: [], transcript: '' }),
       stitchVideos: async () => {},
+      extractFrame: async () => {},
+      imageSize: async () => ({ width: 1024, height: 1536 }),
+      padToAspect: async () => {},
+      cropToAspect: async () => {},
+      videoDuration: async () => 12.35,
     });
     const r = await videoBlock.execute({
       config: { sourceUrl: 'https://youtube.com/watch?v=x' },
@@ -136,5 +148,190 @@ describe('video block', () => {
     await expect(
       videoBlock.execute({ config: {}, inputs: withPorts({ start: port({ images: [img] }) }), dir }),
     ).rejects.toThrow(/Prompt/);
+  });
+});
+
+describe('tryon block', () => {
+  const face: FileRef = { kind: 'file', path: '/face.png', mime: 'image/png' };
+  const outfit: FileRef = { kind: 'file', path: '/outfit.png', mime: 'image/png' };
+
+  it('errors when Mặt mẫu is missing', async () => {
+    await expect(
+      tryOnBlock.execute({ config: {}, inputs: withPorts({ outfit: port({ images: [outfit] }) }), dir }),
+    ).rejects.toThrow(/cần ảnh Mặt mẫu/);
+  });
+
+  it('skips the outfit step and keeps the clothes when Trang phục is missing', async () => {
+    let steps: { prompt: string; referenceImagePaths: string[] }[] = [];
+    setPilot({
+      sendPrompt: async () => '',
+      generateImage: async () => {},
+      generateImageSteps: async (req) => {
+        steps = req.steps;
+      },
+      openLogin: async () => {},
+      openSite: async () => {},
+    });
+    const pose: FileRef = { kind: 'file', path: '/pose.png', mime: 'image/png' };
+    await tryOnBlock.execute({
+      config: {},
+      inputs: withPorts({ face: port({ images: [face] }), pose: port({ images: [pose] }) }),
+      dir,
+    });
+    expect(steps.map((s) => s.referenceImagePaths[0])).toEqual(['/face.png', '/pose.png']);
+    expect(steps[1].prompt).not.toContain('- Thay trang phục');
+    expect(steps[1].prompt).toContain('GIỮ NGUYÊN trang phục đang mặc');
+  });
+
+  it('sends face, outfit, then the pose image in one tab', async () => {
+    let steps: { prompt: string; referenceImagePaths: string[] }[] = [];
+    let provider = '';
+    setPilot({
+      sendPrompt: async () => '',
+      generateImage: async () => {},
+      generateImageSteps: async (req) => {
+        steps = req.steps;
+        provider = req.provider ?? '';
+      },
+      openLogin: async () => {},
+      openSite: async () => {},
+    });
+    const pose: FileRef = { kind: 'file', path: '/pose.png', mime: 'image/png' };
+    const r = await tryOnBlock.execute({
+      config: { genPrompt: 'đổi mặt và áo' },
+      inputs: withPorts({
+        face: port({ images: [face] }),
+        outfit: port({ images: [outfit] }),
+        pose: port({ images: [pose] }),
+      }),
+      dir,
+    });
+    expect(provider).toBe('chatgpt');
+    expect(steps.map((s) => s.referenceImagePaths[0])).toEqual(['/face.png', '/outfit.png', '/pose.png']);
+    expect(steps[2].prompt).toBe('đổi mặt và áo');
+    expect((r.out as FileRef).path).toContain('tryon-0.png');
+  });
+
+  it('adds a background step after the composite when Background is connected', async () => {
+    let steps: { prompt: string; referenceImagePaths: string[]; saveTo?: string }[] = [];
+    setPilot({
+      sendPrompt: async () => '',
+      generateImage: async () => {},
+      generateImageSteps: async (req) => {
+        steps = req.steps;
+      },
+      openLogin: async () => {},
+      openSite: async () => {},
+    });
+    const pose: FileRef = { kind: 'file', path: '/pose.png', mime: 'image/png' };
+    const bg: FileRef = { kind: 'file', path: '/bg.png', mime: 'image/png' };
+    const r = await tryOnBlock.execute({
+      config: {},
+      inputs: withPorts({
+        face: port({ images: [face] }),
+        outfit: port({ images: [outfit] }),
+        pose: port({ images: [pose] }),
+        background: port({ images: [bg] }),
+      }),
+      dir,
+    });
+    expect(steps.map((s) => s.referenceImagePaths[0])).toEqual(['/face.png', '/outfit.png', '/pose.png', '/bg.png']);
+    expect(steps[2].saveTo).toContain('tryon-0-ghep.png');
+    expect(steps[3].saveTo).toBeUndefined();
+    expect((r.out as FileRef).path).toContain('tryon-0.png');
+  });
+
+  it('cuts a frame from the Clip when there is no pose image', async () => {
+    let cut: { videoPath: string; seconds: number; outFile: string } | null = null;
+    let padded: { aspect: number; outFile: string } | null = null;
+    let cropped: { aspect: number; outFile: string } | null = null;
+    setMedia({
+      downloadVideo: async () => ({ file: '', info: {} }),
+      extractVideoContext: async () => ({ framePaths: [], transcript: '' }),
+      stitchVideos: async () => {},
+      extractFrame: async (videoPath, seconds, outFile) => {
+        cut = { videoPath, seconds, outFile };
+      },
+      imageSize: async () => ({ width: 576, height: 1024 }),
+      padToAspect: async (_in, aspect, outFile) => {
+        padded = { aspect, outFile };
+      },
+      cropToAspect: async (_in, aspect, outFile) => {
+        cropped = { aspect, outFile };
+      },
+      videoDuration: async () => 12.35,
+    });
+    let posePath = '';
+    setPilot({
+      sendPrompt: async () => '',
+      generateImage: async () => {},
+      generateImageSteps: async (req) => {
+        posePath = req.steps[2].referenceImagePaths[0];
+      },
+      openLogin: async () => {},
+      openSite: async () => {},
+    });
+    const clip: FileRef = { kind: 'file', path: '/clip.mp4', mime: 'video/mp4' };
+    await tryOnBlock.execute({
+      config: { frameTime: 2.5 },
+      inputs: withPorts({
+        face: port({ images: [face] }),
+        outfit: port({ images: [outfit] }),
+        clip: port({ videos: [clip] }),
+      }),
+      dir,
+    });
+    expect(cut!.videoPath).toBe('/clip.mp4');
+    expect(cut!.seconds).toBe(2.5);
+    // Khung 9:16 của clip được nới tới 2:3 trước khi gửi, kết quả cắt lại về 9:16.
+    expect(padded!.aspect).toBeCloseTo(2 / 3);
+    expect(posePath).toBe(padded!.outFile);
+    expect(cropped!.aspect).toBeCloseTo(576 / 1024);
+    expect(cropped!.outFile).toContain('tryon-0.png');
+  });
+});
+
+describe('aidancing block', () => {
+  const img: FileRef = { kind: 'file', path: '/tryon.png', mime: 'image/png' };
+  const clip: FileRef = { kind: 'file', path: '/clip.mp4', mime: 'video/mp4' };
+
+  it('picks the smallest duration that covers the clip', () => {
+    expect(pickDuration(12.35)).toBe(15);
+    expect(pickDuration(10)).toBe(10);
+    expect(pickDuration(10.02)).toBe(10);
+    expect(pickDuration(40)).toBe(25);
+  });
+
+  it('sends image + video with defaults and returns the downloaded video', async () => {
+    let req: { jobTypeId: number; seconds: number; quality: string; aspectRatio: string; imagePath: string } | null = null;
+    setMedia({
+      downloadVideo: async () => ({ file: '', info: {} }),
+      extractVideoContext: async () => ({ framePaths: [], transcript: '' }),
+      stitchVideos: async () => {},
+      extractFrame: async () => {},
+      imageSize: async () => ({ width: 864, height: 1536 }),
+      padToAspect: async () => {},
+      cropToAspect: async () => {},
+      videoDuration: async () => 12.35,
+    });
+    setAiDancing({
+      generateVideo: async (r) => {
+        req = r;
+        return { jobId: 1 };
+      },
+    });
+    const r = await aiDancingBlock.execute({
+      config: {},
+      inputs: withPorts({ image: port({ images: [img] }), video: port({ videos: [clip] }) }),
+      dir,
+    });
+    expect(req!).toMatchObject({ jobTypeId: 192, seconds: 15, quality: 'quality', aspectRatio: '9:16', imagePath: '/tryon.png' });
+    expect((r.out as FileRef).path).toContain('aidancing-0.mp4');
+  });
+
+  it('errors without Ảnh mẫu', async () => {
+    await expect(
+      aiDancingBlock.execute({ config: {}, inputs: withPorts({ video: port({ videos: [clip] }) }), dir }),
+    ).rejects.toThrow(/cần Ảnh mẫu/);
   });
 });

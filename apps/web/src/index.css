@@ -700,7 +700,8 @@ input, select, textarea { font: inherit; color: inherit; }
 .vf-node .url-input:focus { border-color: var(--type); box-shadow: 0 0 0 3px var(--type-glow); outline: none; }
 
 .config-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.config-row select {
+.config-row select,
+.config-row input[type='number'] {
   min-width: 0;
   border: 1px solid var(--line-soft);
   border-radius: var(--r-sm);
@@ -710,7 +711,9 @@ input, select, textarea { font: inherit; color: inherit; }
   font-size: 11px;
   transition: border-color 0.16s var(--ease-out);
 }
-.config-row select:focus { border-color: var(--type); outline: none; }
+.config-row select:focus,
+.config-row input[type='number']:focus { border-color: var(--type); outline: none; }
+.config-row input[type='number'] { width: 64px; }
 
 /* Block restyle (Ảnh GPT 2 bước): khu prompt 2 bước — ngăn cách với khu ảnh, title tách khỏi ô nhập */
 .vf-node .restyle-steps {
@@ -810,6 +813,28 @@ input, select, textarea { font: inherit; color: inherit; }
 .react-flow__handle.vf-handle:hover {
   transform: translateY(-50%) scale(1.15);
 }
+/* Tên cổng hiện ngay khi hover: cổng vào hiện nhãn bên trái, cổng ra hiện nhãn bên phải */
+.react-flow__handle.vf-handle[data-label]:hover::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 8px);
+  transform: translateY(-50%);
+  padding: 3px 8px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+.react-flow__handle.vf-handle.react-flow__handle-right[data-label]:hover::after {
+  right: auto;
+  left: calc(100% + 8px);
+}
 /* Icon loại data trong cổng (to hơn ~50%) — màu tối đọc rõ trên mọi màu nền; không cản kéo nối */
 .port-ico {
   width: 17px;
@@ -825,9 +850,9 @@ input, select, textarea { font: inherit; color: inherit; }
 .vf-handle[data-type='json'], .kind-dot[data-type='json'], .swatch[data-type='json'] { background: var(--port-json); }
 .vf-handle[data-type='any'], .kind-dot[data-type='any'], .swatch[data-type='any'] { background: var(--port-any); }
 /* Block tạo video theo model (kling/kling-edit/faceswap) đều phát 'video' → dùng màu video cho dot/badge */
-.wf-dot[data-type='kling'], .wf-dot[data-type='kling-edit'], .wf-dot[data-type='faceswap'],
-.kind-dot[data-type='kling'], .kind-dot[data-type='kling-edit'], .kind-dot[data-type='faceswap'],
-.palette-kind[data-type='kling'], .palette-kind[data-type='kling-edit'], .palette-kind[data-type='faceswap'] {
+.wf-dot[data-type='kling'], .wf-dot[data-type='kling-edit'], .wf-dot[data-type='faceswap'], .wf-dot[data-type='aidancing'],
+.kind-dot[data-type='kling'], .kind-dot[data-type='kling-edit'], .kind-dot[data-type='faceswap'], .kind-dot[data-type='aidancing'],
+.palette-kind[data-type='kling'], .palette-kind[data-type='kling-edit'], .palette-kind[data-type='faceswap'], .palette-kind[data-type='aidancing'] {
   background: var(--port-video);
   color: oklch(0.25 0.04 78);
 }

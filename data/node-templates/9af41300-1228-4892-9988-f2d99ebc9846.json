@@ -1,0 +1,18 @@
+{
+  "id": "9af41300-1228-4892-9988-f2d99ebc9846",
+  "name": "Độ loa (copy)",
+  "nodes": [
+    {
+      "id": "n",
+      "type": "text",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {
+        "content": "Enhance the bust to be fuller and more defined — naturally rounded with a subtle, visible cleavage line. Keep the size proportionate to the body, elegant and realistic, not exaggerated. The clothing should fit snugly and flatteringly."
+      }
+    }
+  ],
+  "edges": []
+}

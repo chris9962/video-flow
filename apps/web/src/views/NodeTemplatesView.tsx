@@ -23,6 +23,8 @@ import { KlingEditBlock } from '../flow/nodes/KlingEditBlock';
 import { FaceSwapBlock } from '../flow/nodes/FaceSwapBlock';
 import { MotionBlock } from '../flow/nodes/MotionBlock';
 import { RestyleBlock } from '../flow/nodes/RestyleBlock';
+import { TryOnBlock } from '../flow/nodes/TryOnBlock';
+import { AiDancingBlock } from '../flow/nodes/AiDancingBlock';
 import { canConnect } from '../flow/validation';
 import { toFlow, fromFlow } from '../flow/mapping';
 import {
@@ -44,6 +46,8 @@ const nodeTypes = {
   faceswap: FaceSwapBlock,
   motion: MotionBlock,
   restyle: RestyleBlock,
+  tryon: TryOnBlock,
+  aidancing: AiDancingBlock,
 };
 const TYPE_LABEL: Record<string, string> = {
   text: 'Text',
@@ -54,6 +58,8 @@ const TYPE_LABEL: Record<string, string> = {
   faceswap: 'Face Swap',
   motion: 'Trích Prompt',
   restyle: 'GPT 2 bước',
+  tryon: 'Ghép mẫu',
+  aidancing: 'AI Dancing',
 };
 
 const badgeOf = (t: NodeTemplate) =>

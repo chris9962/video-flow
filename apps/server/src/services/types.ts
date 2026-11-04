@@ -13,10 +13,11 @@ export interface BrowserPilot {
     outFile: string;
   }): Promise<void>;
   /** Gửi NHIỀU message liên tiếp trong CÙNG 1 tab (giữ ngữ cảnh) — message cuối tạo ảnh → tải vào outFile.
+   *  Bước có saveTo cũng tạo ảnh: chờ ảnh xong, lưu vào saveTo rồi mới gửi bước sau.
    *  provider: 'chatgpt' (mặc định) hoặc 'gemini'. */
   generateImageSteps(req: {
     provider?: ImageProvider;
-    steps: { prompt: string; referenceImagePaths: string[] }[];
+    steps: { prompt: string; referenceImagePaths: string[]; saveTo?: string }[];
     outFile: string;
   }): Promise<void>;
   /** Mở cửa sổ browser headful để user đăng nhập provider (giữ session trong profile) */
@@ -35,6 +36,31 @@ export interface MediaService {
   ): Promise<{ framePaths: string[]; transcript: string }>;
   /** Nối các video thành một (chuẩn hóa resolution/fps) */
   stitchVideos(videoPaths: string[], outFile: string): Promise<void>;
+  /** Cắt 1 khung hình ở giây `seconds` (quá độ dài thì lấy khung cuối) → ghi PNG vào outFile */
+  extractFrame(videoPath: string, seconds: number, outFile: string): Promise<void>;
+  /** Kích thước ảnh (px) */
+  imageSize(imagePath: string): Promise<{ width: number; height: number }>;
+  /** Nới ảnh tới tỉ lệ width/height = aspect, phần thêm là bản làm mờ của chính ảnh; ảnh gốc nằm giữa */
+  padToAspect(imagePath: string, aspect: number, outFile: string): Promise<void>;
+  /** Cắt phần giữa ảnh theo tỉ lệ width/height = aspect */
+  cropToAspect(imagePath: string, aspect: number, outFile: string): Promise<void>;
+  /** Độ dài video (giây) */
+  videoDuration(videoPath: string): Promise<number>;
+}
+
+/** aidancing.net qua cookie đăng nhập của Chrome CDP — model copy chuyển động: ảnh mẫu + video mẫu → video. */
+export interface AiDancingService {
+  generateVideo(req: {
+    /** Mã model trên trang /create/general?id=… (192 = Copy Chuyển Động Dùng Nền Ảnh v5.1) */
+    jobTypeId: number;
+    imagePath: string;
+    videoPath: string;
+    /** Thời lượng tính tiền: 10 | 15 | 20 | 25 */
+    seconds: number;
+    quality: 'fast' | 'quality';
+    aspectRatio: '9:16' | '16:9';
+    outFile: string;
+  }): Promise<{ jobId: number }>;
 }
 
 export interface VideoGenService {

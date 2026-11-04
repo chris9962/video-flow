@@ -70,6 +70,10 @@ const args = [
   // LUÔN dùng 1 profile Default → tránh user lỡ tạo/đổi profile (Chrome mở nhiều context thì
   // Playwright connectOverCDP gãy: "Browser context management is not supported").
   '--profile-directory=Default',
+  // TẮT extension: extension (MetaMask…) chạy service_worker target → Playwright connectOverCDP
+  // assert "targetInfo … type service_worker" rồi GÃY ("Chưa kết nối được Chrome"). Automation
+  // không cần extension nào → tắt cho sạch (login Google/ChatGPT vẫn giữ nguyên).
+  '--disable-extensions',
   '--no-first-run',
   '--no-default-browser-check',
   'https://chatgpt.com/',

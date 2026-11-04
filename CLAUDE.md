@@ -95,14 +95,20 @@ Chrome 136+ chặn remote-debug trên profile mặc định → phải dùng pro
 Mỗi `generateImage` **mở tab mới (ctx.newPage) + try/finally luôn đóng** cho cả ChatGPT lẫn Gemini.
 
 ### ChatGPT (chatgpt.com)
-- Composer: `#prompt-textarea` (contenteditable). KHÔNG dùng `form textarea` (đó là textarea ẩn fallback → bug).
-- Gửi: gõ bằng `fill()`/insertText rồi **Enter** (đừng tìm-click nút gửi, hay treo).
-- Reply text có `[data-message-author-role="assistant"]`. Nhưng ẢNH gen thì KHÔNG có attr này.
-- Ảnh gen XONG = nút hành động xuất hiện trong conversation-turn cuối:
-  `[data-testid="good-image-turn-action-button"]` / aria "Chia sẻ hình ảnh này" / "Chỉnh sửa ảnh".
-  (Nút Stop tắt RẤT SỚM trước khi ảnh xong → KHÔNG dùng làm tín hiệu.)
-- Tải: `page.request.get(URL)` BỊ CHẶN. Phải qua UI: click ảnh → dialog toàn màn hình → nút `aria-label="Lưu"`
-  → bắt `page.waitForEvent('download')` → saveAs. Retry 3 lần, Escape đóng dialog.
+Cập nhật 2026-11-02 theo skill `flow-chain-video` (`~/.claude/skills/flow-chain-video/scripts/gpt-image.mjs`).
+- Tab tự động mở bằng `Target.createTarget` với `background: true` (`newBackgroundPage`). `ctx.newPage()` làm macOS chuyển focus sang Chrome.
+- Composer: `#prompt-textarea` hoặc `div[contenteditable="true"][aria-label]` (aria "Ask ChatGPT"). KHÔNG dùng `form textarea` (đó là textarea ẩn fallback → bug).
+- Đính ảnh: `input[type="file"]:not([capture]):not([accept])`. Ô file đầu tiên là "Take a photo" (capture), gắn vào đó thì ChatGPT không nhận ảnh.
+  Gắn xong phải thấy nút `aria-label="Remove <tên file>"`; chưa thấy thì chờ 2s rồi gắn lại, tối đa 3 lần.
+- Gửi: gõ bằng `fill()`/insertText rồi **Enter**. Sau 1,5s prompt còn trong ô nhập thì bấm nút gửi; vẫn còn thì báo lỗi.
+- Reply text (đo 2026-11-02): `[data-markdown-text-style="assistant-message"]`. Trang không còn `[data-message-author-role="assistant"]` và `conversation-turn`.
+- Ảnh gen XONG = số nút `Share generated image N` / `Edit generated image N` (VI: `Chia sẻ ảnh đã tạo N` / `Chỉnh sửa ảnh đã tạo N`) tăng,
+  VÀ có ảnh `[data-testid="generated-image-preview"] img` với kích thước byte chưa từng có, giữ nguyên qua 2 lần đo.
+  (Nút Stop tắt RẤT SỚM trước khi ảnh xong → KHÔNG dùng làm tín hiệu.) Mỗi 90s tải lại trang 1 lần, vì ảnh có lúc không vào khối preview.
+  ChatGPT trả 2 ảnh và hỏi chọn → bấm `Image 1 is better`. Hết lượt → bắt chữ "hit the plan limit" / "đã đạt giới hạn".
+- Tải: `page.request.get(URL)` BỊ CHẶN. Đọc ảnh trong trang bằng `fetch(img.src, {credentials:'include'})` → base64 → ghi file. Không cần mở dialog "Lưu".
+- Lỗi thì để tab mở cho user xem; xong thì đóng tab.
+- Chỗ dễ sai (đo trong skill 2026-11-02): sau bước tải lại trang, đôi khi script không nhận ra ảnh mới dù ảnh đã có. Chưa có cách sửa.
 
 ### Gemini (gemini.google.com/app) — dùng để GHÉP ĐỒ (ChatGPT chặn try-on người thật, policy)
 - Composer: `div.ql-editor[contenteditable="true"]` (aria "Enter a prompt for Gemini").
@@ -119,7 +125,18 @@ Mỗi `generateImage` **mở tab mới (ctx.newPage) + try/finally luôn đóng*
   ảnh xong (tránh "couldn't download image"). Retry 3 lần. Verified soi DOM: trước/sau hover nút đều visible nhưng
   chỉ ăn click sau hover.
 
-### Google Flow (labs.google/fx/tools/flow) — tạo VIDEO qua Veo (provider video CHÍNH, dùng credit gói AI Pro/Plus)
+### Google Flow (flow.google.com) — tạo VIDEO qua Omni/Veo (provider video CHÍNH, dùng credit gói AI Pro/Plus)
+**Cập nhật 2026-11-02:** `flow-impl.ts` là bản port của skill `flow-chain-video` (`~/.claude/skills/flow-chain-video/scripts/flow.mjs`).
+Khi 2 nguồn khác nhau, code và comment trong `flow-impl.ts` đúng hơn các mục cũ dưới đây. Điểm đã đổi:
+- URL `https://flow.google.com/`. Tab mở nền (`Target.createTarget` background). Lỗi thì để tab mở cho user xem.
+- Cài đặt là `role=radio` (Video, Khung hình, 9:16, 720p, `6 giây`, x1), không còn `role=tab`. Model chọn qua nút "Chọn nhóm mô hình" → `menuitem`.
+  Chỉ Omni chọn được độ dài và độ phân giải; Veo cố định 8 giây. Env `FLOW_QUALITY` (mặc định 720p).
+- Slot Start/End là `button` tên `Bắt đầu`/`Kết thúc`. Upload → chờ RPC `maseQ` lấy mã ảnh → bấm ảnh theo TÊN FILE trong hộp thoại
+  → bấm `Thêm vào câu lệnh` nếu có → kiểm tra ảnh nhỏ ≤80px đã nằm trong ô.
+- Tạo: nút `Bắt đầu tạo`/`Generate`, chờ RPC `nprQif`, kiểm tra lệnh tạo chứa mã ảnh start/end và prompt.
+- Xong: trạng thái 3 trong RPC hoặc có `flow-video-tile` với `img[src]`/`video[src]`. Ô có chữ "Không thành công"/"Failed" → báo lỗi.
+- Tải: hover ô → "Tuỳ chọn khác" → Tải xuống → bản `FLOW_DOWNLOAD` (mặc định 1080p, Flow upscale tối đa 10 phút) → bắt sự kiện download.
+- Callback của `page.evaluate`/`waitForFunction` KHÔNG được khai báo hàm có tên (`const f = () => …`): tsx (esbuild keepNames) chèn `__name()`, trang không có hàm này → evaluate lỗi.
 **Mặc định TUẦN TỰ (`FLOW_POOL_SIZE=1`):** Flow ăn credit + fan-out video phải đợi video trước render xong
 mới gen tiếp (engine bắn `Promise.all` nhưng pool=1 nối đuôi). Để song song mới set env >1.
 SPA hydrate chậm: sau `goto` phải chờ element thật (textbox/`New project`) chứ đừng chờ theo thời gian — trang
@@ -147,6 +164,26 @@ chưa hydrate hiện bản marketing ("Create with Google Flow"), hydrate xong m
 - **image→video (Frames):** sub-tab `Frames` có 2 slot **Start/End** (div clickable, KHÔNG phải button, class băm → tìm bằng text rồi leo lên ô vuông ~50px). Click slot → dialog chọn media → nút **"Upload media"** → `filechooser` → setFiles → asset hiện kèm spinner → **click asset tile** để tự gắn vào slot (KHÔNG cần nút "Add to Prompt"). Ảnh quá nhỏ/degenerate bị Flow từ chối ("Oops, something went wrong"). video block có 3 cổng start/prompt/end.
 - **Đang render:** tile trong "All Media" hiện `\d+%`. **XONG = hết `%` trong `document.body.innerText` VÀ có `<video>`.**
 - **Tải (CÁCH BỀN — đã đổi):** lấy `<video>.src` = `…/flow/api/trpc/media.getMediaUrlRedirect?name=<uuid>` (URL có cookie-auth) rồi **`page.request.get(src)` → ghi file** (trả `video/mp4` thẳng). Reload project trước để src trpc settle. BỎ cách hover→kebab→Download→"720p Original Size" cũ (UI mong manh, hay không trúng ngay sau gen). Đã verify end-to-end ra MP4 ~1.5MB.
+
+### Block Ghép mẫu (`tryon`) — mặt mẫu + trang phục vào khung hình của clip
+File: `apps/server/src/nodes/tryon.ts`, prompt mặc định ở `packages/shared/src/node-defs.ts` (`TRYON_DEFAULT_*`). Thêm ngày 2026-11-02.
+- Cổng: Mặt mẫu (bắt buộc), Trang phục (không bắt buộc), Ảnh dáng, Clip (thiếu Ảnh dáng thì cắt khung ở giây `frameTime`, mặc định 0 = khung đầu), Background (không bắt buộc).
+- 1 tab ChatGPT, các message liên tiếp: nhớ mặt → nhớ trang phục → sửa Ảnh dáng → (có Background) đổi background.
+- **Tỉ lệ ảnh:** ChatGPT luôn trả 2:3. Ảnh dáng 9:16 → block nới 2 bên bằng nền mờ tới 2:3 (`padToAspect`), nhận ảnh 2:3, cắt phần giữa về đúng tỉ lệ Ảnh dáng (`cropToAspect`). Gửi thẳng 9:16 thì GPT tự kéo giãn/cắt khung.
+- **Khung hình:** prompt bước 3 KHÔNG được có câu "giữ đủ tay chân/toàn thân" — khung cắt ngang đùi thì GPT zoom ra cho thấy cả chân, người nhỏ đi, không khớp clip (đo 2026-11-03, run 1). Prompt hiện tại ghi rõ không zoom, cắt ngang đúng chỗ ảnh gốc.
+- Ảnh kết quả nên lấy khung ĐẦU của clip: aidancing mở video bằng đúng ảnh đó, tỉ lệ người khớp video mẫu.
+
+### AI Dancing (aidancing.net) — block `aidancing`, copy chuyển động ảnh mẫu + video mẫu
+File: `apps/server/src/services/aidancing-impl.ts`. Không mở tab: gọi HTTP bằng `browser.contexts()[0].request` (dùng cookie đăng nhập của Chrome CDP). Đo ngày 2026-11-03.
+- **Tạo job:** `POST https://aidancing.net/create/general`, multipart: `jobTypeId` (192 = "AI Copy Chuyển Động Dùng Nền Ảnh v5.1", job `ANIMATE_IV2V_720_1280_CHANGE_BG_V5_TIME`), `aspectRatio` (`9:16`|`16:9`), `qualityMode` (`1` = Chất lượng, `2` = Nhanh), `voiceId` (rỗng), `actualTime` (10|15|20|25 giây), `title`, `image_1` (ảnh), `video`. Không CSRF. Thành công → 302 về `/dashboard`. Response không có mã job → đặt `title` riêng (`vf-xxxxxxxx`) rồi tìm job theo title.
+- **Giá:** Chất lượng 0,22 credit/giây, Nhanh 0,11 credit/giây, tính theo `actualTime` (15 giây Chất lượng = 3,3 credit). Thiếu credit thì trang hiện confirm → không gửi.
+- **Giới hạn trang:** ảnh < 40 MB, video < 90 MB và < 60 giây.
+- **Trạng thái:** `GET /api/proxy/jobs?page=0&size=20` → `items[]` (`id`, `title`, `status`, `outputFileId`, `errorMessage`, `actualTime`, `actualCost`, `jobType.jobName`). `status`: `WAITING_UPLOAD` → `PENDING` → `PROCESSING` → `COMPLETED` | `FAILED` (FAILED thì trang hoàn credit). Trang dashboard tự hỏi mỗi 5 giây; service hỏi mỗi 15 giây.
+- **Tải:** `GET /api/proxy/files/{outputFileId}` → mp4. Trang tự xoá dữ liệu sau 3 ngày.
+- **Thời lượng mặc định của block:** nhỏ nhất trong 10/15/20/25 mà ≥ độ dài video mẫu (`pickDuration`).
+- Job chạy khoảng 22–30 phút (đo 2026-11-03: 22 phút cho 15 giây Chất lượng). Server restart giữa chừng (`tsx watch`) thì mất vòng hỏi trạng thái, nhưng service lưu job đang chạy vào `data/aidancing-pending.json` theo mã băm (ảnh + video + thông số). Chạy lại block với cùng input → theo dõi tiếp job cũ, không gửi job mới. Đã thử 2026-11-03: restart giữa job 3219488, chạy lại → log "Theo dõi tiếp job".
+- Video ra dài bằng video mẫu (12,3 giây với gói 15 giây), 720×1280, có tiếng của video mẫu. Tiền tính theo gói đã chọn.
+- Chạy cả chuỗi Ghép mẫu → AI Dancing từ dòng lệnh và đăng TikTok @linh_dan_20x: skill `aidancing-tiktok` (`~/.claude/skills/aidancing-tiktok`).
 
 ### Kling qua WEB (kling.ai/app) — dùng credit gói SUB (không phải fal.ai API)
 Block `kling` có `config.engine`: `'falai'` (mặc định, fal API trả tiền) | `'web'` (kling.ai, tiêu credit sub). Web =

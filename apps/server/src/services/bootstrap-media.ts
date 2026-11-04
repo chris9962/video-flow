@@ -1,8 +1,9 @@
+import { createAiDancingService } from './aidancing-impl';
 import { createFalService } from './falai-impl';
 import { createFlowVideoGen } from './flow-impl';
 import { createVideoUnderstandingService } from './gemini-video-impl';
 import { createGrokService } from './grok-impl';
-import { setFal, setGrok, setKlingWeb, setMedia, setVideoGen, setVideoUnderstanding } from './index';
+import { setAiDancing, setFal, setGrok, setKlingWeb, setMedia, setVideoGen, setVideoUnderstanding } from './index';
 import { createKlingWebService } from './kling-web-impl';
 import { createMediaService } from './media-impl';
 
@@ -16,4 +17,5 @@ export function bootstrapMediaServices(): void {
   setKlingWeb(createKlingWebService());
   setVideoUnderstanding(createVideoUnderstandingService());
   setGrok(createGrokService());
+  setAiDancing(createAiDancingService());
 }

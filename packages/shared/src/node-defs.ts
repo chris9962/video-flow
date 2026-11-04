@@ -131,7 +131,42 @@ export const BLOCK_DEFINITIONS: Record<string, BlockTypeDefinition> = {
       { id: 'face', label: 'Mẫu', accepts: ['image'] },
     ],
   },
+  // Ghép mẫu: 3 message cùng 1 tab — B1 nhớ mặt mẫu, B2 nhớ trang phục, B3 sửa ảnh dáng (khung hình cắt từ clip).
+  // Sửa thẳng ảnh dáng thay vì tạo ảnh mới để giữ đúng tư thế, góc máy, background → ảnh khớp clip khi làm video.
+  tryon: {
+    type: 'tryon',
+    emits: 'image',
+    label: 'Ghép mẫu',
+    description:
+      'Ghép mặt mẫu cố định + trang phục vào ảnh dáng cắt từ clip, giữ nguyên tư thế. Nối Mặt mẫu và Ảnh dáng; thiếu Ảnh dáng thì nối Clip để block tự cắt khung hình ở giây đã chọn. Trang phục không bắt buộc: không nối thì giữ quần áo trong Ảnh dáng. Background không bắt buộc: nối thì thêm 1 bước đưa nhân vật đã ghép vào background mới.',
+    accepts: ['image', 'video'],
+    inputs: [
+      { id: 'face', label: 'Mặt mẫu', accepts: ['image'] },
+      { id: 'outfit', label: 'Trang phục · không bắt buộc', accepts: ['image'] },
+      { id: 'pose', label: 'Ảnh dáng', accepts: ['image'] },
+      { id: 'clip', label: 'Clip', accepts: ['video'] },
+      { id: 'background', label: 'Background · không bắt buộc', accepts: ['image'] },
+    ],
+    consumeWhole: ['video'],
+  },
+  // aidancing.net (model copy chuyển động): ảnh mẫu (thường là khung đầu của clip đã ghép mặt + đồ) + video mẫu → video.
+  aidancing: {
+    type: 'aidancing',
+    emits: 'video',
+    label: 'AI Dancing',
+    description:
+      'aidancing.net copy chuyển động: nhân vật trong Ảnh mẫu làm theo động tác của Video mẫu. Ảnh mẫu nên là khung đầu của Video mẫu (đã ghép mặt + trang phục) để cùng tỉ lệ người. Dùng credit aidancing, job chạy khoảng 30 phút.',
+    accepts: ['image', 'video'],
+    inputs: [
+      { id: 'image', label: 'Ảnh mẫu', accepts: ['image'] },
+      { id: 'video', label: 'Video mẫu', accepts: ['video'] },
+    ],
+    consumeWhole: ['video'],
+  },
 };
+
+/** Thời lượng aidancing cho chọn (giây tính tiền) */
+export const AIDANCING_DURATIONS = [10, 15, 20, 25];
 
 // Prompt mặc định block restyle — dùng chung server (khi config rỗng) lẫn FE (hiện sẵn để user sửa 1 phần).
 export const RESTYLE_DEFAULT_ANALYZE = `Xem kỹ ảnh này và GHI NHỚ chính xác:
@@ -142,5 +177,26 @@ export const RESTYLE_DEFAULT_ANALYZE = `Xem kỹ ảnh này và GHI NHỚ chính
 - Hướng nhìn của mắt, góc của mặt so với camera, cách xõa tóc.
 Chỉ cần ghi nhớ, CHƯA tạo ảnh.`;
 export const RESTYLE_DEFAULT_GEN = `Đầu tiên hãy ghi nhớ đặc điểm gương mặt của ảnh này: ánh mắt, nụ cười, sóng mũi.
-Tạo một ảnh chân dung của người trong ảnh này (với các đặc điểm vừa ghi nhớ), GIỮ NGUYÊN khuôn mặt và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên.
+Tạo một ảnh chân dung của người trong ảnh này (với các đặc điểm vừa ghi nhớ), GIỮ NGUYÊN khuôn mặt (có thể đổi góc mặt cho phù hợp với ảnh mẫu trước đó) và danh tính của họ, nhưng dùng ĐÚNG góc máy, ánh sáng và background mà bạn vừa ghi nhớ ở ảnh trước. Ảnh chân thực, tự nhiên.
 QUAN TRỌNG — đổi góc nhìn của gương mặt cho KHỚP với ảnh mẫu (góc của mặt so với camera), và đổi cả cách xõa tóc cho khớp với ảnh mẫu.`;
+
+// Prompt mặc định block tryon (Ghép mẫu) — 3 bước cùng 1 tab, bước 3 đính kèm Ảnh dáng.
+export const TRYON_DEFAULT_FACE = `Đây là ảnh gương mặt người mẫu của tôi. Hãy GHI NHỚ thật kỹ: hình dáng khuôn mặt, mắt, lông mày, mũi, môi, màu da, kiểu tóc và màu tóc.
+Chỉ cần ghi nhớ, CHƯA tạo ảnh.`;
+export const TRYON_DEFAULT_OUTFIT = `Đây là ảnh sản phẩm trang phục. Hãy GHI NHỚ thật kỹ: loại trang phục, màu sắc, chất liệu, hoa văn, cổ áo, tay áo, độ dài, độ ôm, chi tiết nút, khoá, đường may.
+Chỉ cần ghi nhớ, CHƯA tạo ảnh.`;
+export const TRYON_DEFAULT_GEN = `chỉnh sửa trực tiếp ảnh đính kèm này, không tạo ảnh mới từ đầu.
+- Thay gương mặt của người trong ảnh bằng gương mặt người mẫu đã ghi nhớ ở ảnh thứ nhất.
+- Thay trang phục của người trong ảnh bằng trang phục đã ghi nhớ ở ảnh thứ hai, đúng màu sắc và chi tiết. Chỉ vẽ phần trang phục nằm trong khung hình hiện tại.
+- GIỮ NGUYÊN 100% khung hình: người ở đúng vị trí và đúng kích thước như ảnh đính kèm. Không zoom ra, không zoom vào, không thêm phần cơ thể nằm ngoài khung. Ảnh gốc cắt ngang chỗ nào thì ảnh mới cắt ngang đúng chỗ đó.
+- GIỮ NGUYÊN 100%: tư thế, vị trí tay chân, hướng người, góc máy, background, hướng sáng, vóc dáng.
+- Làm ánh sáng trên da nhân vật giảm xuống, loại bỏ các yếu tố làm da trông như nhựa, như ảnh AI. Làm màu da, độ đổ bóng và ánh sáng tự nhiên hơn.
+- Ảnh chân thực, tự nhiên.`;
+// Thêm vào cuối prompt bước 3 khi không nối Trang phục.
+export const TRYON_KEEP_OUTFIT = `- Không có ảnh trang phục: GIỮ NGUYÊN trang phục đang mặc trong ảnh này, bỏ qua mọi yêu cầu thay trang phục.`;
+// Bước 4 block tryon, chỉ chạy khi nối Background: đính kèm ảnh Background, sửa tiếp ảnh vừa ghép.
+export const TRYON_DEFAULT_BG = `đưa nhân vật trong ảnh vừa tạo vào background của ảnh đính kèm này.
+- Thay toàn bộ background của ảnh vừa tạo bằng background trong ảnh đính kèm.
+- GIỮ NGUYÊN 100% nhân vật: gương mặt, trang phục, tư thế, vị trí tay chân, vóc dáng, kích thước và vị trí của nhân vật trong khung hình.
+- Ánh sáng, màu sắc và bóng đổ trên nhân vật khớp với ánh sáng của background mới. Chân nhân vật đứng đúng trên mặt sàn của background, có bóng đổ dưới chân.
+- GIỮ NGUYÊN 100% khung hình của ảnh vừa tạo: không zoom ra, không zoom vào, nhân vật cắt ngang đúng chỗ như ảnh vừa tạo. Ảnh chân thực, tự nhiên.`;

@@ -1,0 +1,18 @@
+{
+  "id": "79895e19-d367-4c87-86b3-2fea63344be5",
+  "name": "Làm mẫu đầy đặn tay chân",
+  "nodes": [
+    {
+      "id": "37372584-2f4b-496c-955a-4c9d2b05ba59",
+      "type": "text",
+      "position": {
+        "x": 720,
+        "y": 419.3333320617676
+      },
+      "config": {
+        "content": "Slightly fuller figure with subtly thicker arms and legs, soft feminine curves, healthy body shape, slim waist, natural proportions, approximately 5–10% more body volume while preserving the same identity."
+      }
+    }
+  ],
+  "edges": []
+}

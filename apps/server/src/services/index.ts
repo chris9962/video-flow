@@ -1,4 +1,5 @@
 import type {
+  AiDancingService,
   BrowserPilot,
   FalService,
   GrokService,
@@ -23,6 +24,15 @@ let media: MediaService = {
   downloadVideo: async () => notReady('Media tools'),
   extractVideoContext: async () => notReady('Media tools'),
   stitchVideos: async () => notReady('Media tools'),
+  extractFrame: async () => notReady('Media tools'),
+  imageSize: async () => notReady('Media tools'),
+  padToAspect: async () => notReady('Media tools'),
+  cropToAspect: async () => notReady('Media tools'),
+  videoDuration: async () => notReady('Media tools'),
+};
+
+let aiDancing: AiDancingService = {
+  generateVideo: async () => notReady('AI Dancing (aidancing.net)'),
 };
 
 let videoGen: VideoGenService = {
@@ -64,10 +74,13 @@ export const setKlingWeb = (v: VideoGenService): void => void (klingWeb = v);
 export const getVideoUnderstanding = (): VideoUnderstandingService => videoUnderstanding;
 export const setVideoUnderstanding = (v: VideoUnderstandingService): void =>
   void (videoUnderstanding = v);
+export const getAiDancing = (): AiDancingService => aiDancing;
+export const setAiDancing = (a: AiDancingService): void => void (aiDancing = a);
 export const getGrok = (): GrokService => grok;
 export const setGrok = (g: GrokService): void => void (grok = g);
 
 export type {
+  AiDancingService,
   BrowserPilot,
   FalService,
   GrokService,

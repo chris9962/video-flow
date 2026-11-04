@@ -1,0 +1,18 @@
+{
+  "id": "59a4211a-635b-4136-9313-30c09e5b716b",
+  "name": "Node mẫu mới",
+  "nodes": [
+    {
+      "id": "0a2bb1e3-5d14-41c7-8990-eee40c0f1464",
+      "type": "text",
+      "position": {
+        "x": 720,
+        "y": 419.3333320617676
+      },
+      "config": {
+        "content": "Slightly fuller figure with subtly thicker arms and legs, soft feminine curves, healthy body shape, slim waist, natural proportions, approximately 5–10% more body volume while preserving the same identity."
+      }
+    }
+  ],
+  "edges": []
+}
