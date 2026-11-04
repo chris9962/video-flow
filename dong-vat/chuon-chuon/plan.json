@@ -1,0 +1,70 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 split-level nature photo of a calm pond, showing the part above the water and the part below the water at the same time. The water surface is a straight horizontal line at about 60 percent of the frame height from the top, so the part above the water fills more than half of the frame. One straight green reed stem stands vertically in the center of the frame, from the pond bottom, up through the water surface, to the top of the frame. Below the surface: clear greenish water, soft light rays, a few out-of-focus water plants far behind, sandy mud at the very bottom. Above the surface: soft out-of-focus green reeds and bright sky. On the underwater part of the stem, a little below the water surface, there is one short neat vertical row of tiny pale yellow oval dragonfly eggs laid into the stem. The eggs are small but clearly visible. Nothing else is on the stem. Soft diffused daylight, sharp focus on the stem. Keep everything important away from the left and right edges. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the pond, the water surface line, the reed stem, background, lighting and camera angle exactly the same. The eggs are now empty, pale, see-through shells in the same spot. One tiny young dragonfly nymph clings to the underwater stem right next to the empty eggs. It is light brown, with six thin legs and large eyes, about four times the length of one egg. Only one nymph."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the pond, the water surface line, the reed stem, the empty eggs, background, lighting and camera angle exactly the same. Remove the tiny nymph. One large emperor dragonfly nymph clings to the underwater part of the stem lower down, in the lower part of the frame below the empty eggs, head toward the top of the frame. It is long and slender, mottled green-brown, with big eyes, six legs gripping the stem and short wing pads on its back. Its body is about one fifth of the frame height long. Only one nymph."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the pond, the water surface line, the reed stem, the empty eggs, background, lighting and camera angle exactly the same. Move the large nymph: it now clings to the stem just above the water surface, head toward the top of the frame. It is the same nymph with the same size, its body wet and shiny. The underwater part of the stem has only the empty eggs. Only one nymph."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep everything exactly the same, including the pond, the water surface line, the reed stem, the empty eggs, background, lighting and camera angle. The nymph above the water is now an empty, pale brown, see-through skin split open on its back, still gripping the stem in the same spot. One newly emerged emperor dragonfly clings to the stem just above the empty skin, head up. Its body is soft and pale green, and its wings are still short, crumpled and milky. Only one dragonfly."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep everything exactly the same, including the pond, the water surface line, the reed stem, the empty eggs, the empty nymph skin, background, lighting and camera angle. The dragonfly stays in the same spot, but its four wings are now fully expanded, long, clear and glassy, spread open flat to the sides. Its thorax is bright green and its long abdomen is bright sky blue with a thin black line. The wingspan is about half of the frame width. Only one dragonfly."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The eggs slowly hatch and one tiny dragonfly nymph crawls out onto the underwater stem beside the empty eggs. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "@prev",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny nymph slowly crawls down the underwater stem and grows bigger and bigger. The empty eggs stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "@prev",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The large nymph slowly climbs up the reed stem, out of the water, and stops a little above the water surface. The empty eggs stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "@prev",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The nymph's skin slowly splits open on its back and a pale dragonfly with crumpled wings crawls out and clings to the stem above the empty skin. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "@prev",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The dragonfly's crumpled wings slowly expand into long clear wings spread open to the sides, and its body gradually turns green and blue. The dragonfly stays in place. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "chuon-chuon.mp4",
+    "speed": 1.25,
+    "crossfade": 0.1
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 macro nature photo at the wet muddy edge of a flooded rice paddy in soft morning light. One small flat grey stone sits in the center of the frame, surrounded by very shallow still clear water. Young green rice stems and a mud bank are softly blurred in the background. The camera is placed low at the level of the stone, looking slightly up. On the stone stands one adult female rice field crab, seen from the front three-quarter view and slightly from below, facing a little to the left. She has a smooth rounded dark olive-brown carapace, two claws and eight walking legs, and she stands high on her legs so her underside is visible. Her broad rounded abdominal flap is folded under her body but pushed slightly open by a dense mass of a few hundred small round amber-yellow eggs, held under the flap on her small abdominal legs. The eggs bulge out and are clearly visible along the edge of the flap. The eggs are only under the flap, none on the stone. The crab with her legs is about half of the frame width, in the center. Keep everything important away from the left and right edges. Only one crab. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the crab, her pose, her size, the stone, the water, the background, lighting and camera angle exactly the same. Only the eggs under her abdominal flap change: the eggs are now translucent grey, and inside each egg two tiny black eye dots are visible. The eggs stay in the same place, under the flap, bulging out along its edge. Only one adult crab. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the mother crab, her pose, her size, the stone, the water, the background, lighting and camera angle exactly the same. The eggs have hatched: under the same abdominal flap, dozens of tiny pale translucent baby crabs cling together among empty transparent egg membranes. Each baby crab is a perfect miniature crab with a round shell, tiny claws and legs, about one fortieth of the frame width. The baby crabs are only under the mother's flap, none on the stone yet. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the mother crab, her pose, her size, the stone, the water, the background, lighting and camera angle exactly the same. The baby crabs are crawling out from under the mother's abdominal flap: about thirty tiny pale translucent baby crabs now cling to her walking legs and spread across the top of the stone around her, and a few are still under the flap. Each baby crab is about one fortieth of the frame width. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the stone, the water, the background, lighting and camera angle exactly the same. The mother crab and all the baby crabs are gone, except one young crab sitting on top of the stone in the center, where the mother stood. The young crab is a small copy of an adult rice field crab: a rounded pale brown carapace, two small claws and eight legs, seen from the same front three-quarter view, facing a little to the left. The young crab with its legs is about one eighth of the frame width. Only one crab. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the stone, the water, the background, lighting and camera angle exactly the same. The young crab has grown into an adult rice field crab in the same place on the stone. It has a smooth rounded dark olive-brown carapace, two claws and eight walking legs, seen from the front three-quarter view and slightly from below, facing a little to the left, standing high on its legs. The crab with its legs is about half of the frame width, in the center. Its abdominal flap is closed flat against its body, with no eggs. Only one crab. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The mother crab stands still while the eggs under her abdominal flap slowly change from amber-yellow to translucent grey with tiny dark eye dots. The eggs stay under the flap. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "K02.png",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The eggs under the mother crab's abdominal flap slowly hatch into tiny pale baby crabs that stay clinging under the flap. The mother crab stands still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "K03.png",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny baby crabs slowly crawl out from under the mother's abdominal flap onto her legs and onto the stone. The mother crab stands still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "K04.png",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The mother crab and the tiny baby crabs quickly walk away out of the frame, while one baby crab stays in the center of the stone and slowly grows bigger, little by little. The stone, the water and the rice stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "K05.png",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The young crab stays in the same spot and slowly grows bigger and bigger, little by little, during the whole clip, into a large adult crab. The stone, the water and the rice stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "cua-dong.mp4",
+    "speed": 1.3,
+    "crossfade": 0.25
+  }
+}

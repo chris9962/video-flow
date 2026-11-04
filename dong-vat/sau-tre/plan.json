@@ -1,0 +1,90 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 macro nature photo. One thick young green bamboo culm stands upright in the center and fills about 70 percent of the frame width, with a soft out-of-focus green bamboo grove behind it. At about one sixth of the frame height from the top there is a bamboo node, a slightly raised ring around the culm. Directly below this node, a tall oval window is cut into the front wall of the culm, from just below the node down to about 55 percent of the frame height. Through the window we see inside the hollow internode: the flat underside of the node forms the ceiling at the top, and the inside of the culm wall is lined with soft, moist, creamy white pulp. The cut edge of the window shows the thickness of the green bamboo wall. The hollow is empty. Below the window, at about 60 percent of the frame height, there is one small round hole in the front of the culm, about one ninth of the culm width wide. At about two thirds of the frame height is the next node, and from this node down to the bottom of the frame the culm is wrapped in a papery light brown bamboo culm sheath with fine dark hairs. On this sheath, just below the node and under the hole, lies one small flat patch of tiny oval light brown eggs that overlap each other like fish scales. The egg patch is about one eighth of the culm width wide. Soft daylight, everything clearly lit, including the inside of the hollow, sharp focus. Keep everything important away from the left and right edges. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the bamboo culm, the nodes, the oval window, the empty hollow, the small round hole, the sheath, background, lighting and camera angle exactly the same. The eggs have hatched: the egg patch is now pale, empty, see-through egg shells in the same spot. About twelve tiny newly hatched caterpillars crawl on the sheath right next to the empty shells, heading up toward the small round hole. Each caterpillar is dark brown with a black stripe along its back and long thin bright white hairs, and is about one fifteenth of the culm width long. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the bamboo culm, the nodes, the oval window, the small round hole, the sheath, the empty egg shells, background, lighting and camera angle exactly the same. The tiny caterpillars are gone from the sheath. Inside the hollow, seen through the window, four small young caterpillars now lie side by side on the creamy white pulp near the bottom of the window. They are milky white with a small brown head, and each is about one eighth of the culm width long. Only four caterpillars. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the bamboo culm, the nodes, the oval window, the small round hole, the sheath, the empty egg shells, background, lighting and camera angle exactly the same. The four caterpillars inside the hollow are now fully grown, in the same spot near the bottom of the window, lying side by side. Each is plump and milky white, with a small orange-brown head and a few short hairs, and is almost half of the culm width long. The creamy white pulp around them is partly eaten away, showing the harder pale yellow bamboo wall, with a few small brown crumbs. Only four caterpillars. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the bamboo culm, the nodes, the oval window, the small round hole, the sheath, the empty egg shells, background, lighting and camera angle exactly the same. A thin flat sheet of white silk now stretches across the hollow just below the ceiling at the top of the window. The same four fully grown milky white caterpillars now hang from the underside of this silk sheet, side by side, each hanging straight down with its head at the bottom. They do not move. The pulp lower in the hollow is eaten away. Only four caterpillars. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the bamboo culm, the nodes, the oval window, the white silk sheet, the small round hole, the sheath, the empty egg shells, background, lighting and camera angle exactly the same. The four hanging caterpillars are now four reddish-brown pupae in the same places. Each pupa hangs straight down with its head pointing down, attached at its tail end to a small loose nest of fine white silk threads under the silk sheet. Each pupa is smooth, shiny and spindle-shaped, with wing pads pressed against its body and a ringed abdomen, and is about as long as the caterpillar was. Only four pupae. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. Keep the bamboo culm, the nodes, the oval window, the white silk sheet, the silk nests, the small round hole, the sheath, the empty egg shells, background, lighting and camera angle exactly the same. The pupae are now empty, split, thin brown pupal shells still hanging in the same places. Four adult moths rest on the inner wall of the hollow just below the empty shells. Each moth has a dark brown body, yellow-brown wings with dark brown-black markings along the wing edges, wings folded flat over its back in a triangle, and long thin antennae. Each moth is about one quarter of the culm width long. Only four moths. No text, no watermark."
+    },
+    {
+      "file": "K08.png",
+      "prompt": "Edit this image. Keep the bamboo culm, the nodes, the oval window, the white silk sheet, the silk nests, the empty pupal shells, the small round hole, the sheath, the empty egg shells, background, lighting and camera angle exactly the same. The hollow behind the window has no moths now. The same four moths, with the same size and colors, now rest on the outside of the green bamboo culm around the small round hole below the window. One moth sits right at the edge of the hole. Only four moths. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny eggs slowly hatch and tiny dark brown hairy caterpillars crawl out onto the sheath next to the empty egg shells. The bamboo stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "@prev",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny caterpillars quickly crawl one by one into the small round hole, then four small milky white caterpillars slowly move up into view inside the hollow and lie still on the pulp. The bamboo stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "@prev",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The four caterpillars inside the hollow stay in the same spot and slowly grow bigger and bigger, little by little, during the whole clip, while the creamy pulp around them is slowly eaten away. The bamboo and the hole stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "@prev",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The four large caterpillars slowly crawl up to the top of the hollow, spin a thin white silk sheet under the ceiling, and hang still underneath it. The bamboo stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "@prev",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The four hanging caterpillars slowly turn into shiny reddish-brown pupae, hanging head down in the same places. The silk sheet and the bamboo stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "F",
+      "start": "@prev",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. One by one, the four pupae slowly split open at the bottom, and a yellow-brown moth slowly crawls out of each one, turns around and walks down the inner wall of the hollow to rest below its pupal shell, while the empty shells slowly turn pale. The bamboo stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "G",
+      "start": "@prev",
+      "end": "K08.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The four moths slowly crawl down inside the hollow out of sight, then come out one by one through the small round hole and rest on the outside of the bamboo around the hole. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "sau-tre.mp4",
+    "speed": 1.65,
+    "crossfade": 0.1
+  }
+}

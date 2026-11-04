@@ -1,0 +1,28 @@
+{
+  "file": "/Users/nguyentruong/project-video-động-vật/tam/tam.mp4",
+  "speed": 1.4,
+  "crossfade": 0.1,
+  "clips": [
+    "A",
+    "B1",
+    "B2",
+    "C",
+    "D",
+    "E"
+  ],
+  "durations": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+  ],
+  "seams": [
+    4.25,
+    8.464,
+    12.679,
+    16.893,
+    21.107
+  ]
+}

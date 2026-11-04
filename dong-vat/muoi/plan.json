@@ -1,0 +1,32 @@
+{
+  "aspect": "9:16",
+  "model": "veo-3.1-fast",
+  "duration": 8,
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "Static locked-off camera, no camera movement, no zoom. The egg raft floats still on the water surface at first. Time-lapse: tiny mosquito larvae hatch from the bottom of the egg raft and wriggle down into the water. The empty raft slowly drifts out of the frame to the left. The larvae grow bigger and darker. The larvae hang head-down from the water surface with their breathing tubes touching the surface. The water line, background and lighting do not move. In the final second, the larvae hang completely still below the water surface."
+    },
+    {
+      "id": "B",
+      "start": "@prev",
+      "end": "K03.png",
+      "prompt": "Static camera. Time-lapse. The middle larva slowly curls up and turns into a pupa. The other two larvae stay still. Nothing else changes.",
+      "duration": 6
+    },
+    {
+      "id": "C",
+      "start": "@prev",
+      "end": "K04.png",
+      "prompt": "Static camera. Time-lapse. An adult mosquito slowly climbs out of the pupa and stands on the water. The other two larvae stay still. Nothing else changes.",
+      "duration": 6
+    }
+  ],
+  "output": {
+    "file": "muoi.mp4",
+    "speed": 1.25,
+    "crossfade": 0.1
+  }
+}

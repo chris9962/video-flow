@@ -1,0 +1,100 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 macro photo of an indoor house wall, the camera looking straight at the wall. The whole frame is a flat, slightly rough, off-white painted plaster wall with fine texture and a little dust, sharp focus everywhere, soft warm indoor light from the upper left. A thin hairline crack runs across the wall from left to right at about 30 percent of the frame height from the bottom. A few thin old dusty grey spider silk threads stretch across the wall from left to right at about 70 percent of the frame height. On the wall just above the crack, slightly left of the center, an adult female household casebearer moth rests, seen from above, head facing up and a little to the left: a small slender moth with narrow grey forewings marked with four or five distinct dark brown spots, wings folded like a narrow tent over the body, long grey fringes at the wing tips, long thin antennae held back along the body, about one fifth of the frame height long. The tip of its abdomen touches the crack, where a few tiny pale bluish-white oval eggs are being laid. Keep everything important away from the left and right edges. Only one moth. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the wall, the crack, the spider silk threads, the lighting and camera angle exactly the same. The moth is gone. In the crack, at the place where its abdomen tip was, there is a small cluster of about fifteen tiny pale bluish-white oval eggs, each about one eightieth of the frame height long. No moth. No text, no watermark."
+    },
+    {
+      "file": "K02b.png",
+      "prompt": "(gpt-image.mjs --ref K03.png) Edit this image. Keep the wall, the crack, the empty egg shells, the spider silk threads, the lighting and camera angle exactly the same. Keep every tiny larva in exactly the same place, size and direction, but none of them has a case yet: each one is now a bare newly hatched larva, a tiny slender creamy white segmented caterpillar with a tiny dark brown head, lying directly on the wall. No grey cases, no dust on their bodies. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the wall, the crack, the spider silk threads, the lighting and camera angle exactly the same. The eggs have hatched: only tiny empty translucent egg shells remain in the crack. About ten tiny larvae now crawl on the wall around the crack, each one inside its own tiny grey case made of wall dust and silk, about one twenty-fifth of the frame height long, with a tiny dark brown head peeking out of the top end. One of them sits at the center of the frame, just above the crack, head facing up, the lower end of its case at 40 percent of the frame height. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the wall, the crack, the empty egg shells, the spider silk threads, the lighting and camera angle exactly the same. All the tiny larvae are gone except the one at the center. It is in the same place, head facing up, the lower end of its case still at 40 percent of the frame height, and it is now bigger: a slim grey spindle-shaped case covered with dust, sand grains and tiny fibers, narrowed at both ends, about one ninth of the frame height long. The larva's glossy dark brown head and its front legs stick out of the top end of the case. Only one larva. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the wall, the crack, the empty egg shells, the spider silk threads, the lighting and camera angle exactly the same. The larva in the same place is now fully grown, head facing up, the lower end of its case still at 40 percent of the frame height. Its case is now about one quarter of the frame height long: a flat grey case shaped like a pumpkin seed, widest in the middle, narrowed to short tube-like openings at both ends, covered with fine sand grains, dust and tiny fibers. The larva's glossy dark brown head, the dark brown plates behind its head, its short legs and the front of its creamy white segmented body stick out of the top end of the case. Only one larva. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the wall, the crack, the empty egg shells, the spider silk threads, the case, the lighting and camera angle exactly the same. The larva stretches its head and front legs up out of the top end of its case, holds the lowest spider silk thread with its front legs and chews it. A short piece of that thread right above its head is now eaten away, leaving a gap with two loose ends. Only one larva. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. Keep the wall, the crack, the empty egg shells, the spider silk threads with the gap, the case, the lighting and camera angle exactly the same. The larva has pulled its head fully inside the case, so no part of the larva is visible. Both ends of the case are now closed, and each end is fastened to the wall with a few short white silk threads. No text, no watermark."
+    },
+    {
+      "file": "K08.png",
+      "prompt": "Edit this image. Keep the wall, the crack, the empty egg shells, the spider silk threads with the gap, the case and its silk threads, the lighting and camera angle exactly the same. A pale brown empty pupal skin now sticks halfway out of the lower end of the case. Right next to the case, on its left side, a newly emerged adult household casebearer moth rests on the wall, head facing up: the same small slender moth as in the first image, with narrow grey forewings marked with dark brown spots, wings folded like a narrow tent over the body, long grey fringes, long thin antennae held back along the body, about one fifth of the frame height long. Only one moth. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The moth slowly lifts its abdomen tip from the crack, leaving the tiny eggs in the crack, then quickly walks away out of the frame to the left. The wall and the spider silk stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "K02.png",
+      "end": "K02b.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny eggs hatch, and tiny bare white larvae slowly crawl out of the crack and spread out over the wall. The wall and the spider silk stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B2",
+      "start": "K02b.png",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. Each tiny white larva stays in the same spot and slowly covers its body with grey wall dust and silk, little by little, until it lies inside a tiny grey case with only its dark head showing. The larvae do not move away. The wall, the crack and the spider silk stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "K03.png",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The other tiny larvae quickly crawl away out of the frame, dragging their tiny cases, while the one larva at the center stays in the same spot and slowly grows a little bigger with its case. The wall, the crack and the spider silk stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "K04.png",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The larva stays in the same spot, head up, and slowly grows bigger and bigger, little by little, during the whole clip, while its grey case grows wider and longer with it. The case grows gradually, never suddenly. The wall, the crack and the spider silk stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "K05.png",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The larva slowly stretches its head up out of its case, holds the spider silk thread above it with its front legs and chews it, and the thread gets eaten away bit by bit. The case stays in the same spot. The wall and the other threads stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "F",
+      "start": "K06.png",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The larva slowly pulls its head back inside its case and stays hidden inside. Short white silk threads slowly appear at both ends of the case, fastening it to the wall. The larva never comes out of the case. There is only one larva. The case stays in the same spot. The wall and the spider silk stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "G",
+      "start": "K07.png",
+      "end": "K08.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. A small grey moth slowly crawls out of the lower end of the case, leaving its empty pupal skin sticking out of the case, and settles on the wall next to the case. The case stays in the same spot. The wall and the spider silk stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "ngai-vai.mp4",
+    "speed": 1.8,
+    "crossfade": 0.25
+  }
+}

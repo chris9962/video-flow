@@ -1,0 +1,80 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 macro nature photo. A thin mulberry twig with one large, wide, heart-shaped mulberry leaf with serrated edges. The leaf lies almost flat in the middle of the frame, seen from about 45 degrees above, with its stem at the top of the frame and its tip at the bottom. The leaf is centered and fills about three quarters of the frame width. Background: soft out-of-focus green mulberry bushes. On the upper part of the leaf, a little right of the central vein and near the right edge of the leaf, sits one small neat cluster of about a dozen tiny oval slate-grey silkworm eggs. The eggs are small but clearly visible. The rest of the leaf is empty and whole. Soft diffused daylight, shallow depth of field, sharp focus on the leaf. Keep everything important away from the left and right edges. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the leaf, the twig, background, lighting and camera angle exactly the same. All the eggs are now empty, whitish, see-through shells with small holes, in the same spot. One tiny newly hatched silkworm sits on the leaf right next to the empty shells, toward the right edge of the leaf. It is black and covered with fine hairs, about four times the length of one egg. Only one silkworm."
+    },
+    {
+      "file": "K02b.png",
+      "prompt": "Edit this image. Keep the leaf, the twig, the empty egg shells, background, lighting and camera angle exactly the same. Remove the tiny black silkworm. Just below the empty egg shells, the right edge of the leaf now has one small curved bite eaten out of it. One medium-size young silkworm rests on the right half of the leaf next to this bite, a little closer to the center of the frame, head toward the top of the frame. It is smooth pale grey with faint darker markings, about one eighth of the frame height long. Only one silkworm. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the twig, the empty egg shells, background, lighting and camera angle exactly the same. Remove the tiny black silkworm. The silkworm has eaten away a large part of the leaf: the whole right half of the leaf below the empty egg shells is gone, down almost to the central vein, leaving one long curved bitten edge. Through the eaten part you see only the out-of-focus green background. The left half of the leaf is still whole. One large, plump silkworm rests on the leaf along the bitten edge in the center of the frame, head toward the top of the frame. It is smooth creamy white, with faint grey crescent markings behind the head and a small pointed horn at the tail end. Its body is about one quarter of the frame height long. Only one silkworm."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the eaten leaf with its missing right half and bitten edge, the empty egg shells, the twig, background, lighting and camera angle exactly the same. Replace the silkworm with one oval golden-yellow silk cocoon in the same spot, lying on the leaf next to the bitten edge. The cocoon is held to the leaf by a thin layer of loose, fluffy golden silk threads. It is about one eighth of the frame height long. No silkworm is visible. Only one cocoon."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the eaten leaf with its missing right half and bitten edge, the empty egg shells, the cocoon, the twig, background, lighting and camera angle exactly the same. The top end of the cocoon now has one small round open hole. One white silk moth sits on the leaf just left of the cocoon, head toward the top of the frame. It has a plump fuzzy white body, short creamy-white wings folded like a tent over its back with faint pale-brown lines, and two dark feathery antennae. It is about the same length as the cocoon. Only one moth."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep everything exactly the same, including the eaten leaf with its missing right half and bitten edge, the empty egg shells, the cocoon with its hole, the twig, background, lighting and camera angle. The moth has moved a little toward the top of the frame. On the leaf just behind the moth's tail, there is now one neat round cluster of about thirty tiny oval pale-yellow eggs. Only one moth."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The eggs slowly hatch and one tiny black silkworm crawls out beside the empty shells. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B1",
+      "start": "@prev",
+      "end": "K02b.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny black silkworm slowly eats a small bite out of the leaf edge and little by little grows bigger, its color gradually fading from black to pale grey. There is only one silkworm. The empty egg shells stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B2",
+      "start": "@prev",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The grey silkworm slowly eats the leaf, and the right half of the leaf disappears little by little as the silkworm grows bigger and bigger and gradually turns creamy white. There is only one silkworm. The empty egg shells stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "@prev",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The silkworm slowly spins silk threads around itself, and little by little a golden cocoon forms and hides it. There is only one silkworm. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "@prev",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. A white silk moth slowly pushes out through the top end of the cocoon and crawls onto the leaf beside it. The cocoon stays in place. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "@prev",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The moth slowly lays tiny pale-yellow eggs on the leaf behind it, and little by little the egg cluster grows. The cocoon stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "tam.mp4",
+    "speed": 1.4,
+    "crossfade": 0.1
+  }
+}

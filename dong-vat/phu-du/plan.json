@@ -1,0 +1,70 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 macro nature photo, split-level over-under view of a clear shallow forest stream at dawn, with the camera half under the water. A flat calm waterline runs straight across the frame at about 40 percent from the top. Above the waterline: one thin green reed stem rises straight up out of the water just right of the center, in front of a soft blurred green riverbank and warm golden dawn light. Below the waterline: clear water with soft light rays and one large smooth brown river stone in the center of the frame, resting on fine gravel. On top of the stone lies one small cluster of about one hundred tiny oval pale yellow insect eggs, each about one eightieth of the frame width. Keep everything important away from the left and right edges. No insects. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the waterline, the reed stem, the background, the stone, the gravel, lighting and camera angle exactly the same. The eggs are hatching: in the same place on top of the stone, many tiny pale translucent mayfly nymphs crawl among empty egg shells. Each nymph has three thread-like tails and is about one fortieth of the frame width long. No adult insects. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the waterline, the reed stem, the background, the stone, the gravel, lighting and camera angle exactly the same. The tiny nymphs and egg shells are gone. One large mature mayfly nymph clings to the top of the stone in the center of the frame, seen from the side and a little from above, head facing left. It has a flattened brown body with dark mottled markings, a wide head with two dark eyes, six spread legs, a row of small leaf-like gills along each side of the abdomen, dark wing pads on its back and three long thin tail filaments. It is about one quarter of the frame width long. Only one insect. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the waterline, the reed stem, the background, the stone, the gravel, lighting and camera angle exactly the same. The nymph is gone from the stone. On the water surface in the center of the frame, next to the base of the reed stem, stands a newly emerged mayfly subimago, seen from the side, head facing left. Its wings are held upright together and are dull smoky grey and cloudy, not transparent. Its body is dull grey-brown with two long thin tails. Its empty pale nymph skin floats on the water just behind it. The mayfly is about one quarter of the frame width long. Only one insect. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the waterline, the reed stem, the background, the stone, the gravel, lighting and camera angle exactly the same. The mayfly is gone from the water surface, and the floating skin is gone. Higher up on the reed stem, above the water and near the center of the frame, an adult mayfly imago clings to the left side of the stem, seen from the side, head facing up. It has shiny transparent wings with fine dark veins held upright together, a slim glossy yellow-brown body that curves up at the end, long front legs and three very long thin tails. Just below it on the stem hangs its empty dull grey subimago skin. The mayfly with its tails is about one third of the frame width long. Only one insect. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the waterline, the reed stem, the empty skin on the stem, the background, the stone, the gravel, lighting and camera angle exactly the same. The adult mayfly is gone from the reed stem. The same adult mayfly, with the same size and colors, now lies still on the water surface in the center of the frame, with its transparent wings spread out flat on the water and its long tails behind it. Below the waterline, one new small cluster of tiny oval pale yellow eggs lies on top of the stone. Only one insect. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny eggs on the stone slowly hatch, and tiny pale mayfly nymphs crawl out among the empty shells. The water, the reed and the stone stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "K02.png",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The tiny nymphs quickly crawl away out of the frame, while one nymph in the center slowly grows bigger and bigger, little by little, into a large brown nymph. The reed and the stone stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "K03.png",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The large nymph swims up from the stone to the water surface, and a mayfly with dull grey wings slowly climbs out of its skin and stands on the water. The reed and the stone stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "K04.png",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The grey-winged mayfly slowly climbs up the reed stem, then slowly sheds its dull skin and comes out with shiny transparent wings and long tails. The stone stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "K05.png",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The adult mayfly slowly flutters down from the reed onto the water surface and lies still with its wings spread flat, while tiny eggs slowly sink down and settle on the stone. The reed and the stone stay still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "phu-du.mp4",
+    "speed": 1.3,
+    "crossfade": 0.25
+  }
+}

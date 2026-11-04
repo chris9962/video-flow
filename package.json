@@ -1,13 +1,11 @@
 {
-  "name": "videoflow",
+  "name": "video-flow-repo",
   "private": true,
-  "type": "module",
-  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "dev:server": "npm run dev -w apps/server",
-    "dev:web": "npm run dev -w apps/web",
-    "chrome": "npm run chrome -w apps/server",
-    "test": "npm run test -ws --if-present",
-    "typecheck": "npm run typecheck -ws --if-present"
+    "dev:server": "npm --prefix app run dev:server",
+    "dev:web": "npm --prefix app run dev:web",
+    "chrome": "npm --prefix app run chrome",
+    "test": "npm --prefix app run test",
+    "typecheck": "npm --prefix app run typecheck"
   }
 }

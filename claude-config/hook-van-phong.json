@@ -1,0 +1,9 @@
+{
+  "hooks": [
+    {
+      "type": "command",
+      "command": "jq -Rs '{hookSpecificOutput:{hookEventName:\"UserPromptSubmit\",additionalContext:.}}' < \"$HOME/.claude/van-phong-ste.md\" 2>/dev/null || true",
+      "timeout": 5
+    }
+  ]
+}

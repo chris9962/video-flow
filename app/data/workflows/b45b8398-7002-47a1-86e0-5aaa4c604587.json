@@ -1,0 +1,113 @@
+{
+  "id": "b45b8398-7002-47a1-86e0-5aaa4c604587",
+  "name": "Ghép mẫu từ clip nhảy",
+  "nodes": [
+    {
+      "id": "f7b60a4e-7716-469d-96da-2ae1b42d7c2f",
+      "type": "image",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "config": {}
+    },
+    {
+      "id": "aaf59ae8-b0ad-4fc1-89b4-76fce779c2b1",
+      "type": "image",
+      "position": {
+        "x": 0,
+        "y": 420
+      },
+      "config": {}
+    },
+    {
+      "id": "30c4935b-d4a2-4167-b7da-a8f727ca0a29",
+      "type": "video",
+      "position": {
+        "x": 0,
+        "y": 840
+      },
+      "config": {}
+    },
+    {
+      "id": "aaa423f1-5ce8-4e6e-bd48-f4f02a0705db",
+      "type": "tryon",
+      "position": {
+        "x": 520,
+        "y": 300
+      },
+      "config": {
+        "provider": "chatgpt",
+        "frameTime": 0
+      }
+    },
+    {
+      "id": "d1479adb-c7fe-42ee-81ea-b0f7054d2b5d",
+      "type": "aidancing",
+      "position": {
+        "x": 1040,
+        "y": 300
+      },
+      "config": {
+        "quality": "quality"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__f7b60a4e-7716-469d-96da-2ae1b42d7c2fout-aaa423f1-5ce8-4e6e-bd48-f4f02a0705dbface",
+      "source": {
+        "nodeId": "f7b60a4e-7716-469d-96da-2ae1b42d7c2f",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "aaa423f1-5ce8-4e6e-bd48-f4f02a0705db",
+        "port": "face"
+      }
+    },
+    {
+      "id": "xy-edge__aaf59ae8-b0ad-4fc1-89b4-76fce779c2b1out-aaa423f1-5ce8-4e6e-bd48-f4f02a0705dboutfit",
+      "source": {
+        "nodeId": "aaf59ae8-b0ad-4fc1-89b4-76fce779c2b1",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "aaa423f1-5ce8-4e6e-bd48-f4f02a0705db",
+        "port": "outfit"
+      }
+    },
+    {
+      "id": "xy-edge__30c4935b-d4a2-4167-b7da-a8f727ca0a29out-aaa423f1-5ce8-4e6e-bd48-f4f02a0705dbclip",
+      "source": {
+        "nodeId": "30c4935b-d4a2-4167-b7da-a8f727ca0a29",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "aaa423f1-5ce8-4e6e-bd48-f4f02a0705db",
+        "port": "clip"
+      }
+    },
+    {
+      "id": "xy-edge__aaa423f1-5ce8-4e6e-bd48-f4f02a0705dbout-d1479adb-c7fe-42ee-81ea-b0f7054d2b5dimage",
+      "source": {
+        "nodeId": "aaa423f1-5ce8-4e6e-bd48-f4f02a0705db",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "d1479adb-c7fe-42ee-81ea-b0f7054d2b5d",
+        "port": "image"
+      }
+    },
+    {
+      "id": "xy-edge__30c4935b-d4a2-4167-b7da-a8f727ca0a29out-d1479adb-c7fe-42ee-81ea-b0f7054d2b5dvideo",
+      "source": {
+        "nodeId": "30c4935b-d4a2-4167-b7da-a8f727ca0a29",
+        "port": "out"
+      },
+      "target": {
+        "nodeId": "d1479adb-c7fe-42ee-81ea-b0f7054d2b5d",
+        "port": "video"
+      }
+    }
+  ]
+}

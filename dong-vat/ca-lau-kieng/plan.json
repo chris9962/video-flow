@@ -1,0 +1,70 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 underwater nature photo in a slow tropical river, side view, camera under the water looking straight at a steep grey-brown mud bank. The top third of the frame is slightly green murky river water with soft light from above and a few thin tree roots hanging down. In the center of the frame, the mud bank has one round dark burrow opening, about one third of the frame width wide; the inside of the burrow is softly lit. On the floor just inside the burrow opening lies one sticky clump of about one hundred small round bright yellow-orange fish eggs, each about one sixtieth of the frame width. The bottom third of the frame is a flat muddy riverbed with small pebbles and dead leaves in front of the bank. Keep everything important away from the left and right edges. No fish. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the water, the roots, the mud bank, the burrow opening, the riverbed, lighting and camera angle exactly the same. The eggs are hatching: in the same place inside the burrow opening lies a pile of many tiny newly hatched fish larvae, each with a large round yellow-orange yolk sac, a short transparent tail and two dark eye dots, about one fortieth of the frame width long. A few empty egg shells remain. No adult fish. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the water, the roots, the mud bank, the burrow opening, the riverbed, lighting and camera angle exactly the same. The larvae and egg shells are gone. Many small dark brown baby suckermouth catfish now cling with their sucker mouths to the mud bank around the burrow opening and to the riverbed just below it. Each baby fish has a flat belly, a wide head, a small dorsal fin and a thin tail, about one twenty-fifth of the frame width long. No adult fish. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the water, the roots, the mud bank, the burrow opening, the riverbed, lighting and camera angle exactly the same. The baby fish are gone. One young sailfin catfish rests on the riverbed in the center of the frame, just below the burrow opening, seen from the side, head facing left. It is brown with many small dark spots, has a flat belly, a body covered in rough bony plates, a tall sail-like dorsal fin raised up, and a forked tail fin, about one quarter of the frame width long. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the water, the roots, the mud bank, the burrow opening, the riverbed, lighting and camera angle exactly the same. The young fish is now an adult Amazon sailfin catfish in the same place and pose, head facing left: long body covered in rough bony armor plates, wide flat head, a round sucker mouth under the head, a very tall sail-like dorsal fin raised up, large spiny pectoral fins, a forked tail fin with a longer lower lobe. It is dark brown with many dark leopard spots on a yellowish-brown base. It is about half of the frame width long, with clear space between the fish and the left and right edges of the frame. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the water, the roots, the mud bank, the burrow opening, the riverbed, lighting and camera angle exactly the same. The same adult sailfin catfish, with the same size and colors, stays in the same place and pose. Above it, on the floor just inside the burrow opening, lies a new sticky clump of small round bright yellow-orange eggs. Only one fish. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The eggs inside the burrow slowly hatch, and tiny larvae with big yellow-orange yolk sacs wriggle out and stay together in a pile. The mud stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "K02.png",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The larvae slowly grow and turn dark brown, then quickly swim out of the burrow and cling to the mud around the opening. The mud stays still. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "K03.png",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The baby catfish quickly swim away out of the frame, while one baby fish slowly glides down to the riverbed below the burrow and grows bigger and bigger. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "K04.png",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The young sailfin catfish rests in the same spot on the riverbed, gently moving its fins, and slowly grows bigger and bigger, little by little, into a dark spotted adult. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "K05.png",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The adult sailfin catfish rests in the same spot, gently moving its fins, while a new clump of yellow-orange eggs slowly appears inside the burrow opening above it. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "ca-lau-kieng.mp4",
+    "speed": 1.3,
+    "crossfade": 0.25
+  }
+}

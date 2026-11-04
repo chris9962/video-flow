@@ -1,0 +1,13 @@
+{
+  "name": "videoflow",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:server": "npm run dev -w apps/server",
+    "dev:web": "npm run dev -w apps/web",
+    "chrome": "npm run chrome -w apps/server",
+    "test": "npm run test -ws --if-present",
+    "typecheck": "npm run typecheck -ws --if-present"
+  }
+}
