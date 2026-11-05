@@ -8,10 +8,11 @@ metadata:
   modified: 2026-11-01T01:10:45.942Z
 ---
 
-Ngày 2026-10-26, người dùng chọn các loài sau cho video tiếp theo, theo thứ tự. Video dế mèn đăng ngày 2026-10-27. Video cá lau kiếng và video dế cơm đăng ngày 2026-10-29. Video phù du đăng ngày 2026-10-30. Video cua đồng và video tôm càng xanh đăng ngày 2026-10-31. Video ốc bươu vàng và video nhện nước đăng ngày 2026-11-01. Video châu chấu lúa và video ngài vải đăng ngày 2026-11-02. Video ruồi trâu và video đuông dừa đăng ngày 2026-11-03. Các loài đã đăng không còn trong danh sách.
+Ngày 2026-10-26, người dùng chọn các loài sau cho video tiếp theo, theo thứ tự. Video dế mèn đăng ngày 2026-10-27. Video cá lau kiếng và video dế cơm đăng ngày 2026-10-29. Video phù du đăng ngày 2026-10-30. Video cua đồng và video tôm càng xanh đăng ngày 2026-10-31. Video ốc bươu vàng và video nhện nước đăng ngày 2026-11-01. Video châu chấu lúa và video ngài vải đăng ngày 2026-11-02. Video ruồi trâu và video đuông dừa đăng ngày 2026-11-03. Video cá phổi châu Phi đăng ngày 2026-11-04. Các loài đã đăng không còn trong danh sách.
 
 Đã làm video, chưa đăng:
 1. Cá lóc: `ca-loc/ca-loc.mp4`, làm ngày 2026-10-29.
+- Gián nhà: `gian/gian.mp4`, 43,92 giây, làm ngày 2026-11-05. Nội dung đăng ở `gian/dang-bai.md`. Loài này không nằm trong danh sách ngày 2026-10-26.
 - Sâu tre: `sau-tre/sau-tre.mp4`, làm ngày 2026-10-24. Loài này không nằm trong danh sách ngày 2026-10-26.
 
 Chưa làm video: hết loài trong danh sách. Khi người dùng hỏi loài tiếp theo, Claude hỏi người dùng chọn loài mới.

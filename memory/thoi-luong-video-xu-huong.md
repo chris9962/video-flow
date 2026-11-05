@@ -16,4 +16,6 @@ Video cuối nên dài 20–26 giây. Người dùng ghi chú ngày 2026-10-22: 
 
 Thời lượng các video đã làm, đo ngày 2026-10-22: bọ rùa 23,6 giây, bướm phượng 23,6 giây, chuồn chuồn 23,7 giây, ong 23,7 giây, ếch 20,5 giây. Hai video ngoài khoảng: bướm 28,4 giây, muỗi 14,8 giây.
 
+Ngày 2026-11-04, video cá phổi: Claude đề xuất tăng tốc 2,25 để còn 25,7 giây. Người dùng chọn giữ tốc độ gốc và nói: "tôi cho phép dai 57s". Từ video này, Claude phải hỏi người dùng trước khi tăng tốc cao để đưa video về 20–26 giây.
+
 Liên quan: [[kenh-dang-video]]

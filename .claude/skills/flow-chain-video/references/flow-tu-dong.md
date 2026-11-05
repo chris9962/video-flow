@@ -142,3 +142,7 @@ Dry run vẫn tạo một project rỗng trong tài khoản Flow của người 
 ## 7. Làm tay khi tự động lỗi
 
 Cách làm tay nằm ở SKILL.md mục 6.1. Lệnh chính là `node chain.mjs upload plan.json <clipId>`. Không dùng `gen --dry-run` để lấy ảnh: lệnh đó mở Chrome CDP và tạo project rỗng trong Flow.
+
+## Hộp thoại tính năng mới của Flow
+
+Hiện tượng: `chain.mjs gen` báo `locator.click: Timeout 30000ms exceeded`, log có `cdk-overlay-backdrop`. Nguyên nhân: Flow hiện hộp thoại tính năng mới, có nút "Bắt đầu", che nút chọn tỉ lệ. Video cá phổi 2026-11-04 gặp lỗi này ở clip đầu. Claude bấm nút "Bắt đầu" qua CDP của tab, rồi chạy lại clip. Flow chưa tạo clip nên không tốn tín dụng. Hộp thoại không hiện lại ở các clip sau.

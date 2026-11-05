@@ -1,0 +1,120 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 nature photo of a shallow seasonal floodplain pond in Africa in the rainy season, shown as a cut-away side view. The lower 45 percent of the frame is a side cross-section of soft wet dark grey-brown mud, with fine texture, a few tiny air holes and thin pale roots; the mud surface is a flat line at 45 percent of the frame height. From 45 to 80 percent of the frame height is a clear side view through still tea-brown water with fine floating particles; the water surface is a flat line at 80 percent of the frame height. The top 20 percent of the frame shows a soft blurred green African savanna with a few acacia trees under a pale blue sky. Two thin green reed stems rise from the mud near the left side, up through the water and above the surface. Soft natural daylight from the upper left, sharp focus on the mud and the water. In the mud cross-section, at the horizontal center of the frame, there is a U-shaped nest burrow filled with tea-brown water: both openings are on the mud surface, about one quarter of the frame width apart, the tube is about one twelfth of the frame width wide, and the bottom of the U reaches down to 15 percent of the frame height. At the bottom of the U lies a small cluster of about twenty round pale yellow eggs, each about one sixtieth of the frame width. A large adult male West African lungfish rests on the mud surface directly above the burrow, seen from the side, its body horizontal across the center of the frame and its head to the left, right above the left opening of the burrow. The lungfish has a long eel-like body, a rounded head with a blunt snout, a small eye and a wide mouth, smooth skin with scales embedded in it, an olive-brown back with large dark brown and black blotches, a pale unspotted belly, long thin thread-like pectoral and pelvic fins, and a tapered pointed tail with a low fin fringe. It is about half of the frame width long. It is not an eel and not a catfish, and it has no whiskers. Keep everything important away from the left and right edges. Only one adult fish. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the mud cross-section, the burrow, the water, the reeds, the background, the lighting and camera angle exactly the same. The adult lungfish stays in exactly the same place and pose. The yellow eggs are gone. In their place, about ten tiny lungfish larvae cling to the walls at the bottom of the burrow: each larva is a slim dark tadpole-like body with a thin tail and slender feather-like external gills behind the head, about one twenty-fifth of the frame width long. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the mud cross-section, the burrow, the water, the reeds, the background, the lighting and camera angle exactly the same. The adult lungfish is gone. All the larvae are gone, and the burrow is empty and filled with tea-brown water. In the water at the horizontal center of the frame, just above the mud surface at 50 percent of the frame height, one young lungfish swims horizontally with its head to the left: a small slim olive-brown fish with dark spots, a rounded head, a small eye, thin thread-like pectoral and pelvic fins and pink-red feather-like external gills behind the head, about one twelfth of the frame width long. Only one fish. No text, no watermark. Sửa lần 2: Edit the attached image. Reduce the young lungfish to one third of its present length."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the water, the reeds, the background, the lighting and camera angle exactly the same. The young lungfish stays in exactly the same place and direction, but it is 2.5 times longer than now, with the same olive-brown spotted skin, rounded head, thread-like fins and pink-red feather-like external gills. The burrow is gone: it is filled in with mud, and the mud cross-section is now solid and unbroken, with the same texture and thin pale roots. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the mud cross-section, the water, the reeds, the background, the lighting and camera angle exactly the same. The lungfish is now a large adult, 2.5 times longer than now, in the same place and direction, resting on the mud surface at the horizontal center of the frame with its head to the left. It looks like the adult lungfish in the first image: a long eel-like body, a rounded head with a blunt snout, a small eye, an olive-brown back with large dark brown and black blotches, a pale unspotted belly, long thin thread-like pectoral and pelvic fins and a tapered pointed tail. The whole fish stays inside the central 80 percent of the frame width. It has no external gills. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the mud cross-section, the mud surface line, the lungfish, the lighting direction and camera angle exactly the same. The water is almost gone: only a very shallow layer of tea-brown water remains on the mud surface, about one thirtieth of the frame height deep, and the lungfish lies in it in exactly the same place and pose, with its back above the water. Everything above the mud surface is now open air, showing a soft blurred dry African savanna with golden grass, a few acacia trees and a pale hot sky. The two reed stems stay in the same place and are now yellow-green. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. Keep the mud cross-section, the mud surface line, the reeds, the background, the lighting and camera angle exactly the same. The shallow water is gone, and the mud surface is wet and glistening. The lungfish has dug head first into the soft mud at the horizontal center of the frame. The front half of its body goes straight down through a hole in the mud surface and is visible inside the mud cross-section, with its head pointing down at 28 percent of the frame height. The rear half of its body and its tail still lie on the mud surface, curving away to the right. It is the same lungfish with the same size and skin. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K08.png",
+      "prompt": "Edit this image. Keep the mud cross-section, the mud surface line, the reeds, the background, the lighting and camera angle exactly the same. No part of the lungfish is above the mud any more, and the mud surface is smooth and damp, with only one small round hole at the horizontal center of the frame. From this hole, a narrow vertical tube about one thirtieth of the frame width wide goes down to a rounded chamber in the mud between 12 and 32 percent of the frame height. Inside the chamber the whole lungfish lies folded in a tight U shape, seen from the side: its head points straight up at the top of the chamber with its mouth next to the bottom of the narrow tube, and its body and tail fold down and back up beside it. It is the same lungfish with the same size and skin. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K09.png",
+      "prompt": "Edit this image. Keep the shape of the ground, the mud surface line, the reeds position, the camera angle, the narrow tube, the chamber and the folded lungfish exactly the same. It is now the height of the dry season. The mud surface is dry, pale grey-tan and cracked, with a few deep vertical cracks that go down to 36 percent of the frame height, but the cracks do not reach the chamber or the tube. The top part of the mud cross-section is now dry and pale; the part around the chamber is darker. The reeds are dry and brown, the savanna behind is pale straw yellow and the sky is hot and hazy. The lungfish lies in the same place and pose, now wrapped in a very thin wrinkled brown membrane cocoon that lies tight on its body and covers everything except its mouth. The cocoon is thin like a dry skin, not a thick shell. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K10.png",
+      "prompt": "Edit this image. Keep the mud surface line, the reeds position, the camera angle, the narrow tube, the chamber, the lungfish and its thin brown cocoon exactly the same. The rains have returned. Tea-brown water again fills the frame from the mud surface at 45 percent up to a flat water surface at 80 percent of the frame height, exactly as in the first image. The cracks are gone, and the whole mud cross-section is dark grey-brown and wet again, with the same texture as in the first image. The narrow tube is filled with water. The reeds are green again. The top 20 percent of the frame shows a soft blurred green savanna under dark grey rain clouds, with thin rain streaks falling and small rings on the water surface. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K11.png",
+      "prompt": "Edit this image. Keep the mud cross-section, the mud surface line, the water, the reeds, the rain, the background, the lighting and camera angle exactly the same. The chamber in the mud stays in the same place, but it now holds only the empty thin brown cocoon, collapsed and wrinkled, filled with water. The narrow tube is now wider, about one twelfth of the frame width. The lungfish has left the mud: it swims horizontally in the water at the horizontal center of the frame, at 58 percent of the frame height, with its head to the left. It is the same lungfish, with the same size and skin as before it entered the cocoon: an olive-brown back with large dark blotches, a pale belly and long thread-like fins. The whole fish stays inside the central 80 percent of the frame width. Only one fish. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The yellow eggs at the bottom of the burrow slowly hatch into tiny dark larvae with feathery gills, and the larvae cling to the burrow walls. The adult lungfish stays in place and only moves its thin fins gently. The mud and the water stay the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "K02.png",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. [0-2s] The adult lungfish quickly swims away to the right and leaves the frame. [2-6s] The tiny larvae slowly wriggle up out of the burrow and swim away, and only one young lungfish stays in the water above the burrow. The mud and the reeds stay the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "K03.png",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The young lungfish stays in the same spot and grows bigger and bigger, little by little, smoothly and evenly until the last second, never suddenly. The empty burrow slowly fills with mud. There is only one fish. The water and the reeds stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "K04.png",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The lungfish stays in the same spot and grows bigger and bigger, little by little, smoothly and evenly from the first second to the last second, never suddenly. Its head grows together with its body, and its feathery gills slowly shrink away. There is only one fish. The mud, the water and the reeds stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "K05.png",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The water level slowly and evenly goes down from the top until it is just above the mud surface, and the dry savanna appears behind it. The lungfish stays still on the mud. There is only one fish. The mud stays exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "F",
+      "start": "K06.png",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The lungfish slowly digs head first down into the soft mud, and the front half of its long body slides down into the ground. There is only one lungfish. The reeds and the background stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "G",
+      "start": "K07.png",
+      "end": "K08.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. [0-3s] The lungfish slowly pushes deeper into the mud, and its tail slides down from the surface into the hole. [3-6s] Under the ground its long body slowly curls around inside the rounded chamber at the center of the frame, until its head points up. The whole fish always stays inside the frame and never goes below the chamber. There is only one lungfish. The reeds and the background stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "H",
+      "start": "K08.png",
+      "end": "K09.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The ground slowly dries, turns pale and cracks. The lungfish in the chamber does not move, and a thin brown skin slowly forms around its body. There is only one lungfish. The tube and the chamber stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue."
+    },
+    {
+      "id": "I",
+      "start": "K09.png",
+      "end": "K10.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. Dark clouds cover the sky and rain falls. The water level slowly and evenly rises from the mud surface up to the top, and the cracks close. The lungfish in the chamber does not move. There is only one lungfish. Nothing else changes. Quiet rain sound, no music, no dialogue."
+    },
+    {
+      "id": "J",
+      "start": "K10.png",
+      "end": "K11.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The lungfish slowly wriggles out of its thin brown cocoon, pushes up through the soft wet mud and swims out into the water above. The empty cocoon stays in the chamber. There is only one lungfish. The reeds and the rain stay the same. Nothing else changes. Quiet rain sound, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "ca-phoi.mp4",
+    "speed": 1,
+    "crossfade": 0.25
+  }
+}

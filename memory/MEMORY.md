@@ -13,3 +13,4 @@
 - [Luôn có clip đồ bộ](luon-co-clip-do-bo.md) — mỗi lần gửi link Shopee: thêm 1 clip mẫu mặc đồ bộ miền Tây lấy ảnh Google (--do-bo-image), không để GPT vẽ; để dựng clip biến hình
 - [Startup procedure](startup-procedure.md) — checklist khi user nói "start": server/web + Chrome CDP (check context sống, không chỉ port)
 - [Chrome CDP context gotcha](chrome-cdp-context-gotcha.md) — đóng cửa sổ Chrome mà process còn nền → gãy connect + mất auto-download
+- [Clip mở đầu camera tiến vào](clip-mo-dau-camera-tien-vao.md) — mỗi video động vật mở đầu bằng clip M: toàn cảnh → camera tiến nhanh vào chủ thể, Flow tạo 4 giây; người dùng rất thích ở video gián

@@ -105,6 +105,16 @@ Prompt clip nối mẫu, từ mặt lá sang cành cây:
 Single continuous camera move, no cuts. The camera slowly follows the large caterpillar as it crawls off the edge of the leaf and onto a thin woody stem nearby. The camera glides smoothly to keep the caterpillar centered. In the final second, the caterpillar rests still on the stem and the camera stops moving.
 ```
 
+Prompt clip mở đầu đã dùng thật, video gián nhà 2026-11-05, đạt ở lần tạo đầu. Ảnh start là toàn cảnh căn bếp. Ảnh end là cận cảnh góc tủ, GPT sửa từ ảnh start bằng "Edit this image. The camera has moved forward through the half-open cabinet door into the cabinet under the sink.":
+```
+In a single continuous shot, no scene cuts, no fade, no dissolve. One smooth camera move: the camera slowly pushes forward across the dark kitchen toward the half-open cabinet door under the sink, moves through the gap of the door into the cabinet, and glides close to the back corner behind the drain pipe, where a large cockroach stands still. The cockroach does not move. In the final second the camera stops moving. Nothing else changes. Quiet night ambience, no music, no dialogue.
+```
+
+Clip này dài 6 giây. Camera tiến chậm trong 2 giây đầu. Video cuối tăng tốc clip này 1,5 lần, còn 3,97 giây. Từ video sau, clip M dùng `"duration": 4`:
+```json
+{ "id": "M", "start": "K00.png", "end": "K01.png", "duration": 4, "prompt": "..." }
+```
+
 Với clip nối, camera di chuyển bên trong clip. Ở hai đầu clip, camera phải đứng yên, để khớp với clip trước và clip sau có camera đứng yên.
 
 ## Ví dụ 3: vòng đời muỗi nhà Culex, đã làm thật 2026-10-17

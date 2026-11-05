@@ -39,7 +39,7 @@ Trả lời người dùng bằng tiếng Việt kỹ thuật: kết luận trư
 
 0. Chuẩn bị công cụ (lần đầu).
 1. Phân tích video mẫu, nếu người dùng gửi video mẫu.
-2. Xem ảnh thật của loài trên Google. Viết kịch bản, chọn số clip, lập bảng phân cảnh. Người dùng duyệt.
+2. Xem ảnh thật của loài trên Google. Viết kịch bản, chọn số clip, thêm clip mở đầu M, lập bảng phân cảnh. Người dùng duyệt.
 3. Viết prompt ảnh khung. Người dùng tạo ảnh trong GPT. Claude kiểm tra ảnh.
 4. Viết prompt chuyển động cho Flow.
 5. Viết `plan.json`.
@@ -123,7 +123,43 @@ Hệ số tăng tốc = tổng số giây render ÷ số giây của video cuố
 
 Ví dụ: 2 clip × 8 giây = 16 giây render, video cuối 11 giây → hệ số 1,45. Đề xuất giữ hệ số trong khoảng 1–2. Giới hạn trên chưa kiểm chứng. Hệ số quá lớn: chọn `duration` ngắn hơn cho từng clip.
 
-### 2.4. Bảng phân cảnh
+### 2.4. Clip mở đầu M: camera tiến từ toàn cảnh vào chủ thể
+
+Mỗi video động vật nên mở đầu bằng clip M. Người dùng yêu cầu cách mở đầu này ngày 2026-11-05 và rất thích kết quả ở video gián nhà. Ý tưởng của người dùng: cảnh đầu quay rộng cả nơi sống, rồi camera tiến sâu vào tới cảnh 1 của vòng đời.
+
+Người dùng muốn camera tiến nhanh, đoạn mở đầu dài khoảng 4 giây. Người dùng yêu cầu ngày 2026-11-05: Flow phải tạo clip nguồn ngắn, không chỉ tăng tốc khi ghép.
+
+| Mục | Nội dung |
+|---|---|
+| Ảnh start K00 | Toàn cảnh nơi sống của loài. Chỗ camera đi vào nằm ở giữa khung: khe cửa tủ, lỗ đục trên thân cây, miệng hang. Nhìn qua chỗ đó thấy một phần bên trong. K00 không có chủ thể. |
+| Ảnh end K01 | Cận cảnh đầu tiên của vòng đời. GPT sửa từ K00 trong cùng cuộc chat. |
+| Diễn biến | Camera tiến đều qua chỗ đi vào, tới cận cảnh chủ thể. Chủ thể đứng yên. |
+| Camera | Di chuyển trong clip, đứng yên ở giây cuối, để khớp với clip A có camera đứng yên |
+| Độ dài | Flow phải tạo clip M ở độ dài ngắn nhất, 4 giây: `plan.json` đặt `"duration": 4` cho clip M. Clip ngắn thì Flow tạo camera tiến nhanh ngay trong clip. Nếu camera vẫn chậm, Claude tăng tốc thêm khi ghép bằng `"speed"` của clip M. |
+| Chi phí thêm | 1 ảnh GPT, 1 clip. Clip 6 giây tốn 10 tín dụng. Chi phí clip 4 giây chưa đo. |
+
+Prompt K00 là prompt mới. Prompt kết thúc bằng "No people, no animals. No text, no watermark."
+
+Prompt K01:
+```
+Edit this image. The camera has moved forward through <chỗ đi vào> into <bên trong>. Show a close-up of <góc cận cảnh>, seen at <góc nhìn>. <bối cảnh cận cảnh>. <nguồn sáng lấy từ K00>. <chủ thể giai đoạn đầu, tả như K01 thường>. No text, no watermark.
+```
+
+Prompt clip M:
+```
+In a single continuous shot, no scene cuts, no fade, no dissolve. One smooth camera move: the camera quickly and smoothly pushes forward across <toàn cảnh> toward <chỗ đi vào>, moves through <chỗ đi vào> into <bên trong>, and glides close to <vị trí chủ thể>, where <chủ thể> stands still. The <chủ thể> does not move. In the final second the camera stops moving. Nothing else changes. Quiet natural ambience, no music, no dialogue.
+```
+
+Video gián dùng chữ "slowly". Mẫu trên dùng "quickly and smoothly" để camera tiến nhanh, chưa kiểm chứng.
+
+Kết quả video gián nhà 2026-11-05: clip M 6 giây đạt ở lần tạo đầu. Camera tiến thật qua cửa tủ, không hoà hình, score cao nhất 0,031. Camera tiến chậm trong 2 giây đầu, đứng yên từ giây 5. Người dùng thấy đoạn này chậm, nên Claude đặt `"speed": 1.5` khi ghép: đoạn mở đầu còn 3,97 giây. Clip M 4 giây chưa được kiểm chứng. Prompt đầy đủ: `references/vi-du.md`.
+
+Chỗ dễ sai:
+- Ánh sáng ở K01 phải có nguồn trong K00, ví dụ đèn bếp chiếu qua khe cửa tủ. Nếu không, Flow có thể đổi ánh sáng đột ngột.
+- Sau khi GPT sửa K00 thành K01, GPT trả ảnh 1086×1448, tỉ lệ 3:4. Các ảnh K sau giữ cỡ này. `chain.mjs` cắt giữa về 9:16 và bỏ 136 px mỗi bên. Prompt K01 nên giữ chủ thể trong 70% giữa chiều rộng.
+- Đặt tên: clip M, ảnh K00. Các clip vòng đời giữ tên A, B, C… và ảnh K01, K02…
+
+### 2.5. Bảng phân cảnh
 
 Điền bảng này cho mỗi clip:
 
@@ -140,7 +176,7 @@ Ví dụ: 2 clip × 8 giây = 16 giây render, video cuối 11 giây → hệ s�
 
 Mẫu đã điền đầy đủ: `references/vi-du.md`.
 
-### 2.5. Người dùng duyệt
+### 2.6. Người dùng duyệt
 
 Gửi người dùng: bảng phân cảnh, số clip, số ảnh GPT cần tạo, model, độ dài, hệ số tăng tốc. Chờ người dùng duyệt trước bước 3. Ảnh GPT tốn thời gian của người dùng. Clip Flow tốn credit.
 
@@ -167,6 +203,7 @@ Quy tắc cho prompt:
 - Mỗi ảnh Kn+1 chỉ khác Kn 1–2 thay đổi chính, cùng bối cảnh, cùng góc máy.
 - Video 9:16: dùng khổ dọc 2:3 trong GPT. Giữ chủ thể ở giữa, không đặt chi tiết quan trọng sát mép trái và phải. `chain.mjs` cắt giữa ảnh về 9:16. Với ảnh 1024×1536, script bỏ 80 px mỗi bên.
 - Thêm "No text, no watermark."
+- Ghi cỡ chủ thể theo tỉ lệ với ảnh trước, ví dụ "2.5 times longer than now". Không ghi theo khung hình. Video cá phổi 2026-11-04: prompt ghi "one twelfth of the frame width", GPT vẽ dài 31% chiều rộng. Prompt "reduce it to one third of its present length" và "2.5 times longer than now" đều đạt.
 - Tạo mọi ảnh bằng cùng một công cụ GPT. Hai công cụ khác nhau cho màu và ánh sáng khác nhau.
 
 Người dùng lưu ảnh thành `K01.png`, `K02.png`… trong thư mục làm việc. Sau đó Claude mở từng ảnh và so:
@@ -240,6 +277,8 @@ Số liệu từ các video sau:
 | Ngài vải 2026-11-02, 7 clip, tường vữa trong nhà nhìn thẳng, sâu trong tổ xám | Mẫu đầy đủ. Clip F lần 1 kể 2 sự kiện: sâu nhả tơ buộc 2 đầu tổ, rồi rút đầu vào tổ. | Lần 1 không đạt: sâu chui hẳn ra khỏi tổ, bò quanh tổ 3,5 giây, rồi biến mất trong 1 khung hình. Lần 2 bỏ câu nhả tơ, thêm "The larva never comes out of the case. There is only one larva." và đạt. Clip "trứng nở + sâu tự làm tổ" không đạt: ảnh end có sẵn tổ, nên sâu chui ra đã có tổ. Claude thêm ảnh sâu trần tạo từ ảnh end bằng `--ref`, tách thành 2 clip, cả 2 đạt ở lần tạo đầu. |
 | Đuông dừa 2026-11-03, 8 clip, mặt cắt dọc ngọn dừa nhìn thẳng | Mẫu đầy đủ. Clip lớn dần dùng câu "stays in the same spot ... during the whole clip". | 7 clip dùng được ở lần tạo đầu. Clip E, đuông lớn 1,9 lần và đầu đổi hình, không đạt: đuông giữ nguyên cỡ tới giây 4,4 rồi to gấp 1,9 lần trong 1 khung hình. Lần 2 thêm "grows smoothly and evenly from the first second to the last second" và "Its head grows together with its body.": đuông lớn dần tới giây 4,25, rồi vẫn đổi cỡ 1,3 lần. Clip D, đuông lớn 2,1 lần mà đầu không đổi hình, đạt ở lần đầu. |
 | Ruồi trâu 2026-11-03, 9 clip, bờ ruộng lúa nhìn ngang, 40% dưới là mặt cắt bùn | Mẫu đầy đủ. Clip F lần 1 kể 2 sự kiện không có mốc thời gian: ấu trùng ăn giun, rồi lớn 2,1 lần. | 8 clip đạt ở lần tạo đầu. Clip F lần 1 không đạt: ấu trùng to gấp 1,9 lần trong 1 khung hình ở giây 3,75. Lần 2 dùng mốc thời gian `[0-2s] The larva slowly swallows the red worm. [2-6s] The larva ... grows bigger and bigger, little by little, smoothly and evenly until the last second` và đạt: ấu trùng nuốt giun tới giây 2,75, rồi lớn dần đều, score cao nhất 0,045. |
+| Cá phổi châu Phi 2026-11-04, 10 clip, vũng nước theo mùa, mặt cắt nhìn ngang, nước rút rồi dâng lại | Mẫu đầy đủ. Clip cá đổi vị trí bỏ "Time-lapse.". Clip G lần 1: "slides all the way down ... folds into a U shape". | 9 clip đạt ở lần tạo đầu, kể cả clip mực nước hạ, mực nước dâng, và clip cá trườn khỏi kén rồi bơi lên. Clip G lần 1 không đạt: cá chui ra mép dưới khung, khoang tròn hiện ra trong 1 khung hình. Lần 2 dùng mốc thời gian và câu "The whole fish always stays inside the frame and never goes below the chamber.": cá uốn cong trong khung, nhưng giây 4,75 vẫn đổi hình trong 1 khung hình. Nguyên nhân: ảnh start và ảnh end khác cả vị trí lẫn hình dạng. |
+| Gián nhà 2026-11-05, 8 clip. Clip M mở đầu: camera tiến từ toàn cảnh căn bếp ban đêm vào góc trong tủ dưới bồn rửa. Các clip sau: cận cảnh sàn tủ, camera đứng yên. | Clip M: ảnh start là toàn cảnh K00, ảnh end là cận cảnh K01 do GPT sửa từ K00 bằng "The camera has moved forward through the half-open cabinet door". Prompt: "In a single continuous shot, no scene cuts, no fade, no dissolve. One smooth camera move: the camera slowly pushes forward ... In the final second the camera stops moving." | Cả 8 clip đạt ở lần tạo đầu. Clip M: camera tiến thật qua cửa tủ, không hoà hình, score cao nhất 0,031, camera đứng yên từ giây 5. Clip F lột xác: lưng gián con nứt, con trưởng thành trắng bò ra phía trước, xác lột ở lại. |
 
 Câu "no scene cuts" không ngăn hoà hình trên chủ thể. Hoà hình xảy ra khi màu hoặc hình của chủ thể đổi lớn trong 1 clip.
 
@@ -300,6 +339,7 @@ Sau khi thử một cách viết, Claude ghi kết quả vào mục 4.2. Cách v
 | `clips[].end` | Ảnh end. Bỏ trống nếu không cần, ví dụ clip camera bay tự do. |
 | `clips[].model` | Chỉ dùng khi bộ lọc nội dung của Flow từ chối một clip nhiều lần. Đổi model giữa chuỗi làm lệch màu và hạt nhiễu. |
 | `clips[].trimStart` | Số giây bỏ ở đầu clip khi ghép. Dùng khi đầu clip có viền đen hoặc cắt cảnh. Khung cuối không đổi, nên clip sau không phải tạo lại. |
+| `clips[].speed` | Hệ số tăng tốc riêng của 1 clip khi ghép, nhân thêm với `output.speed`. Video gián 2026-11-05 đặt 1.5 cho clip M 6 giây, xem mục 2.4. |
 | `output.speed` | Hệ số tăng tốc khi ghép |
 | `output.crossfade` | Số giây crossfade ở mỗi điểm nối. 0 = nối thẳng. |
 | `output.audio` | `flow` (mặc định): giữ tiếng gốc của Flow. `none`: bỏ tiếng. |
@@ -363,11 +403,23 @@ Không chạy liền nhiều clip mà không xem. Sau mỗi clip, Claude xem khu
 
 Ngày 2026-10-25, video nhện: người dùng yêu cầu tạo các clip song song. Mỗi clip dùng 2 ảnh K của GPT làm ảnh start và ảnh end, không dùng `@prev`. Bước nhảy ở điểm nối được che bằng crossfade 0,25 giây. Kết quả: 4 điểm nối đạt, với score 0,010–0,089.
 
+Cảnh báo: chỉ chạy `chain.mjs gen` khi `clips/<id>.mp4` đã có. Nếu file chưa có, lệnh tạo clip mới trên Flow và tốn 10 tín dụng. Video gián 2026-11-05: Claude tải clip M khi các tiến trình khác còn chạy, lệnh tải báo `ENOENT`, rồi lệnh `gen` nối sau tạo thêm 1 clip M. Không tải clip khi còn tiến trình `gen` đang chạy.
+
 Cách chạy:
 1. Mở mỗi clip bằng `chain.mjs gen` ngay khi có ảnh end của clip đó. Hai lần mở cách nhau 45 giây, để tiến trình trước cài xong giao diện Flow.
 2. Mỗi tiến trình mở một kết nối Playwright mới, và kết nối mới đổi thư mục tải của Chrome. Vì vậy, mọi clip trừ clip mở sau cùng báo lỗi `download.saveAs: ENOENT`. Video vẫn còn trong project Flow.
 3. Khi mọi tiến trình đã dừng, tải lần lượt từng clip lỗi bằng `flow.mjs --project <url> --out clips/<id>.mp4 --download 1080p`. Link project nằm ở dòng `Project:` trong log của clip. Mỗi clip tải trong khoảng 10 giây, không tốn tín dụng.
 4. Chạy lại `chain.mjs gen plan.json <id>` để trích khung đầu và khung cuối.
+
+Script cho cách chạy này nằm ở `scripts/song-song/`. Mỗi script nhận thư mục làm việc và đọc danh sách ảnh K, clip từ `plan.json`. Claude chạy 2 script đầu ở chế độ nền cùng lúc:
+
+| Script | Việc làm |
+|---|---|
+| `auto-images.sh <thư mục>` | Tạo đủ ảnh K. Khi `gpt-image.mjs` không nhận ra ảnh mới sau bước "Tải lại trang", script lưu ảnh qua CDP của tab. Cần Python có Pillow. |
+| `gen-all.sh <thư mục> [--dry-run]` | Chờ file `ok/<ảnh end>`, ví dụ `ok/K02`, rồi mở clip. Claude tạo file `ok/Kxx` sau khi xem và duyệt ảnh `Kxx.png`. |
+| `tai-lai.sh <thư mục>` | Chạy sau khi `gen-all.sh` in "xong". Tải các clip báo `ENOENT`, rồi trích khung. Script bỏ qua clip chưa tải được, không chạy `gen` cho clip đó. |
+
+Video gián 2026-11-05 chạy theo cách này: 9 ảnh K và 8 clip xong trong khoảng 15 phút.
 
 `gpt-image.mjs` lưu ảnh không qua cơ chế tải của Chrome, nên tạo ảnh K song song với Flow không làm lỗi ảnh.
 
@@ -515,6 +567,7 @@ Lỗi đã gặp:
 | `scripts/anh-google.mjs` | Chụp trang Hình ảnh của Google cho từng từ khoá, để xem ảnh thật của loài. Xem mục 2.0. |
 | `scripts/launch-chrome.mjs` | Mở Chrome CDP, cổng 9222, profile `~/chrome-cdp-profile` |
 | `scripts/dang-bai.mjs` | Đăng video lên YouTube Shorts và Thước phim của fanpage Facebook. Xem bước 10. |
+| `scripts/song-song/` | Tạo ảnh K và clip song song: `auto-images.sh`, `gen-all.sh`, `tai-lai.sh`. Xem mục 6.3. |
 | `references/phan-tich-video-mau.md` | Người dùng gửi video mẫu |
 | `references/flow-tu-dong.md` | Chuẩn bị tự động Flow, xử lý lỗi Flow, làm tay khi tự động lỗi |
 | `references/vi-du.md` | Cần mẫu bảng phân cảnh, prompt, `plan.json` đầy đủ |

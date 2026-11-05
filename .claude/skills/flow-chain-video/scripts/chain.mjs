@@ -361,14 +361,17 @@ function cmdJoin(P) {
   const probes = files.map(probe);
   const { fpsStr, width: W, height: H } = probes[0];
   const trims = P.plan.clips.map((c) => Number(c.trimStart || 0));
-  const durs = probes.map((p, k) => p.duration - trims[k]);
+  // Clip mở đầu có camera tiến vào: người dùng muốn 4 giây trong video cuối, nên clip 6 giây cần tăng tốc riêng (2026-11-05).
+  const clipSpeeds = P.plan.clips.map((c) => Number(c.speed ?? 1));
+  clipSpeeds.forEach((s, k) => { if (!(s > 0)) die(`Clip ${P.plan.clips[k].id}: speed phải > 0.`); });
+  const durs = probes.map((p, k) => (p.duration - trims[k]) / clipSpeeds[k]);
   durs.forEach((d, k) => {
     if (d <= 0) die(`Clip ${P.plan.clips[k].id}: trimStart ${trims[k]} lớn hơn độ dài clip.`);
     if (xf > 0 && d <= xf) die(`Clip ${P.plan.clips[k].id} ngắn hơn crossfade ${xf} giây.`);
   });
 
   const parts = probes.map(
-    (_, k) => `[${k}:v]${trims[k] ? `trim=start=${trims[k]},` : ''}settb=AVTB,setpts=PTS-STARTPTS,fps=${fpsStr},scale=${W}:${H},setsar=1,format=yuv420p[v${k}]`,
+    (_, k) => `[${k}:v]${trims[k] ? `trim=start=${trims[k]},` : ''}settb=AVTB,setpts=PTS-STARTPTS${clipSpeeds[k] !== 1 ? `,setpts=PTS/${clipSpeeds[k]}` : ''},fps=${fpsStr},scale=${W}:${H},setsar=1,format=yuv420p[v${k}]`,
   );
   const rawSeams = [];
   let last = 'v0';
@@ -395,7 +398,7 @@ function cmdJoin(P) {
   if (withAudio) {
     files.forEach((f, k) => {
       const src = hasAudio(f)
-        ? `[${k}:a]${trims[k] ? `atrim=start=${trims[k]},` : ''}asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-16:TP=-2,aresample=48000`
+        ? `[${k}:a]${trims[k] ? `atrim=start=${trims[k]},` : ''}asetpts=PTS-STARTPTS${clipSpeeds[k] !== 1 ? `,${atempoChain(clipSpeeds[k])}` : ''},aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-16:TP=-2,aresample=48000`
         // Clip không có tiếng (tải tay, hoặc đã cắt bằng -an) → chèn lặng đúng độ dài để các điểm nối không lệch.
         : `anullsrc=r=48000:cl=stereo,atrim=duration=${durs[k]}`;
       parts.push(`${src}[a${k}]`);

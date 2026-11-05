@@ -11,6 +11,7 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 
@@ -481,7 +482,8 @@ function parseArgs(argv) {
   return args;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// So đường dẫn thật: ~/.claude/skills/<tên> là symlink về repo, và import.meta.url luôn là đường dẫn thật.
+if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const a = parseArgs(process.argv.slice(2));
   if ((!a.prompt && !a.project) || (!a.out && !a['dry-run'])) {
     console.error(
