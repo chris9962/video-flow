@@ -28,7 +28,9 @@ Ngày 2026-11-03, Claude viết skill `aidancing-tiktok` (`~/video-flow/.claude/
 Bản mở rộng, người dùng nêu ngày 2026-11-03 (chưa làm):
 - Input: 1 link TikTok (clip nhảy) + N link Shopee (ví dụ 5). Claude tách sản phẩm trong ảnh Shopee thành ảnh trang phục riêng. Output: N clip, mỗi clip 1 bộ đồ.
 - Phần chính là tạo clip. Đăng TikTok là phần phụ.
-- Bộ mặt mẫu cố định: 4 node ảnh bên trái nhất của workflow `ecbec438-a333-4357-a3a1-2bd10e02e4f5` ("Trường"). 2 node chứa cùng 1 file, nên chỉ có 3 ảnh: nhìn thẳng cười, quay 3/4 sang phải khung, quay sang phải khung nhiều hơn. Claude đã chép 3 ảnh vào `~/.claude/skills/aidancing-tiktok/assets/mat-mau/`. Claude chọn ảnh có góc mặt gần nhất với khung đầu của clip.
+- Bộ mặt mẫu cố định: 4 node ảnh bên trái nhất của workflow `ecbec438-a333-4357-a3a1-2bd10e02e4f5` ("Trường"). 2 node chứa cùng 1 file, nên chỉ có 3 ảnh: nhìn thẳng cười, quay 3/4 sang phải khung, quay sang phải khung nhiều hơn. Claude đã chép 3 ảnh vào `~/.claude/skills/aidancing-tiktok/assets/mat-mau/`. Đây là mẫu 1.
+- Mẫu 2: ngày 2026-11-05, người dùng gửi ảnh mặt thứ 2, là người khác. File `mat-mau/mau-2-01-nhin-thang-cuoi-mim.png`, nhìn thẳng, cười mỉm.
+- Ngày 2026-11-05, người dùng yêu cầu: trước khi tạo ảnh ghép, Claude phải hỏi dùng mặt mẫu nào. Trong mẫu người dùng chọn, Claude chọn ảnh có góc mặt gần nhất với khung đầu của clip.
 - Kiểu tóc: chỉ gợi ý cho GPT tạo kiểu hợp trang phục, GPT tự chọn. Giữ độ dài tóc (tóc dài không cắt ngắn). Prompt phải yêu cầu giữ nguyên nhận diện khuôn mặt.
 - Điểm duyệt: không cần báo credit. Sau khi ghép xong N ảnh, Claude dừng trước AI Dancing và mở workflow trên FE video-flow (http://localhost:5173/editor/<id>) cho người dùng xem ảnh ghép.
 - N block AI Dancing chạy song song (engine chạy các nhánh độc lập bằng Promise.all). Ngày 2026-11-03 Claude nối các lần ghi `aidancing-pending.json` để job song song không ghi đè mã job của nhau.

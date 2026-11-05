@@ -60,20 +60,24 @@ Chi tiết kỹ thuật của 2 block nằm trong `~/video-flow/app/CLAUDE.md`, 
 | Input | Nguồn | Yêu cầu |
 |---|---|---|
 | Clip nhảy mẫu | Skill `video-downloader`, lưu vào `~/Desktop/Mẫu/Clip mẫu/` | Dưới 60 giây, dưới 90 MB, nên 9:16 |
-| Mặt mẫu | Bộ mặt cố định trong `<skill>/assets/mat-mau/`, xem bảng dưới | Chọn 1 ảnh có góc mặt gần nhất với mặt trong khung đầu của clip |
+| Mặt mẫu | Ảnh trong `<skill>/assets/mat-mau/`, xem bảng dưới | Người dùng chọn mẫu. Trong mẫu đó, Claude chọn ảnh có góc mặt gần nhất với mặt trong khung đầu của clip. |
 | Trang phục | Ảnh sản phẩm người dùng gửi, hoặc ảnh Claude tìm trên mạng khi người dùng yêu cầu | Thấy toàn bộ trang phục, nền trơn. Không bắt buộc: bỏ trống thì giữ quần áo trong clip. |
 
-Bộ mặt mẫu cố định của người dùng, xác nhận ngày 2026-11-03. Cùng 1 người, tóc đen dài uốn sóng, nền xám.
+Thư mục có 2 mẫu, là 2 người khác nhau. Trước khi tạo ảnh ghép, Claude phải hỏi người dùng dùng mẫu nào. Người dùng yêu cầu ngày 2026-11-05.
 
-| File | Góc mặt | Cỡ |
-|---|---|---|
-| `01-nhin-thang-cuoi.png` | Nhìn thẳng, cười | 1126×1397 |
-| `02-quay-3-4-sang-phai-cuoi-mim.png` | Quay 3/4 sang phải khung hình, cười mỉm | 1122×1402 |
-| `03-quay-sang-phai-moi-khep.png` | Quay sang phải khung hình nhiều hơn ảnh 02, môi khép | 487×603 |
+| Mẫu | File | Góc mặt | Cỡ |
+|---|---|---|---|
+| 1 | `01-nhin-thang-cuoi.png` | Nhìn thẳng, cười | 1126×1397 |
+| 1 | `02-quay-3-4-sang-phai-cuoi-mim.png` | Quay 3/4 sang phải khung hình, cười mỉm | 1122×1402 |
+| 1 | `03-quay-sang-phai-moi-khep.png` | Quay sang phải khung hình nhiều hơn ảnh 02, môi khép | 487×603 |
+| 2 | `mau-2-01-nhin-thang-cuoi-mim.png` | Nhìn thẳng, cười mỉm, đầu hơi nghiêng | 1254×1254 |
 
-- Nguồn: 4 node ảnh bên trái nhất của workflow `ecbec438-a333-4357-a3a1-2bd10e02e4f5` ("Trường") trong video-flow. 2 node trong số đó chứa cùng 1 file, md5 `906ff40b…`, nên bộ mặt chỉ có 3 ảnh.
-- Người dùng không gửi mặt mới thì Claude dùng bộ này, không hỏi lại.
-- Không ảnh nào quay sang trái khung hình. Mặt trong clip quay sang trái thì Claude lật ngang ảnh 02 hoặc 03. Lật ngang làm đổi bên rẽ ngôi tóc.
+- Mẫu 1: tóc đen dài uốn sóng, nền xám. Người dùng xác nhận ngày 2026-11-03.
+- Nguồn của mẫu 1: 4 node ảnh bên trái nhất của workflow `ecbec438-a333-4357-a3a1-2bd10e02e4f5` ("Trường") trong video-flow. 2 node trong số đó chứa cùng 1 file, md5 `906ff40b…`, nên mẫu 1 chỉ có 3 ảnh.
+- Mẫu 2: tóc đen dài thả, nền vườn có hoa giấy hồng, áo hồng hoa nhí, khuyên tai hình nơ. Người dùng gửi ngày 2026-11-05.
+- Mẫu 2 chưa dùng lần nào. Lần đầu dùng, Claude kiểm tra ảnh ghép không lấy áo hoặc khuyên tai của ảnh mặt.
+- Mẫu 1 không có ảnh quay sang trái khung hình. Mặt trong clip quay sang trái thì Claude lật ngang ảnh 02 hoặc 03. Lật ngang làm đổi bên rẽ ngôi tóc.
+- Mẫu 2 chỉ có 1 ảnh nhìn thẳng.
 - Khi đưa lên block ảnh của video-flow, Claude upload file từ thư mục này qua `POST /api/assets`.
 - Clip TikTok thường chỉ có bản 576×1024.
 - Ngày 2026-11-03, ffprobe đọc clip trên Desktop có lần quá thời gian chờ. Khi đó, Claude chép clip vào scratchpad rồi dùng bản chép.
@@ -119,7 +123,7 @@ Người dùng gửi 1 link TikTok và N link Shopee. Kết quả là N clip tr�
    - Khoảng 8 ảnh đầu là ảnh gallery, các ảnh sau là icon hoặc ảnh của sản phẩm khác.
    - Claude dùng ảnh bìa, tức ảnh đầu. Ảnh bìa quyết định màu.
    - Claude lưu ảnh vào `~/Desktop/Mẫu/Ảnh/shopee/<shopId>-<itemId>/`, rồi đóng tab.
-3. Claude chọn mặt trong `<skill>/assets/mat-mau/` có góc gần nhất với khung đầu của clip.
+3. Claude hỏi người dùng dùng mẫu 1 hay mẫu 2. Claude nên hỏi ngay khi nhận link, cùng lúc với các câu hỏi khác. Trong mẫu người dùng chọn, Claude chọn ảnh có góc gần nhất với khung đầu của clip.
    - Mỗi lần người dùng gửi link Shopee, Claude luôn thêm 1 bộ đồ bộ miền Tây bằng `--do-bo-image <ảnh>`. Người dùng dùng clip này để dựng clip biến hình. Người dùng yêu cầu ngày 2026-11-03.
    - Claude lấy ảnh đồ bộ từ Google Hình ảnh, từ khoá "đồ bộ miền tây", trong tab nền của Chrome CDP. Claude bấm vào 1 ảnh có người mặc nguyên bộ, rồi đọc ảnh cỡ lớn trong khung xem trước: `img` có `src` http, không thuộc gstatic, `naturalWidth` ≥ 400. Ảnh ghép nhiều khung thì Claude cắt riêng 1 khung.
    - Không dùng `--do-bo`, tức ChatGPT tự vẽ đồ bộ. Ngày 2026-11-03 người dùng xem bản ChatGPT vẽ và nói "đồ bộ gpt gen ra chán quá".

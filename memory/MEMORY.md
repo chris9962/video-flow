@@ -7,7 +7,7 @@
 - [Khung giờ đăng video](khung-gio-dang-video.md) — dế cơm đăng 21:31 thứ Năm 2026-10-29 (+07), Facebook có lượt xem cao; tôm càng xanh hẹn 21:30 ngày 2026-10-31 để so; nhắc khi đăng
 - [Chrome không lấy focus](chrome-khong-lay-focus.md) — script CDP mở tab nền, không bringToFront; sửa ngày 2026-10-30
 - [Đóng tab sau khi xong việc](dong-tab-sau-khi-xong.md) — lưu danh sách tab trước khi chạy script Chrome, đóng tab mới sau khi xong
-- [Ghép mẫu + aidancing trong video-flow](video-flow-ghep-mau-aidancing.md) — ảnh 9:16 lấy khung đầu clip, chỉ đổi mặt + quần áo, gọi aidancing tốn credit; skill aidancing-tiktok chạy cả chuỗi và đăng TikTok; bản mở rộng TikTok + N link Shopee, 4 mặt mẫu ở workflow ecbec438, duyệt ảnh ghép trên FE
+- [Ghép mẫu + aidancing trong video-flow](video-flow-ghep-mau-aidancing.md) — ảnh 9:16 lấy khung đầu clip, chỉ đổi mặt + quần áo, gọi aidancing tốn credit; skill aidancing-tiktok chạy cả chuỗi và đăng TikTok; bản mở rộng TikTok + N link Shopee, 2 mẫu mặt trong assets/mat-mau, phải hỏi người dùng chọn mẫu nào, duyệt ảnh ghép trên FE
 - [TikTok không bật nhãn AI](tiktok-khong-bat-nhan-ai.md) — đăng @linh_dan_20x: không bật AI-generated content, không đổi cài đặt tài khoản
 - [Mô tả TikTok không ghi tên sản phẩm](tiktok-mo-ta-khong-ten-san-pham.md) — @linh_dan_20x: chỉ ghi câu vu vơ, hashtag chung, không tả trang phục
 - [Luôn có clip đồ bộ](luon-co-clip-do-bo.md) — mỗi lần gửi link Shopee: thêm 1 clip mẫu mặc đồ bộ miền Tây lấy ảnh Google (--do-bo-image), không để GPT vẽ; để dựng clip biến hình
