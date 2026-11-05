@@ -4,7 +4,7 @@ Ngày viết: 2026-11-05. Skill dùng: `flow-chain-video`. Loài: gián nhà, t�
 
 K là viết tắt của keyframe (ảnh khung). K00–K08 là 9 ảnh tĩnh do GPT tạo.
 
-Trạng thái: người dùng duyệt ngày 2026-11-05. Video xong ngày 2026-11-05, chưa đăng.
+Trạng thái: người dùng duyệt ngày 2026-11-05. Video xong ngày 2026-11-05. Video đăng YouTube và Facebook ngày 2026-11-05.
 
 ## 1. Thông số
 

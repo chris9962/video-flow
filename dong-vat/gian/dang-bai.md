@@ -11,3 +11,8 @@ Did you know they are born white? Tell me in the comments 👇
 Subscribe for more life cycles.
 
 #cockroach #lifecycle #shorts
+
+## Đã đăng
+
+- YouTube 2026-11-05: https://youtube.com/shorts/pKPqoUFGhm4
+- Facebook 2026-11-05: https://www.facebook.com/reel/1358924449517084/

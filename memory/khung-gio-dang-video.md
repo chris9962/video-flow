@@ -28,6 +28,7 @@ Giờ đăng các video trước, lấy theo giờ sửa file `dang.log`, để 
 - Ruồi trâu: 2026-11-03, thứ Ba. YouTube khoảng 17:14, Facebook khoảng 17:15. Người dùng bảo đăng, Claude đăng ngay. Link: https://youtube.com/shorts/I9iOXFzdEK8, https://www.facebook.com/reel/1702472318113627/
 - Đuông dừa: 2026-11-03, thứ Ba. YouTube khoảng 19:30:08, Facebook khoảng 19:31:35. Người dùng bảo đăng, Claude đăng ngay. Link: https://youtube.com/shorts/61zaCJoGlQw, https://www.facebook.com/reel/1342603684508858/
 - Cá phổi châu Phi: 2026-11-04, thứ Tư. YouTube khoảng 22:04:32, Facebook khoảng 22:06:17. Người dùng bảo đăng, Claude đăng ngay. Video dài 57 giây, dài hơn các video trước. Link: https://youtube.com/shorts/OkqXKnojO7o, https://www.facebook.com/reel/3768485876649745/
+- Gián nhà: 2026-11-05, thứ Năm. YouTube khoảng 09:56:15, Facebook khoảng 09:57:23. Người dùng bảo đăng, Claude đăng ngay. Video có clip mở đầu M camera tiến vào. Link: https://youtube.com/shorts/pKPqoUFGhm4, https://www.facebook.com/reel/1358924449517084/
 
 Đây mới là 1 video đăng buổi tối có số liệu. Cặp so sánh tiếp theo: cua đồng 11:30 và tôm càng xanh 21:30, cùng ngày 2026-10-31. Lượt xem cao có thể do nội dung, không chỉ do giờ đăng.
 
