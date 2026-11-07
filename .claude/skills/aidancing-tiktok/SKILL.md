@@ -1,6 +1,6 @@
 ---
 name: aidancing-tiktok
-description: Làm video nhảy quảng cáo quần áo bằng mặt mẫu cố định rồi đăng TikTok. Có bản nhiều bộ đồ: 1 link TikTok + N link Shopee → N clip. Chuỗi gồm 4 bước. (1) Lấy khung đầu của clip nhảy mẫu. (2) ChatGPT ghép mặt mẫu và trang phục vào khung đó (block "Ghép mẫu" của repo ~/video-flow). (3) aidancing.net copy chuyển động của clip lên ảnh ghép (block "AI Dancing"). (4) Đăng video lên TikTok @linh_dan_20x qua TikTok Studio. Dùng mỗi khi người dùng nhắc "flow aidancing", "aidancing", "ghép mẫu", "clip nhảy mẫu", "mặt mẫu", "thay mặt thay đồ vào clip", "AI copy chuyển động", "đăng tiktok", "up tiktok", "tiktok studio", "linh_dan_20x", hoặc gửi clip nhảy kèm ảnh quần áo hay link Shopee, kể cả khi không nhắc tên skill. Không dùng cho video vòng đời động vật (flow-chain-video) hay chỉ tải video (video-downloader).
+description: Làm video nhảy quảng cáo quần áo bằng mặt mẫu cố định rồi đăng TikTok. Có bản nhiều bộ đồ: 1 link TikTok + N link Shopee → N clip. Chuỗi gồm 4 bước. (1) Lấy khung đầu của clip nhảy mẫu. (2) ChatGPT ghép mặt mẫu và trang phục vào khung đó (block "Ghép mẫu" của repo ~/video-flow). (3) aidancing.net copy chuyển động của clip lên ảnh ghép (block "AI Dancing"). (4) Đăng video lên TikTok @linh_dan_20x qua TikTok Studio. Dùng mỗi khi người dùng nhắc "flow aidancing", "aidancing", "ghép mẫu", "clip nhảy mẫu", "mặt mẫu", "thay mặt thay đồ vào clip", "AI copy chuyển động", "đăng tiktok", "up tiktok", "tiktok studio", "linh_dan_20x", "biến hình", "ghép clip thay đồ", "đổi đồ theo nhạc", "tải job aidancing", hoặc gửi clip nhảy kèm ảnh quần áo hay link Shopee, kể cả khi không nhắc tên skill. Không dùng cho video vòng đời động vật (flow-chain-video) hay chỉ tải video (video-downloader).
 ---
 
 # aidancing-tiktok
@@ -19,8 +19,9 @@ Trả lời người dùng bằng tiếng Việt kỹ thuật: kết luận trư
 | 2. Ghép mặt mẫu và trang phục vào ảnh dáng | ChatGPT, cùng 1 cuộc chat | Ảnh ghép 9:16, cùng khung với clip |
 | 3. Copy chuyển động của clip lên ảnh ghép | aidancing.net, model id 192 "AI Copy Chuyển Động Dùng Nền Ảnh v5.1" | Video 720×1280, dài bằng clip, có tiếng của clip |
 | 4. Đăng video | TikTok Studio | Link bài TikTok |
+| Tuỳ chọn: ghép video biến hình | `scripts/bien-hinh.mjs`, Claude review và quyết định | 1 video đổi đồ N−1 lần theo nhạc |
 
-`scripts/chay-workflow.mjs` làm bước 1–3 qua API của server video-flow. `scripts/dang-tiktok.mjs` làm bước 4.
+`scripts/chay-workflow.mjs` làm bước 1–3 qua API của server video-flow. `scripts/dang-tiktok.mjs` làm bước 4. `scripts/tai-job.mjs` tải video của job aidancing theo mã job. Bước 3c mô tả cách ghép video biến hình.
 
 ## Quy tắc bắt buộc
 
@@ -30,6 +31,7 @@ Trả lời người dùng bằng tiếng Việt kỹ thuật: kết luận trư
 - Claude không được đổi cài đặt tài khoản TikTok. Hộp thoại "Turn on automatic content checks?" phải đóng bằng Cancel.
 - Claude không được xoá dữ liệu và không được gửi tin nhắn cho người khác.
 - Sau khi xong việc, Claude đóng mọi tab Chrome mà Claude hoặc script đã mở. Claude không đóng tab người dùng đã mở trước.
+- Video biến hình (bước 3c): Claude phải xem ảnh kiểm tra và chốt thứ tự bộ đồ, mốc đổi đồ trước khi chạy `bien-hinh.mjs dung`. Claude không được dựng thẳng từ gợi ý của script. Người dùng yêu cầu ngày 2026-11-07.
 
 ## Ràng buộc của ảnh ghép
 
@@ -263,6 +265,89 @@ Số liệu lần chạy thứ 3, ngày 2026-11-05: 3 bộ cũ và 1 đồ bộ,
 - Mẫu 2: ảnh ghép không lấy áo hồng của ảnh mặt. 3 trên 4 ảnh ghép lấy khuyên tai hình nơ của ảnh mặt.
 - 4 job aidancing gói 20 giây chạy song song, xong sau 1617–1648 giây. Video ra 720×1280, 19,37 giây, có tiếng.
 - Lỗi nhỏ trong video: chữ trên biển nền bị méo dần. Khung bình luận TikTok ở video bộ 2 có thêm 1 khung chữ méo ở giữa video. Corset của bộ 3 có thêm dây vai ở cuối video.
+
+## Bước 3c — Ghép video biến hình từ N clip
+
+Dùng khi người dùng có N clip aidancing cùng 1 clip nhảy mẫu, khác bộ đồ, và muốn ghép thành 1 video đổi đồ theo nhạc. Người dùng yêu cầu cách làm này ngày 2026-11-07.
+
+Vai trò: script đo và dựng. **Claude xem ảnh kiểm tra và ra quyết định**: thứ tự bộ đồ, điểm đổi đồ, duyệt bản cuối. Người dùng yêu cầu Claude review và quyết định, không chạy tự động hoàn toàn.
+
+Bắt buộc: Claude review **trước khi ghép**. Gợi ý `--cat` của script chỉ là điểm bắt đầu. Lý do, lần thử ngày 2026-11-07 với clip @irenebbyy_: nhạc không có drop, gợi ý của script để bộ thứ 2 hiện 2,2 s. Cú đổi đồ đẹp nhất, tay che ống kính ở 10,37 s, chỉ thấy được khi xem ảnh. Script không đo được biểu cảm và động tác che camera.
+
+Trong câu trả lời, Claude báo bảng quyết định: mốc, bộ đồ, lý do chọn mốc. Nếu Claude không dùng gợi ý của script, Claude ghi lý do.
+
+Quy tắc của người dùng, ngày 2026-11-07:
+- N clip thì đổi đồ đúng N−1 lần. Mỗi bộ đồ xuất hiện 1 lần. Không chớp nháy qua lại nhiều bộ.
+- Clip đầu là bộ đồ bộ, mặt mộc. Các bộ sau là đồ Shopee.
+- Điểm đổi đồ phải có lý do trong nhạc hoặc động tác. Đổi theo số giây chia đều thì người xem thấy không có gì đặc biệt.
+- Điều kiện chính: đổi đồ lúc **hết 1 câu hát và có động tác** (nháy mắt, quay đầu, tay che camera). Đổi giữa câu hát thì không hay.
+
+### Các bước
+
+1. Tải clip theo mã job aidancing, không tốn credit:
+   ```bash
+   cd <skill>/scripts && node tai-job.mjs <mã job> [<mã job> ...]
+   ```
+   Script lưu `~/Desktop/Mẫu/Videos/aidancing-<mã job>.mp4`. aidancing.net xoá dữ liệu sau 3 ngày.
+2. Claude trích 1 khung của mỗi clip ở cùng mốc giây rồi xem, để biết clip nào là bộ nào. Clip đồ bộ đứng đầu danh sách.
+3. Chạy phân tích:
+   ```bash
+   node <skill>/scripts/bien-hinh.mjs phan-tich <clip đồ bộ> <clip 2> ... [--out <thư mục>]
+   ```
+   Script in:
+   - Độ khớp động tác của từng clip so với clip 1: độ lệch khung và tương quan của đường chuyển động. Lệch 0 khung và tương quan > 0,6 thì khớp.
+   - Tempo, các đoạn lặng của nhạc.
+   - Chỗ ngắt câu hát: năng lượng dải giọng người 300–3000 Hz tụt sâu ≥ 0,1 s. Ứng viên nằm trong chỗ ngắt có cờ HẾT CÂU, được cộng điểm và được ưu tiên khi gợi ý. Mốc gợi ý ghi "(giữa câu)" khi không có ứng viên hết câu ở gần.
+   - Ảnh `giong-hat.png`: phổ dải giọng người. Vệt ngang nhiều tầng là giọng hát. Nhạc cụ cùng dải tần có thể làm script nhận sai chỗ ngắt, nên Claude xem ảnh này khi kết quả lạ.
+   - Bảng ứng viên: onset mạnh của nhạc, độ mạnh chuyển động tại đó, cờ DROP nếu onset nằm ngay sau đoạn lặng, và điểm.
+   - Gợi ý N−1 mốc `--cat`: mốc 1 là phách đầu tiên của drop sớm nhất. Các mốc sau chia đều phần còn lại. Mỗi mốc lấy ứng viên gần, cách mốc trước ≥ 60% độ dài trung bình của 1 bộ, ưu tiên ứng viên điểm cao và gần mốc.
+   - Ảnh `toan-bo.png`: clip 1, 2 khung/giây, mỗi hàng 10 khung = 5 giây. Ảnh `cung-luc.png`: các clip cạnh nhau ở từng mốc gợi ý.
+   - Khi cần xem kỹ 1 khoảnh khắc, Claude trích dải khung dày quanh mốc đó: `ffmpeg -ss <giây> -t 2 -i <clip 1> -vf "fps=6,scale=140:-1,tile=12x1" -frames:v 1 quanh.png`.
+4. Claude xem 2 ảnh và quyết định. Mục "Claude quyết định gì" ở dưới.
+5. Dựng video:
+   ```bash
+   node <skill>/scripts/bien-hinh.mjs dung --cat <giây,giây,...> --out ~/Desktop/Mẫu/Videos/bien-hinh-<tên>.mp4 <clip đồ bộ> <clip 2> ... [--flash 0.55] [--zoom 0.08]
+   ```
+   - Clip theo thứ tự xuất hiện. Clip 1 chạy từ giây 0, đổi sang clip 2 ở mốc 1, v.v.
+   - Mốc làm tròn về khung gần nhất. Mỗi đoạn lấy đúng khung cùng thời điểm của clip đó, nên động tác nối liền.
+   - Nhạc lấy liền từ clip 1, không vấp ở điểm đổi.
+   - Ở mỗi điểm đổi: chớp sáng `--flash` giảm dần trong 0,15 s, phóng to `--zoom` giảm dần trong 0,25 s. `--flash 0` tắt chớp. `--flash-cat 3` chỉ chớp ở điểm đổi thứ 3.
+   - `--hieu-ung hoa-hinh --hoa 0.27`: thay cắt cứng bằng hoà 2 clip trong 0,27 s quanh mốc. Các clip khớp động tác, nên bộ cũ tan dần thành bộ mới ngay trên người, mặt và tư thế giữ nguyên. Đề xuất của Claude ngày 2026-11-07: hoà hình cho mọi điểm đổi, chỉ chớp ở điểm đổi sang bộ cuối. Hiệu ứng glitch, vỡ điểm ảnh, lia nhoè không dùng, vì che hoặc làm sai màu bộ đồ đang bán.
+   - Script ghi ảnh 9 khung trong ±0,3 s quanh mỗi điểm đổi vào `<video>-kiem-tra/cat-<n>.png`.
+6. Claude xem từng ảnh `cat-<n>.png`: bộ đồ đổi gọn trong 1 khung, tư thế trước và sau khớp, chớp không che mặt quá lâu. Sau đó Claude mở video cho người dùng xem.
+
+### Claude quyết định gì
+
+| Quyết định | Căn cứ |
+|---|---|
+| Thứ tự các bộ sau đồ bộ | Độ ấn tượng tăng dần. Bộ mạnh nhất (màu đậm, dáng ôm, chi tiết lạ) để cuối, vì bộ cuối được giữ lâu nhất. |
+| Mốc đổi đồ | Bắt đầu từ gợi ý của script. Claude dời mốc khi `toan-bo.png` cho thấy khoảnh khắc đẹp hơn ở gần đó: tay lướt qua người, xoay người, nháy mắt, cười vào camera. Script không đo được biểu cảm. |
+| Có dời mốc vì đoạn quá ngắn | Mỗi bộ nên hiện ≥ 3 s để người xem nhìn rõ |
+| Mức chớp, mức phóng to | Mặc định 0,55 và 0,08. Giảm khi chớp che mặt ở ảnh kiểm tra. |
+
+Script đo nhạc bằng năng lượng âm thanh. Claude không nghe được nhạc, nên không có "cảm nhận nhạc" ngoài các con số này. Phần Claude thêm vào so với script là nhìn hình.
+
+### Kết quả ngày 2026-11-07
+
+- 4 clip job 3271444–3271447, 720×1280, 30 fps, 19,37 s, cùng clip nhảy mẫu. Khớp động tác: lệch 0 khung, tương quan 0,96–0,97.
+- Nhạc 129 BPM. Đoạn lặng 3,00–4,25 s, rồi drop 5 phách liền từ 4,03 s. Đoạn lặng nhỏ 11,75–12,25 s.
+- Thứ tự: đồ bộ hoa (3271446) → đầm lụa trắng (3271444) → đầm hồng corset (3271447) → đầm đỏ lưới (3271445).
+- Mốc: 4,03 s (drop), 8,17 s (phách trùng động tác mạnh nhất, chuyển động 0,99), 12,30 s (drop nhỏ). Gợi ý của script trùng với lựa chọn của Claude.
+- Video: `~/Desktop/Mẫu/Videos/bien-hinh-4-bo.mp4`, 19,37 s, 23 MB.
+- Mỗi clip có sẵn khung "Trả lời bình luận… Xem mặt mộc lào" của clip TikTok gốc. Khung này nằm cùng chỗ ở cả 4 clip, nên không nhảy khi đổi đồ.
+
+Lần 2, cùng ngày, 4 clip của clip nhảy @irenebbyy_ (đồ bộ, đầm lụa trắng, corset hồng, đầm đỏ cổ yếm), 24,83 s:
+- Khớp động tác: lệch 0 khung, tương quan 0,93–0,97. Nhạc 136 BPM, không có đoạn lặng, nên không có drop.
+- Gợi ý đầu của script là 8,60 / 10,83 / 20,17 s: bộ trắng chỉ hiện 2,2 s. Claude không dùng gợi ý này, và sửa script để ưu tiên mốc chia đều.
+- Claude chọn 5,50 s (phách 0,77 ngay sau động tác chỉ tay vào camera), 10,37 s (người mẫu xoè tay che kín ống kính, chuyển động 0,99), 17,03 s (phách 0,78, bắt đầu vẫy tay). Khoảnh khắc nháy mắt ở 8,6 s bị bỏ, vì đặt mốc ở đó thì bộ trắng chỉ hiện 1,8 s.
+- Mốc tay che ống kính cho cú đổi đồ đẹp nhất: tay lớn dần, chớp sáng, tay vẫn che rồi rút ra với bộ đồ mới.
+- Video: `~/Desktop/bien-hinh-irenebbyy-4-bo.mp4`, 24,83 s.
+
+Lần 3, cùng clip @irenebbyy_, sau khi người dùng đặt điều kiện hết câu hát:
+- Script tìm chỗ ngắt câu ở 3,30–3,60, 7,32, 10,46–10,98, 14,40, 17,54–18,12, 21,54 s, cách nhau 3–4 s, khớp câu 2 ô nhịp ở 136 BPM.
+- Mốc 5,50 s và 17,03 s của lần 2 nằm giữa câu. Mốc 10,37 s (tay che ống kính) đã nằm ở chỗ hết câu.
+- Claude chọn 3,60 s (hết câu, nháy mắt ở 3,5 s), 10,37 s (hết câu, tay che ống kính), 17,50 s (hết câu, ngậm miệng và quay đầu). Gợi ý của script là 7,27 / 14,37 / 18,37 s. Claude không dùng vì 7,27 và 14,37 không có động tác, và 18,37 nằm giữa câu.
+- Hiệu ứng: hoà hình 0,27 s mọi điểm, chớp ở điểm 3. Video: `~/Desktop/bien-hinh-irenebbyy-het-cau.mp4`.
 
 ## Bước 4 — Kiểm tra video
 
