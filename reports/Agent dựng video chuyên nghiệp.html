@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agent dựng video chuyên nghiệp</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: một cột đọc ~72ch; 3 trường phái xếp cột như 3 track; bảng công đoạn theo thứ tự sản xuất; bảng rộng cuộn ngang trong khung riêng */
+:root {
+  --bg: #f3f4f7;
+  --surface: #ffffff;
+  --ink: #161a21;
+  --muted: #555d6c;
+  --line: #d9dde4;
+  --accent: #1f4fd1;
+  --accent-soft: #e6ecfb;
+  --sch-a: #c9861a;
+  --sch-b: #2f6c7a;
+  --sch-c: #6a4fb3;
+  --ok: #17663a; --ok-bg: #e2f2e8;
+  --info: #1f4fd1; --info-bg: #e6ecfb;
+  --part: #7a5000; --part-bg: #fbefd6;
+  --no: #8a2c2c; --no-bg: #f6e2e2;
+  --later: #4a5263; --later-bg: #e8eaef;
+  --warn-bg: #fff6e5; --warn-line: #e3a23b;
+  --code-bg: #eceff4;
+
+  --f-display: "Bricolage Grotesque", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --s-1: 0.8125rem;
+  --s0: 1rem;
+  --s1: 1.1875rem;
+  --s2: 1.5rem;
+  --s3: 2rem;
+  --s4: clamp(2.25rem, 5vw, 3.25rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121418; --surface: #1a1d23; --ink: #e7e9ee; --muted: #a0a7b4; --line: #2d323b;
+    --accent: #8aa9ff; --accent-soft: #1d2640;
+    --sch-a: #e0a43a; --sch-b: #5fb0c2; --sch-c: #a68cf0;
+    --ok: #86d6a6; --ok-bg: #173323; --info: #9db7ff; --info-bg: #1d2640;
+    --part: #f0c46a; --part-bg: #3a2d12; --no: #f2a0a0; --no-bg: #3a1c1c;
+    --later: #b8beca; --later-bg: #262a32;
+    --warn-bg: #2b2414; --warn-line: #e0a43a; --code-bg: #232731;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121418; --surface: #1a1d23; --ink: #e7e9ee; --muted: #a0a7b4; --line: #2d323b;
+  --accent: #8aa9ff; --accent-soft: #1d2640;
+  --sch-a: #e0a43a; --sch-b: #5fb0c2; --sch-c: #a68cf0;
+  --ok: #86d6a6; --ok-bg: #173323; --info: #9db7ff; --info-bg: #1d2640;
+  --part: #f0c46a; --part-bg: #3a2d12; --no: #f2a0a0; --no-bg: #3a1c1c;
+  --later: #b8beca; --later-bg: #262a32;
+  --warn-bg: #2b2414; --warn-line: #e0a43a; --code-bg: #232731;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--s0); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--surface);
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+code { font-family: var(--f-mono); font-size: 0.875em; background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; overflow-wrap: anywhere; }
+
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.masthead { background: var(--surface); border-bottom: 1px solid var(--line); }
+.masthead .wrap { padding-block: 40px 32px; display: grid; gap: 14px; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: var(--s-1); letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 16px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: var(--s4); font-weight: 750; letter-spacing: -0.02em; font-variation-settings: "opsz" 96; }
+h2 { font-size: var(--s3); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: var(--s1); font-weight: 650; }
+.lead { font-size: var(--s1); max-width: 66ch; margin: 0; }
+.meta { color: var(--muted); font-size: var(--s-1); margin: 0; max-width: 76ch; }
+
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; overflow-x: auto; white-space: nowrap; scrollbar-width: thin; }
+.nav a { display: inline-block; padding: 10px; font-size: var(--s-1); font-weight: 500; color: var(--muted); text-decoration: none; }
+.nav a:hover { color: var(--ink); }
+
+main .wrap { display: grid; gap: 56px; padding-block: 40px 64px; }
+section { display: grid; gap: 18px; scroll-margin-top: 64px; min-width: 0; }
+section > p { margin: 0; }
+.sec-head { display: grid; gap: 6px; }
+.sec-head p { color: var(--muted); margin: 0; max-width: 74ch; }
+
+/* Stack */
+.stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.stack-item {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 16px; display: grid; gap: 6px; align-content: start;
+}
+.stack-item.core { border-color: var(--accent); background: var(--accent-soft); }
+.stack-item .k { font-family: var(--f-mono); font-size: var(--s-1); color: var(--muted); }
+.stack-item strong { font-family: var(--f-display); font-size: var(--s1); font-weight: 650; line-height: 1.25; }
+.stack-item .d { color: var(--muted); font-size: 0.9375rem; }
+
+.callout {
+  background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 8px;
+  padding: 14px 16px; display: grid; gap: 6px; max-width: 84ch;
+}
+.callout .label { font-family: var(--f-mono); font-size: var(--s-1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--part); font-weight: 500; }
+.callout p { margin: 0; }
+
+/* Pipeline flow */
+.flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-family: var(--f-mono); font-size: var(--s-1); }
+.flow span { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; }
+.flow i { color: var(--muted); font-style: normal; }
+
+/* Schools */
+.schools { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; }
+.school {
+  background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c);
+  border-radius: 8px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0;
+}
+.school.a { --c: var(--sch-a); }
+.school.b { --c: var(--sch-b); }
+.school.c { --c: var(--sch-c); }
+.school .tag { font-family: var(--f-mono); font-size: var(--s-1); color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.school h3 { font-size: var(--s2); }
+.school dl { margin: 0; display: grid; gap: 10px; }
+.school dt { font-size: var(--s-1); font-weight: 600; color: var(--muted); }
+.school dd { margin: 2px 0 0; font-size: 0.9375rem; }
+.school dd ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+
+/* Tables */
+.tbl-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-size: var(--s-1); font-weight: 600; color: var(--muted); background: var(--bg); white-space: nowrap; }
+td.name { font-weight: 600; }
+td.nw { white-space: nowrap; }
+td.idx { font-family: var(--f-mono); font-size: var(--s-1); color: var(--muted); font-variant-numeric: tabular-nums; width: 1%; }
+table.wide { min-width: 900px; }
+table.mid { min-width: 720px; }
+table.xwide { min-width: 1120px; }
+tr.group td { background: var(--bg); font-size: var(--s-1); font-weight: 600; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; padding-block: 6px; }
+
+.pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { color: var(--ok); background: var(--ok-bg); }
+.pill.info { color: var(--info); background: var(--info-bg); }
+.pill.part { color: var(--part); background: var(--part-bg); }
+.pill.no { color: var(--no); background: var(--no-bg); }
+.pill.later { color: var(--later); background: var(--later-bg); }
+.arrow { color: var(--muted); padding: 0 4px; }
+
+ul.facts { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; max-width: 82ch; }
+ul.facts li::marker { color: var(--muted); }
+
+/* Examples */
+.examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+.example { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.example .tag { font-family: var(--f-mono); font-size: var(--s-1); color: var(--muted); }
+.shots { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: shot; }
+.shots li { counter-increment: shot; display: grid; grid-template-columns: 54px 1fr; gap: 10px; font-size: 0.9375rem; }
+.shots li::before { content: "Cảnh " counter(shot); font-family: var(--f-mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+.shots b { font-weight: 600; }
+.example .tools { font-size: var(--s-1); color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+
+/* Steps */
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+ol.steps > li {
+  counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px;
+}
+ol.steps > li::before { content: counter(s); font-family: var(--f-display); font-size: var(--s2); font-weight: 700; line-height: 1; color: var(--accent); }
+.step { display: grid; gap: 8px; min-width: 0; }
+.step p { margin: 0; }
+.step .warn { color: var(--part); font-weight: 500; }
+.cmd { display: flex; align-items: stretch; background: var(--code-bg); border-radius: 6px; overflow: hidden; min-width: 0; }
+.cmd code { background: none; padding: 8px 10px; flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; display: block; }
+.cmd button {
+  font: inherit; font-size: 12px; font-weight: 600; border: 0; border-left: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); padding: 0 12px; cursor: pointer;
+}
+.cmd button:hover { background: var(--accent-soft); }
+
+.security { border: 1px solid var(--no); border-radius: 8px; padding: 16px; display: grid; gap: 10px; background: var(--surface); }
+.security h3 { color: var(--no); }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 24px 40px; color: var(--muted); font-size: var(--s-1); display: grid; gap: 6px; }
+
+@media (max-width: 560px) {
+  .masthead .wrap { padding-block: 28px 24px; }
+  main .wrap { gap: 44px; padding-block: 28px 48px; }
+  ol.steps > li { grid-template-columns: 28px 1fr; padding: 14px; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow"><span>Bộ công cụ cho video giải thích</span><span>Số liệu research ngày 2026-11-07</span></div>
+    <h1>Agent dựng video chuyên nghiệp</h1>
+    <p class="lead">OpenMontage trên máy bạn là bộ khung gần nhất với mục tiêu này. OpenMontage chạy đủ chuỗi từ research chủ đề tới render, và có pipeline cho cả 3 trường phái. Bạn ghép thêm voice-clone cho giọng đọc, HyperFrames hoặc Remotion cho đồ hoạ.</p>
+    <p class="meta">Mục tiêu đánh giá: video giải thích nhiều chủ đề, có giọng đọc, đẹp cả hình lẫn tiếng. Ví dụ: thuỷ triều dâng và rút, quy trình thanh toán bảo hiểm xe. Số sao và ngày commit lấy từ GitHub ngày 2026-11-07.</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Mục lục">
+  <div class="wrap">
+    <ul>
+      <li><a href="#bo-cong-cu">Bộ công cụ</a></li>
+      <li><a href="#truong-phai">3 trường phái</a></li>
+      <li><a href="#cong-doan">Từng công đoạn</a></li>
+      <li><a href="#vi-du">2 ví dụ</a></li>
+      <li><a href="#danh-gia-lai">Đánh giá lại</a></li>
+      <li><a href="#viet-lai">Viết lại</a></li>
+      <li><a href="#con-thieu">Còn thiếu</a></li>
+      <li><a href="#buoc-tiep-theo">Bước tiếp theo</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <section id="bo-cong-cu" aria-labelledby="h-stack">
+      <div class="sec-head">
+        <h2 id="h-stack">Bộ công cụ đề xuất</h2>
+        <p>Mỗi công cụ lo một phần. OpenMontage điều phối cả chuỗi và gọi các công cụ còn lại.</p>
+      </div>
+      <div class="stack">
+        <div class="stack-item core"><span class="k">Khung điều phối · đã có trên máy</span><strong>OpenMontage</strong><span class="d">12 pipeline, hơn 100 tool. Mỗi công đoạn có 1 director skill. OpenMontage hỏi bạn duyệt ở các bước sáng tạo.</span></div>
+        <div class="stack-item"><span class="k">Đồ hoạ, chuyển cảnh</span><strong>HyperFrames và Remotion</strong><span class="d">OpenMontage chọn 1 trong 2 cho mỗi project. Remotion là mặc định cho explainer có số liệu.</span></div>
+        <div class="stack-item"><span class="k">Sơ đồ khoa học</span><strong>Manim</strong><span class="d">Hợp sơ đồ vật lý, toán, quỹ đạo. OpenMontage có skill <code>manimce-best-practices</code>.</span></div>
+        <div class="stack-item"><span class="k">Giọng đọc · đã có trên máy</span><strong>voice-clone</strong><span class="d">Skill đã có mục "Voicing an OpenMontage project".</span></div>
+        <div class="stack-item"><span class="k">Phụ đề từng chữ</span><strong>WhisperX hoặc mlx-whisper</strong><span class="d">Kịch bản đã có sẵn chữ, nên chỉ cần căn mốc thời gian theo file giọng.</span></div>
+        <div class="stack-item"><span class="k">Nhạc nền</span><strong>ACE-Step-1.5</strong><span class="d">MIT, chạy local trên Apple Silicon, chỉnh được BPM và thời lượng.</span></div>
+      </div>
+      <div class="callout" role="note">
+        <span class="label">Kiểm tra trên máy ngày 2026-11-07</span>
+        <p>FFmpeg 8.1.2 trên máy không có filter <code>drawtext</code>, <code>subtitles</code> và <code>ass</code>. FFmpeg chưa vẽ chữ hay burn phụ đề được. HyperFrames và Remotion vẽ chữ trong Chrome, nên không cần các filter này.</p>
+      </div>
+      <div class="flow" aria-label="Chuỗi công đoạn của OpenMontage">
+        <span>research</span><i>→</i><span>proposal</span><i>→</i><span>script</span><i>→</i><span>scene_plan</span><i>→</i><span>assets</span><i>→</i><span>edit</span><i>→</i><span>compose</span>
+      </div>
+      <p class="meta">Chuỗi công đoạn chung của mọi pipeline OpenMontage, theo README. Trang chỉ giữ công cụ chạy local hoặc dùng key miễn phí.</p>
+    </section>
+
+    <section id="truong-phai" aria-labelledby="h-schools">
+      <div class="sec-head">
+        <h2 id="h-schools">Ba trường phái</h2>
+        <p>Mỗi trường phái ứng với 1 hoặc 2 pipeline có sẵn trong OpenMontage.</p>
+      </div>
+      <div class="schools">
+        <article class="school a">
+          <span class="tag">Trường phái A</span>
+          <h3>Toàn bộ là đồ hoạ</h3>
+          <dl>
+            <div><dt>Hợp với</dt><dd>Quy trình, thủ tục, số liệu, khái niệm trừu tượng.</dd></div>
+            <div><dt>Renderer</dt><dd><ul>
+              <li><a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener">HyperFrames</a>: HTML + GSAP, khoảng 450 block, plugin chính thức có 9 skill.</li>
+              <li><a href="https://github.com/remotion-dev/skills" target="_blank" rel="noopener">Remotion</a>: React, 13 skill chính thức.</li>
+              <li><a href="https://github.com/ManimCommunity/manim" target="_blank" rel="noopener">Manim</a>: sơ đồ khoa học và toán.</li>
+            </ul></dd></div>
+            <div><dt>Skill thêm</dt><dd><ul>
+              <li><a href="https://github.com/iart-ai/motion-skills" target="_blank" rel="noopener">motion-skills</a> (1,3k sao, MIT): kinetic typography, biểu đồ, explainer, lower third.</li>
+              
+            </ul></dd></div>
+            <div><dt>Pipeline OpenMontage</dt><dd>Animated Explainer, Animation. Style: Clean Professional, Flat Motion Graphics, Minimalist Diagram.</dd></div>
+            <div><dt>Giới hạn</dt><dd>Mỗi cảnh cần thiết kế riêng. Hình thiếu cảm giác thật.</dd></div>
+          </dl>
+        </article>
+        <article class="school b">
+          <span class="tag">Trường phái B</span>
+          <h3>Clip nguồn thật</h3>
+          <dl>
+            <div><dt>Hợp với</dt><dd>Hiện tượng tự nhiên, địa điểm, sự kiện.</dd></div>
+            <div><dt>Nguồn clip</dt><dd><ul>
+              <li>Kho stock có key miễn phí: Pexels, Pixabay, Unsplash.</li>
+              <li>Kho mở: Archive.org, NASA, Wikimedia Commons.</li>
+              <li>Clip AI: Google Flow/Veo qua <code>flow-chain-video</code> đã có.</li>
+            </ul></dd></div>
+            <div><dt>Công cụ</dt><dd><ul>
+              <li>OpenMontage Documentary Montage: tìm clip bằng CLIP theo mô tả từng chỗ trống, khớp nhạc, chỉnh màu đồng đều.</li>
+              <li><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">MoneyPrinterTurbo</a> (140k sao, MIT): lấy stock từ Pexels, Pixabay, Coverr, thêm phụ đề và nhạc nền.</li>
+            </ul></dd></div>
+            <div><dt>Pipeline OpenMontage</dt><dd>Documentary Montage, Cinematic.</dd></div>
+            <div><dt>Giới hạn</dt><dd>Kho stock thiếu cảnh rất cụ thể. License của từng nguồn chưa được research.</dd></div>
+          </dl>
+        </article>
+        <article class="school c">
+          <span class="tag">Trường phái C</span>
+          <h3>Kết hợp clip thật và đồ hoạ</h3>
+          <dl>
+            <div><dt>Hợp với</dt><dd>Hiện tượng cần cả cảnh thật và sơ đồ giải thích.</dd></div>
+            <div><dt>Công cụ</dt><dd><ul>
+              <li>OpenMontage Hybrid: footage kèm sơ đồ hoặc overlay. Pipeline kiểm tra tỉ lệ footage và đồ hoạ, mật độ overlay.</li>
+              <li>HyperFrames hoặc Remotion làm lớp chữ, sơ đồ, lower third trên clip.</li>
+              
+            </ul></dd></div>
+            <div><dt>Pipeline OpenMontage</dt><dd>Hybrid. Screen Demo nếu cần quay màn hình app.</dd></div>
+            <div><dt>Giới hạn</dt><dd>Bạn phải giữ màu và font thống nhất giữa clip thật và đồ hoạ.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section id="cong-doan" aria-labelledby="h-stages">
+      <div class="sec-head">
+        <h2 id="h-stages">Công cụ cho từng công đoạn</h2>
+        <p>Các công đoạn xếp theo thứ tự sản xuất. Cột trạng thái cho biết bạn đã có công cụ trên máy, mới có trong research, phải trả phí, hay còn thiếu.</p>
+      </div>
+      <div class="tbl-scroll">
+        <table class="wide">
+          <thead><tr><th></th><th>Công đoạn</th><th>Công cụ</th><th>Trạng thái</th><th>Ghi chú</th></tr></thead>
+          <tbody>
+            <tr class="group"><td colspan="5">Tiền kỳ</td></tr>
+            <tr><td class="idx">01</td><td class="name">Ý tưởng, research chủ đề</td><td>OpenMontage bước research và proposal</td><td><span class="pill ok">Đã có trên máy</span></td><td>OpenMontage đề xuất ý tưởng, rồi chờ bạn duyệt.</td></tr>
+            <tr><td class="idx">02</td><td class="name">Kịch bản, hook</td><td>OpenMontage bước script. <a href="https://github.com/jakeschincariol/youtube-agent-skill" target="_blank" rel="noopener">youtube-agent-skill</a> (4,9k sao, MIT).</td><td><span class="pill ok">Đã có trên máy</span></td><td>youtube-agent-skill có 21 công thức hook và chấm hook dạng lời trước khi làm.</td></tr>
+            <tr><td class="idx">03</td><td class="name">Phân cảnh</td><td>OpenMontage bước scene_plan, Backlot storyboard.</td><td><span class="pill part">Cần cập nhật</span></td><td>Backlot có ở upstream. Bản OpenMontage trên máy dừng ở commit 2026-06-22.</td></tr>
+            <tr class="group"><td colspan="5">Hình</td></tr>
+            <tr><td class="idx">04</td><td class="name">Đồ hoạ, sơ đồ, chữ động</td><td>HyperFrames, Remotion, Manim, motion-skills</td><td><span class="pill info">Đã research</span></td><td>Render local, không tốn phí. HyperFrames cần Node 22+, máy có Node v22.14.0.</td></tr>
+            <tr><td class="idx">05</td><td class="name">Ảnh và clip AI</td><td><code>gpt-image.mjs</code>, <code>flow.mjs</code> của repo</td><td><span class="pill ok">Đã có trên máy</span></td><td>Hai script điều khiển giao diện web của ChatGPT và Google Flow qua Chrome CDP, không gọi API trả phí. Bạn nối 2 script vào OpenMontage bằng 2 tool mới.</td></tr>
+            <tr><td class="idx">06</td><td class="name">Clip thật</td><td>Pexels, Pixabay, Unsplash, Archive.org, NASA, Wikimedia qua OpenMontage</td><td><span class="pill part">Cần key miễn phí</span></td><td>README của OpenMontage có biến <code>PEXELS_API_KEY</code>, <code>PIXABAY_API_KEY</code>, <code>UNSPLASH_ACCESS_KEY</code>.</td></tr>
+            <tr><td class="idx">07</td><td class="name">Chuyển cảnh, effect giữa shot</td><td>Block của HyperFrames, GSAP. FFmpeg <code>xfade</code>. OpenMontage Video Stitch.</td><td><span class="pill info">Đã research</span></td><td>HyperFrames có shader transition, grain, overlay. FFmpeg có 58 transition <code>xfade</code>.</td></tr>
+            <tr class="group"><td colspan="5">Tiếng</td></tr>
+            <tr><td class="idx">08</td><td class="name">Giọng đọc</td><td>voice-clone (OmniVoice)</td><td><span class="pill ok">Đã có trên máy</span></td><td>Skill <code>voice-clone</code> đã nối với OpenMontage.</td></tr>
+            <tr><td class="idx">09</td><td class="name">Nhạc nền</td><td><a href="https://github.com/ace-step/ACE-Step-1.5" target="_blank" rel="noopener">ACE-Step-1.5</a> (14,5k sao, MIT)</td><td><span class="pill info">Đã research</span></td><td>ACE-Step chạy MPS trên Apple Silicon. OpenMontage có <code>pixabay_music</code>, cần key Pixabay miễn phí.</td></tr>
+            <tr><td class="idx">10</td><td class="name">SFX: whoosh, tiếng động</td><td>FFmpeg <code>adelay</code> + <code>amix</code> theo mốc cắt</td><td><span class="pill no">Còn thiếu</span></td><td>Research không tìm thấy repo tự đặt SFX vào chuyển cảnh. OpenMontage có <code>freesound_music</code> tìm âm thanh trên Freesound, cần key miễn phí.</td></tr>
+            <tr><td class="idx">11</td><td class="name">Mix tiếng, ducking</td><td>OpenMontage Audio Mixer, Audio Enhance. FFmpeg <code>loudnorm</code>.</td><td><span class="pill ok">Đã có trên máy</span></td><td>Audio Mixer giảm nhạc khi có giọng, thêm fade.</td></tr>
+            <tr class="group"><td colspan="5">Hậu kỳ</td></tr>
+            <tr><td class="idx">12</td><td class="name">Phụ đề từng chữ</td><td>Căn mốc: WhisperX, mlx-whisper, parakeet-ctc-0.6b-Vietnamese. Render: Remotion, HyperFrames, pycaps.</td><td><span class="pill info">Đã research</span></td><td>WhisperX có aligner tiếng Việt <code>wav2vec2-base-vi-vlsp2020</code>. Font phải có đủ dấu tiếng Việt.</td></tr>
+            <tr><td class="idx">13</td><td class="name">Chỉnh màu</td><td>OpenMontage Color Grade bằng LUT. FFmpeg <code>lut3d</code>.</td><td><span class="pill ok">Đã có trên máy</span></td><td>Documentary Montage chỉnh màu đồng đều cho clip từ nhiều nguồn.</td></tr>
+            <tr><td class="idx">14</td><td class="name">Render</td><td>HyperFrames, Remotion, FFmpeg local</td><td><span class="pill ok">Đã có trên máy</span></td><td>Cả 3 render trên máy, không tốn phí.</td></tr>
+            <tr><td class="idx">15</td><td class="name">Kiểm tra trước khi xuất</td><td>Contact sheet, filmstrip + waveform tại điểm cắt. <a href="https://github.com/kajisho5/ffmpeg-skill" target="_blank" rel="noopener">ffmpeg-skill</a>. PySceneDetect.</td><td><span class="pill info">Đã research</span></td><td>Claude tạo filmstrip + waveform ±1,5 giây quanh mỗi điểm cắt bằng FFmpeg.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="vi-du" aria-labelledby="h-examples">
+      <div class="sec-head">
+        <h2 id="h-examples">Áp vào 2 ví dụ của bạn</h2>
+        <p>Đây là cách chia cảnh đề xuất, chưa chạy thử. OpenMontage tự research chủ đề và đề xuất kịch bản ở bước proposal.</p>
+      </div>
+      <div class="examples">
+        <article class="example">
+          <span class="tag">Trường phái C · pipeline Hybrid</span>
+          <h3>Thuỷ triều dâng và rút</h3>
+          <ol class="shots">
+            <li><span><b>Clip thật</b> bãi biển lúc nước dâng và rút. Nguồn: Wikimedia, NASA, Pexels, hoặc clip Veo.</span></li>
+            <li><span><b>Sơ đồ</b> Trái Đất, Mặt Trăng và lực hấp dẫn. Renderer: Manim hoặc HyperFrames.</span></li>
+            <li><span><b>Sơ đồ</b> Mặt Trời và Mặt Trăng thẳng hàng hoặc vuông góc, cho triều cường và triều kém.</span></li>
+            <li><span><b>Clip thật</b> có lớp chữ tổng kết. Renderer: HyperFrames hoặc Remotion.</span></li>
+          </ol>
+          <p class="tools">Giọng: voice-clone. Phụ đề: WhisperX căn mốc. Nhạc: ACE-Step-1.5. Mix: OpenMontage Audio Mixer.</p>
+        </article>
+        <article class="example">
+          <span class="tag">Trường phái A · pipeline Animated Explainer</span>
+          <h3>Quy trình thanh toán bảo hiểm xe</h3>
+          <ol class="shots">
+            <li><span><b>Hook</b> bằng chữ động: một câu hỏi người xem hay gặp khi xe gặp sự cố.</span></li>
+            <li><span><b>Sơ đồ các bước</b> có số thứ tự và icon. Mỗi bước 1 cảnh. Các bước lấy từ tài liệu của hãng bảo hiểm.</span></li>
+            <li><span><b>Quay màn hình</b> app hoặc form nộp hồ sơ, nếu có. Pipeline: Screen Demo.</span></li>
+            <li><span><b>Thẻ tổng kết</b> danh sách giấy tờ cần chuẩn bị.</span></li>
+          </ol>
+          <p class="tools">Renderer: Remotion hoặc HyperFrames, style Clean Professional hoặc Minimalist Diagram. Thêm motion-skills cho lower third và biểu đồ.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="danh-gia-lai" aria-labelledby="h-reassess">
+      <div class="sec-head">
+        <h2 id="h-reassess">Đánh giá lại danh sách cũ theo mục tiêu mới</h2>
+        <p>Bản trước đánh giá theo video động vật không lời. Video giải thích có giọng đọc, nên nhiều công cụ đổi mức độ phù hợp. Bảng đã bỏ công cụ không hợp ở cả 2 cột. Công cụ cần API trả phí nằm ở mục tiếp theo, kèm khả năng viết lại.</p>
+      </div>
+      <div class="tbl-scroll">
+        <table class="wide">
+          <thead><tr><th>Công cụ</th><th>Video động vật</th><th></th><th>Video giải thích</th><th>Lý do</th></tr></thead>
+          <tbody>
+            <tr class="group"><td colspan="5">Khung và renderer</td></tr>
+            <tr><td class="name"><a href="https://github.com/calesthio/OpenMontage" target="_blank" rel="noopener">OpenMontage</a></td><td><span class="pill part">Một phần</span></td><td class="arrow">→</td><td><span class="pill ok">Lõi</span></td><td>Có đủ chuỗi tiền kỳ tới render và pipeline cho cả 3 trường phái.</td></tr>
+            <tr><td class="name">HyperFrames</td><td><span class="pill ok">Hợp</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Đồ hoạ, chuyển cảnh, chữ động. Apache-2.0.</td></tr>
+            <tr><td class="name">Remotion</td><td><span class="pill ok">Hợp</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Mặc định của OpenMontage cho explainer có số liệu. Miễn phí cho cá nhân.</td></tr>
+            <tr><td class="name">Manim</td><td><span class="pill no">Không hợp</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Sơ đồ khoa học như quỹ đạo, lực hấp dẫn.</td></tr>
+            <tr><td class="name">ffmpeg-skill</td><td><span class="pill ok">Hợp</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Kiểm tra thông số và contact sheet. MIT, chạy local.</td></tr>
+            
+            <tr><td class="name">motion-skills (iart.ai)</td><td><span class="pill later">Chưa xét</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>56 skill: kinetic typography, biểu đồ, explainer, lower third.</td></tr>
+            <tr><td class="name">MoneyPrinterTurbo</td><td><span class="pill no">Không hợp</span></td><td class="arrow">→</td><td><span class="pill part">Một phần</span></td><td>Lấy stock footage tốt. Bạn thay TTS của nó bằng voice-clone.</td></tr>
+            
+            
+            <tr><td class="name">MoviePy</td><td><span class="pill part">Một phần</span></td><td class="arrow">→</td><td><span class="pill part">Một phần</span></td><td>Python thuần, ít hiệu ứng có sẵn.</td></tr>
+            
+            <tr class="group"><td colspan="5">Kịch bản, giọng, phụ đề</td></tr>
+            <tr><td class="name">youtube-agent-skill</td><td><span class="pill no">Không hợp</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Chấm hook dạng lời. Video giải thích có lời.</td></tr>
+            <tr><td class="name">WhisperX, mlx-whisper, parakeet-vi</td><td><span class="pill later">Khi cần</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Căn mốc phụ đề theo file giọng của voice-clone.</td></tr>
+            <tr><td class="name">Remotion captions, pycaps</td><td><span class="pill later">Khi cần</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Phụ đề tô từng chữ.</td></tr>
+            
+            <tr><td class="name">auto-editor</td><td><span class="pill part">Một phần</span></td><td class="arrow">→</td><td><span class="pill part">Một phần</span></td><td>Bỏ đoạn im hoặc đứng yên trong footage tự quay.</td></tr>
+            <tr class="group"><td colspan="5">Âm thanh</td></tr>
+            <tr><td class="name">ACE-Step-1.5</td><td><span class="pill later">Thử</span></td><td class="arrow">→</td><td><span class="pill ok">Hợp</span></td><td>Nhạc nền local theo BPM và thời lượng.</td></tr>
+            
+            <tr class="group"><td colspan="5">Phần mềm dựng</td></tr>
+            <tr><td class="name">Cầu nối After Effects, Premiere, Resolve, CapCut</td><td><span class="pill later">Chưa cần</span></td><td class="arrow">→</td><td><span class="pill later">Tuỳ chọn</span></td><td>Chỉ dùng khi bạn muốn sửa tay trước khi xuất.</td></tr>
+            <tr><td class="name">nexrender</td><td><span class="pill later">Chưa cần</span></td><td class="arrow">→</td><td><span class="pill later">Tuỳ chọn</span></td><td>Chỉ dùng khi bạn có template After Effects.</td></tr>
+            
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="viet-lai" aria-labelledby="h-rewrite">
+      <div class="sec-head">
+        <h2 id="h-rewrite">Công cụ dùng API trả phí: khả năng thay bằng công cụ của bạn</h2>
+        <p>Claude đọc code của từng repo ngày 2026-11-07. Bảng ghi chỗ repo gọi API trả phí và phần bạn phải viết để thay bằng công cụ đang có.</p>
+      </div>
+      <div class="stack">
+        <div class="stack-item"><span class="k">Giọng đọc · local</span><strong>voice-clone</strong><span class="d">OmniVoice chạy trên máy. Thay ElevenLabs, xai/tts-v1, Qwen3-TTS.</span></div>
+        <div class="stack-item"><span class="k">Ảnh · ChatGPT web</span><strong><code>gpt-image.mjs</code></strong><span class="d">CLI: <code>--prompt --out [--ref]</code>. Nhận 1 ảnh tham chiếu.</span></div>
+        <div class="stack-item"><span class="k">Clip Veo · Google Flow web</span><strong><code>flow.mjs</code></strong><span class="d">CLI: <code>--prompt --out [--image] [--end-image] [--aspect 9:16]</code>.</span></div>
+        <div class="stack-item"><span class="k">Giọng thành chữ · local</span><strong>WhisperX, mlx-whisper</strong><span class="d">Thay ElevenLabs Scribe và xai/stt-v1.</span></div>
+      </div>
+      <div class="callout" role="note">
+        <span class="label">Giới hạn khi thay API bằng giao diện web</span>
+        <ul class="facts">
+          <li>Mỗi ảnh hoặc clip tốn lượt của tài khoản ChatGPT và tín dụng Google Flow.</li>
+          <li>Script web chạy chậm hơn API. Chrome CDP phải chạy ở cổng 9222.</li>
+          <li>Repo tạo nhiều shot song song phải giới hạn số lệnh chạy cùng lúc.</li>
+          <li>Khi giao diện web đổi, bạn phải sửa selector. Hai script đo giao diện ngày 2026-10-18.</li>
+        </ul>
+      </div>
+      <div class="tbl-scroll">
+        <table class="xwide">
+          <thead><tr><th>Repo</th><th>Chỗ gọi API trả phí</th><th>Thay bằng</th><th>Phần phải viết</th><th>Công sức</th><th>Kết luận</th></tr></thead>
+          <tbody>
+            <tr><td class="name"><a href="https://github.com/calesthio/OpenMontage" target="_blank" rel="noopener">OpenMontage</a></td><td>Provider Suno, ElevenLabs cho nhạc và SFX, GPT Image 2, Seedance, Veo API</td><td>voice-clone, đã nối qua <code>build_audio.py</code>. <code>gpt-image.mjs</code>, <code>flow.mjs</code>, ACE-Step. Tool có sẵn: <code>pixabay_music</code>, <code>freesound_music</code>.</td><td>2 tool mới kế thừa <code>BaseTool</code> trong <code>tools/graphics/</code> và <code>tools/video/</code>. Registry tự import mọi module trong <code>tools/</code>.</td><td><span class="pill ok">Thấp</span></td><td><span class="pill ok">Làm đầu tiên</span></td></tr>
+            <tr><td class="name"><a href="https://github.com/browser-use/video-use" target="_blank" rel="noopener">video-use</a></td><td>ElevenLabs Scribe, chỉ trong hàm <code>call_scribe</code> của <code>helpers/transcribe.py</code></td><td>WhisperX hoặc mlx-whisper</td><td>Viết lại 1 hàm, xuất JSON có mảng <code>words</code> như Scribe. Bản local mất phần tách người nói và tag sự kiện như "(laughter)".</td><td><span class="pill ok">Thấp</span></td><td><span class="pill ok">Hợp</span> Repo kèm skill <code>manim-video</code>. <code>render.py</code> burn phụ đề bằng filter <code>subtitles</code>, nên cần FFmpeg có libass.</td></tr>
+            <tr><td class="name"><a href="https://github.com/digitalsamba/claude-code-video-toolkit" target="_blank" rel="noopener">claude-code-video-toolkit</a></td><td><code>voiceover.py</code>: ElevenLabs, Qwen3-TTS qua RunPod hoặc Modal. <code>align_captions.py</code>: Scribe. <code>sfx.py</code>, <code>music.py</code>: ElevenLabs. <code>flux2.py</code>, <code>ltx2.py</code>, <code>image_edit.py</code>: GPU Modal.</td><td>voice-clone, WhisperX, Freesound, <code>gpt-image.mjs</code>, <code>flow.mjs</code>. <code>music_gen.py</code> dùng ACE-Step với key miễn phí của acemusic.ai, giữ nguyên.</td><td>Mỗi tool là 1 CLI riêng. Bạn thay từng CLI và giữ đúng đường dẫn file đầu ra.</td><td><span class="pill part">Thấp đến vừa</span></td><td><span class="pill ok">Hợp</span> Cho trường phái A. Phần giữ lại: template Remotion, thư viện transition, <code>/scene-review</code>, <code>qc.py</code>, <code>contact_sheet.py</code>, <code>pacing.py</code>.</td></tr>
+            <tr><td class="name"><a href="https://github.com/Alisa0808/vox-director" target="_blank" rel="noopener">Vox Director</a></td><td>Atlas Cloud cho ảnh, clip, giọng, nhạc, SFX, xoá nền và chuyển giọng thành chữ</td><td><code>gpt-image.mjs</code>, <code>flow.mjs</code>, voice-clone, ACE-Step, Freesound, WhisperX. Xoá nền cần thêm 1 công cụ local, chưa chọn.</td><td><code>scripts/provider.py</code> có lớp Provider với 7 hàm. Bạn viết 1 class LocalProvider. Pipeline chờ job bất đồng bộ và URL, nên class phải giả lập 2 phần này.</td><td><span class="pill part">Vừa</span></td><td><span class="pill part">Một phần</span> Chỉ có 1 kiểu hình: cắt dán giấy. Engine keyframe local <code>motion.py</code> không cần API.</td></tr>
+            <tr><td class="name"><a href="https://github.com/HKUDS/ViMax" target="_blank" rel="noopener">ViMax</a></td><td>Ảnh Nano Banana và clip Veo qua Google API. LLM qua OpenRouter.</td><td><code>gpt-image.mjs</code>, <code>flow.mjs</code>. LLM: Ollama chạy local, chưa thử chất lượng.</td><td><code>tools/protocols.py</code> định nghĩa 2 hàm. Bạn viết 2 class và đổi <code>class_path</code> trong config. ViMax truyền nhiều ảnh tham chiếu, còn <code>gpt-image.mjs</code> nhận 1 ảnh.</td><td><span class="pill no">Vừa đến cao</span></td><td><span class="pill part">Một phần</span> Chỉ hợp video có cốt truyện và nhân vật.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="meta">Thứ tự nên làm: OpenMontage trước, rồi video-use, rồi claude-code-video-toolkit. Vox Director và ViMax để sau, khi bạn cần đúng kiểu video của chúng.</p>
+    </section>
+
+    <section id="con-thieu" aria-labelledby="h-gaps">
+      <div class="sec-head">
+        <h2 id="h-gaps">Phần research chưa phủ</h2>
+        <p>Research vòng 1 nhắm video động vật, nên các mục sau cho video giải thích chưa có số liệu.</p>
+      </div>
+      <ul class="facts">
+        <li>Thư viện icon và hình minh hoạ miễn phí, kèm license.</li>
+        <li>Thư viện nhạc và SFX miễn phí. License khi kênh bật kiếm tiền.</li>
+        <li>License của Pexels, Pixabay, Archive.org, NASA và Wikimedia cho kênh kiếm tiền.</li>
+        <li>Font tiếng Việt cho chữ động: đủ dấu, đủ độ đậm.</li>
+        <li>Danh sách transition có sẵn của Remotion.</li>
+        <li>Cách giữ nhân vật hoặc phong cách nhất quán qua nhiều ảnh AI.</li>
+        <li>Chất lượng của OpenMontage với video tiếng Việt. Research không tìm thấy bài thử nào.</li>
+      </ul>
+      <ul class="facts">
+        <li>Quy định nền tảng vẫn áp cho mọi chủ đề. Từ 2025-07-15, YouTube dùng tên "inauthentic content" cho video sản xuất hàng loạt. Từ 2026-03, Meta giảm phân phối video chỉ ghép clip có sẵn.</li>
+      </ul>
+    </section>
+
+    <section id="buoc-tiep-theo" aria-labelledby="h-steps">
+      <div class="sec-head">
+        <h2 id="h-steps">Bước tiếp theo</h2>
+        <p>Các bước xếp theo thứ tự phải làm. Bạn đọc phần bảo mật trước khi cài bất kỳ công cụ nào.</p>
+      </div>
+      <div class="security" role="note">
+        <h3>Bảo mật khi cài skill và MCP server bên thứ ba</h3>
+        <ul class="facts">
+          <li>Snyk quét 3.984 skill và công bố ngày 2026-02-05. Snyk xác nhận 76 skill độc hại. 36,82% số skill có ít nhất một lỗi.</li>
+          <li>Bạn phải ghim commit hoặc version, đọc <code>SKILL.md</code> và thư mục <code>scripts/</code>, rồi chạy <code>uvx mcp-scan@latest --skills</code>.</li>
+          <li>Bạn nên chạy thử tool mới ngoài <code>~/video-flow</code>, vì <code>app/data/settings.json</code> chứa <code>claudeToken</code>.</li>
+        </ul>
+      </div>
+      <ol class="steps">
+        <li><div class="step">
+          <h3>Cập nhật OpenMontage</h3>
+          <p class="warn">Cảnh báo: remote URL của <code>~/OpenMontage</code> chứa GitHub token dạng plaintext. Bạn thu hồi token trên GitHub trước, rồi đổi remote.</p>
+          <div class="cmd"><code>git -C ~/OpenMontage remote set-url origin https://github.com/calesthio/OpenMontage.git</code><button type="button" data-copy>Copy</button></div>
+          <p>Bạn ghi lại commit hiện tại, vì <code>voice-clone</code> dùng OpenMontage. Sau đó bạn pull.</p>
+          <div class="cmd"><code>git -C ~/OpenMontage rev-parse HEAD</code><button type="button" data-copy>Copy</button></div>
+          <div class="cmd"><code>git -C ~/OpenMontage pull</code><button type="button" data-copy>Copy</button></div>
+        </div></li>
+        <li><div class="step">
+          <h3>Lấy key stock miễn phí</h3>
+          <p>Bạn đăng ký key của Pexels, Pixabay, Unsplash và Freesound. Bạn điền key vào file env của OpenMontage theo README. Archive.org, NASA và Wikimedia không cần key.</p>
+        </div></li>
+        <li><div class="step">
+          <h3>Nối GPT Image và Veo vào OpenMontage</h3>
+          <p class="warn">Cảnh báo: Chrome CDP phải chạy ở cổng 9222 trước khi tool gọi 2 script này.</p>
+          <p>Claude viết 2 tool kế thừa <code>BaseTool</code>. Tool thứ nhất gọi <code>gpt-image.mjs</code>. Tool thứ hai gọi <code>flow.mjs</code>. Registry của OpenMontage tự nhận 2 tool mới.</p>
+        </div></li>
+        <li><div class="step">
+          <h3>Cài renderer</h3>
+          <p class="warn">Cảnh báo: HyperFrames đang ở v0.9.x, nên script phải ghim version.</p>
+          <p>Bạn chạy 2 lệnh sau trong Claude Code. OpenMontage đã có skill Remotion và HyperFrames trong <code>.agents/skills</code>.</p>
+          <div class="cmd"><code>/plugin marketplace add anthropics/claude-plugins-official</code><button type="button" data-copy>Copy</button></div>
+          <div class="cmd"><code>/plugin install hyperframes@claude-plugins-official</code><button type="button" data-copy>Copy</button></div>
+        </div></li>
+        <li><div class="step">
+          <h3>Làm thử 2 video ngắn</h3>
+          <p>Video 1 là quy trình thanh toán bảo hiểm xe, theo trường phái A. Video 2 là thuỷ triều, theo trường phái C. Cả hai dùng giọng của voice-clone. Bạn so chất lượng hình, tiếng và chi phí của 2 video.</p>
+        </div></li>
+        <li><div class="step">
+          <h3>Chốt bộ mặc định và viết skill riêng</h3>
+          <p>Sau 2 video thử, Claude ghi lại renderer, style, font, nhạc và quy trình kiểm tra đạt yêu cầu. Claude viết thành 1 skill trong <code>~/video-flow/.claude/skills/</code>.</p>
+        </div></li>
+        <li><div class="step">
+          <h3>Research vòng 2 cho phần chưa phủ</h3>
+          <p>Nếu bạn muốn, Claude chạy research vòng 2 cho các mục ở phần "Phần research chưa phủ". Ưu tiên là license của nhạc, SFX và stock.</p>
+        </div></li>
+      </ol>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Báo cáo đầy đủ của research vòng 1: <code>~/video-flow/reports/Agent dựng video chuyên nghiệp.md</code></span>
+    <span>Ghi chú gốc: <code>~/video-flow/research_notes/Agent dựng video chuyên nghiệp/</code></span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll("[data-copy]").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var code = btn.previousElementSibling;
+    var reset = function () { setTimeout(function () { btn.textContent = "Copy"; }, 1600); };
+    var selectIt = function () {
+      var r = document.createRange(); r.selectNodeContents(code);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      btn.textContent = "Đã chọn"; reset();
+    };
+    try {
+      navigator.clipboard.writeText(code.textContent).then(function () { btn.textContent = "Đã copy"; reset(); }, selectIt);
+    } catch (e) { selectIt(); }
+  });
+});
+</script>
+</body>
+</html>
