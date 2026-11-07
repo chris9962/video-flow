@@ -67,9 +67,10 @@ mkdirSync(PROFILE_DIR, { recursive: true });
 const args = [
   `--remote-debugging-port=${PORT}`,
   `--user-data-dir=${PROFILE_DIR}`,
-  // LUÔN dùng 1 profile Default → tránh user lỡ tạo/đổi profile (Chrome mở nhiều context thì
+  // LUÔN dùng 1 profile (mặc định Default, đổi bằng env CHROME_CDP_PROFILE_DIRECTORY, vd "Profile 1")
+  // → tránh user lỡ tạo/đổi profile (Chrome mở nhiều context thì
   // Playwright connectOverCDP gãy: "Browser context management is not supported").
-  '--profile-directory=Default',
+  `--profile-directory=${process.env.CHROME_CDP_PROFILE_DIRECTORY || 'Default'}`,
   // TẮT extension: extension (MetaMask…) chạy service_worker target → Playwright connectOverCDP
   // assert "targetInfo … type service_worker" rồi GÃY ("Chưa kết nối được Chrome"). Automation
   // không cần extension nào → tắt cho sạch (login Google/ChatGPT vẫn giữ nguyên).

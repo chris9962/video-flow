@@ -13,3 +13,6 @@ dong-vat/**
 
 # Đặt sau khối dong-vat: dòng !*.json ở trên không được đưa file này vào git.
 **/.claude/settings.local.json
+
+# Video thành phẩm: không commit.
+videos/

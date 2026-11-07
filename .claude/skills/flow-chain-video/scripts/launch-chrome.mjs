@@ -65,7 +65,7 @@ mkdirSync(PROFILE_DIR, { recursive: true });
 const args = [
   `--remote-debugging-port=${PORT}`,
   `--user-data-dir=${PROFILE_DIR}`,
-  '--profile-directory=Default',
+  `--profile-directory=${process.env.CHROME_CDP_PROFILE_DIRECTORY || 'Default'}`,
   '--disable-extensions',
   '--no-first-run',
   '--no-default-browser-check',

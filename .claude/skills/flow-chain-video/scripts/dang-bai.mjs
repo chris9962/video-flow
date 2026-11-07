@@ -124,10 +124,10 @@ async function youtube(ctx, video, title, desc, dryRun) {
   await titleBox.waitFor({ timeout: 60_000 });
   await page.waitForTimeout(2_000);
   await titleBox.click();
-  await page.keyboard.press('Meta+A');
+  await page.keyboard.press('ControlOrMeta+A');
   await page.keyboard.insertText(title);
   await page.locator('#description-textarea #textbox').first().click();
-  await page.keyboard.press('Meta+A');
+  await page.keyboard.press('ControlOrMeta+A');
   await page.keyboard.press('Backspace');
   await typeLines(page, desc, 'Enter');
   await page.locator('tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_NOT_MFK"]').first().click();
