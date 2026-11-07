@@ -89,7 +89,8 @@ Dry run vẫn tạo một project rỗng trong tài khoản Flow của người 
 
 | Model trong plan | Nhãn trong Flow | Độ dài | Tín dụng |
 |---|---|---|---|
-| `omni-flash` | Omni 1.1 Flash. Mặc định. | 4 / 6 / 8 / 10 giây | 7 / 10 / 12 / 15 ở 720p. 4 giây 360p: 4. |
+| `omni-flash` | Omni 1.1 Flash. Mặc định. Flow ghi ngừng hoạt động ngày 2026-12-05. | 4 / 6 / 8 / 10 giây | 7 / 10 / 12 / 15 ở 720p. 4 giây 360p: 4. |
+| `omni-1.2-flash` | Omni 1.2 Flash. Flow thêm ngày 2026-11-07 và chọn sẵn model này. Chưa dùng cho video nào. | Thanh trượt 3–15 giây | 3 tín dụng mỗi giây ở 720p: 4 giây 12, 6 giây 18, 8 giây 24. Đo ngày 2026-11-07. |
 | `veo-3.1-lite` | Veo 3.1 - Lite | Cố định 8 giây | 10 |
 | `veo-3.1-fast` | Veo 3.1 - Fast | Cố định 8 giây | 20 |
 | `veo-3.1-quality` | Veo 3.1 - Quality | Cố định 8 giây | 100 |

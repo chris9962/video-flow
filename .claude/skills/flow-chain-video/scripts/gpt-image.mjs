@@ -204,6 +204,9 @@ export async function generateGptImage({ prompt, outFile, chatUrl, refImage, sav
     }
     const text = !chatUrl && !refImage && !/^(generate|create|edit|tạo)\b/i.test(prompt) ? `Generate an image. ${prompt}` : prompt;
     await composer.click();
+    // ChatGPT giữ bản nháp cũ trong ô nhập; không xoá thì prompt bị chèn vào giữa bản nháp. 2026-11-07.
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.press('Backspace');
     // insertText giữ prompt trên 1 dòng; Enter gửi.
     await page.keyboard.insertText(text);
     await page.keyboard.press('Enter');

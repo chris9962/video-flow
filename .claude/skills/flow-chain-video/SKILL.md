@@ -121,13 +121,17 @@ Bên trong một clip, chuyển động tự do. Chỉ hai đầu clip cần kh�
 
 Hệ số tăng tốc = tổng số giây render ÷ số giây của video cuối.
 
-Ví dụ: 2 clip × 8 giây = 16 giây render, video cuối 11 giây → hệ số 1,45. Đề xuất giữ hệ số trong khoảng 1–2. Giới hạn trên chưa kiểm chứng. Hệ số quá lớn: chọn `duration` ngắn hơn cho từng clip.
+Ví dụ: 2 clip × 8 giây = 16 giây render, video cuối 11 giây → hệ số 1,45. Hệ số quá lớn: chọn `duration` ngắn hơn cho từng clip.
+
+Giới hạn tốc độ: `output.speed` không nên vượt 1,5. Người dùng ghi chú ngày 2026-11-07: tốc độ 1,6 quá nhanh. Người dùng chọn 1,4 cho video kiến lửa và video cá thòi lòi. Nếu video dài hơn 26 giây ở tốc độ 1,4, Claude báo người dùng và đề xuất bớt clip, không tăng tốc. Clip M là ngoại lệ: `clips[].speed` của clip M theo quy tắc 1–1,5 giây ở mục 2.4.
 
 ### 2.4. Clip mở đầu M: camera tiến từ toàn cảnh vào chủ thể
 
 Mỗi video động vật nên mở đầu bằng clip M. Người dùng yêu cầu cách mở đầu này ngày 2026-11-05 và rất thích kết quả ở video gián nhà. Ý tưởng của người dùng: cảnh đầu quay rộng cả nơi sống, rồi camera tiến sâu vào tới cảnh 1 của vòng đời.
 
-Người dùng muốn camera tiến nhanh, đoạn mở đầu dài khoảng 4 giây. Người dùng yêu cầu ngày 2026-11-05: Flow phải tạo clip nguồn ngắn, không chỉ tăng tốc khi ghép.
+Quy tắc độ dài: trong video cuối, đoạn mở đầu M phải dài 1–1,5 giây. Không được để đoạn M dài hơn 1,5 giây. Người dùng yêu cầu quy tắc này ngày 2026-11-07. Quy tắc này thay cho mức khoảng 4 giây ngày 2026-11-05.
+
+Flow phải tạo clip M ở độ dài ngắn nhất, để camera tiến nhanh ngay trong clip. Người dùng yêu cầu điều này ngày 2026-11-05. Khi ghép, Claude đưa đoạn M về 1–1,5 giây bằng `trimStart` và `speed`.
 
 | Mục | Nội dung |
 |---|---|
@@ -135,8 +139,8 @@ Người dùng muốn camera tiến nhanh, đoạn mở đầu dài khoảng 4 g
 | Ảnh end K01 | Cận cảnh đầu tiên của vòng đời. GPT sửa từ K00 trong cùng cuộc chat. |
 | Diễn biến | Camera tiến đều qua chỗ đi vào, tới cận cảnh chủ thể. Chủ thể đứng yên. |
 | Camera | Di chuyển trong clip, đứng yên ở giây cuối, để khớp với clip A có camera đứng yên |
-| Độ dài | Flow phải tạo clip M ở độ dài ngắn nhất, 4 giây: `plan.json` đặt `"duration": 4` cho clip M. Clip ngắn thì Flow tạo camera tiến nhanh ngay trong clip. Nếu camera vẫn chậm, Claude tăng tốc thêm khi ghép bằng `"speed"` của clip M. |
-| Chi phí thêm | 1 ảnh GPT, 1 clip. Clip 6 giây tốn 10 tín dụng. Chi phí clip 4 giây chưa đo. |
+| Độ dài | Flow tạo 4 giây: `plan.json` đặt `"duration": 4` cho clip M. Trong video cuối, đoạn M dài 1–1,5 giây, không được dài hơn. Claude bỏ giây đứng yên ở đầu clip bằng `"trimStart"`, rồi đặt `"speed"` = (4 − trimStart) ÷ (1,5 × `output.speed`). Sau khi ghép, Claude đọc `seams.json`: điểm nối đầu tiên phải ≤ 1,5 giây. |
+| Chi phí thêm | 1 ảnh GPT, 1 clip. Clip 6 giây tốn 10 tín dụng. Clip 4 giây tốn 7 tín dụng, đo ngày 2026-11-06. |
 
 Prompt K00 là prompt mới. Prompt kết thúc bằng "No people, no animals. No text, no watermark."
 
@@ -152,7 +156,9 @@ In a single continuous shot, no scene cuts, no fade, no dissolve. One smooth cam
 
 Video gián dùng chữ "slowly". Mẫu trên dùng "quickly and smoothly" để camera tiến nhanh, chưa kiểm chứng.
 
-Kết quả video gián nhà 2026-11-05: clip M 6 giây đạt ở lần tạo đầu. Camera tiến thật qua cửa tủ, không hoà hình, score cao nhất 0,031. Camera tiến chậm trong 2 giây đầu, đứng yên từ giây 5. Người dùng thấy đoạn này chậm, nên Claude đặt `"speed": 1.5` khi ghép: đoạn mở đầu còn 3,97 giây. Clip M 4 giây chưa được kiểm chứng. Prompt đầy đủ: `references/vi-du.md`.
+Kết quả video gián nhà 2026-11-05: clip M 6 giây đạt ở lần tạo đầu. Camera tiến thật qua cửa tủ, không hoà hình, score cao nhất 0,031. Camera tiến chậm trong 2 giây đầu, đứng yên từ giây 5. Người dùng thấy đoạn này chậm, nên Claude đặt `"speed": 1.5` khi ghép: đoạn mở đầu còn 3,97 giây. Prompt đầy đủ: `references/vi-du.md`.
+
+Kết quả video kiến lửa 2026-11-06: clip M 4 giây, prompt có "quickly and smoothly", đạt ở lần tạo đầu. Camera đứng yên ở giây 0–1,0, tiến vào ở giây 1,0–2,5, đứng yên từ giây 2,5. Người dùng muốn đoạn mở đầu dài 1,5 giây. Claude đặt `"trimStart": 1.0` để bỏ giây đứng yên đầu, và đặt `"speed"` của clip M theo công thức: speed = (4 − trimStart) ÷ (1,5 × `output.speed`). Ảnh K00 là mặt cắt bãi cỏ có ụ đất của tổ kiến, phía dưới là đường hầm. Camera đi xuyên đường hầm xuống khoang, có nhoè chuyển động.
 
 Chỗ dễ sai:
 - Ánh sáng ở K01 phải có nguồn trong K00, ví dụ đèn bếp chiếu qua khe cửa tủ. Nếu không, Flow có thể đổi ánh sáng đột ngột.
@@ -340,7 +346,7 @@ Sau khi thử một cách viết, Claude ghi kết quả vào mục 4.2. Cách v
 | `clips[].model` | Chỉ dùng khi bộ lọc nội dung của Flow từ chối một clip nhiều lần. Đổi model giữa chuỗi làm lệch màu và hạt nhiễu. |
 | `clips[].trimStart` | Số giây bỏ ở đầu clip khi ghép. Dùng khi đầu clip có viền đen hoặc cắt cảnh. Khung cuối không đổi, nên clip sau không phải tạo lại. |
 | `clips[].speed` | Hệ số tăng tốc riêng của 1 clip khi ghép, nhân thêm với `output.speed`. Video gián 2026-11-05 đặt 1.5 cho clip M 6 giây, xem mục 2.4. |
-| `output.speed` | Hệ số tăng tốc khi ghép |
+| `output.speed` | Hệ số tăng tốc khi ghép. Không nên vượt 1,5, xem mục 2.3. Mặc định 1,4. |
 | `output.crossfade` | Số giây crossfade ở mỗi điểm nối. 0 = nối thẳng. |
 | `output.audio` | `flow` (mặc định): giữ tiếng gốc của Flow. `none`: bỏ tiếng. |
 

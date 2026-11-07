@@ -26,13 +26,16 @@ const UPSCALE_TIMEOUT_MS = 10 * 60_000;
 export const ALLOWED_DURATIONS = [4, 6, 8, 10];
 
 export const FLOW_MODEL_LABELS = {
-  'omni-flash': /Omni .*Flash/,
+  // Ngày 2026-11-07, Flow thêm Omni 1.2 Flash, đặt làm model mặc định, giá gần gấp đôi Omni 1.1.
+  'omni-flash': /Omni 1\.1 Flash/,
+  'omni-1.2-flash': /Omni 1\.2 Flash/,
   'veo-3.1-lite': /Veo 3\.1 - Lite/,
   'veo-3.1-fast': /Veo 3\.1 - Fast/,
   'veo-3.1-quality': /Veo 3\.1 - Quality/,
 };
 // Chỉ Omni có lựa chọn độ dài và độ phân giải. Veo cố định 8 giây, 720p.
 const OMNI = 'omni-flash';
+const isOmni = (model) => model.startsWith('omni');
 
 export function snapDuration(sec) {
   return ALLOWED_DURATIONS.reduce((a, b) => (Math.abs(b - sec) <= Math.abs(a - sec) ? b : a), 6);
@@ -143,6 +146,28 @@ async function pickRadio(page, name, what) {
   await page.waitForTimeout(300);
 }
 
+// Omni 1.1 chọn độ dài bằng nút radio. Omni 1.2 dùng thanh trượt 3–15 giây.
+async function pickDuration(page, sec) {
+  await openSettings(page);
+  const radio = page.getByRole('radio', { name: new RegExp(`^${sec} ?(giây|s)$`) }).first();
+  if (await radio.count()) {
+    await radio.click();
+    await page.waitForTimeout(300);
+    return;
+  }
+  const slider = page.locator('mat-slider.duration-slider input[type=range]').first();
+  if (!(await slider.count())) throw new Error(`Không thấy lựa chọn "${sec} giây" trong cài đặt Flow.`);
+  const shown = () => slider.evaluate((el) => el.closest('mat-slider').parentElement.parentElement.innerText);
+  await slider.focus();
+  await page.keyboard.press('Home');
+  for (let i = 0; i < 20; i++) {
+    if (new RegExp(`\\b${sec} ?(giây|s)\\b`).test(await shown())) return;
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(150);
+  }
+  throw new Error(`Không đặt được thanh trượt độ dài về ${sec} giây.`);
+}
+
 async function configure(page, { model, aspect, duration, quality, frames }) {
   // Chế độ Tác nhân bật thì chip cấu hình bị ẩn.
   if (!(await page.locator('button', { hasText: CHIP }).count())) {
@@ -171,9 +196,9 @@ async function configure(page, { model, aspect, duration, quality, frames }) {
     });
   await page.waitForTimeout(600);
 
-  if (model === OMNI) {
+  if (isOmni(model)) {
     await pickRadio(page, new RegExp(`^${quality}`), quality);
-    await pickRadio(page, new RegExp(`^${duration} ?(giây|s)$`), `${duration} giây`);
+    await pickDuration(page, duration);
   } else if (duration !== 8) {
     console.warn(`! Model ${model} cố định 8 giây trên Flow. Bỏ qua duration ${duration}.`);
   }
