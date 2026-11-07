@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: b06fc468-5e62-4526-87d0-4727ef4adee3
-  modified: 2026-10-30T01:21:59.988Z
+  modified: 2026-11-07T04:02:17.449Z
 ---
 
 Ngày 2026-10-30, người dùng báo video dế cơm trên Facebook có lượt xem tăng vượt trội so với các video khác. Người dùng cho rằng giờ đăng là khung giờ có lượt xem cao.
@@ -29,8 +29,14 @@ Giờ đăng các video trước, lấy theo giờ sửa file `dang.log`, để 
 - Đuông dừa: 2026-11-03, thứ Ba. YouTube khoảng 19:30:08, Facebook khoảng 19:31:35. Người dùng bảo đăng, Claude đăng ngay. Link: https://youtube.com/shorts/61zaCJoGlQw, https://www.facebook.com/reel/1342603684508858/
 - Cá phổi châu Phi: 2026-11-04, thứ Tư. YouTube khoảng 22:04:32, Facebook khoảng 22:06:17. Người dùng bảo đăng, Claude đăng ngay. Video dài 57 giây, dài hơn các video trước. Link: https://youtube.com/shorts/OkqXKnojO7o, https://www.facebook.com/reel/3768485876649745/
 - Gián nhà: 2026-11-05, thứ Năm. YouTube khoảng 09:56:15, Facebook khoảng 09:57:23. Người dùng bảo đăng, Claude đăng ngay. Video có clip mở đầu M camera tiến vào. Link: https://youtube.com/shorts/pKPqoUFGhm4, https://www.facebook.com/reel/1358924449517084/
+- Lươn đồng: 2026-11-06, thứ Sáu. YouTube khoảng 21:45:28, Facebook khoảng 21:47:07. Người dùng bảo đăng, Claude đăng ngay, giờ đăng gần khung 21:30. Video có clip mở đầu M dài 1,5 giây. Link: https://youtube.com/shorts/xk6W73WWXLc, https://www.facebook.com/reel/1841630743657917/
 
-Đây mới là 1 video đăng buổi tối có số liệu. Cặp so sánh tiếp theo: cua đồng 11:30 và tôm càng xanh 21:30, cùng ngày 2026-10-31. Lượt xem cao có thể do nội dung, không chỉ do giờ đăng.
+Lượt xem YouTube ngày 2026-11-07, Claude lấy bằng `yt-dlp`:
+- Tôm càng xanh, đăng 21:30: 1.008.853 lượt xem, 12.243 lượt thích. Đây là video cao nhất kênh.
+- Cua đồng, đăng 11:30 cùng ngày: 54.260 lượt xem, cao thứ 2 kênh.
+- Các video đăng khoảng 21:00–21:45 sau đó chỉ có 400–900 lượt xem: nhện nước, ngài vải, lươn đồng.
+
+Giờ 21:30 không giải thích được lượt xem cao. Hai video cao nhất đều là giáp xác, nên nội dung có thể là lý do chính.
 
 **Why:** Người dùng muốn đăng video vào khung giờ có lượt xem cao.
 
