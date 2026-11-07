@@ -26,8 +26,10 @@ This succeeds for most videos and gives the highest available quality without wa
 TikTok's extractor is flaky: sometimes `yt-dlp -F` shows **only an `audio` (mp3) format** even for a real video, and slideshow/photo posts always extract as audio-only. If that happens (you downloaded an .mp3, or formats list has no video), don't keep retrying yt-dlp — use tikwm:
 
 ```bash
-curl -s "https://www.tikwm.com/api/?url=<TIKTOK_URL>" -o <a-temp-file>.json
+curl -s "https://www.tikwm.com/api/?url=<TIKTOK_URL>&hd=1" -o <a-temp-file>.json
 ```
+
+Always pass `hd=1`. Without it, `hdplay` comes back empty and `play` is only 576×1024. Verified 2026-11-05: with `hd=1`, `hdplay` gave 1080×1920 HEVC for a post where `play` was 576×1024.
 
 (Write the temp JSON to the session scratchpad directory, not `/tmp`.)
 

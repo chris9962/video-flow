@@ -7,7 +7,10 @@
 //   node ghep-nhieu-bo.mjs --clip clip.mp4 --face mat.png [--product a.jpg ...] [--do-bo] [--name "..."]
 //     --do-bo thêm 1 nhánh: ChatGPT tự vẽ 1 bộ đồ bộ miền Tây, không cần ảnh sản phẩm.
 //     --do-bo-image anh.jpg thêm 1 nhánh đồ bộ từ ảnh thật, đi qua bước tách sản phẩm như ảnh Shopee.
-//   node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality quality|fast]
+//     Mặc định block Ghép mẫu đưa người vào ảnh nền assets/background/nen-01-phong-khach-sofa-be.png.
+//     --background nen.png dùng ảnh nền khác. --giu-nen giữ nền của clip.
+//   node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality quality|fast] [--bo bo1 --bo do-bo ...]
+//     --bo chỉ chạy AI Dancing cho block Ghép mẫu có nhãn này (bo1, bo2…, do-bo). Bỏ trống thì chạy mọi block.
 //     Thêm 1 block AI Dancing sau mỗi block Ghép mẫu, rồi chạy song song từ các block đó. Lệnh này tốn credit.
 
 import fs from 'node:fs';
@@ -40,6 +43,21 @@ const DO_BO_PROMPT = `Tạo 1 ảnh sản phẩm: 1 bộ đồ bộ mặc nhà k
 const HAIR_AND_IDENTITY = `- Gợi ý: tạo kiểu tóc hợp với trang phục này, bạn tự chọn kiểu. Giữ nguyên độ dài và màu tóc của người mẫu: tóc dài thì chỉ tạo kiểu trên mái tóc dài đó, không cắt ngắn.
 - GIỮ NGUYÊN 100% nhận diện gương mặt người mẫu đã ghi nhớ: hình dáng khuôn mặt, mắt, lông mày, mũi, môi, màu da. Đổi kiểu tóc không được làm thay đổi gương mặt.`;
 
+// Người dùng yêu cầu ngày 2026-11-05: clip đồ bộ mở đầu clip biến hình, mặt mộc để khác rõ với các clip có trang điểm phía sau.
+const MAT_MOC = `- Người mẫu để mặt mộc: không trang điểm, không son môi, không kẻ mắt, không phấn mắt, không má hồng, không mi giả. Da và môi giữ màu tự nhiên.
+- Chỉ bỏ lớp trang điểm. Gương mặt vẫn là gương mặt người mẫu đã ghi nhớ.`;
+
+// Người dùng yêu cầu ngày 2026-11-05: ảnh ghép đưa vào nền của người dùng, khung hình giữ đúng ảnh cũ, căn phòng đổi góc nhìn cho khớp.
+// Prompt mặc định TRYON_DEFAULT_BG (lần chạy 2026-11-02) để GPT giữ góc máy của ảnh nền: người dời ra giữa và nhỏ đi, không khớp clip.
+const DEFAULT_BACKGROUND = path.resolve(import.meta.dirname, '..', 'assets', 'background', 'nen-01-phong-khach-sofa-be.png');
+const BG_PROMPT = `đưa nhân vật trong ảnh vừa tạo vào căn phòng trong ảnh đính kèm này.
+- GIỮ NGUYÊN 100% khung hình của ảnh vừa tạo: tỉ lệ ảnh, kích thước nhân vật, vị trí nhân vật trong khung, chỗ khung cắt ngang người. Không zoom ra, không zoom vào, không dời nhân vật.
+- GIỮ NGUYÊN 100% nhân vật: gương mặt, kiểu tóc, trang phục, tư thế, vị trí tay chân, vóc dáng.
+- Góc máy lấy theo ảnh vừa tạo: hướng máy, độ cao máy, độ nghiêng, khoảng cách tới nhân vật. Vẽ lại căn phòng trong ảnh đính kèm theo đúng góc máy này. Được xoay và đổi góc nhìn căn phòng cho khớp.
+- Từ ảnh đính kèm chỉ lấy nội dung căn phòng: đồ đạc, tường, sàn, cửa, đèn, màu sắc, ánh sáng. Không lấy góc máy và khung hình của ảnh đính kèm.
+- Thay toàn bộ background cũ. Bỏ mọi chữ, khung bình luận, sticker và logo của ảnh vừa tạo.
+- Ánh sáng và bóng đổ trên nhân vật khớp với căn phòng. Chân nhân vật đứng đúng trên sàn, có bóng đổ dưới chân. Ảnh chân thực, tự nhiên.`;
+
 const slug = (s) =>
   s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/gi, 'd').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase();
 
@@ -47,19 +65,22 @@ const t0 = Date.now();
 const step = (s) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)}s] ${s}`);
 
 function parseArgs(argv) {
-  const opts = { products: [], quality: 'quality', doBo: false };
+  const opts = { products: [], quality: 'quality', doBo: false, background: DEFAULT_BACKGROUND };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--product') opts.products.push(argv[++i]);
     else if (a === '--do-bo') opts.doBo = true;
+    else if (a === '--giu-nen') opts.background = null;
+    else if (a === '--background') opts.background = argv[++i];
     else if (a === '--do-bo-image') opts.doBoImage = argv[++i];
+    else if (a === '--bo') (opts.bo ??= []).push(argv[++i]);
     else if (['--clip', '--face', '--name', '--aidancing', '--quality'].includes(a)) opts[a.slice(2)] = argv[++i];
     else throw new Error(`Không hiểu tham số: ${a}`);
   }
   if (opts.aidancing) return opts;
   if (!opts.clip || !opts.face) throw new Error('Thiếu --clip hoặc --face');
   if (opts.products.length === 0 && !opts.doBo && !opts.doBoImage) throw new Error('Thiếu --product, --do-bo hoặc --do-bo-image');
-  for (const f of [opts.clip, opts.face, ...opts.products, ...(opts.doBoImage ? [opts.doBoImage] : [])]) {
+  for (const f of [opts.clip, opts.face, ...opts.products, ...[opts.doBoImage, opts.background].filter(Boolean)]) {
     if (!fs.existsSync(f)) throw new Error(`Không thấy file: ${f}`);
   }
   return opts;
@@ -156,17 +177,28 @@ async function buildAndRunTryon(opts) {
   const clip = node('video', 0, 0, { content: await uploadAsset(opts.clip) });
   const face = node('image', 0, ROW, { content: await uploadAsset(opts.face) });
   wf.nodes.push(clip, face);
+  const bg = opts.background ? node('image', 0, ROW * 3, { content: await uploadAsset(opts.background) }) : null;
+  if (bg) wf.nodes.push(bg);
+  const bgConfig = bg ? { bgPrompt: BG_PROMPT } : {};
+  const bgEdge = (tryon) => (bg ? [edge(bg.id, tryon.id, 'background')] : []);
   const branches = opts.products.map((file, i) => ({ file, tag: `bo${i + 1}`, title: `Bộ ${i + 1}` }));
   if (opts.doBoImage) branches.push({ file: opts.doBoImage, tag: 'do-bo', title: 'Đồ bộ' });
   const extract = node('text', 0, ROW * 2, { content: EXTRACT_PROMPT });
   if (branches.length) wf.nodes.push(extract);
   const genPrompt = `${defaultTryonGen()}\n${HAIR_AND_IDENTITY}`;
+  const doBoGenPrompt = `${genPrompt}\n${MAT_MOC}`;
   const labels = {};
   for (const [i, { file, tag, title }] of branches.entries()) {
     const raw = node('image', 520, ROW * i, { content: await uploadAsset(file) });
     const outfit = node('image', 1040, ROW * i, { provider: 'chatgpt' });
     // vfLabel đặt tên file video ở bước --aidancing.
-    const tryon = node('tryon', 1560, ROW * i, { provider: 'chatgpt', frameTime: 0, genPrompt, vfLabel: tag });
+    const tryon = node('tryon', 1560, ROW * i, {
+      provider: 'chatgpt',
+      frameTime: 0,
+      genPrompt: tag === 'do-bo' ? doBoGenPrompt : genPrompt,
+      vfLabel: tag,
+      ...bgConfig,
+    });
     wf.nodes.push(raw, outfit, tryon);
     wf.edges.push(
       edge(extract.id, outfit.id, 'prompt'),
@@ -174,6 +206,7 @@ async function buildAndRunTryon(opts) {
       edge(face.id, tryon.id, 'face'),
       edge(outfit.id, tryon.id, 'outfit'),
       edge(clip.id, tryon.id, 'clip'),
+      ...bgEdge(tryon),
     );
     labels[outfit.id] = `${title} · tách sản phẩm`;
     labels[tryon.id] = `${title} · Ghép mẫu`;
@@ -182,13 +215,14 @@ async function buildAndRunTryon(opts) {
     const y = ROW * branches.length;
     const prompt = node('text', 520, y, { content: DO_BO_PROMPT });
     const outfit = node('image', 1040, y, { provider: 'chatgpt' });
-    const tryon = node('tryon', 1560, y, { provider: 'chatgpt', frameTime: 0, genPrompt, vfLabel: 'do-bo' });
+    const tryon = node('tryon', 1560, y, { provider: 'chatgpt', frameTime: 0, genPrompt: doBoGenPrompt, vfLabel: 'do-bo', ...bgConfig });
     wf.nodes.push(prompt, outfit, tryon);
     wf.edges.push(
       edge(prompt.id, outfit.id, 'prompt'),
       edge(face.id, tryon.id, 'face'),
       edge(outfit.id, tryon.id, 'outfit'),
       edge(clip.id, tryon.id, 'clip'),
+      ...bgEdge(tryon),
     );
     labels[outfit.id] = 'Đồ bộ · tạo ảnh';
     labels[tryon.id] = 'Đồ bộ · Ghép mẫu';
@@ -209,7 +243,11 @@ async function buildAndRunTryon(opts) {
 async function addAndRunAiDancing(opts) {
   const wf = await api('GET', `/api/workflows/${opts.aidancing}`);
   const clipId = wf.nodes.find((n) => n.type === 'video')?.id;
-  const tryons = wf.nodes.filter((n) => n.type === 'tryon');
+  const allTryons = wf.nodes.filter((n) => n.type === 'tryon');
+  const tryons = opts.bo ? allTryons.filter((t) => opts.bo.includes(t.config.vfLabel)) : allTryons;
+  if (opts.bo && tryons.length !== opts.bo.length) {
+    throw new Error(`Không thấy block Ghép mẫu có nhãn ${opts.bo.join(', ')}. Nhãn có trong workflow: ${allTryons.map((t) => t.config.vfLabel).join(', ')}`);
+  }
   if (!clipId || tryons.length === 0) throw new Error(`Workflow ${wf.id} không có block Clip hoặc Ghép mẫu`);
   const missing = tryons.filter((t) => !t.config.content);
   if (missing.length) throw new Error(`${missing.length} block Ghép mẫu chưa có ảnh ghép. Chạy lại phần Ghép mẫu trước.`);

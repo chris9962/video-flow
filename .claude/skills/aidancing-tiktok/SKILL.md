@@ -15,7 +15,7 @@ Trả lời người dùng bằng tiếng Việt kỹ thuật: kết luận trư
 
 | Bước | Công cụ | Kết quả |
 |---|---|---|
-| 1. Lấy khung đầu của clip | ffmpeg trong block Ghép mẫu (`tryon`) | Ảnh dáng 9:16 |
+| 1. Chọn và lấy khung đầu của clip | `scripts/khung-dau.mjs` cắt clip khi cần, rồi ffmpeg trong block Ghép mẫu (`tryon`) | Ảnh dáng 9:16 |
 | 2. Ghép mặt mẫu và trang phục vào ảnh dáng | ChatGPT, cùng 1 cuộc chat | Ảnh ghép 9:16, cùng khung với clip |
 | 3. Copy chuyển động của clip lên ảnh ghép | aidancing.net, model id 192 "AI Copy Chuyển Động Dùng Nền Ảnh v5.1" | Video 720×1280, dài bằng clip, có tiếng của clip |
 | 4. Đăng video | TikTok Studio | Link bài TikTok |
@@ -36,8 +36,9 @@ Trả lời người dùng bằng tiếng Việt kỹ thuật: kết luận trư
 Người dùng đặt các ràng buộc này ngày 2026-11-03:
 
 - Ảnh ghép có tỉ lệ 9:16. Cỡ và vị trí của người trong ảnh phải khớp với clip.
-- Ảnh dáng là khung đầu của clip, vì aidancing mở video bằng đúng ảnh ghép.
-- Chỉ đổi mặt và quần áo. Background giữ nguyên background của clip. Không nối cổng Background.
+- Ảnh dáng là khung đầu của clip, vì aidancing mở video bằng đúng ảnh ghép. Nếu khung đầu không có mặt đầy đủ, Claude cắt clip theo mục "Chọn khung đầu" ở bước 1.
+- Bước ghép chỉ đổi mặt và quần áo.
+- Ngày 2026-11-03, người dùng yêu cầu giữ nền của clip. Ngày 2026-11-05, người dùng đổi yêu cầu: sau bước ghép, block Ghép mẫu đưa người vào ảnh nền của người dùng. Chi tiết nằm ở mục "Ảnh nền" của bước 1. `--giu-nen` giữ cách cũ.
 - Prompt bước sửa ảnh không được có câu "giữ đủ tay, chân, toàn thân". Câu đó làm ChatGPT zoom ra, và người trong ảnh nhỏ hơn người trong clip.
 - Prompt làm da tự nhiên: giảm ánh sáng trên da, bỏ da nhựa. Không dùng câu "thêm lỗ chân lông, màu da không đều": câu đó làm ra mụn và tàn nhang.
 
@@ -79,8 +80,89 @@ Thư mục có 2 mẫu, là 2 người khác nhau. Trước khi tạo ảnh ghé
 - Mẫu 1 không có ảnh quay sang trái khung hình. Mặt trong clip quay sang trái thì Claude lật ngang ảnh 02 hoặc 03. Lật ngang làm đổi bên rẽ ngôi tóc.
 - Mẫu 2 chỉ có 1 ảnh nhìn thẳng.
 - Khi đưa lên block ảnh của video-flow, Claude upload file từ thư mục này qua `POST /api/assets`.
-- Clip TikTok thường chỉ có bản 576×1024.
+- Link `play` của tikwm chỉ có bản 576×1024. Claude phải gọi tikwm với tham số `hd=1` và tải link `hdplay`. Ngày 2026-11-05, link `hdplay` cho bản 1080×1920, mã HEVC. Bản 576×1024 làm ảnh dáng bị nhoè.
+- Clip HEVC chưa qua aidancing lần nào. `khung-dau.mjs --tu` mã hoá lại sang H.264. Nếu Claude dùng clip HEVC gốc, Claude phải mã hoá lại sang H.264 trước khi dùng.
 - Ngày 2026-11-03, ffprobe đọc clip trên Desktop có lần quá thời gian chờ. Khi đó, Claude chép clip vào scratchpad rồi dùng bản chép.
+
+### Ảnh nền
+
+Ảnh nền nằm trong `<skill>/assets/background/`. Ngày 2026-11-05, người dùng gửi ảnh này và yêu cầu chỉ dùng ảnh này.
+
+| File | Nội dung | Cỡ |
+|---|---|---|
+| `nen-01-phong-khach-sofa-be.png` | Phòng khách: sofa chữ L màu be, bàn trà mặt đá chân vàng, bình hoa hồng, sàn gỗ nâu, cửa gỗ nâu | 962×1635 |
+
+- Người dùng không dùng các ảnh nền cũ trong `~/video-flow/app/data/assets/`: phòng khách có bếp `2cfdaf80…png`, phòng sofa cam `d9eba5a2…png`, phòng trắng `d97a9eac…png`.
+
+Cách flow dùng ảnh nền, theo yêu cầu của người dùng ngày 2026-11-05:
+- `ghep-nhieu-bo.mjs` nối ảnh nền vào cổng Background của mọi block Ghép mẫu, kể cả nhánh đồ bộ. Mọi clip có cùng nền, nên clip biến hình liền nền.
+- Block Ghép mẫu gửi thêm 1 message trong cùng cuộc chat ChatGPT, sau bước ghép mặt và trang phục. Block lưu ảnh trước khi đổi nền thành `tryon-<i>-ghep.png` trong thư mục run. Ảnh sau khi đổi nền là kết quả của block.
+- Khung hình phải giữ đúng ảnh trước khi đổi nền: tỉ lệ, cỡ người, vị trí người, chỗ khung cắt ngang người. Căn phòng trong ảnh nền được đổi góc nhìn cho khớp góc máy của ảnh trước khi đổi nền. Người dùng đặt yêu cầu này ngày 2026-11-05.
+- Script đặt prompt riêng `BG_PROMPT` vào `config.bgPrompt` của block. Lý do: lần chạy ngày 2026-11-02 dùng prompt mặc định `TRYON_DEFAULT_BG`. ChatGPT giữ góc máy của ảnh nền, dời người từ bên trái ra giữa khung và làm người nhỏ đi.
+- `BG_PROMPT` cũng yêu cầu bỏ chữ và khung bình luận TikTok của clip.
+- Model aidancing 192 dùng nền của ảnh ghép, nên video ra có nền mới.
+- `chay-workflow.mjs` ở bước 3 chưa nối ảnh nền.
+
+Số liệu lần thử ngày 2026-11-05, workflow `fa420941-697b-45d1-9b48-5853827ebab9`: clip luulee cắt từ giây 0,2, mẫu 2, đầm lụa bộ 1, prompt `BG_PROMPT`.
+- Block Ghép mẫu chạy 140 giây, gồm cả bước đổi nền.
+- Căn phòng có đủ sofa chữ L màu be, bàn trà, bình hoa, cửa gỗ và sàn gỗ. Góc nhìn căn phòng đổi theo ảnh cũ.
+- Khung bình luận TikTok và chữ trên tường của clip không còn.
+- Người lệch khoảng 6% chiều ngang và 2% chiều dọc so với ảnh trước khi đổi nền. Cỡ người gần như giữ nguyên. Claude đo bằng cách chồng 2 ảnh. Lần chạy ngày 2026-11-02 với prompt mặc định lệch nhiều hơn: người dời từ bên trái ra giữa khung và nhỏ đi.
+
+### Chọn khung đầu
+
+aidancing mở video bằng ảnh ghép, rồi chạy clip từ giây 0. Vì vậy, ảnh dáng phải là khung đầu của clip. Ở một số clip, khung đầu có mặt quay nghiêng, bị che hoặc bị mờ. Khi đó, ChatGPT ghép mặt kém.
+
+Người dùng yêu cầu ngày 2026-11-05: Claude tự xem khung và tự chọn khung. Script chỉ dùng Node và ffmpeg, vì người dùng có thể chạy skill trên Windows. Claude không được dùng Apple Vision hoặc công cụ chỉ có trên macOS.
+
+Cảnh báo: Claude không được chỉ đổi `frameTime` của block Ghép mẫu. aidancing vẫn chạy clip gốc từ giây 0, nên khung đầu của video sẽ lệch với ảnh ghép.
+
+1. Claude chạy:
+   ```bash
+   node <skill>/scripts/khung-dau.mjs <clip.mp4> [--giay 3] [--fps 5]
+   ```
+   - Script chia 3 giây đầu thành 15 khoảng, mỗi khoảng 0,2 giây.
+   - Mỗi ô là khung nét nhất trong khoảng của ô, đo bằng filter `blurdetect`.
+   - Script ghi `luoi.jpg` 5 cột vào thư mục `<tên clip>-khung-dau/` cạnh clip.
+   - Script in mốc `--tu` và mức mờ của từng ô. Mức mờ càng nhỏ, khung càng nét.
+2. Claude xem `luoi.jpg`, rồi mở khung lẻ `kNN.jpg` của các ô ứng viên. Trong lưới, mặt chỉ cao khoảng 30 px. Khung lẻ giữ độ phân giải gốc.
+3. Claude chọn ô sớm nhất đạt cả 5 điều kiện:
+   - Khung phải thấy người từ đầu gối trở lên. Thấy toàn thân thì càng tốt. Clip quảng cáo quần áo, nên ảnh dáng phải thấy trang phục. Người dùng đặt điều kiện này ngày 2026-11-05. Khung cận mặt hoặc nửa người không đạt.
+   - Mặt gần nhìn thẳng, thấy rõ 2 mắt và 2 má. Người dùng đặt tiêu chí này ngày 2026-11-05. Mặt quay 3/4 vẫn thấy 2 mắt, nhưng có 1 má bị khuất, nên không đạt.
+   - Tay, tóc hoặc điện thoại không che mặt.
+   - Mắt mở. Khung nét nhất có thể là khung đang chớp mắt.
+   - Mặt nét. Ở clip ninhanh, khung nét có mức mờ 5,5–6. Khung mờ do chuyển động có mức mờ 7–11.
+4. Nếu ô gần đạt nhưng đang chớp mắt hoặc hơi mờ, Claude xem mọi khung quanh ô đó:
+   ```bash
+   node <skill>/scripts/khung-dau.mjs <clip.mp4> --quanh <mốc của ô>
+   ```
+   Script ghi lưới mọi khung trong ±0,1 giây vào thư mục `<tên clip>-quanh-<giây>s/`.
+5. Nếu ô 1 đạt, Claude dùng clip gốc. Nếu khung khác đạt, Claude chạy:
+   ```bash
+   node <skill>/scripts/khung-dau.mjs <clip.mp4> --tu <mốc của ô>
+   ```
+   Script ghi `<tên clip>-tu-<giây>s.mp4` cạnh clip gốc. Claude dùng clip này cho cả block Ghép mẫu và block AI Dancing.
+6. Nếu 3 giây đầu không có ô đạt, Claude mở `luoi.jpg` cho người dùng xem và hỏi người dùng chọn giây nào.
+
+Ghi chú kỹ thuật:
+- Script cần ffmpeg ≥ 6.0, vì filter `blurdetect` có từ bản 6.0.
+- Script đọc mốc giây thật của từng khung từ kết quả của `blurdetect`, rồi lấy khung bằng filter `select`. Không dùng filter `fps`: filter này lấy khung cuối của mỗi khoảng, nên mốc lệch tới 0,067 giây ở clip 30 fps.
+- Script cắt bằng `-ss` đặt trước `-i` và mã hoá lại bằng libx264. Script trừ 1 ms khỏi mốc `--tu`. Lý do: mốc in ra có 3 chữ số thập phân. Ví dụ, khung 0,46667 giây in thành 0,467, và `-ss 0.467` bỏ qua khung đó.
+- Ngày 2026-11-05, khung đầu của clip cắt khớp khung đã chọn, SSIM 0,99 ở cả 2 clip thử.
+- Nếu clip dài hơn 25 giây, Claude cắt từ khung đã chọn trước, rồi mới cắt còn 24,9 giây.
+
+Số liệu ngày 2026-11-05, clip luulee 576×1024, 30 fps, 19,4 giây:
+- Ô 1, giây 0: mặt quay 3/4 sang phải, 1 má bị khuất. Người đứng nghiêng.
+- Ô 2, giây 0,2: mặt gần nhìn thẳng, thấy rõ 2 mắt và 2 má. Khung thấy người từ đầu tới bắp chân. Claude chọn ô 2, người dùng xem ảnh so sánh và đồng ý.
+- Clip cắt còn 19,2 giây.
+- 4 video luulee làm xong ngày 2026-11-05 dùng clip gốc, chưa cắt.
+
+Số liệu ngày 2026-11-05, clip ninhanh, quay ban đêm, 30 fps, 15,05 giây:
+- Lần thử đầu dùng bản 576×1024 và khung đầu của mỗi khoảng. Claude chọn giây 0,4. Người dùng xem ảnh so sánh và nói: "ảnh bị nhoà hết rồi".
+- Lần thử 2 dùng bản HD 1080×1920 tải qua tikwm với `hd=1`, và chọn khung nét nhất trong mỗi khoảng.
+- Ô 3 là giây 0,533, mức mờ 5,49, nhưng mắt khép một nửa. `--quanh 0.533` cho thấy khung giây 0,467: mức mờ 5,54, mắt mở, mặt nhìn thẳng, thấy toàn thân. Claude chọn giây 0,467.
+- Clip cắt còn 14,61 giây, cỡ 1080×1920, H.264, 17,9 MB.
+- Tay vẫn mờ ở mọi khung quanh giây 0,5, vì người trong clip đang vẫy tay.
 
 ## Bước 2 — Dry run và báo chi phí
 
@@ -118,6 +200,7 @@ node <skill>/scripts/chay-workflow.mjs --face <mặt.png> --outfit <trang-phục
 Người dùng gửi 1 link TikTok và N link Shopee. Kết quả là N clip trên cùng 1 clip TikTok, mỗi clip 1 bộ đồ. Người dùng yêu cầu luồng này ngày 2026-11-03. Phần chính là tạo clip. Đăng TikTok là phần phụ.
 
 1. Claude tải clip TikTok bằng skill `video-downloader`. Clip dài hơn 25 giây: Claude hỏi người dùng, rồi cắt còn 24,9 giây bằng ffmpeg. Gói lớn nhất của aidancing là 25 giây. Ngày 2026-11-03, người dùng chọn cắt.
+   - Sau đó, Claude chọn khung đầu theo mục "Chọn khung đầu" ở bước 1. Các bước sau dùng clip đã cắt.
 2. Claude mở từng link Shopee trong tab nền của Chrome CDP, dùng `Target.createTarget` với `background: true`.
    - Claude đọc tên sản phẩm, ảnh `img[src*="susercontent.com/file/"]` và tên các màu, là `button[aria-label]`.
    - Khoảng 8 ảnh đầu là ảnh gallery, các ảnh sau là icon hoặc ảnh của sản phẩm khác.
@@ -127,19 +210,24 @@ Người dùng gửi 1 link TikTok và N link Shopee. Kết quả là N clip tr�
    - Mỗi lần người dùng gửi link Shopee, Claude luôn thêm 1 bộ đồ bộ miền Tây bằng `--do-bo-image <ảnh>`. Người dùng dùng clip này để dựng clip biến hình. Người dùng yêu cầu ngày 2026-11-03.
    - Claude lấy ảnh đồ bộ từ Google Hình ảnh, từ khoá "đồ bộ miền tây", trong tab nền của Chrome CDP. Claude bấm vào 1 ảnh có người mặc nguyên bộ, rồi đọc ảnh cỡ lớn trong khung xem trước: `img` có `src` http, không thuộc gstatic, `naturalWidth` ≥ 400. Ảnh ghép nhiều khung thì Claude cắt riêng 1 khung.
    - Không dùng `--do-bo`, tức ChatGPT tự vẽ đồ bộ. Ngày 2026-11-03 người dùng xem bản ChatGPT vẽ và nói "đồ bộ gpt gen ra chán quá".
+   - Clip đồ bộ là clip đầu của clip biến hình. Ở clip này, mẫu để mặt mộc, không trang điểm. Các clip Shopee phía sau giữ trang điểm như ảnh mặt mẫu. Người dùng yêu cầu ngày 2026-11-05 để người xem thấy rõ khác biệt khi biến hình.
+   - Script tự thêm yêu cầu mặt mộc, hằng `MAT_MOC`, vào prompt ghép mẫu của riêng nhánh đồ bộ. Yêu cầu này chưa chạy thật lần nào. Lần đầu chạy, Claude kiểm tra ảnh ghép đồ bộ: không son, không kẻ mắt, gương mặt vẫn đúng mẫu.
 4. Claude chép clip, mặt và ảnh sản phẩm vào scratchpad, rồi chạy:
    ```bash
-   cd <skill>/scripts && node ghep-nhieu-bo.mjs --clip <clip.mp4> --face <mặt.png> --product <a.jpg> [--product <b.jpg> ...] --do-bo-image <đồ-bộ.jpg> --name "<tên>"
+   cd <skill>/scripts && node ghep-nhieu-bo.mjs --clip <clip.mp4> --face <mặt.png> --product <a.jpg> [--product <b.jpg> ...] --do-bo-image <đồ-bộ.jpg> --name "<tên>" [--background <nền.png> | --giu-nen]
    ```
+   - Mặc định, script dùng ảnh nền `assets/background/nen-01-phong-khach-sofa-be.png`. `--background` chọn ảnh nền khác. `--giu-nen` giữ nền của clip.
    - Script tạo 1 workflow. Mỗi sản phẩm có 3 block: ảnh Shopee gốc, block "Ảnh" tách sản phẩm qua ChatGPT, và block "Ghép mẫu".
    - Prompt Ghép mẫu là prompt mặc định, thêm 2 dòng: gợi ý kiểu tóc hợp trang phục, và giữ nguyên nhận diện gương mặt.
    - Script dừng sau Ghép mẫu.
+   - Claude so ảnh trước và sau khi đổi nền: cỡ người, vị trí người và khung cắt phải giống nhau. Nếu người bị dời hoặc nhỏ đi, Claude báo người dùng trước bước 6.
 5. Claude mở workflow trên FE bằng `open http://localhost:5173/editor/<id>`. Người dùng xem ảnh ghép trên FE. Claude không cần báo credit.
 6. Người dùng duyệt xong thì Claude chạy:
    ```bash
-   cd <skill>/scripts && node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality quality|fast]
+   cd <skill>/scripts && node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality quality|fast] [--bo bo1 --bo do-bo ...]
    ```
    - Script thêm 1 block AI Dancing sau mỗi block Ghép mẫu. Engine chạy các nhánh song song.
+   - Người dùng chỉ chọn một số bộ thì Claude thêm `--bo <nhãn>` cho từng bộ. Nhãn là `vfLabel` của block Ghép mẫu: `bo1`, `bo2`…, `do-bo`. Ngày 2026-11-05, người dùng chỉ chọn bộ áo dài, `--bo bo1`.
    - Sau khi thêm block, script chờ 15 giây rồi đọc lại workflow. Block bị xoá thì script dừng và không gửi job.
    - Script đọc video từ `data/runs/<runId>/<nodeId>/outputs.json`, rồi chép vào `~/Desktop/Mẫu/Videos/aidancing-<tên>-bo<n>-<thời điểm>.mp4`.
 
@@ -160,6 +248,21 @@ Số liệu lần chạy thứ 2, ngày 2026-11-03, với 2 bộ trên cùng cli
 - 2 block tách sản phẩm chạy song song, mất 34–36 giây. 2 block Ghép mẫu chạy song song, mất 109–112 giây.
 - Ảnh bìa Shopee ghép nhiều khung, có cả màu khác: Claude cắt riêng khung lớn có màu ảnh bìa trước khi tách. Cắt tại cột sáng đều theo chiều dọc giữa các khung.
 - Bước kiểm tra 15 giây trước khi gửi job đạt. Block AI Dancing giữ đủ video sau khi run xong.
+
+Số liệu lần chạy ngày 2026-11-05, clip @danggnhung cắt từ giây 3,933, áo dài cách tân dài tới mắt cá, mẫu 2, có đổi nền:
+- 2 block Ghép mẫu có đổi nền chạy song song, mất 209–217 giây.
+- Người dùng chỉ chọn bộ áo dài, `--bo bo1`. Tab FE vẫn mở nhưng không xoá block AI Dancing trong 15 giây kiểm tra.
+- Job aidancing 3274223, gói 25 giây, quality, 5,5 credit: mất 2030 giây, tức khoảng 34 phút.
+- Video ra 720×1280, 22,3 giây, có tiếng. Nền là phòng khách của ảnh ghép.
+- Từ giây 18 của video, clip gốc lùi camera ra toàn thân. Ảnh ghép không có phần dưới đầu gối, nên aidancing tự vẽ phần này: áo dài ngắn lại thành váy ngang gối, mất quần, mẫu đi giày trắng. Với clip lùi camera như vậy, Claude báo người dùng trước khi chạy aidancing.
+
+Số liệu lần chạy thứ 3, ngày 2026-11-05: 3 bộ cũ và 1 đồ bộ, mặt mẫu 2, clip @luulee.ninhhiep 19,4 giây. Workflow `5cf0dd52-75a0-4db2-abf3-848b4a8c778a`.
+- Dùng lại bộ đồ cũ: Claude lấy ảnh đã tách sạch, `image-0.png` của block tách sản phẩm cũ, trong `~/video-flow/app/data/runs/`. Workflow cũ còn ghi đường dẫn `~/video-flow/data/…` của bản trước khi gom repo.
+- 4 block Ghép mẫu chạy song song: 3 block đạt sau 236–257 giây. Block bộ 1 báo lỗi "ChatGPT chưa gửi prompt". Claude chạy lại riêng block đó bằng `POST /api/workflows/<id>/run` với `{"from": "<id block>"}`, và lần chạy lại đạt.
+- Mặt mộc: ảnh ghép và video đồ bộ có môi nhạt, không kẻ mắt. 3 bộ Shopee có môi đỏ. Khác biệt thấy được ở giây 9,5 của video.
+- Mẫu 2: ảnh ghép không lấy áo hồng của ảnh mặt. 3 trên 4 ảnh ghép lấy khuyên tai hình nơ của ảnh mặt.
+- 4 job aidancing gói 20 giây chạy song song, xong sau 1617–1648 giây. Video ra 720×1280, 19,37 giây, có tiếng.
+- Lỗi nhỏ trong video: chữ trên biển nền bị méo dần. Khung bình luận TikTok ở video bộ 2 có thêm 1 khung chữ méo ở giữa video. Corset của bộ 3 có thêm dây vai ở cuối video.
 
 ## Bước 4 — Kiểm tra video
 
@@ -196,6 +299,7 @@ Cảnh báo: theo hộp thoại của TikTok, TikTok có thể gỡ video AI tr�
 | Hộp thoại "Labeling AI-generated content" | Script hoặc Claude bấm công tắc nhãn AI | Không bấm công tắc này |
 | Người trong ảnh ghép nhỏ hơn người trong clip | Prompt có câu "giữ đủ toàn thân" | Đã bỏ câu đó khỏi prompt mặc định |
 | ChatGPT trả ảnh lệch khung | ChatGPT luôn trả ảnh 2:3 | Block nới ảnh dáng tới 2:3, rồi cắt kết quả về 9:16 |
+| Block Ghép mẫu báo "ChatGPT chưa gửi prompt: prompt vẫn nằm trong ô nhập" | Gặp 1 lần ngày 2026-11-05, khi 4 block Ghép mẫu chạy song song | Chạy lại riêng block lỗi: `POST /api/workflows/<id>/run` với `{"from": "<id block>"}`. Các block khác dùng kết quả đã lưu. Sau đó Claude đóng tab ChatGPT mà block để mở. |
 | Shopee chuyển tab sang `shopee.vn/verify/traffic/error`, trang ghi "Login Required" | Shopee kiểm tra lưu lượng. Ngày 2026-11-03, lần đầu bị chặn, lần sau khi Chrome khởi động lại thì mở được, không cần đăng nhập. | Mở lại link. Nếu vẫn bị chặn, người dùng đăng nhập Shopee trong Chrome CDP. Không được giả user agent của bot để vượt trang này. |
 | `TypeError: fetch failed`, `The blob could not be read` khi upload | Node không đọc được file trên Desktop | Chép file vào scratchpad rồi dùng bản chép |
 | `dang-tiktok.mjs` in "chưa đọc được link" dù đã đăng | Danh sách bài trên trang Content chưa tải xong khi script đọc. Gặp ngày 2026-11-03. | Mở `tiktok.com/tiktokstudio/content` trong tab nền, lấy mã video lớn nhất trong các link `/video/`, rồi đóng tab |
