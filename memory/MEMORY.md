@@ -1,16 +1,19 @@
 - [Kiểm tra chủ động khi chạy script](kiem-tra-chu-dong-khi-chay-script.md) — tự xem trang thật mỗi khoảng 1 phút, không chờ script hết thời gian chờ; báo ngắn gọn
 - [Kênh đăng video](kenh-dang-video.md) — YouTube và fanpage Facebook "Life Cycle Lab", cách đăng Shorts và Thước phim
-- [Thời lượng video dễ lên xu hướng](thoi-luong-video-xu-huong.md) — video cuối nên dài 20–26 giây; áp khi lập bảng phân cảnh
+- [Thời lượng video dễ lên xu hướng](thoi-luong-video-xu-huong.md) — video cuối nên dài 20–26 giây; tốc độ ghép mặc định 1,4, không nên vượt 1,5; áp khi lập bảng phân cảnh
 - [Research chỉ lấy chi tiết hình ảnh](research-chi-lay-chi-tiet-hinh-anh.md) — video không thuyết minh; bỏ lịch tháng, số ngày từng giai đoạn
 - [Không cần hoàn hảo](khong-can-hoan-hao.md) — lỗi nhỏ thì giữ, không tốn thêm tín dụng; mở video cho người dùng xem sớm
-- [Video tiếp theo](video-tiep-theo.md) — chưa đăng: cá lóc, sâu tre; chưa làm: hết danh sách
-- [Khung giờ đăng video](khung-gio-dang-video.md) — dế cơm đăng 21:31 thứ Năm 2026-10-29 (+07), Facebook có lượt xem cao; tôm càng xanh hẹn 21:30 ngày 2026-10-31 để so; nhắc khi đăng
+- [Video tiếp theo](video-tiep-theo.md) — chưa đăng: cá lóc, sâu tre, kiến lửa, cá thòi lòi; chưa làm: hết danh sách
+- [Khung giờ đăng video](khung-gio-dang-video.md) — giờ đăng và link từng video; tôm càng xanh (21:30) đạt 1 triệu lượt xem YouTube, cua đồng (11:30) 54 nghìn, video tối khác dưới 1 nghìn: giờ 21:30 không giải thích được; nhắc khi đăng
 - [Chrome không lấy focus](chrome-khong-lay-focus.md) — script CDP mở tab nền, không bringToFront; sửa ngày 2026-10-30
 - [Đóng tab sau khi xong việc](dong-tab-sau-khi-xong.md) — lưu danh sách tab trước khi chạy script Chrome, đóng tab mới sau khi xong
 - [Ghép mẫu + aidancing trong video-flow](video-flow-ghep-mau-aidancing.md) — ảnh 9:16 lấy khung đầu clip, chỉ đổi mặt + quần áo, gọi aidancing tốn credit; skill aidancing-tiktok chạy cả chuỗi và đăng TikTok; bản mở rộng TikTok + N link Shopee, 2 mẫu mặt trong assets/mat-mau, phải hỏi người dùng chọn mẫu nào, duyệt ảnh ghép trên FE
 - [TikTok không bật nhãn AI](tiktok-khong-bat-nhan-ai.md) — đăng @linh_dan_20x: không bật AI-generated content, không đổi cài đặt tài khoản
 - [Mô tả TikTok không ghi tên sản phẩm](tiktok-mo-ta-khong-ten-san-pham.md) — @linh_dan_20x: chỉ ghi câu vu vơ, hashtag chung, không tả trang phục
-- [Luôn có clip đồ bộ](luon-co-clip-do-bo.md) — mỗi lần gửi link Shopee: thêm 1 clip mẫu mặc đồ bộ miền Tây lấy ảnh Google (--do-bo-image), không để GPT vẽ; để dựng clip biến hình
+- [Luôn có clip đồ bộ](luon-co-clip-do-bo.md) — mỗi lần gửi link Shopee: thêm 1 clip mẫu mặc đồ bộ miền Tây lấy ảnh Google (--do-bo-image), không để GPT vẽ, mẫu để mặt mộc; để dựng clip biến hình
 - [Startup procedure](startup-procedure.md) — checklist khi user nói "start": server/web + Chrome CDP (check context sống, không chỉ port)
 - [Chrome CDP context gotcha](chrome-cdp-context-gotcha.md) — đóng cửa sổ Chrome mà process còn nền → gãy connect + mất auto-download
-- [Clip mở đầu camera tiến vào](clip-mo-dau-camera-tien-vao.md) — mỗi video động vật mở đầu bằng clip M: toàn cảnh → camera tiến nhanh vào chủ thể, Flow tạo 4 giây; người dùng rất thích ở video gián
+- [Clip mở đầu camera tiến vào](clip-mo-dau-camera-tien-vao.md) — mỗi video động vật mở đầu bằng clip M: toàn cảnh → camera tiến nhanh vào chủ thể, Flow tạo 4 giây; video cuối chỉ giữ 1–1,5 giây, không được dài hơn (quy tắc 2026-11-07)
+- [Chọn khung đầu, không dùng Apple Vision](chon-khung-dau-khong-apple-vision.md) — khung đầu clip phải thấy từ đầu gối trở lên, mặt nhìn thẳng, nét: Claude tự xem lưới khung-dau.mjs, cắt clip từ khung đạt; script phải chạy được trên Windows
+- [Video giải thích nhiều chủ đề](video-giai-thich-nhieu-chu-de.md) — mục tiêu mới 2026-11-07: video giải thích có giọng đọc, 3 trường phái (đồ hoạ, clip thật, kết hợp); OpenMontage làm khung; không lấy pipeline động vật làm tiêu chí
+- [Công cụ cần API trả phí](bo-cong-cu-api-tra-phi.md) — trước khi bỏ, đọc code xem phần trả phí thay được bằng voice-clone, gpt-image.mjs, flow.mjs, Whisper local không; chỉ bỏ khi không thay được hoặc không hợp
