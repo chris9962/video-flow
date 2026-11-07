@@ -67,12 +67,31 @@ echo "== 5. Thư mục ảnh và video =="
 mkdir -p "$HOME/Desktop/Mẫu/Videos" "$HOME/Desktop/Mẫu/Clip mẫu" "$HOME/Desktop/Mẫu/Ảnh"
 echo "  ~/Desktop/Mẫu/{Videos,Clip mẫu,Ảnh}"
 
+echo "== 6. Voice Studio =="
+# Skill voice-clone gọi ~/voice-studio/vc.py, và .venv ghi đường dẫn tuyệt đối ~/voice-studio.
+link="$HOME/voice-studio"
+if [ -L "$link" ] || [ ! -e "$link" ]; then
+  ln -sfn "$REPO/voice-studio" "$link"
+  echo "  $link → $REPO/voice-studio"
+else
+  warn "$link là thư mục riêng. Đổi tên thư mục đó rồi chạy lại."
+fi
+if [ -x voice-studio/.venv/bin/python ]; then
+  echo "  voice-studio/.venv đã có, giữ nguyên"
+elif command -v uv >/dev/null 2>&1; then
+  (cd voice-studio && uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r requirements.txt) \
+    || warn "Cài voice-studio/.venv lỗi"
+else
+  warn "Thiếu uv, chưa cài voice-studio/.venv. Chạy: brew install uv. Sau đó chạy lại ./setup.sh"
+fi
+
 cat <<'EOF'
 
-== 6. Việc bạn làm tay ==
+== 7. Việc bạn làm tay ==
 1. Chép app/data/settings.json từ máy cũ, nếu bạn dùng Claude chat trong app. File này chứa claudeToken, không có trong git.
 2. Chạy: cd ~/video-flow/app && npm run chrome
    Trong cửa sổ Chrome đó, đăng nhập ChatGPT, Google (Flow, YouTube), Facebook, TikTok Studio và aidancing.net.
 3. Nếu cần ảnh và video cũ, chép dong-vat/<tên-video>/ và ~/Desktop/Mẫu từ máy cũ.
-4. Mở Claude Code tại ~/video-flow. Khi Claude Code hỏi, chọn trust folder để setting memory có hiệu lực.
+4. Nếu cần giọng mẫu, chép ~/voice-clone/voices từ máy cũ. Lần chạy Voice Studio đầu tiên tải mô hình OmniVoice 2,46 GB.
+5. Mở Claude Code tại ~/video-flow. Khi Claude Code hỏi, chọn trust folder để setting memory có hiệu lực.
 EOF
