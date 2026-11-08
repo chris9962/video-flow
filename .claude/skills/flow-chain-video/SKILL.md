@@ -39,7 +39,7 @@ Trả lời người dùng bằng tiếng Việt kỹ thuật: kết luận trư
 
 0. Chuẩn bị công cụ (lần đầu).
 1. Phân tích video mẫu, nếu người dùng gửi video mẫu.
-2. Xem ảnh thật của loài trên Google. Viết kịch bản, chọn số clip, thêm clip mở đầu M, lập bảng phân cảnh. Người dùng duyệt.
+2. Xem ảnh thật của loài trên Google. Viết kịch bản, chọn số clip, hỏi người dùng có làm clip mở đầu M không, lập bảng phân cảnh. Người dùng duyệt.
 3. Viết prompt ảnh khung. Người dùng tạo ảnh trong GPT. Claude kiểm tra ảnh.
 4. Viết prompt chuyển động cho Flow.
 5. Viết `plan.json`.
@@ -123,11 +123,15 @@ Hệ số tăng tốc = tổng số giây render ÷ số giây của video cuố
 
 Ví dụ: 2 clip × 8 giây = 16 giây render, video cuối 11 giây → hệ số 1,45. Hệ số quá lớn: chọn `duration` ngắn hơn cho từng clip.
 
-Giới hạn tốc độ: `output.speed` không nên vượt 1,5. Người dùng ghi chú ngày 2026-11-07: tốc độ 1,6 quá nhanh. Người dùng chọn 1,4 cho video kiến lửa và video cá thòi lòi. Nếu video dài hơn 26 giây ở tốc độ 1,4, Claude báo người dùng và đề xuất bớt clip, không tăng tốc. Clip M là ngoại lệ: `clips[].speed` của clip M theo quy tắc 1–1,5 giây ở mục 2.4.
+Giới hạn tốc độ: `output.speed` không nên vượt 1,5. Người dùng ghi chú ngày 2026-11-07: tốc độ 1,6 quá nhanh. Người dùng chọn 1,4 cho video kiến lửa và video cá thòi lòi. Video cuối phải dài ít nhất 30 giây. Người dùng yêu cầu ngày 2026-11-08, vì Facebook cần thời gian xem trung bình 24 giây. Nếu video ngắn hơn 30 giây ở tốc độ 1,4, Claude đề xuất thêm clip hoặc giảm tốc, rồi hỏi người dùng. Clip M là ngoại lệ: `clips[].speed` của clip M theo quy tắc 1–1,5 giây ở mục 2.4.
 
 ### 2.4. Clip mở đầu M: camera tiến từ toàn cảnh vào chủ thể
 
-Mỗi video động vật nên mở đầu bằng clip M. Người dùng yêu cầu cách mở đầu này ngày 2026-11-05 và rất thích kết quả ở video gián nhà. Ý tưởng của người dùng: cảnh đầu quay rộng cả nơi sống, rồi camera tiến sâu vào tới cảnh 1 của vòng đời.
+Clip M là tuỳ chọn. Claude phải hỏi người dùng có làm clip M không, trước khi lập bảng phân cảnh. Nếu người dùng không trả lời, Claude không làm clip M.
+
+Ngày 2026-11-08, người dùng nhận xét: các video đã đăng có clip M ít lượt xem. Người dùng yêu cầu video tiếp theo không có clip M, để so kết quả.
+
+Người dùng đề ra clip M ngày 2026-11-05, sau video gián nhà. Ý tưởng của người dùng: cảnh đầu quay rộng cả nơi sống, rồi camera tiến sâu vào tới cảnh 1 của vòng đời.
 
 Quy tắc độ dài: trong video cuối, đoạn mở đầu M phải dài 1–1,5 giây. Không được để đoạn M dài hơn 1,5 giây. Người dùng yêu cầu quy tắc này ngày 2026-11-07. Quy tắc này thay cho mức khoảng 4 giây ngày 2026-11-05.
 
@@ -184,7 +188,7 @@ Mẫu đã điền đầy đủ: `references/vi-du.md`.
 
 ### 2.6. Người dùng duyệt
 
-Gửi người dùng: bảng phân cảnh, số clip, số ảnh GPT cần tạo, model, độ dài, hệ số tăng tốc. Chờ người dùng duyệt trước bước 3. Ảnh GPT tốn thời gian của người dùng. Clip Flow tốn credit.
+Gửi người dùng: bảng phân cảnh, số clip, số ảnh GPT cần tạo, model, độ dài, hệ số tăng tốc. Ghi rõ video có clip M hay không, theo câu trả lời ở mục 2.4. Chờ người dùng duyệt trước bước 3. Ảnh GPT tốn thời gian của người dùng. Clip Flow tốn credit.
 
 Nếu video có mục đích giáo dục, hỏi người dùng có cần đúng sinh học không. Hai video mẫu đã phân tích có lỗi: sâu bướm Luna thật làm kén trong lá khô dưới đất, không treo kén trên cành; bướm phượng thật đẻ từng trứng riêng lẻ, không đẻ thành cụm.
 
@@ -512,7 +516,7 @@ Người dùng đăng video lên 2 nơi, cùng tên "Life Cycle Lab". Chrome CDP
 | Nơi | Dạng bài | Địa chỉ |
 |---|---|---|
 | YouTube | Shorts | Kênh `UCyVJDSNhxgezvgYuf82wi6Q`, đăng qua YouTube Studio |
-| Facebook | Thước phim | https://www.facebook.com/profile.php?id=61595556214345, đăng qua `facebook.com/reels/create` |
+| Facebook | Thước phim và Tin | https://www.facebook.com/profile.php?id=61595556214345, đăng qua `facebook.com/reels/create` |
 
 Cảnh báo trước khi chạy:
 - Chỉ đăng khi người dùng yêu cầu. Bài công khai hiện ngay cho mọi người.
@@ -529,6 +533,7 @@ node <skill>/scripts/dang-bai.mjs <thư mục video> [--youtube] [--facebook] [-
 - Script lấy video từ `plan.json`, trường `output.file`. Thư mục không có `plan.json` thì script dùng `<tên thư mục>.mp4`.
 - YouTube: script điền tiêu đề, mô tả, chọn "Không dành cho trẻ em", "Sử dụng AI = Có", chế độ Công khai, rồi bấm Xuất bản.
 - Facebook: dòng đầu của bài là tiêu đề, các dòng sau là mô tả. Script đổi "Subscribe" thành "Follow" và `#shorts` thành `#reels`. Script bật "Thêm nhãn AI", kiểm tra đối tượng Công khai, rồi bấm Đăng.
+- Facebook đăng thước phim lên Tin của trang cùng lúc. Trang đặt "Chia sẻ lên tin" là "Luôn chia sẻ thước phim lên tin" từ ngày 2026-11-08. Cài đặt này áp dụng cả khi người dùng đăng tay. Nếu dòng "Chia sẻ lên tin" ghi "Tắt", script chọn lại "Luôn chia sẻ". Nếu vẫn "Tắt", script báo lỗi và không đăng.
 - Sau khi đăng, script ghi link vào `dang-bai.md`, mục "## Đã đăng". Trước khi đăng, Claude đọc mục này để không đăng trùng.
 - `--dry-run` điền mọi trường rồi dừng trước nút Xuất bản hoặc Đăng. Với YouTube, video thử ở lại trong Studio dạng bản nháp riêng tư.
 
@@ -572,7 +577,7 @@ Lỗi đã gặp:
 | `scripts/flow.mjs` | Tạo 1 clip trên Flow và tải bản 1080p. `chain.mjs gen` gọi file này khi chưa có clip. `--project <url>` tải video từ project đã tạo xong. |
 | `scripts/anh-google.mjs` | Chụp trang Hình ảnh của Google cho từng từ khoá, để xem ảnh thật của loài. Xem mục 2.0. |
 | `scripts/launch-chrome.mjs` | Mở Chrome CDP, cổng 9222, profile `~/chrome-cdp-profile` |
-| `scripts/dang-bai.mjs` | Đăng video lên YouTube Shorts và Thước phim của fanpage Facebook. Xem bước 10. |
+| `scripts/dang-bai.mjs` | Đăng video lên YouTube Shorts, Thước phim và Tin của fanpage Facebook. Xem bước 10. |
 | `scripts/song-song/` | Tạo ảnh K và clip song song: `auto-images.sh`, `gen-all.sh`, `tai-lai.sh`. Xem mục 6.3. |
 | `references/phan-tich-video-mau.md` | Người dùng gửi video mẫu |
 | `references/flow-tu-dong.md` | Chuẩn bị tự động Flow, xử lý lỗi Flow, làm tay khi tự động lỗi |
