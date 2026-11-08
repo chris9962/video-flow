@@ -1,0 +1,91 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K00.png",
+      "prompt": "Vertical 2:3 realistic photo of a cut-away view of a mangrove mudflat at low tide in the Mekong Delta, seen from the side at mud level, like a clean vertical slice through the ground. The upper 35 percent of the frame: mangrove trees with arching prop roots, soft morning light, a pale sky, and the shiny wet grey mud surface of the mudflat with small puddles. At the horizontal center of the mud surface stands a low cone-shaped mud turret built of small mud pellets, with a round hole in its top: the entrance of a mudskipper burrow. The lower 65 percent of the frame: the smooth cut face of wet dark grey-brown mud with fine roots and small shells. From the turret a narrow J-shaped tunnel goes down through the mud. Near the bottom of the tunnel, at the horizontal center of the frame at 72 percent of the frame height, is a dome-shaped egg chamber that bulges up from the tunnel, a little brighter than the mud around it. The upper half of the chamber holds air, and its curved ceiling is covered with a single layer of tiny pale yellow eggs. The lower half of the chamber holds murky water, and one giant mudskipper rests still in this water under the eggs. Soft daylight falls on the cut face from the front. Realistic photo, natural colors, deep focus, not a diagram, not an illustration. Keep everything important away from the left and right edges. No people. No text, no watermark."
+    },
+    {
+      "file": "K01.png",
+      "prompt": "Edit this image. The camera has moved forward and down through the mud into the egg chamber at the bottom of the burrow. Show a close-up of the inside of this one chamber, seen from the side. The chamber is a smooth dome-shaped cavity in wet dark grey-brown mud and fills the middle of the frame. Its curved ceiling, in the upper half of the chamber, is covered with a single dense layer of about sixty tiny round glossy pale yellow eggs stuck to the mud. The upper half of the chamber holds air. The lower part of the chamber holds still, murky brownish water; the water surface is flat and horizontal at 62 percent of the frame height. In this water, under the eggs, rests one giant mudskipper (Periophthalmodon schlosseri), seen from the side, head to the right: grey-brown body, two bulging eyes close together on top of its head just below the water surface, small white spots on its cheeks, muscular pectoral fins. Its head and front body are inside the frame, and its tail goes out of the frame at the left edge. Each egg is about one third the size of the fish's eye. The same soft daylight falls into the chamber from the front. Keep the eggs and the fish's head within the middle 70 percent of the frame width. Macro photo, sharp focus on the eggs. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the chamber, the mud, the water level, the fish, the lighting and camera angle exactly the same. The eggs stay in exactly the same place and size, but they are now ready to hatch: each egg is clear and see-through, with two tiny black eyes and a curled tiny embryo inside. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the chamber, the mud, the fish, the eggs, the lighting and camera angle exactly the same. The water has risen and now fills the whole chamber up to the ceiling: there is no air left, and the eggs on the ceiling are under water. The fish stays in exactly the same place, pose and size. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the chamber, the mud, the water, the fish, the lighting and camera angle exactly the same. The eggs have hatched: the ceiling now holds only empty, clear, broken egg shells in the same place, and about thirty tiny see-through fish larvae with big black eyes and thin bodies swim in the water of the chamber, between the ceiling and the fish. Each larva is about as long as two eggs. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. The camera has moved back up along the burrow tunnel and out of the mud. It is low tide on the same mangrove mudflat. Show the shiny wet grey mud surface seen from the side at mud level. The lower 40 percent of the frame is the cut face of wet dark grey-brown mud, with the top of the narrow burrow tunnel going down. The upper 60 percent shows the wet mud surface with small puddles, and blurred mangrove prop roots behind in soft morning light. The low cone-shaped mud turret with a hole on top stands on the mud a little behind, about one fifth of the frame width from the left edge. On the wet mud surface in the foreground, centered just right of the frame center, rests one small juvenile mudskipper seen from the side, head to the right, propped up on its pectoral fins: slender pale grey body with dark blotches, two bulging eyes on top of its head. Its body is one fifth of the frame width long. Only one fish. Macro photo, sharp focus on the young fish. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the mud, the turret, the puddles, the roots, the lighting and camera angle exactly the same. The young mudskipper stays in exactly the same spot and pose, head to the right, but it has grown into an adult giant mudskipper 2.4 times longer than now: a long grey-brown body with a dark stripe running from the eye to the tail, small white and pale blue spots on its cheeks and sides, two bulging eyes close together on top of its big head, strong pectoral fins, and its large first dorsal fin folded flat on its back. Keep the whole fish inside the middle 80 percent of the frame width. Only one fish. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. Keep the mud, the turret, the puddles, the roots, the lighting and camera angle exactly the same. The adult mudskipper stays in the same spot and size, head to the right. It now pushes up on its pectoral fins, lifts its head, and raises its large first dorsal fin like a sail: a tall fan-shaped brown fin with dark spots and a pale edge. Its long second dorsal fin is also raised, with a dark stripe and a white edge. Only one fish. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The pale yellow eggs on the ceiling slowly become clear, and tiny black eyes and curled embryos appear inside them, little by little, during the whole clip. The mudskipper stays still in the water. The chamber and the water stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue.",
+      "speed": 0.934
+    },
+    {
+      "id": "B",
+      "start": "K02.png",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The water in the chamber slowly rises, little by little, until it fills the whole chamber and covers the eggs on the ceiling. The mudskipper stays still. The eggs and the mud stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue.",
+      "speed": 0.816
+    },
+    {
+      "id": "C",
+      "start": "K03.png",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The eggs on the ceiling slowly hatch, and tiny see-through larvae with black eyes wriggle out and swim in the water. The empty egg shells stay on the ceiling. The mudskipper stays still. The chamber and the mud stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue.",
+      "speed": 0.995
+    },
+    {
+      "id": "N",
+      "start": "K04.png",
+      "end": "K05.png",
+      "duration": 4,
+      "prompt": "In a single continuous shot, no scene cuts, no fade, no dissolve. One smooth camera move: the camera quickly and smoothly pulls back from the egg chamber and rises up along the burrow tunnel through the mud, up to the surface of the mangrove mudflat at low tide, and stops close to a young mudskipper resting on the wet mud near the mud turret. The young fish does not move. In the final second the camera stops moving. Nothing else changes. Quiet natural ambience, no music, no dialogue.",
+      "speed": 0.75
+    },
+    {
+      "id": "D",
+      "start": "K05.png",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The young mudskipper stays in the same spot and grows bigger and bigger into an adult, little by little, smoothly and evenly from the first second to the last second, never suddenly. Its head grows together with its body. There is only one fish. The mud, the turret and the roots stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue.",
+      "speed": 1.003
+    },
+    {
+      "id": "E",
+      "start": "K06.png",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The mudskipper slowly pushes up on its pectoral fins, lifts its head and raises its large dorsal fin like a sail. There is only one fish. The mud, the turret and the roots stay exactly the same. Nothing else changes. Quiet natural ambience, no music, no dialogue.",
+      "speed": 0.899
+    }
+  ],
+  "output": {
+    "file": "/private/tmp/claude-501/-Users-nguyentruong-video-flow/bb5dc709-7408-40b0-8196-ab2da87f58e3/scratchpad/tts/hinh-thuyet-minh-vi.mp4",
+    "speed": 1.0,
+    "crossfade": 0.25
+  }
+}

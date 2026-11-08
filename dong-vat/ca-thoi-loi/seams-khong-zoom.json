@@ -1,0 +1,28 @@
+{
+  "file": "/Users/nguyentruong/video-flow/dong-vat/ca-thoi-loi/ca-thoi-loi-khong-zoom.mp4",
+  "speed": 1.4,
+  "crossfade": 0.25,
+  "clips": [
+    "A",
+    "B",
+    "C",
+    "N",
+    "D",
+    "E"
+  ],
+  "durations": [
+    5.958333,
+    5.958333,
+    5.958333,
+    3.916667,
+    5.958333,
+    5.958333
+  ],
+  "seams": [
+    4.167,
+    8.244,
+    12.321,
+    14.94,
+    19.018
+  ]
+}

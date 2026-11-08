@@ -11,3 +11,8 @@ Which stage did you not expect? Tell me in the comments 👇
 Subscribe for more life cycles.
 
 #mudskipper #lifecycle #shorts
+
+## Đã đăng
+
+- YouTube 2026-11-08: https://youtube.com/shorts/su5Ay_voeWY
+- Facebook 2026-11-08: https://www.facebook.com/reel/1126284810014284/
