@@ -30,6 +30,7 @@ Giờ đăng các video trước, lấy theo giờ sửa file `dang.log`, để 
 - Cá phổi châu Phi: 2026-11-04, thứ Tư. YouTube khoảng 22:04:32, Facebook khoảng 22:06:17. Người dùng bảo đăng, Claude đăng ngay. Video dài 57 giây, dài hơn các video trước. Link: https://youtube.com/shorts/OkqXKnojO7o, https://www.facebook.com/reel/3768485876649745/
 - Gián nhà: 2026-11-05, thứ Năm. YouTube khoảng 09:56:15, Facebook khoảng 09:57:23. Người dùng bảo đăng, Claude đăng ngay. Video có clip mở đầu M camera tiến vào. Link: https://youtube.com/shorts/pKPqoUFGhm4, https://www.facebook.com/reel/1358924449517084/
 - Lươn đồng: 2026-11-06, thứ Sáu. YouTube khoảng 21:45:28, Facebook khoảng 21:47:07. Người dùng bảo đăng, Claude đăng ngay, giờ đăng gần khung 21:30. Video có clip mở đầu M dài 1,5 giây. Link: https://youtube.com/shorts/xk6W73WWXLc, https://www.facebook.com/reel/1841630743657917/
+- Cá thòi lòi: 2026-11-08, Chủ Nhật. YouTube khoảng 10:20:26, Facebook khoảng 10:22:35. Người dùng bảo đăng, Claude đăng ngay. Đây là video đầu tiên có thuyết minh tiếng Anh bằng giọng clone của người dùng, dài 34 giây, không có clip M. Link: https://youtube.com/shorts/su5Ay_voeWY, https://www.facebook.com/reel/1126284810014284/
 
 Lượt xem YouTube ngày 2026-11-07, Claude lấy bằng `yt-dlp`:
 - Tôm càng xanh, đăng 21:30: 1.008.853 lượt xem, 12.243 lượt thích. Đây là video cao nhất kênh.
