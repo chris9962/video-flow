@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Đăng video lên YouTube Shorts và Thước phim của fanpage Facebook qua Chrome CDP.
+// Đăng video lên YouTube Shorts, Thước phim và Tin của fanpage Facebook qua Chrome CDP.
 // Tiêu đề và mô tả lấy từ dang-bai.md trong thư mục video. Giao diện tiếng Việt, đo thật ngày 2026-10-21.
 // Không chạy khi flow.mjs đang tải video: kết nối Playwright mới đổi thư mục tải của Chrome và làm hỏng file tải.
 //
@@ -233,6 +233,17 @@ async function facebook(ctx, video, caption, dryRun) {
     throw new Error(`Facebook: nhãn AI hoặc đối tượng sai, chưa đăng. Đối tượng: "${audience.replace(/\s+/g, ' ')}"`);
   }
   step('Facebook: nhãn AI bật, đối tượng Công khai');
+  // "Luôn chia sẻ" là cài đặt của trang: chọn 1 lần thì các thước phim sau tự lên tin, kể cả khi đăng tay.
+  const storyRow = page.getByRole('button').filter({ has: page.getByText(/^(Chia sẻ lên tin|Share to story)$/) }).last();
+  if (/^(Tắt|Off)$/m.test(await storyRow.innerText())) {
+    await storyRow.click();
+    await page.locator('label').filter({ hasText: /^(Luôn chia sẻ thước phim lên tin|Always share)/ }).locator('input[type="radio"]').check({ force: true });
+    await page.getByRole('button', { name: /^(Lưu|Save)$/ }).click();
+    await page.waitForTimeout(1_500);
+  }
+  const story = (await storyRow.innerText()).replace(/\s+/g, ' ');
+  if (/(Tắt|Off)$/.test(story)) throw new Error(`Facebook: chưa bật chia sẻ lên tin, chưa đăng. Dòng cài đặt: "${story}"`);
+  step(`Facebook: ${story}`);
   if (dryRun) {
     step('Facebook: --dry-run, dừng trước nút Đăng. Tab Tạo thước phim để mở.');
     return null;

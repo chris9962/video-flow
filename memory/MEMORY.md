@@ -1,9 +1,9 @@
 - [Kiểm tra chủ động khi chạy script](kiem-tra-chu-dong-khi-chay-script.md) — tự xem trang thật mỗi khoảng 1 phút, không chờ script hết thời gian chờ; báo ngắn gọn
-- [Kênh đăng video](kenh-dang-video.md) — YouTube và fanpage Facebook "Life Cycle Lab", cách đăng Shorts và Thước phim
-- [Thời lượng video dễ lên xu hướng](thoi-luong-video-xu-huong.md) — video cuối nên dài 20–26 giây; tốc độ ghép mặc định 1,4, không nên vượt 1,5; áp khi lập bảng phân cảnh
+- [Kênh đăng video](kenh-dang-video.md) — YouTube và fanpage Facebook "Life Cycle Lab", cách đăng Shorts, Thước phim; thước phim tự lên Tin từ 2026-11-08
+- [Thời lượng video](thoi-luong-video-xu-huong.md) — video cuối phải dài ít nhất 30 giây (2026-11-08, thay mức 20–26 giây); tốc độ ghép mặc định 1,4, không nên vượt 1,5; video ngắn thì đề xuất thêm clip hoặc giảm tốc; áp khi lập bảng phân cảnh
 - [Research chỉ lấy chi tiết hình ảnh](research-chi-lay-chi-tiet-hinh-anh.md) — video không thuyết minh; bỏ lịch tháng, số ngày từng giai đoạn
 - [Không cần hoàn hảo](khong-can-hoan-hao.md) — lỗi nhỏ thì giữ, không tốn thêm tín dụng; mở video cho người dùng xem sớm
-- [Video tiếp theo](video-tiep-theo.md) — chưa đăng: cá lóc, sâu tre, kiến lửa, cá thòi lòi; chưa làm: hết danh sách
+- [Video tiếp theo](video-tiep-theo.md) — chưa đăng: cá lóc, sâu tre, kiến lửa; chưa làm: hết danh sách
 - [Khung giờ đăng video](khung-gio-dang-video.md) — giờ đăng và link từng video; tôm càng xanh (21:30) đạt 1 triệu lượt xem YouTube, cua đồng (11:30) 54 nghìn, video tối khác dưới 1 nghìn: giờ 21:30 không giải thích được; nhắc khi đăng
 - [Chrome không lấy focus](chrome-khong-lay-focus.md) — script CDP mở tab nền, không bringToFront; sửa ngày 2026-10-30
 - [Đóng tab sau khi xong việc](dong-tab-sau-khi-xong.md) — lưu danh sách tab trước khi chạy script Chrome, đóng tab mới sau khi xong
@@ -13,7 +13,11 @@
 - [Luôn có clip đồ bộ](luon-co-clip-do-bo.md) — mỗi lần gửi link Shopee: thêm 1 clip mẫu mặc đồ bộ miền Tây lấy ảnh Google (--do-bo-image), không để GPT vẽ, mẫu để mặt mộc; để dựng clip biến hình
 - [Startup procedure](startup-procedure.md) — checklist khi user nói "start": server/web + Chrome CDP (check context sống, không chỉ port)
 - [Chrome CDP context gotcha](chrome-cdp-context-gotcha.md) — đóng cửa sổ Chrome mà process còn nền → gãy connect + mất auto-download
-- [Clip mở đầu camera tiến vào](clip-mo-dau-camera-tien-vao.md) — mỗi video động vật mở đầu bằng clip M: toàn cảnh → camera tiến nhanh vào chủ thể, Flow tạo 4 giây; video cuối chỉ giữ 1–1,5 giây, không được dài hơn (quy tắc 2026-11-07)
+- [Clip mở đầu camera tiến vào](clip-mo-dau-camera-tien-vao.md) — clip M là tuỳ chọn từ 2026-11-08: hỏi người dùng trước mỗi video; video tiếp theo không có clip M vì video có clip M ít lượt xem; nếu làm: video cuối giữ 1–1,5 giây
 - [Chọn khung đầu, không dùng Apple Vision](chon-khung-dau-khong-apple-vision.md) — khung đầu clip phải thấy từ đầu gối trở lên, mặt nhìn thẳng, nét: Claude tự xem lưới khung-dau.mjs, cắt clip từ khung đạt; script phải chạy được trên Windows
 - [Video giải thích nhiều chủ đề](video-giai-thich-nhieu-chu-de.md) — mục tiêu mới 2026-11-07: video giải thích có giọng đọc, 3 trường phái (đồ hoạ, clip thật, kết hợp); OpenMontage làm khung; không lấy pipeline động vật làm tiêu chí
 - [Công cụ cần API trả phí](bo-cong-cu-api-tra-phi.md) — trước khi bỏ, đọc code xem phần trả phí thay được bằng voice-clone, gpt-image.mjs, flow.mjs, Whisper local không; chỉ bỏ khi không thay được hoặc không hợp
+- [Codex dùng reasoning medium](codex-reasoning-medium.md) — khi gọi `codex exec`, thêm `-c model_reasoning_effort="medium"`; không sửa ~/.codex/config.toml (2026-11-08)
+- [Kịch bản đủ quy trình, cuốn hút](kich-ban-du-quy-trinh-cuon-hut.md) — đánh giá kịch bản theo quy trình sống và hành động (chui ra hang, ăn mồi, lớn dần, nhảy, di chuyển); cỡ vây sai là lỗi nhỏ (2026-11-08)
+- [Giọng thuyết minh tiếng Anh](giong-thuyet-minh-tieng-anh.md) — bản tiếng Anh dùng giọng clone của người dùng `giong-toi-eng`, tạo từ voice-mau-eng.mp3 (2026-11-08)
+- [Chia việc kịch bản và thuyết minh](chia-viec-kich-ban-thuyet-minh.md) — Claude thu thập tài liệu và tạo giọng; GPT (Codex) viết lời thuyết minh và bản dịch; Claude không tự dịch; giọng cuối bằng tiếng Anh (2026-11-08)

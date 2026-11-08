@@ -1,0 +1,28 @@
+{
+  "file": "/private/tmp/claude-501/-Users-nguyentruong-video-flow/bb5dc709-7408-40b0-8196-ab2da87f58e3/scratchpad/tts/hinh-thuyet-minh-vi.mp4",
+  "speed": 1,
+  "crossfade": 0.25,
+  "clips": [
+    "A",
+    "B",
+    "C",
+    "N",
+    "D",
+    "E"
+  ],
+  "durations": [
+    6.379371520342612,
+    7.301878676470588,
+    5.988274371859296,
+    5.222222666666666,
+    5.9405114656031905,
+    6.627734149054504
+  ],
+  "seams": [
+    6.254,
+    13.306,
+    19.045,
+    24.017,
+    29.707
+  ]
+}
