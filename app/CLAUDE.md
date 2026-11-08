@@ -178,7 +178,7 @@ File: `apps/server/src/nodes/tryon.ts`, prompt mặc định ở `packages/share
 ### AI Dancing (aidancing.net) — block `aidancing`, copy chuyển động ảnh mẫu + video mẫu
 File: `apps/server/src/services/aidancing-impl.ts`. Không mở tab: gọi HTTP bằng `browser.contexts()[0].request` (dùng cookie đăng nhập của Chrome CDP). Đo ngày 2026-11-03.
 - **Tạo job:** `POST https://aidancing.net/create/general`, multipart: `jobTypeId` (192 = "AI Copy Chuyển Động Dùng Nền Ảnh v5.1", job `ANIMATE_IV2V_720_1280_CHANGE_BG_V5_TIME`), `aspectRatio` (`9:16`|`16:9`), `qualityMode` (`1` = Chất lượng, `2` = Nhanh), `voiceId` (rỗng), `actualTime` (10|15|20|25 giây), `title`, `image_1` (ảnh), `video`. Không CSRF. Thành công → 302 về `/dashboard`. Response không có mã job → đặt `title` riêng (`vf-xxxxxxxx`) rồi tìm job theo title.
-- **Giá:** Chất lượng 0,22 credit/giây, Nhanh 0,11 credit/giây, tính theo `actualTime` (15 giây Chất lượng = 3,3 credit). Thiếu credit thì trang hiện confirm → không gửi.
+- **Giá:** Chất lượng 0,29 credit/giây, Nhanh 0,15 credit/giây (đọc trên trang ngày 2026-11-08; ngày 2026-11-03 là 0,22 và 0,11), tính theo `actualTime`. Danh sách mọi model (jobTypeId), tham số và giá: `docs/aidancing-models.md`. Thiếu credit thì trang hiện confirm → không gửi.
 - **Giới hạn trang:** ảnh < 40 MB, video < 90 MB và < 60 giây.
 - **Trạng thái:** `GET /api/proxy/jobs?page=0&size=20` → `items[]` (`id`, `title`, `status`, `outputFileId`, `errorMessage`, `actualTime`, `actualCost`, `jobType.jobName`). `status`: `WAITING_UPLOAD` → `PENDING` → `PROCESSING` → `COMPLETED` | `FAILED` (FAILED thì trang hoàn credit). Trang dashboard tự hỏi mỗi 5 giây; service hỏi mỗi 15 giây.
 - **Tải:** `GET /api/proxy/files/{outputFileId}` → mp4. Trang tự xoá dữ liệu sau 3 ngày.

@@ -11,6 +11,16 @@ dong-vat/**
 !dong-vat/**/*.sh
 !dong-vat/**/*.txt
 
+# mon-an: cùng quy tắc với dong-vat. Riêng ảnh bìa kênh trong mon-an/kenh/ giữ trong git.
+mon-an/**
+!mon-an/**/
+!mon-an/**/*.md
+!mon-an/**/*.json
+!mon-an/**/*.mjs
+!mon-an/**/*.sh
+!mon-an/**/*.txt
+!mon-an/kenh/*.jpg
+
 # Đặt sau khối dong-vat: dòng !*.json ở trên không được đưa file này vào git.
 **/.claude/settings.local.json
 

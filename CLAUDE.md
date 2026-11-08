@@ -34,6 +34,24 @@ Repo chứa toàn bộ công cụ làm video của người dùng: app video-flo
 - Tại gốc repo, `npm run dev:server`, `npm run dev:web` và `npm run chrome` chuyển lệnh vào `app/`.
 - Voice Studio: `~/voice-studio/start.sh`, hoặc bấm đúp `voice-studio/Mo Voice Studio.command`.
 
+## Profile Chrome CDP và kênh đăng video
+
+Ghi ngày 2026-11-08. Profile nằm trong `~/chrome-cdp-profile`, cổng 9222.
+
+| Profile | Tài khoản Google | Kênh |
+|---|---|---|
+| Profile 1 "Oliver" | oliver1990ax@gmail.com | TikTok Linh Đan https://www.tiktok.com/@linh_dan_20x, FB Life Cycle Lab https://www.facebook.com/profile.php?id=61595556214345, FB Aurevella https://www.facebook.com/profile.php?id=61594230160348 (sẽ đổi tên thành Life Cycle Lab), YouTube Life Cycle Lab https://www.youtube.com/@LifeCycleLabTV |
+| Profile 2 "My" | mi.nguyen97mi@gmail.com | Kênh "Từ Hạt Đến Mâm": TikTok https://www.tiktok.com/@t.ht.n.mm, FB https://www.facebook.com/profile.php?id=61596364020370, YouTube https://www.youtube.com/@TừHạtĐếnMâm |
+
+- Người giao việc và duyệt video cho 4 kênh của profile Oliver là Telegram `nntruong96` (chat 5065235131).
+- Người quản lý 3 kênh của profile My là Telegram Diễm My (chat 9060990194). Diễm My cũng gửi việc video áo dài. Video kênh "Từ Hạt Đến Mâm" nằm trong `mon-an/`.
+- Không đăng video của người này lên kênh của người kia.
+- Khi nhận yêu cầu up clip, Claude hỏi người yêu cầu up lên kênh nào trước khi đăng, vì nntruong96 có 2 trang Facebook (Life Cycle Lab, Aurevella). Chủ máy dặn ngày 2026-11-08.
+- **Quy tắc:** khi 1 người trên Telegram yêu cầu tạo clip hoặc đăng video, Claude phải xác định trước profile của người đó: `nntruong96` → Profile 1 "Oliver"; Diễm My (9060990194) → Profile 2 "My". Mọi bước (ChatGPT, aidancing, Flow, đăng bài) chạy trong profile đó. Cả 2 profile đều đã đăng nhập ChatGPT và mạng xã hội.
+- Kỹ thuật, đo ngày 2026-11-08: Chrome CDP mở cả 2 profile trong 1 tiến trình. Playwright `contexts()[0]` gộp tab của cả 2 profile. Tab mới (`newPage`, `Target.createTarget`) mở trong browser context mặc định, khi đó là Profile 2 "My". CDP không tạo được tab trong context của profile còn lại. Xác định profile của 1 context bằng trang `chrome://version`, dòng "Profile Path".
+- Script: `.claude/skills/flow-chain-video/scripts/chrome-profile.mjs` mở tab đúng profile; `kenh.json` cùng thư mục ghi kênh của từng profile. `dang-bai.mjs` và `dang-tiktok.mjs` bắt buộc `--profile oliver|my`.
+- Google Flow: `flow.mjs` tự chọn tài khoản Google còn nhiều credit nhất ở mọi profile. Sổ credit `app/data/flow-credits.json`; xem bằng `node .claude/skills/flow-chain-video/scripts/flow-tai-khoan.mjs --so`. Ngày 2026-11-08: oliver1990ax còn 1 credit (đặt lại 23/11), mi.nguyen97my còn 1.050 (đặt lại 8/12).
+
 ## File không có trong git
 
 Cảnh báo: không được commit `app/data/settings.json`. File này chứa `claudeToken`.

@@ -6,14 +6,17 @@
 //
 // CLI:
 //   node flow.mjs --prompt "..." --out out.mp4 [--image start.png] [--end-image end.png]
-//                 [--model omni-flash] [--duration 6] [--aspect 9:16] [--quality 720p] [--download 1080p] [--dry-run]
+//                 [--model omni-flash] [--duration 6] [--aspect 9:16] [--quality 720p] [--download 1080p] [--account <email|auto>] [--dry-run]
 //   node flow.mjs --project <url> --out out.mp4 [--download 1080p]   (tải video từ project đã tạo xong)
+//   Thêm --account <email|auto> để chọn tài khoản Google. auto (mặc định) = tài khoản còn nhiều credit nhất, đủ cho clip.
+//   Credit trước/sau mỗi clip ghi vào app/data/flow-credits.json (xem flow-tai-khoan.mjs).
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
+import { openFlowAccount, estimateCost, flowUrl, currentEmail, openAccount, logCredit } from './flow-tai-khoan.mjs';
 
 const CHROME_CDP_URL = process.env.CHROME_CDP_URL || 'http://127.0.0.1:9222';
 const FLOW_HOME = 'https://flow.google.com/';
@@ -118,13 +121,22 @@ function watchRpc(page) {
   return { waitRpc, statuses };
 }
 
-async function newProject(page) {
-  await page.goto(FLOW_HOME, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+async function newProject(page, acc) {
+  await page.goto(acc ? flowUrl(acc.n) : FLOW_HOME, { waitUntil: 'domcontentloaded', timeout: 60_000 });
   // Trước khi hydrate, trang hiện bản marketing — chờ nút thật thay vì chờ theo thời gian.
   const btn = page.getByRole('button', { name: /Dự án mới|New project/i }).first();
   await btn.waitFor({ timeout: 45_000 }).catch(() => {
     throw new Error('Không vào được Flow. Kiểm tra đã đăng nhập Google trong cửa sổ Chrome CDP chưa.');
   });
+  if (acc) {
+    const email = await currentEmail(page);
+    if (email !== acc.email) throw new Error(`Flow đang mở tài khoản ${email}, không phải ${acc.email}.`);
+  }
+  // Lần đầu mở 1 tài khoản, Flow có thể hiện hộp thoại giới thiệu che nút "Dự án mới" (đo 2026-11-08).
+  for (let i = 0; i < 3 && (await page.locator('.cdk-overlay-backdrop-showing').count()); i++) {
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(500);
+  }
   await btn.click();
   await page.locator(COMPOSER).first().waitFor({ timeout: 30_000 });
   await page.waitForTimeout(1_500);
@@ -401,6 +413,18 @@ async function newBackgroundPage(ctx) {
   throw new Error('Chrome không mở được tab mới.');
 }
 
+// Đọc lại credit sau khi tạo clip và ghi sổ. Lỗi đọc credit không được làm hỏng clip đã tải.
+async function recordUse(page, acc, extra) {
+  try {
+    const after = await openAccount(page, acc.n);
+    if (after.email !== acc.email) return;
+    logCredit(after, extra.error ? 'loi' : 'tao', { before: acc.credits, used: acc.credits - after.credits, ...extra });
+    step(`Credit ${acc.email}: ${acc.credits} → ${after.credits}`);
+  } catch (e) {
+    console.warn(`! Không đọc được credit sau khi tạo: ${e.message.split(/\r?\n/)[0]}`);
+  }
+}
+
 export async function generateFlowVideo({
   prompt,
   startImage,
@@ -412,6 +436,8 @@ export async function generateFlowVideo({
   download = '1080p',
   outFile,
   project,
+  account = process.env.FLOW_ACCOUNT || 'auto',
+  flowProfile = process.env.FLOW_PROFILE || null,
   dryRun = process.env.FLOW_DRYRUN === '1',
 }) {
   if (!prompt && !project) throw new Error('Thiếu prompt.');
@@ -435,7 +461,19 @@ export async function generateFlowVideo({
   }
   // Không gọi browser.close(): với Chrome của người dùng, lệnh này đóng luôn cửa sổ đã đăng nhập.
   const ctx = browser.contexts()[0] ?? (await browser.newContext());
-  const page = await newBackgroundPage(ctx);
+  // Tạo clip: dò credit ở mọi profile Chrome, mở tab trong profile có tài khoản Google được chọn.
+  // Tài khoản hết credit thì Flow ẩn nút tạo, script kẹt ở bước bấm tạo.
+  let page;
+  let acc = null;
+  if (project) page = await newBackgroundPage(ctx);
+  else {
+    ({ page, acc } = await openFlowAccount(browser, {
+      want: account,
+      cost: estimateCost(model, snapDuration(duration)),
+      profile: flowProfile,
+      log: step,
+    }));
+  }
   const { waitRpc, statuses } = watchRpc(page);
   let keepTab = false;
   try {
@@ -449,7 +487,7 @@ export async function generateFlowVideo({
       return outFile;
     }
     // Project mới cho mỗi clip: thư viện ảnh và lưới kết quả chỉ chứa dữ liệu của clip này.
-    await newProject(page);
+    await newProject(page, acc);
     step(`Project: ${page.url()}`);
     await configure(page, {
       model,
@@ -483,12 +521,16 @@ export async function generateFlowVideo({
     const videoId = res?.[3]?.[0]?.[0];
     step(`Mã video: ${videoId ?? '(không đọc được)'}`);
 
+    const projectUrl = page.url();
     const doneId = await waitVideo(page, statuses, videoId, GEN_TIMEOUT_MS);
     step(`Video xong: ${doneId}`);
     await downloadResult(page, download, outFile);
     step(`✓ Đã lưu video: ${outFile}`);
+    await recordUse(page, acc, { model, duration: snapDuration(duration), out: outFile, project: projectUrl });
     return outFile;
   } catch (err) {
+    // Ghi credit cả khi lỗi: lỗi có thể do hết credit giữa chừng.
+    if (acc && !dryRun) await recordUse(page, acc, { model, duration: snapDuration(duration), out: outFile, error: err.message.split(/\r?\n/)[0] });
     // Lỗi tải ENOENT xảy ra khi video đã xong; tải lại bằng --project, nên tab này không còn dùng.
     keepTab = !/download\.saveAs|ENOENT/.test(err.message);
     throw err;
@@ -527,6 +569,8 @@ if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.me
     download: a.download || '1080p',
     outFile: a.out,
     project: a.project,
+    account: a.account || process.env.FLOW_ACCOUNT || 'auto',
+    flowProfile: a['flow-profile'] || process.env.FLOW_PROFILE || null,
     dryRun: !!a['dry-run'] || process.env.FLOW_DRYRUN === '1',
   })
     // Kết nối CDP giữ event loop sống — phải thoát chủ động.

@@ -11,7 +11,7 @@ const USAGE = `Cách dùng:
   node chain.mjs status <plan.json>
   node chain.mjs images <plan.json> [K02.png] [--force]
   node chain.mjs upload <plan.json> <clipId>
-  node chain.mjs gen    <plan.json> <clipId> [--force] [--dry-run]
+  node chain.mjs gen    <plan.json> <clipId> [--force] [--dry-run] [--account <email|auto>]
   node chain.mjs join   <plan.json>
   node chain.mjs check  <plan.json | video.mp4> [--threshold 0.07] [--seams 7.9,15.8] [--crop w:h:x:y]
   node chain.mjs scenes <video> [--threshold 0.15] [--crop w:h:x:y]`;
@@ -321,6 +321,8 @@ async function cmdGen(P, id, flags) {
     quality: clip.quality || P.quality,
     download: P.download,
     outFile: out,
+    // Tài khoản Google của Flow: --account, rồi "flowAccount" trong plan.json, mặc định auto = còn nhiều credit nhất.
+    account: flags.account || P.plan.flowAccount || process.env.FLOW_ACCOUNT || 'auto',
     dryRun,
   });
   if (dryRun) return;

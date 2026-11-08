@@ -1,0 +1,104 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K00.png",
+      "prompt": "Vertical 2:3 photorealistic landscape photo of green terraced rice paddies in northern Vietnam at sunrise, thin morning mist, still water in the paddies reflecting the warm golden sky. In the center of the frame, a flooded paddy with smooth wet mud and shallow water. Soft warm light from the low sun on the left. No people, no animals. No text, no watermark."
+    },
+    {
+      "file": "K01.png",
+      "prompt": "Edit this image. The camera has moved down into the flooded paddy in the center. Show an extreme macro close-up of the wet brown mud surface just under shallow clear water, seen from a low side angle. One single golden rice grain with its husk lies on the mud in the center of the frame. Warm golden sunrise light from the left, same as before, tiny water droplets sparkle. Shallow depth of field, soft blurred background. Keep the rice grain inside the middle 70 percent of the width. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the same mud, water, camera angle and light. The rice grain has sprouted: a thin white root goes into the mud and a small green rice seedling with three thin leaves grows up from the grain, about 6 times taller than the grain. The husk of the grain is still visible at the base. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the same camera angle and the same warm golden light. The seedling has grown into a mature rice plant clump with many stems. The camera now sees its top: several heavy golden ripe rice panicles bend down, full of golden grains, filling the center of the frame. Blurred golden rice field behind. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. The rice has been harvested and threshed. Show a top-down view of a round woven bamboo tray filled with a thick layer of golden unhusked rice grains, sitting on a rustic wooden surface. A few rice stalks lie at the edge. Same warm golden sunrise light from the left. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the same bamboo tray, same top-down camera, same light. The golden husks are gone: the tray is now filled with clean white polished rice grains, a small pile of light brown rice husk sits at the left edge of the tray. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the same top-down camera and the same warm light. Instead of the bamboo tray, show a round traditional Vietnamese steamer with a taut white cloth stretched over a pot of boiling water. On the cloth lies one thin, smooth, glossy white rice noodle sheet, freshly steamed, light steam rising. Rustic wooden kitchen surface around it. No text, no watermark."
+    },
+    {
+      "file": "K07a.png",
+      "prompt": "Edit this image. Keep the same top-down camera and the same warm light. The rice noodle sheet has been folded and cut: a neat pile of fresh flat white pho rice noodles lies on a round wooden cutting board in the center, a cleaver rests at the right edge. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. Keep the same top-down camera and the same warm light. In the center is now a white ceramic bowl of hot Vietnamese beef pho: the flat white rice noodles in clear golden broth, thin slices of pink rare beef, chopped green onions and cilantro, thin white onion rings, steam rising. A small plate of lime and chili and a pair of wooden chopsticks beside the bowl. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "M",
+      "start": "K00.png",
+      "end": "K01.png",
+      "duration": 4,
+      "trimStart": 1,
+      "speed": 1.43,
+      "prompt": "In a single continuous shot, no scene cuts, no fade, no dissolve. One smooth camera move: the camera quickly and smoothly flies down across the misty terraced rice paddies toward the flooded paddy in the center, and glides close to the wet mud, where one rice grain lies still. In the final second the camera stops moving. Quiet natural ambience, morning birds, no music, no dialogue."
+    },
+    {
+      "id": "A",
+      "start": "@prev",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Time-lapse. During the whole clip the camera slowly and smoothly pulls back a little, so the rice grain gets smaller little by little. At the same time the grain slowly sprouts: a white root grows into the mud and a green seedling grows up. Nothing else changes. Quiet water ambience, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "@prev",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Time-lapse. The seedling grows bigger and bigger, little by little during the whole clip, into a tall rice plant, while the camera slowly rises with it. Golden panicles appear and ripen and bend down. Nothing else changes. Soft wind in rice leaves, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "@prev",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. The ripe rice is cut and golden rice grains slowly pour down from above into a round bamboo tray, while the camera smoothly tilts down to look straight down at the tray filling up. Nothing else changes. Rustling rice and falling grain sounds, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "@prev",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The golden husks slowly peel away and gather at the left edge, and the grains turn into clean white rice little by little. The tray stays still. Nothing else changes. Soft grain rustling, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "@prev",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The white rice slowly melts into smooth white rice batter, which spreads thinly over a steaming cloth and sets into one glossy rice noodle sheet. Steam rises. Nothing else changes. Bubbling water and steam sounds, no music, no dialogue."
+    },
+    {
+      "id": "F",
+      "start": "@prev",
+      "end": "K07a.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The rice noodle sheet is lifted onto a wooden board, folded, and a cleaver slowly slices it into flat noodles. Nothing else changes. Crisp knife chopping sounds, no music, no dialogue."
+    },
+    {
+      "id": "G",
+      "start": "@prev",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The noodles are placed in a white bowl, beef slices and herbs are added, and hot golden broth is slowly poured over them. Steam rises. Nothing else changes. Pouring broth sound, no music, no dialogue.",
+      "trimStart": 0.5
+    }
+  ],
+  "output": {
+    "file": "lua-den-pho.mp4",
+    "speed": 1.4,
+    "crossfade": 0.1
+  }
+}

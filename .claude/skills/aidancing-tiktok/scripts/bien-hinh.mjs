@@ -6,14 +6,27 @@
 // CLI:
 //   node bien-hinh.mjs phan-tich <clip1> <clip2> ... [--out <thư mục>]
 //     Kiểm tra các clip khớp động tác, đo nhịp nhạc, khoảng lặng, động tác mạnh, gợi ý N−1 điểm đổi đồ.
-//     Ghi ảnh kiểm tra vào <thư mục> (mặc định: thư mục bien-hinh cạnh clip1).
+//     Ghi ảnh kiểm tra vào <thư mục>. Mặc định: <thư mục video>/phan-tich/ khi clip nằm trong <thư mục video>/clip/.
+//   Thư mục làm việc quy ước: <repo>/videos/bien-hinh-<tên>/ gồm clip/, phan-tich/ và video kết quả.
 //   node bien-hinh.mjs dung --cat <giây,giây,...> --out <video.mp4> <clip1> <clip2> ...
 //        [--hieu-ung chop|hoa-hinh] [--hoa 0.25] [--flash 0.55] [--flash-cat 1,2,3] [--zoom 0.08]
 //     Dựng video: clip1 từ giây 0, đổi sang clip2 ở điểm cắt 1, … Nhạc liền lấy từ clip1.
 //     --hieu-ung chop (mặc định): cắt cứng ở mốc. hoa-hinh: hoà 2 clip trong --hoa giây quanh mốc. Các clip khớp động tác,
 //       nên hoà hình trông như bộ đồ biến dần trên người.
 //     --flash: độ chớp sáng, 0 = tắt. --flash-cat: chỉ chớp ở các điểm cắt này (đánh số từ 1), mặc định mọi điểm.
+//     --zoom: mức phóng to ở điểm cắt. --zoom-cat: chỉ phóng to ở các điểm này. --zoom-tg: số giây phóng to giảm dần,
+//       mặc định 0,25. Cả 2 nhận 1 số hoặc danh sách theo điểm cắt. Zoom giật ở điểm 1, giữ điểm khác:
+//       --zoom 0.18,0.08,0.08 --zoom-tg 0.12,0.25,0.25.
 //     Ghi ảnh khung quanh từng điểm cắt vào <video>-kiem-tra/.
+//     --bat-dau <giây,giây,...> --nhac <clip mẫu gốc>: dựng từ các đoạn ngắn của lệnh cat-mau. Mốc i là giây trên clip mẫu gốc
+//       ứng với khung 0 của clip i. Nhạc lấy từ --nhac. Mốc --cat vẫn tính trên clip mẫu gốc.
+//
+//   node bien-hinh.mjs cat-mau <clip mẫu> --cat <giây,...> [--som 1.5] [--bat-dau <giây,...>] [--du 0.3] [--out <thư mục>]
+//     Cắt clip mẫu thành N đoạn để chạy aidancing riêng từng đoạn, thay cho N clip full (người dùng đồng ý ngày 2026-11-08).
+//     Đoạn 1 bắt đầu ở giây 0. Đoạn i bắt đầu sớm hơn mốc đổi đồ i−1 khoảng --som giây, để ảnh ghép lấy khung mặt đẹp
+//     và khung mặt bị che ở mốc vẫn có video. Đoạn i kết thúc sau mốc i thêm --du giây (để hoà hình).
+//     Lần đầu chạy không có --bat-dau: script ghi ảnh khung trước mỗi mốc, Claude chọn khung mặt nhìn thẳng, mắt mở, rồi
+//     chạy lại với --bat-dau. In số giây tính tiền của từng đoạn (gói 10/15/20/25) và lệnh dung để ghép.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -30,20 +43,28 @@ function die(msg) {
 }
 
 function parseArgs(argv) {
-  const opts = { clips: [], flash: 0.55, zoom: 0.08, hieuUng: 'chop', hoa: 0.25 };
+  const opts = { clips: [], flash: 0.55, hieuUng: 'chop', hoa: 0.25 };
   opts.cmd = argv[0];
   for (let i = 1; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--out') opts.out = argv[++i];
     else if (a === '--cat') opts.cat = argv[++i].split(',').map(Number);
     else if (a === '--flash-cat') opts.flashCat = argv[++i].split(',').map(Number);
+    else if (a === '--zoom-cat') opts.zoomCat = argv[++i].split(',').map(Number);
     else if (a === '--hieu-ung') opts.hieuUng = argv[++i];
-    else if (['--flash', '--zoom', '--hoa'].includes(a)) opts[a.slice(2)] = Number(argv[++i]);
+    else if (a === '--bat-dau') opts.batDau = argv[++i].split(',').map(Number);
+    else if (a === '--nhac') opts.nhac = argv[++i];
+    else if (a === '--zoom') opts.zoom = argv[++i].split(',').map(Number);
+    else if (a === '--zoom-tg') opts['zoom-tg'] = argv[++i].split(',').map(Number);
+    else if (['--flash', '--hoa', '--som', '--du'].includes(a)) opts[a.slice(2)] = Number(argv[++i]);
     else opts.clips.push(a);
   }
-  if (!['phan-tich', 'dung'].includes(opts.cmd)) die('Lệnh phải là phan-tich hoặc dung. Xem đầu file để biết cách dùng.');
+  if (!['phan-tich', 'dung', 'cat-mau'].includes(opts.cmd)) die('Lệnh phải là phan-tich, dung hoặc cat-mau. Xem đầu file để biết cách dùng.');
   if (!['chop', 'hoa-hinh'].includes(opts.hieuUng)) die('--hieu-ung phải là chop hoặc hoa-hinh.');
-  if (opts.clips.length < 2) die('Cần ít nhất 2 clip.');
+  if (opts.cmd === 'cat-mau') {
+    if (opts.clips.length !== 1) die('cat-mau nhận đúng 1 clip mẫu.');
+  } else if (opts.clips.length < 2) die('Cần ít nhất 2 clip.');
+  if (opts.nhac && !fs.existsSync(opts.nhac)) die(`Không thấy clip nhạc: ${opts.nhac}`);
   for (const c of opts.clips) if (!fs.existsSync(c)) die(`Không thấy clip: ${c}`);
   return opts;
 }
@@ -163,7 +184,9 @@ function phanTich(opts) {
   const info = clips.map(probe);
   const { fps } = info[0];
   const dur = Math.min(...info.map((i) => i.duration));
-  const outDir = opts.out ?? path.join(path.dirname(clips[0]), 'bien-hinh');
+  // Mặc định: clip nằm trong <thư mục video>/clip/ thì ghi vào <thư mục video>/phan-tich/, không thì phan-tich/ cạnh clip1.
+  const clipDir = path.dirname(path.resolve(clips[0]));
+  const outDir = opts.out ?? path.join(path.basename(clipDir) === 'clip' ? path.dirname(clipDir) : clipDir, 'phan-tich');
   fs.mkdirSync(outDir, { recursive: true });
 
   console.log('== Clip');
@@ -294,18 +317,31 @@ function dung(opts) {
   for (let j = 1; j < cuts.length; j++) if (cuts[j] <= cuts[j - 1]) die('Các mốc --cat phải tăng dần.');
   const ts = cuts.map((f) => (f / fps).toFixed(4));
 
+  // Lệch khung của từng clip so với clip mẫu gốc: khung F của video ra = khung F − lech[i] của clip i.
+  if (opts.batDau && (opts.batDau.length !== clips.length || !opts.nhac)) die(`--bat-dau cần đúng ${clips.length} mốc và cần --nhac <clip mẫu gốc>.`);
+  const lech = clips.map((_, i) => (opts.batDau ? Math.round(opts.batDau[i] * fps) : 0));
+  const frames = clips.map((c) => Math.floor(probe(c).duration * fps));
+
   // Hoà hình: h khung trước và h khung sau mốc là clip cũ hoà dần sang clip mới, lấy cùng khung của 2 clip.
   const h = opts.hieuUng === 'hoa-hinh' ? Math.max(1, Math.round((opts.hoa * fps) / 2)) : 0;
   for (let j = 0; j < cuts.length; j++) {
     const prev = j ? cuts[j - 1] : 0;
     if (cuts[j] - h <= prev + h) die('Các mốc quá gần nhau so với --hoa.');
+    // Clip j phải có tới khung cuts[j]+h, clip j+1 phải bắt đầu trước khung cuts[j]−h.
+    if (cuts[j] + h > lech[j] + frames[j]) die(`Clip ${j + 1} hết trước mốc ${fmt(cuts[j] / fps)} s (+hoà). Cắt đoạn dài hơn (--du).`);
+    if (cuts[j] - h < lech[j + 1]) die(`Clip ${j + 2} bắt đầu sau mốc ${fmt(cuts[j] / fps)} s (−hoà). Đặt --bat-dau sớm hơn.`);
   }
 
   // Hiệu ứng ở mỗi điểm cắt c: chớp sáng giảm dần trong 0,15 s, phóng to giảm dần trong 0,25 s.
   // Với hoà hình, phóng to bắt đầu từ đầu đoạn hoà; chớp vẫn ở đúng mốc.
   const pulse = (c, d) => `if(between(t,${c},${c}+${d}),1-(t-${c})/${d},0)`;
-  const zoomStart = cuts.map((f) => ((f - h) / fps).toFixed(4));
-  const Z = `1+${opts.zoom}*(${zoomStart.map((c) => pulse(c, 0.25 + h / fps)).join('+')})`;
+  // --zoom-cat: chỉ phóng to ở các điểm cắt này. --zoom-tg: thời gian phóng to giảm dần (nhỏ = giật mạnh hơn).
+  // --zoom và --zoom-tg nhận 1 giá trị cho mọi điểm, hoặc danh sách theo từng điểm cắt.
+  const per = (arr, j, def) => (arr ? (arr.length > 1 ? arr[j] ?? def : arr[0]) : def);
+  const zoomTerms = cuts
+    .map((f, j) => ({ c: ((f - h) / fps).toFixed(4), z: per(opts.zoom, j, 0.08), d: per(opts['zoom-tg'], j, 0.25) }))
+    .filter((x, j) => x.z > 0 && (!opts.zoomCat || opts.zoomCat.includes(j + 1)));
+  const Z = zoomTerms.length ? `1+${zoomTerms.map((x) => `${x.z}*${pulse(x.c, x.d + h / fps)}`).join('+')}` : '1';
   const flashTs = ts.filter((_, j) => !opts.flashCat || opts.flashCat.includes(j + 1));
   const B = flashTs.length ? `${opts.flash}*(${flashTs.map((c) => pulse(c, 0.15)).join('+')})` : '0';
 
@@ -317,26 +353,28 @@ function dung(opts) {
     parts.push(`[${i}:v]scale=${width}:${height},format=yuv420p${uses > 1 ? `,split=${uses}` : ''}${Array.from({ length: uses }, (_, u) => `[s${i}_${u}]`).join('')}`);
   });
   clips.forEach((_, i) => {
-    const start = i === 0 ? 0 : cuts[i - 1] + h;
-    const end = i < cuts.length ? `:end_frame=${cuts[i] - h}` : '';
+    const start = (i === 0 ? 0 : cuts[i - 1] + h) - lech[i];
+    const end = i < cuts.length ? `:end_frame=${cuts[i] - h - lech[i]}` : '';
     parts.push(`[s${i}_0]trim=start_frame=${start}${end},setpts=PTS-STARTPTS[v${i}]`);
     seg.push(`[v${i}]`);
     if (h && i < cuts.length) {
       const a = `[s${i}_${i > 0 ? 2 : 1}]`;
       const b = `[s${i + 1}_1]`;
-      const range = `trim=start_frame=${cuts[i] - h}:end_frame=${cuts[i] + h},setpts=PTS-STARTPTS`;
+      const range = (k) => `trim=start_frame=${cuts[i] - h - lech[k]}:end_frame=${cuts[i] + h - lech[k]},setpts=PTS-STARTPTS`;
       const D = ((2 * h) / fps).toFixed(4);
-      parts.push(`${a}${range}[ha${i}]`, `${b}${range}[hb${i}]`);
+      parts.push(`${a}${range(i)}[ha${i}]`, `${b}${range(i + 1)}[hb${i}]`);
       parts.push(`[ha${i}][hb${i}]blend=all_expr='A*(1-T/${D})+B*(T/${D})'[x${i}]`);
       seg.push(`[x${i}]`);
     }
   });
   parts.push(`${seg.join('')}concat=n=${seg.length}:v=1:a=0[c]`);
   parts.push(`[c]scale=w='trunc(iw*(${Z})/2)*2':h='trunc(ih*(${Z})/2)*2':eval=frame,crop=${width}:${height},eq=brightness='${B}':eval=frame,format=yuv420p[v]`);
+  const audio = opts.nhac ? ['-i', opts.nhac] : [];
   ffmpeg([
     ...clips.flatMap((c) => ['-i', c]),
+    ...audio,
     '-filter_complex', parts.join(';'),
-    '-map', '[v]', '-map', '0:a?',
+    '-map', '[v]', '-map', opts.nhac ? `${clips.length}:a?` : '0:a?', '-shortest',
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart',
     opts.out,
   ]);
@@ -354,6 +392,65 @@ function dung(opts) {
   console.log(`Ảnh kiểm tra quanh điểm cắt: ${dir}`);
 }
 
+// Gói aidancing nhỏ nhất đủ dài cho đoạn: 10, 15, 20, 25 giây.
+const goi = (d) => [10, 15, 20, 25].find((g) => g >= d - 0.01);
+
+function catMau(opts) {
+  const src = opts.clips[0];
+  if (!opts.cat?.length) die('Thiếu --cat <giây,...>: N−1 mốc đổi đồ trên clip mẫu.');
+  const { fps, duration } = probe(src);
+  const som = opts.som ?? 1.5;
+  const du = opts.du ?? 0.3;
+  const cuts = opts.cat;
+  const n = cuts.length + 1;
+  const outDir = opts.out || path.join(path.dirname(src), path.basename(src, path.extname(src)) + '-doan');
+  fs.mkdirSync(outDir, { recursive: true });
+  const fr = (t) => Math.round(t * fps) / fps; // làm tròn về khung
+
+  if (!opts.batDau) {
+    // Ảnh khung trước mỗi mốc: 12 khung trong [mốc − som − 0,5; mốc − som + 0,5], Claude chọn khung mặt đẹp.
+    console.log(`Chưa có --bat-dau. Ảnh khung quanh (mốc − ${som} s), chọn khung mặt nhìn thẳng, mắt mở, không bị che:`);
+    cuts.forEach((c, j) => {
+      const a = Math.max(0, c - som - 0.5);
+      const file = path.join(outDir, `truoc-moc-${j + 1}.jpg`);
+      ffmpeg(['-ss', String(a), '-t', '1', '-i', src, '-vf', 'fps=12,scale=200:-1,tile=6x2', '-frames:v', '1', file]);
+      const moc = Array.from({ length: 12 }, (_, k) => (a + k / 12).toFixed(3)).join(' ');
+      console.log(`  mốc ${j + 1} (${c} s): ${file}\n    ô 1–12, trái sang phải, trên xuống dưới: ${moc}`);
+    });
+    console.log(`Gợi ý: --bat-dau 0,${cuts.map((c) => fr(Math.max(0, c - som)).toFixed(3)).join(',')}`);
+    return;
+  }
+  if (opts.batDau.length !== n) die(`--bat-dau cần đúng ${n} mốc (đoạn 1 thường là 0).`);
+  // Làm tròn về đúng thời điểm của khung, giống cách dung tính lệch khung. Không làm tròn thì -ss có thể bỏ qua khung
+  // (lỗi gặp ngày 2026-11-08: 8,37 s ở 30 fps là khung 251 = 8,3667 s, -ss 8.369 bắt đầu từ khung 252).
+  const starts = opts.batDau.map((t) => +fr(t).toFixed(4));
+  for (let i = 1; i < n; i++) {
+    if (!(starts[i] < cuts[i - 1])) die(`Đoạn ${i + 1} phải bắt đầu trước mốc ${cuts[i - 1]} s.`);
+    if (cuts[i - 1] - starts[i] > 2.5) console.log(`  Lưu ý: đoạn ${i + 1} bắt đầu sớm ${(cuts[i - 1] - starts[i]).toFixed(2)} s, hơn 2,5 s.`);
+  }
+  let tong = 0;
+  const files = [];
+  for (let i = 0; i < n; i++) {
+    const a = starts[i];
+    const b = i < cuts.length ? Math.min(duration, cuts[i] + du) : duration;
+    const d = b - a;
+    if (d > 25) die(`Đoạn ${i + 1} dài ${d.toFixed(2)} s, quá gói 25 s.`);
+    const file = path.join(outDir, `doan-${i + 1}.mp4`);
+    // -ss trước -i, trừ 1 ms để không bỏ qua khung đã chọn (như khung-dau.mjs).
+    ffmpeg(['-ss', String(Math.max(0, a - 0.5 / fps)), '-i', src, '-t', d.toFixed(3), '-c:v', 'libx264', '-preset', 'slow', '-crf', '16', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', file]);
+    const g = goi(d);
+    tong += g;
+    files.push(file);
+    console.log(`  Đoạn ${i + 1}: ${a.toFixed(3)} → ${b.toFixed(3)} s (${d.toFixed(2)} s, gói ${g} s) → ${file}`);
+  }
+  const full = n * goi(duration);
+  console.log(`Tính tiền: ${tong} giây (${(tong * 0.15).toFixed(2)} credit fast, ${(tong * 0.29).toFixed(2)} quality).`);
+  console.log(`So với ${n} clip full: ${full} giây (${(full * 0.15).toFixed(2)} fast, ${(full * 0.29).toFixed(2)} quality).`);
+  console.log(`\nSau khi có video aidancing của từng đoạn (theo thứ tự đoạn), ghép bằng:`);
+  console.log(`  node bien-hinh.mjs dung --cat ${cuts.join(',')} --bat-dau ${starts.join(',')} --nhac "${src}" --out <video.mp4> <video đoạn 1> ... <video đoạn ${n}>`);
+}
+
 const opts = parseArgs(process.argv.slice(2));
 if (opts.cmd === 'phan-tich') phanTich(opts);
+else if (opts.cmd === 'cat-mau') catMau(opts);
 else dung(opts);

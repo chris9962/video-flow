@@ -4,17 +4,22 @@
 // Không chạy khi flow.mjs đang tải video: kết nối Playwright mới đổi thư mục tải của Chrome và làm hỏng file tải.
 //
 // CLI:
-//   node dang-bai.mjs <thư mục video> [--youtube] [--facebook] [--video file.mp4] [--dry-run]
+//   node dang-bai.mjs <thư mục video> --profile <oliver|my> [--youtube] [--facebook] [--fb-page <id>] [--video file.mp4] [--dry-run]
 //   Không ghi --youtube, --facebook thì đăng cả hai. --dry-run điền mọi trường nhưng không bấm Xuất bản / Đăng.
+//   --profile bắt buộc (chủ máy dặn 2026-11-08): kênh YouTube, trang Facebook và profile Chrome lấy từ kenh.json.
+//   --fb-page chọn trang Facebook khác trang đầu của profile, ví dụ Aurevella của profile oliver.
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
+import { profileInfo, newPageInProfile } from './chrome-profile.mjs';
 
 const CHROME_CDP_URL = process.env.CHROME_CDP_URL || 'http://127.0.0.1:9222';
-const YT_CHANNEL = 'UCyVJDSNhxgezvgYuf82wi6Q';
-const FB_PAGE_ID = '61595556214345';
-const FB_PAGE_NAME = 'Life Cycle Lab';
+// Gán trong main() theo --profile.
+let PROFILE = null;
+let YT_CHANNEL = null;
+let FB_PAGE_ID = null;
+let FB_PAGE_NAME = null;
 
 const t0 = Date.now();
 const step = (s) => console.log(`[${((Date.now() - t0) / 1000).toFixed(1)}s] ${s}`);
@@ -49,6 +54,8 @@ async function openBackgroundWindow() {
 }
 
 async function newBackgroundPage(ctx) {
+  // Có --profile: tab mở trong đúng profile Chrome của kênh.
+  if (PROFILE) return newPageInProfile(ctx.browser(), PROFILE.key);
   // Nhiều script có thể mở tab cùng lúc, nên tìm tab theo URL riêng thay vì chờ sự kiện 'page'.
   const mark = `about:blank#${process.pid}-${Date.now()}`;
   const cdp = await ctx.browser().newBrowserCDPSession();
@@ -63,10 +70,12 @@ async function newBackgroundPage(ctx) {
 }
 
 function parseArgs(argv) {
-  const opts = { dir: null, youtube: false, facebook: false, video: null, dryRun: false };
+  const opts = { dir: null, youtube: false, facebook: false, video: null, dryRun: false, profile: null, fbPage: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === '--youtube') opts.youtube = true;
+    if (a === '--profile') opts.profile = argv[++i];
+    else if (a === '--fb-page') opts.fbPage = argv[++i];
+    else if (a === '--youtube') opts.youtube = true;
     else if (a === '--facebook') opts.facebook = true;
     else if (a === '--dry-run') opts.dryRun = true;
     else if (a === '--video') opts.video = argv[++i];
@@ -249,9 +258,16 @@ async function facebook(ctx, video, caption, dryRun) {
 async function main() {
   const opts = parseArgs(process.argv.slice(2));
   if (!opts.dir) {
-    console.log('Cách dùng: node dang-bai.mjs <thư mục video> [--youtube] [--facebook] [--video file.mp4] [--dry-run]');
+    console.log('Cách dùng: node dang-bai.mjs <thư mục video> --profile <oliver|my> [--youtube] [--facebook] [--fb-page <id>] [--video file.mp4] [--dry-run]');
     process.exit(1);
   }
+  PROFILE = profileInfo(opts.profile);
+  YT_CHANNEL = PROFILE.youtube.channel;
+  const fb = opts.fbPage ? PROFILE.facebook.find((f) => f.id === opts.fbPage) : PROFILE.facebook[0];
+  if (!fb) throw new Error(`Trang Facebook ${opts.fbPage} không thuộc profile ${PROFILE.key}: ${PROFILE.facebook.map((f) => `${f.id} ${f.name}`).join(', ')}`);
+  FB_PAGE_ID = fb.id;
+  FB_PAGE_NAME = fb.name;
+  step(`Profile ${PROFILE.key} (${PROFILE.dir}): YouTube ${PROFILE.youtube.name}, Facebook ${FB_PAGE_NAME}`);
   const dir = path.resolve(opts.dir);
   const md = fs.readFileSync(path.join(dir, 'dang-bai.md'), 'utf8');
   const title = readSection(md, 'Tiêu đề').find((l) => l.trim()).trim();

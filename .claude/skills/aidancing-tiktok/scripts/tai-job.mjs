@@ -4,10 +4,9 @@
 //
 // CLI:
 //   node tai-job.mjs <mã job> [<mã job> ...] [--out <thư mục>]
-//     Mặc định lưu vào ~/Desktop/Mẫu/Videos/aidancing-<mã job>.mp4.
+//     Mặc định lưu vào <repo>/videos/aidancing/aidancing-<mã job>.mp4. Git bỏ qua thư mục videos/.
 
 import fs from 'node:fs/promises';
-import os from 'node:os';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
 
@@ -15,7 +14,7 @@ const BASE = 'https://aidancing.net';
 const CDP = process.env.CHROME_CDP_URL || 'http://127.0.0.1:9222';
 
 const args = process.argv.slice(2);
-let outDir = path.join(os.homedir(), 'Desktop', 'Mẫu', 'Videos');
+let outDir = path.resolve(import.meta.dirname, '..', '..', '..', '..', 'videos', 'aidancing');
 const ids = [];
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--out') outDir = args[++i];

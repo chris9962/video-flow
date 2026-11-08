@@ -1,14 +1,13 @@
 #!/usr/bin/env node
-// Chạy chuỗi Ghép mẫu → AI Dancing của video-flow qua API của server, rồi chép video kết quả ra thư mục Videos.
+// Chạy chuỗi Ghép mẫu → AI Dancing của video-flow qua API của server, rồi chép video kết quả ra thư mục videos/aidancing của repo.
 // Đo ngày 2026-11-03 trên workflow mẫu "Ghép mẫu từ clip nhảy".
 // Server chỉ nghe 127.0.0.1: trên macOS, localhost ra ::1 và không kết nối được.
 //
 // CLI:
-//   node chay-workflow.mjs --face mat.png --clip clip.mp4 [--outfit ao.png] [--quality quality|fast] [--out video.mp4] [--dry-run]
+//   node chay-workflow.mjs --face mat.png --clip clip.mp4 [--outfit ao.png] [--quality fast|quality] [--out video.mp4] [--dry-run]
 //   --dry-run kiểm tra input và in chi phí dự kiến. Lệnh không tạo workflow, không gọi ChatGPT, không gọi aidancing.
 
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -18,14 +17,14 @@ const SERVER = process.env.VIDEOFLOW_URL || 'http://127.0.0.1:3001';
 const DATA_DIR = path.resolve(import.meta.dirname, '..', '..', '..', '..', 'app', 'data');
 const TEMPLATE_ID = 'b45b8398-7002-47a1-86e0-5aaa4c604587';
 const DURATIONS = [10, 15, 20, 25];
-const CREDIT_PER_SECOND = { quality: 0.22, fast: 0.11 };
+const CREDIT_PER_SECOND = { quality: 0.29, fast: 0.15 }; // giá trên trang ngày 2026-11-08
 const RUN_TIMEOUT_MS = 100 * 60_000;
 
 const t0 = Date.now();
 const step = (s) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)}s] ${s}`);
 
 function parseArgs(argv) {
-  const opts = { quality: 'quality', dryRun: false };
+  const opts = { quality: 'fast', dryRun: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--dry-run') opts.dryRun = true;
@@ -208,7 +207,8 @@ if (r.status !== 'done') {
 const video = readOutput(r.runId, dancing.id);
 const composite = readOutput(tryonRunId, tryon.id);
 if (!video) throw new Error(`Run ${r.runId} xong nhưng không có video của block AI Dancing`);
-const out = opts.out ?? path.join(os.homedir(), 'Desktop', 'Mẫu', 'Videos', `aidancing-${base}-${stamp.replace(/[ :]/g, '')}.mp4`);
+// Video kết quả nằm trong <repo>/videos/aidancing/, git bỏ qua thư mục này. Người dùng yêu cầu ngày 2026-11-07.
+const out = opts.out ?? path.resolve(import.meta.dirname, '..', '..', '..', '..', 'videos', 'aidancing', `aidancing-${base}-${stamp.replace(/[ :]/g, '')}.mp4`);
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.copyFileSync(video.path, out);
 if (composite) fs.copyFileSync(composite.path, out.replace(/\.mp4$/i, '-anh-ghep.png'));

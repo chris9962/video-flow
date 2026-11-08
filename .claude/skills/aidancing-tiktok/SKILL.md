@@ -19,9 +19,26 @@ Trả lời người dùng bằng tiếng Việt kỹ thuật: kết luận trư
 | 2. Ghép mặt mẫu và trang phục vào ảnh dáng | ChatGPT, cùng 1 cuộc chat | Ảnh ghép 9:16, cùng khung với clip |
 | 3. Copy chuyển động của clip lên ảnh ghép | aidancing.net, model id 192 "AI Copy Chuyển Động Dùng Nền Ảnh v5.1" | Video 720×1280, dài bằng clip, có tiếng của clip |
 | 4. Đăng video | TikTok Studio | Link bài TikTok |
-| Tuỳ chọn: ghép video biến hình | `scripts/bien-hinh.mjs`, Claude review và quyết định | 1 video đổi đồ N−1 lần theo nhạc |
+| Từ 2 bộ đồ: video biến hình | `scripts/bien-hinh-model.mjs`: 1 job model 156/157/158 tự đổi ảnh theo mốc. Claude chọn mốc. | 1 video đổi đồ N−1 lần theo nhạc |
 
 `scripts/chay-workflow.mjs` làm bước 1–3 qua API của server video-flow. `scripts/dang-tiktok.mjs` làm bước 4. `scripts/tai-job.mjs` tải video của job aidancing theo mã job. Bước 3c mô tả cách ghép video biến hình.
+
+## Câu hỏi đầu tiên
+
+Khi người dùng gửi ảnh hoặc link sản phẩm, Claude hỏi ngắn gọn, 1 câu:
+
+> Làm clip đơn (1 bộ) hay video biến hình 2, 4 hay 6 bộ?
+
+| Lựa chọn | Cách làm |
+|---|---|
+| Clip đơn | 1 clip AI Dancing, model 192 |
+| Biến hình 2 bộ | Model 156, video 10 s |
+| Biến hình 4 bộ | Model 157, video 20 s |
+| Biến hình 6 bộ | Model 158, video 30 s |
+
+Biến hình: bộ đầu là đồ bộ, mặt mộc. Cùng lúc, hỏi có đổi nền không. Người dùng yêu cầu ngày 2026-11-08: hỏi rõ nhưng ngắn, không viết dài.
+
+Mặt mẫu mặc định: `assets/mat-mau/mau-2-02-mac-dinh-nhin-thang-cuoi-mim.png` (mẫu 2, nhìn thẳng, cười mỉm, 1199×1312). Người dùng không nói gì thì dùng ảnh này, không hỏi chọn mẫu. Người dùng đặt ngày 2026-11-08.
 
 ## Quy tắc bắt buộc
 
@@ -66,7 +83,7 @@ Chi tiết kỹ thuật của 2 block nằm trong `~/video-flow/app/CLAUDE.md`, 
 | Mặt mẫu | Ảnh trong `<skill>/assets/mat-mau/`, xem bảng dưới | Người dùng chọn mẫu. Trong mẫu đó, Claude chọn ảnh có góc mặt gần nhất với mặt trong khung đầu của clip. |
 | Trang phục | Ảnh sản phẩm người dùng gửi, hoặc ảnh Claude tìm trên mạng khi người dùng yêu cầu | Thấy toàn bộ trang phục, nền trơn. Không bắt buộc: bỏ trống thì giữ quần áo trong clip. |
 
-Thư mục có 2 mẫu, là 2 người khác nhau. Trước khi tạo ảnh ghép, Claude phải hỏi người dùng dùng mẫu nào. Người dùng yêu cầu ngày 2026-11-05.
+Thư mục có 2 mẫu, là 2 người khác nhau. Từ 2026-11-08, mặc định dùng ảnh mặc định của mẫu 2 (mục "Câu hỏi đầu tiên"), không hỏi. Chỉ đổi khi người dùng nói rõ mẫu khác.
 
 | Mẫu | File | Góc mặt | Cỡ |
 |---|---|---|---|
@@ -74,6 +91,7 @@ Thư mục có 2 mẫu, là 2 người khác nhau. Trước khi tạo ảnh ghé
 | 1 | `02-quay-3-4-sang-phai-cuoi-mim.png` | Quay 3/4 sang phải khung hình, cười mỉm | 1122×1402 |
 | 1 | `03-quay-sang-phai-moi-khep.png` | Quay sang phải khung hình nhiều hơn ảnh 02, môi khép | 487×603 |
 | 2 | `mau-2-01-nhin-thang-cuoi-mim.png` | Nhìn thẳng, cười mỉm, đầu hơi nghiêng | 1254×1254 |
+| 2, **mặc định** | `mau-2-02-mac-dinh-nhin-thang-cuoi-mim.png` | Nhìn thẳng, cười mỉm, nền hoa trắng, váy lụa kem | 1199×1312 |
 
 - Mẫu 1: tóc đen dài uốn sóng, nền xám. Người dùng xác nhận ngày 2026-11-03.
 - Nguồn của mẫu 1: 4 node ảnh bên trái nhất của workflow `ecbec438-a333-4357-a3a1-2bd10e02e4f5` ("Trường") trong video-flow. 2 node trong số đó chứa cùng 1 file, md5 `906ff40b…`, nên mẫu 1 chỉ có 3 ảnh.
@@ -95,6 +113,8 @@ Thư mục có 2 mẫu, là 2 người khác nhau. Trước khi tạo ảnh ghé
 | `nen-01-phong-khach-sofa-be.png` | Phòng khách: sofa chữ L màu be, bàn trà mặt đá chân vàng, bình hoa hồng, sàn gỗ nâu, cửa gỗ nâu | 962×1635 |
 
 - Người dùng không dùng các ảnh nền cũ trong `~/video-flow/app/data/assets/`: phòng khách có bếp `2cfdaf80…png`, phòng sofa cam `d9eba5a2…png`, phòng trắng `d97a9eac…png`.
+
+Trước khi chạy Ghép mẫu, Claude phải hỏi người dùng có đổi nền hay không. Người dùng yêu cầu ngày 2026-11-07. Có đổi nền: dùng ảnh nền mặc định hoặc `--background`. Không đổi nền: thêm `--giu-nen`. Claude hỏi cùng lúc với câu hỏi chọn mẫu 1 hay mẫu 2.
 
 Cách flow dùng ảnh nền, theo yêu cầu của người dùng ngày 2026-11-05:
 - `ghep-nhieu-bo.mjs` nối ảnh nền vào cổng Background của mọi block Ghép mẫu, kể cả nhánh đồ bộ. Mọi clip có cùng nền, nên clip biến hình liền nền.
@@ -169,15 +189,17 @@ Số liệu ngày 2026-11-05, clip ninhanh, quay ban đêm, 30 fps, 15,05 giây:
 ## Bước 2 — Dry run và báo chi phí
 
 ```bash
-node <skill>/scripts/chay-workflow.mjs --face <mặt.png> --outfit <trang-phục.png> --clip <clip.mp4> [--quality quality|fast] --dry-run
+node <skill>/scripts/chay-workflow.mjs --face <mặt.png> --outfit <trang-phục.png> --clip <clip.mp4> [--quality fast|quality] --dry-run
 ```
 
 Lệnh in kích thước clip, độ dài, gói aidancing và số credit. Lệnh không gọi ChatGPT và không gọi aidancing.
 
 | Chế độ | Giá | Gói 15 giây | Thời gian chờ đo ngày 2026-11-03 | Video ra |
 |---|---|---|---|---|
-| `quality`, mặc định | 0,22 credit/giây | 3,3 credit | 20–22 phút | 720×1280 |
-| `fast` | 0,11 credit/giây | 1,65 credit | 10 phút | 576×1024, mờ hơn |
+| `fast`, mặc định từ 2026-11-07 | 0,15 credit/giây | 2,25 credit | 10 phút | 576×1024, mờ hơn |
+| `quality` | 0,29 credit/giây | 4,35 credit | 20–22 phút | 720×1280 |
+
+- Ngày 2026-11-07, người dùng chọn `fast` làm mặc định. Claude chỉ dùng `quality` khi người dùng yêu cầu.
 
 - Gói là số nhỏ nhất trong 10, 15, 20, 25 giây mà đủ dài cho clip. aidancing tính tiền theo gói, không theo độ dài clip.
 - Claude gửi người dùng số credit, rồi chờ người dùng đồng ý.
@@ -185,13 +207,13 @@ Lệnh in kích thước clip, độ dài, gói aidancing và số credit. Lện
 ## Bước 3 — Chạy chuỗi
 
 ```bash
-node <skill>/scripts/chay-workflow.mjs --face <mặt.png> --outfit <trang-phục.png> --clip <clip.mp4> [--quality quality|fast] [--out <video.mp4>]
+node <skill>/scripts/chay-workflow.mjs --face <mặt.png> --outfit <trang-phục.png> --clip <clip.mp4> [--quality fast|quality] [--out <video.mp4>]
 ```
 
 - Claude chạy lệnh ở chế độ nền và đọc log mỗi vài phút. Claude không chờ hết thời gian chờ của script.
 - Script tạo 1 workflow mới từ workflow mẫu `b45b8398-7002-47a1-86e0-5aaa4c604587` ("Ghép mẫu từ clip nhảy"). Script không sửa workflow mẫu. Log có link editor của workflow mới.
 - Bước ghép ảnh mất 2–4 phút. Nếu bước này quá 5 phút, Claude xem tab ChatGPT trong Chrome CDP.
-- Kết quả: `~/Desktop/Mẫu/Videos/aidancing-<tên clip>-<thời điểm>.mp4`, cùng ảnh ghép `…-anh-ghep.png`.
+- Kết quả: `<repo>/videos/aidancing/aidancing-<tên clip>-<thời điểm>.mp4`, cùng ảnh ghép `…-anh-ghep.png`.
 - Cảnh báo: Claude không được sửa file trong `~/video-flow/app/apps/server` lúc chuỗi đang chạy. `tsx watch` khởi động lại server, và run đang chạy dừng theo.
 - Nếu server khởi động lại, script chờ server chạy lại. Ảnh ghép đã có thì script chỉ chạy lại block AI Dancing với đúng ảnh đó. Service aidancing nhận ra cùng input và theo dõi tiếp job cũ, nên không trừ credit lần 2.
 - Khi ChatGPT lỗi, tab ChatGPT để mở để Claude xem lỗi.
@@ -208,8 +230,8 @@ Người dùng gửi 1 link TikTok và N link Shopee. Kết quả là N clip tr�
    - Khoảng 8 ảnh đầu là ảnh gallery, các ảnh sau là icon hoặc ảnh của sản phẩm khác.
    - Claude dùng ảnh bìa, tức ảnh đầu. Ảnh bìa quyết định màu.
    - Claude lưu ảnh vào `~/Desktop/Mẫu/Ảnh/shopee/<shopId>-<itemId>/`, rồi đóng tab.
-3. Claude hỏi người dùng dùng mẫu 1 hay mẫu 2. Claude nên hỏi ngay khi nhận link, cùng lúc với các câu hỏi khác. Trong mẫu người dùng chọn, Claude chọn ảnh có góc gần nhất với khung đầu của clip.
-   - Mỗi lần người dùng gửi link Shopee, Claude luôn thêm 1 bộ đồ bộ miền Tây bằng `--do-bo-image <ảnh>`. Người dùng dùng clip này để dựng clip biến hình. Người dùng yêu cầu ngày 2026-11-03.
+3. Claude hỏi câu ở mục "Câu hỏi đầu tiên" (clip đơn hay biến hình mấy bộ, có đổi nền không) ngay khi nhận link. Mặt mẫu dùng ảnh mặc định, trừ khi người dùng nói mẫu khác.
+   - Người dùng gửi 1 sản phẩm (1 link hoặc 1 ảnh): Claude chỉ tạo 1 clip của sản phẩm đó. Không thêm đồ bộ, không ghép biến hình. Người dùng gửi từ 2 sản phẩm trở lên: Claude thêm 1 bộ đồ bộ miền Tây bằng `--do-bo-image <ảnh>` làm clip đầu, rồi ghép video biến hình (bước 3c). Người dùng đặt quy tắc này ngày 2026-11-08, thay quy tắc "luôn thêm đồ bộ" ngày 2026-11-03.
    - Claude lấy ảnh đồ bộ từ Google Hình ảnh, từ khoá "đồ bộ miền tây", trong tab nền của Chrome CDP. Claude bấm vào 1 ảnh có người mặc nguyên bộ, rồi đọc ảnh cỡ lớn trong khung xem trước: `img` có `src` http, không thuộc gstatic, `naturalWidth` ≥ 400. Ảnh ghép nhiều khung thì Claude cắt riêng 1 khung.
    - Không dùng `--do-bo`, tức ChatGPT tự vẽ đồ bộ. Ngày 2026-11-03 người dùng xem bản ChatGPT vẽ và nói "đồ bộ gpt gen ra chán quá".
    - Clip đồ bộ là clip đầu của clip biến hình. Ở clip này, mẫu để mặt mộc, không trang điểm. Các clip Shopee phía sau giữ trang điểm như ảnh mặt mẫu. Người dùng yêu cầu ngày 2026-11-05 để người xem thấy rõ khác biệt khi biến hình.
@@ -218,20 +240,27 @@ Người dùng gửi 1 link TikTok và N link Shopee. Kết quả là N clip tr�
    ```bash
    cd <skill>/scripts && node ghep-nhieu-bo.mjs --clip <clip.mp4> --face <mặt.png> --product <a.jpg> [--product <b.jpg> ...] --do-bo-image <đồ-bộ.jpg> --name "<tên>" [--background <nền.png> | --giu-nen]
    ```
+   - Claude chỉ chạy lệnh khi người dùng đã trả lời có đổi nền hay không.
    - Mặc định, script dùng ảnh nền `assets/background/nen-01-phong-khach-sofa-be.png`. `--background` chọn ảnh nền khác. `--giu-nen` giữ nền của clip.
    - Script tạo 1 workflow. Mỗi sản phẩm có 3 block: ảnh Shopee gốc, block "Ảnh" tách sản phẩm qua ChatGPT, và block "Ghép mẫu".
    - Prompt Ghép mẫu là prompt mặc định, thêm 2 dòng: gợi ý kiểu tóc hợp trang phục, và giữ nguyên nhận diện gương mặt.
    - Script dừng sau Ghép mẫu.
    - Claude so ảnh trước và sau khi đổi nền: cỡ người, vị trí người và khung cắt phải giống nhau. Nếu người bị dời hoặc nhỏ đi, Claude báo người dùng trước bước 6.
 5. Claude mở workflow trên FE bằng `open http://localhost:5173/editor/<id>`. Người dùng xem ảnh ghép trên FE. Claude không cần báo credit.
-6. Người dùng duyệt xong thì Claude chạy:
+6. Người dùng duyệt xong:
+   - **Từ 2 bộ trở lên (mặc định từ 2026-11-08):** không chạy N clip. Claude chọn mốc đổi đồ (bước 3c) rồi chạy 1 job model biến hình với các ảnh ghép, đồ bộ đứng đầu:
+     ```bash
+     cd <skill>/scripts && node bien-hinh-model.mjs --video <clip> --anh <tryon đồ bộ> --anh <tryon bo1> ... --moc <giây,...> [--quality fast|quality]
+     ```
+     Ảnh ghép là `config.content.path` của các block Ghép mẫu (log của lần chạy Ghép mẫu in đường dẫn). Báo credit theo dòng đầu của `--dry-run`, chờ đồng ý.
+   - **1 bộ:** 1 clip AI Dancing như cũ:
    ```bash
-   cd <skill>/scripts && node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality quality|fast] [--bo bo1 --bo do-bo ...]
+   cd <skill>/scripts && node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality fast|quality] [--bo bo1 --bo do-bo ...]
    ```
    - Script thêm 1 block AI Dancing sau mỗi block Ghép mẫu. Engine chạy các nhánh song song.
    - Người dùng chỉ chọn một số bộ thì Claude thêm `--bo <nhãn>` cho từng bộ. Nhãn là `vfLabel` của block Ghép mẫu: `bo1`, `bo2`…, `do-bo`. Ngày 2026-11-05, người dùng chỉ chọn bộ áo dài, `--bo bo1`.
    - Sau khi thêm block, script chờ 15 giây rồi đọc lại workflow. Block bị xoá thì script dừng và không gửi job.
-   - Script đọc video từ `data/runs/<runId>/<nodeId>/outputs.json`, rồi chép vào `~/Desktop/Mẫu/Videos/aidancing-<tên>-bo<n>-<thời điểm>.mp4`.
+   - Script đọc video từ `data/runs/<runId>/<nodeId>/outputs.json`, rồi chép vào `<repo>/videos/aidancing/aidancing-<tên>-bo<n>-<thời điểm>.mp4`.
 
 Cảnh báo cho bước 6: tab FE đã mở từ trước chỉ giữ bản workflow cũ, chưa có block AI Dancing. FE tự lưu mỗi 5 giây khi không có run, và ghi đè bản của script. Ngày 2026-11-03, tab FE đã xoá block AI Dancing ngay sau khi job xong.
 - Người dùng chọn cách làm ngày 2026-11-03: người dùng đóng tab FE trước bước 6 và không mở FE trong lúc Claude chạy. Claude chỉ mở FE khi script đã dừng.
@@ -282,13 +311,56 @@ Quy tắc của người dùng, ngày 2026-11-07:
 - Điểm đổi đồ phải có lý do trong nhạc hoặc động tác. Đổi theo số giây chia đều thì người xem thấy không có gì đặc biệt.
 - Điều kiện chính: đổi đồ lúc **hết 1 câu hát và có động tác** (nháy mắt, quay đầu, tay che camera). Đổi giữa câu hát thì không hay.
 
-### Các bước
+Thư mục làm việc: `<repo>/videos/bien-hinh-<tên>/`, gồm `clip/` (clip đầu vào), `phan-tich/` (ảnh của lệnh `phan-tich`), video kết quả và thư mục `-kiem-tra/` của từng bản dựng. Git bỏ qua `videos/`. Người dùng yêu cầu ngày 2026-11-07: không để video kết quả trên Desktop.
+
+### Cách mặc định: model biến hình 156/157/158, 1 job
+
+Người dùng chọn ngày 2026-11-08 sau khi xem kết quả model 157: "kết quả quá sắc sảo rồi". Video biến hình chạy bằng 1 job `bien-hinh-model.mjs`, không tạo N clip, không ghép.
+1. Claude chọn N−1 mốc đổi đồ như cũ: `bien-hinh.mjs phan-tich <clip mẫu> <clip mẫu>` (đưa clip mẫu 2 lần), xem `toan-bo.png`, theo quy tắc hết câu + động tác.
+2. `bien-hinh-model.mjs --dry-run` in model, số credit. Script chọn model nhỏ nhất đủ ảnh và đủ dài cho clip: 156 (2 ảnh, 10 s), 157 (4 ảnh, 20 s), 158 (6 ảnh, 30 s). Mọi ô đều bắt buộc. Thiếu ảnh thì script lặp ảnh cuối ở ô thừa, mốc thừa đặt sau mốc cuối 0,5 s. Cách lấp này chưa thử: lần đầu Claude xem có giật ở mốc thừa không.
+3. Clip 20–30 s với 4 bộ: script chọn 158 (3,9 credit) để giữ đủ độ dài. `--model 157` (2,6 credit) cắt video còn 20 s. Claude hỏi người dùng chọn.
+4. Chạy thật, rồi kiểm tra như bước 6 cũ: xem khung quanh từng mốc.
+5. Hiệu ứng zoom giật + chớp chưa có trên video của model. Muốn có thì Claude thêm bằng ffmpeg ở đúng các mốc (chưa viết script).
+
+Ảnh vào: ảnh ghép của block Ghép mẫu (khung đầu của clip). Lần thử 157 dùng khung lấy từ clip cũ ở giây bắt đầu từng đoạn, nên chưa biết model có cần ảnh cùng tư thế với khung ở mốc không. Lần đầu chạy với ảnh ghép khung đầu, Claude xem điểm đổi có giật tư thế không.
+
+### Cách dự phòng: chọn mốc trước, chạy aidancing theo đoạn
+
+Dùng khi model biến hình lỗi hoặc cần nhiều hơn 6 bộ. Người dùng đồng ý ngày 2026-11-08. Thay vì chạy N clip full rồi ghép, Claude chọn mốc đổi đồ trên clip mẫu trước, cắt clip mẫu thành N đoạn, rồi chạy aidancing cho từng đoạn với 1 bộ đồ. Mỗi đoạn tính gói 10 s nếu ≤ 10 s.
+
+Ví dụ clip @irenebbyy_ 24,83 s, 4 bộ: cách cũ 4 × 25 s = 100 s (15 credit fast, 29 quality). Cách mới 4 × 10 s = 40 s (6 credit fast, 11,6 quality).
+
+1. `node <skill>/scripts/bien-hinh.mjs phan-tich <clip mẫu> <clip mẫu>` để có chỗ hết câu, nhịp, `toan-bo.png`. Lệnh cần ≥ 2 clip, nên đưa clip mẫu 2 lần. Claude chốt N−1 mốc theo quy tắc ở trên.
+2. `node <skill>/scripts/bien-hinh.mjs cat-mau <clip mẫu> --cat <mốc,...>`: script ghi `truoc-moc-<n>.jpg`, 12 khung quanh (mốc − 1,5 s) và in giây của từng ô.
+3. Claude xem ảnh, chọn với mỗi mốc 1 khung bắt đầu sớm hơn mốc 1–2 s, mặt nhìn thẳng, mắt mở, không bị che. Mốc đổi đồ có thể là lúc mặt bị che (tay che ống kính): đoạn sau đã bắt đầu từ trước đó, ảnh ghép lấy khung mặt đẹp.
+4. `node <skill>/scripts/bien-hinh.mjs cat-mau <clip mẫu> --cat <mốc,...> --bat-dau 0,<giây>,...`: ghi `doan-<i>.mp4`. Đoạn i chạy từ mốc bắt đầu tới mốc đổi đồ kế tiếp + 0,3 s (`--du`, để hoà hình). Script in số giây tính tiền, so với cách cũ, và in lệnh `dung`.
+5. Mỗi đoạn chạy 1 workflow riêng: `ghep-nhieu-bo.mjs --clip <doan-i.mp4> --product <bộ i>` (đoạn 1: `--do-bo-image`). Ảnh ghép tự lấy khung đầu của đoạn. Báo credit, chờ đồng ý, rồi `--aidancing` cho từng workflow. Các job chạy song song.
+6. Ghép bằng lệnh `dung` mà script in ở bước 4, thêm `--hieu-ung`, `--flash-cat` như cách cũ. `--bat-dau` và `--nhac <clip mẫu>` báo cho `dung` biết mỗi video đoạn bắt đầu ở giây nào của clip mẫu, và lấy nhạc liền từ clip mẫu.
+
+Kiểm chứng ngày 2026-11-08, không tốn credit: cắt 4 clip full @irenebbyy_ theo đoạn rồi ghép bằng `--bat-dau`, so với ghép từ 4 clip full bằng cách cũ: SSIM 0,99 ở cả 4 đoạn. Lỗi đã sửa: mốc bắt đầu phải làm tròn về đúng khung, nếu không đoạn lệch 1 khung (SSIM 0,88).
+
+Chưa chạy aidancing thật theo đoạn lần nào. Lần đầu, Claude kiểm tra điểm nối: nền và ánh sáng 2 đoạn có lệch không, vì mỗi đoạn có ảnh ghép riêng.
+
+Hiệu ứng mặc định, người dùng chọn ngày 2026-11-08: điểm đổi từ đồ bộ sang bộ 2 là zoom giật + chớp sáng. Các điểm sau hoà hình, chớp ở điểm cuối. Với 4 bộ:
+`--hieu-ung hoa-hinh --hoa 0.27 --flash-cat 1,3 --zoom 0.3,0.08,0.08 --zoom-tg 0.12,0.25,0.25`. Người dùng thử zoom giật 0,2 không chớp, rồi 0,3 không chớp, và nói "Giật + flash mới hợp".
+
+### Model 157: aidancing tự làm biến hình 4 ảnh trong 1 job
+
+Thử ngày 2026-11-08, job 3314124. Model 157 "AI Copy Chuyển Động + Biến Hình 4 Ảnh v7.0 (20s)": `image_1..4`, `text_1..3` = mốc đổi ảnh (giây, dạng `10.37`), `video`. Giá cố định 2,6 credit Nhanh, 5,2 Chất lượng. 156 = 2 ảnh 10 s, 158 = 6 ảnh 30 s (3,9 / 7,8). Script thử: gửi multipart `POST /create/general` không có `actualTime`, xem `app/docs/aidancing-models.md`.
+- Input: clip đồ bộ @irenebbyy_ 24,83 s, 4 ảnh là khung của 4 clip cũ ở giây bắt đầu đoạn, mốc 3.6 / 10.37 / 17.5, chế độ Nhanh.
+- Chạy 578 giây. Video ra 576×1024, 30 fps, có tiếng, **19,93 s**: model cắt clip còn 20 s, nên bộ cuối chỉ hiện 2,4 s. Clip dài hơn 20 s thì dùng 158 hoặc cắt clip mẫu.
+- Đổi ảnh đúng mốc, cắt gọn trong 1 khung, tư thế liền. Cả 4 bộ đúng trang phục ảnh.
+- Video không có hiệu ứng ở điểm đổi. Muốn zoom giật + chớp thì chạy thêm hiệu ứng ở mốc bằng ffmpeg.
+
+Cách cũ (N clip full, các bước dưới đây) vẫn dùng khi đã có sẵn N clip full, ví dụ tải lại theo mã job.
+
+### Các bước (cách cũ: N clip full)
 
 1. Tải clip theo mã job aidancing, không tốn credit:
    ```bash
    cd <skill>/scripts && node tai-job.mjs <mã job> [<mã job> ...]
    ```
-   Script lưu `~/Desktop/Mẫu/Videos/aidancing-<mã job>.mp4`. aidancing.net xoá dữ liệu sau 3 ngày.
+   Script lưu `<repo>/videos/aidancing/aidancing-<mã job>.mp4`. Với video biến hình, Claude ghi `--out <repo>/videos/bien-hinh-<tên>/clip`. aidancing.net xoá dữ liệu sau 3 ngày.
 2. Claude trích 1 khung của mỗi clip ở cùng mốc giây rồi xem, để biết clip nào là bộ nào. Clip đồ bộ đứng đầu danh sách.
 3. Chạy phân tích:
    ```bash
@@ -306,7 +378,7 @@ Quy tắc của người dùng, ngày 2026-11-07:
 4. Claude xem 2 ảnh và quyết định. Mục "Claude quyết định gì" ở dưới.
 5. Dựng video:
    ```bash
-   node <skill>/scripts/bien-hinh.mjs dung --cat <giây,giây,...> --out ~/Desktop/Mẫu/Videos/bien-hinh-<tên>.mp4 <clip đồ bộ> <clip 2> ... [--flash 0.55] [--zoom 0.08]
+   node <skill>/scripts/bien-hinh.mjs dung --cat <giây,giây,...> --out <repo>/videos/bien-hinh-<tên>/bien-hinh-<tên>.mp4 <clip đồ bộ> <clip 2> ... [--flash 0.55] [--zoom 0.08]
    ```
    - Clip theo thứ tự xuất hiện. Clip 1 chạy từ giây 0, đổi sang clip 2 ở mốc 1, v.v.
    - Mốc làm tròn về khung gần nhất. Mỗi đoạn lấy đúng khung cùng thời điểm của clip đó, nên động tác nối liền.
@@ -333,7 +405,7 @@ Script đo nhạc bằng năng lượng âm thanh. Claude không nghe được n
 - Nhạc 129 BPM. Đoạn lặng 3,00–4,25 s, rồi drop 5 phách liền từ 4,03 s. Đoạn lặng nhỏ 11,75–12,25 s.
 - Thứ tự: đồ bộ hoa (3271446) → đầm lụa trắng (3271444) → đầm hồng corset (3271447) → đầm đỏ lưới (3271445).
 - Mốc: 4,03 s (drop), 8,17 s (phách trùng động tác mạnh nhất, chuyển động 0,99), 12,30 s (drop nhỏ). Gợi ý của script trùng với lựa chọn của Claude.
-- Video: `~/Desktop/Mẫu/Videos/bien-hinh-4-bo.mp4`, 19,37 s, 23 MB.
+- Video: `videos/bien-hinh-mat-moc/bien-hinh-4-bo.mp4`, 19,37 s, 23 MB.
 - Mỗi clip có sẵn khung "Trả lời bình luận… Xem mặt mộc lào" của clip TikTok gốc. Khung này nằm cùng chỗ ở cả 4 clip, nên không nhảy khi đổi đồ.
 
 Lần 2, cùng ngày, 4 clip của clip nhảy @irenebbyy_ (đồ bộ, đầm lụa trắng, corset hồng, đầm đỏ cổ yếm), 24,83 s:
@@ -341,13 +413,13 @@ Lần 2, cùng ngày, 4 clip của clip nhảy @irenebbyy_ (đồ bộ, đầm l
 - Gợi ý đầu của script là 8,60 / 10,83 / 20,17 s: bộ trắng chỉ hiện 2,2 s. Claude không dùng gợi ý này, và sửa script để ưu tiên mốc chia đều.
 - Claude chọn 5,50 s (phách 0,77 ngay sau động tác chỉ tay vào camera), 10,37 s (người mẫu xoè tay che kín ống kính, chuyển động 0,99), 17,03 s (phách 0,78, bắt đầu vẫy tay). Khoảnh khắc nháy mắt ở 8,6 s bị bỏ, vì đặt mốc ở đó thì bộ trắng chỉ hiện 1,8 s.
 - Mốc tay che ống kính cho cú đổi đồ đẹp nhất: tay lớn dần, chớp sáng, tay vẫn che rồi rút ra với bộ đồ mới.
-- Video: `~/Desktop/bien-hinh-irenebbyy-4-bo.mp4`, 24,83 s.
+- Video: `videos/bien-hinh-irenebbyy/bien-hinh-irenebbyy-4-bo.mp4`, 24,83 s.
 
 Lần 3, cùng clip @irenebbyy_, sau khi người dùng đặt điều kiện hết câu hát:
 - Script tìm chỗ ngắt câu ở 3,30–3,60, 7,32, 10,46–10,98, 14,40, 17,54–18,12, 21,54 s, cách nhau 3–4 s, khớp câu 2 ô nhịp ở 136 BPM.
 - Mốc 5,50 s và 17,03 s của lần 2 nằm giữa câu. Mốc 10,37 s (tay che ống kính) đã nằm ở chỗ hết câu.
 - Claude chọn 3,60 s (hết câu, nháy mắt ở 3,5 s), 10,37 s (hết câu, tay che ống kính), 17,50 s (hết câu, ngậm miệng và quay đầu). Gợi ý của script là 7,27 / 14,37 / 18,37 s. Claude không dùng vì 7,27 và 14,37 không có động tác, và 18,37 nằm giữa câu.
-- Hiệu ứng: hoà hình 0,27 s mọi điểm, chớp ở điểm 3. Video: `~/Desktop/bien-hinh-irenebbyy-het-cau.mp4`.
+- Hiệu ứng: hoà hình 0,27 s mọi điểm, chớp ở điểm 3. Video: `videos/bien-hinh-irenebbyy/bien-hinh-irenebbyy-het-cau.mp4`.
 
 ## Bước 4 — Kiểm tra video
 
@@ -365,8 +437,10 @@ Kết quả đo ngày 2026-11-03: khung đầu của video giống ảnh ghép, 
    - Ví dụ sai, 2 bài đã đăng ngày 2026-11-03: `Đầm trắng tay phồng 🤍 #damtrang #ootd …`, `Đầm lụa đuôi cá đính hoa 🤍 #damlua …`.
 2. Claude chạy:
    ```bash
-   cd <skill>/scripts && node dang-tiktok.mjs <video.mp4> --caption "<mô tả>" [--dry-run]
+   cd <skill>/scripts && node dang-tiktok.mjs <video.mp4> --caption "<mô tả>" --profile <oliver|my> [--dry-run]
    ```
+   - `--profile` bắt buộc, theo người yêu cầu: `oliver` = Telegram nntruong96, TikTok @linh_dan_20x; `my` = Telegram Diễm My, TikTok @t.ht.n.mm. Bảng đầy đủ: `~/.claude/skills/flow-chain-video/scripts/kenh.json`.
+   - Script mở tab trong profile Chrome đó. TikTok Studio không chứa đúng handle thì script dừng, không đăng.
 3. Script mở tab nền TikTok Studio và tải video lên. Script đóng hộp thoại, gõ mô tả rồi kiểm tra lại mô tả. Script kiểm tra nhãn AI đang tắt, rồi bấm Post. Cuối cùng, script in link bài và đóng tab.
 4. `--dry-run` làm mọi bước trừ bấm Post, và để tab mở cho người dùng xem. Sau đó, Claude đóng tab đó bằng `curl -s http://127.0.0.1:9222/json/close/<id>`.
 5. Sau khi đăng, TikTok ghi "Content under review" và để bài ở "Only me" cho tới khi duyệt xong. Sau khi duyệt, bài theo quyền "Everyone".

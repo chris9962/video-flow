@@ -9,12 +9,13 @@
 //     --do-bo-image anh.jpg thêm 1 nhánh đồ bộ từ ảnh thật, đi qua bước tách sản phẩm như ảnh Shopee.
 //     Mặc định block Ghép mẫu đưa người vào ảnh nền assets/background/nen-01-phong-khach-sofa-be.png.
 //     --background nen.png dùng ảnh nền khác. --giu-nen giữ nền của clip.
-//   node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality quality|fast] [--bo bo1 --bo do-bo ...]
+//   node ghep-nhieu-bo.mjs --aidancing <workflowId> [--quality fast|quality] [--bo bo1 --bo do-bo ...]
 //     --bo chỉ chạy AI Dancing cho block Ghép mẫu có nhãn này (bo1, bo2…, do-bo). Bỏ trống thì chạy mọi block.
 //     Thêm 1 block AI Dancing sau mỗi block Ghép mẫu, rồi chạy song song từ các block đó. Lệnh này tốn credit.
+//   node ghep-nhieu-bo.mjs --doan <ảnh 1> <đoạn 1.mp4> --doan <ảnh 2> <đoạn 2.mp4> ... [--quality fast|quality] [--name ..] [--out <thư mục>]
+//     Mỗi cặp là 1 job AI Dancing song song, ảnh dùng thẳng, không qua ChatGPT. Đoạn lấy từ bien-hinh.mjs cat-mau. Tốn credit.
 
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 
@@ -65,7 +66,7 @@ const t0 = Date.now();
 const step = (s) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)}s] ${s}`);
 
 function parseArgs(argv) {
-  const opts = { products: [], quality: 'quality', doBo: false, background: DEFAULT_BACKGROUND };
+  const opts = { products: [], quality: 'fast', doBo: false, background: DEFAULT_BACKGROUND };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--product') opts.products.push(argv[++i]);
@@ -74,8 +75,13 @@ function parseArgs(argv) {
     else if (a === '--background') opts.background = argv[++i];
     else if (a === '--do-bo-image') opts.doBoImage = argv[++i];
     else if (a === '--bo') (opts.bo ??= []).push(argv[++i]);
-    else if (['--clip', '--face', '--name', '--aidancing', '--quality'].includes(a)) opts[a.slice(2)] = argv[++i];
+    else if (a === '--doan') (opts.doan ??= []).push({ image: argv[++i], clip: argv[++i] });
+    else if (['--clip', '--face', '--name', '--aidancing', '--quality', '--out'].includes(a)) opts[a.slice(2)] = argv[++i];
     else throw new Error(`Không hiểu tham số: ${a}`);
+  }
+  if (opts.doan) {
+    for (const { image, clip } of opts.doan) for (const f of [image, clip]) if (!f || !fs.existsSync(f)) throw new Error(`Không thấy file: ${f}`);
+    return opts;
   }
   if (opts.aidancing) return opts;
   if (!opts.clip || !opts.face) throw new Error('Thiếu --clip hoặc --face');
@@ -273,7 +279,47 @@ async function addAndRunAiDancing(opts) {
   const r = await runAndWait(wf, Object.keys(labels), labels);
   // Đọc video từ outputs.json của run: tab FE mở từ trước khi thêm block tự lưu bản cũ và xoá block AI Dancing khỏi workflow.
   const stamp = new Date().toLocaleString('sv-SE').slice(0, 16).replace(/[ :]/g, '');
-  const outDir = path.join(os.homedir(), 'Desktop', 'Mẫu', 'Videos');
+  // Video kết quả nằm trong <repo>/videos/aidancing/, git bỏ qua thư mục này. Người dùng yêu cầu ngày 2026-11-07.
+  const outDir = path.resolve(APP_DIR, '..', 'videos', 'aidancing');
+  fs.mkdirSync(outDir, { recursive: true });
+  for (const id of Object.keys(labels)) {
+    let video = null;
+    try {
+      video = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'runs', r.runId, id, 'outputs.json'), 'utf8')).out;
+    } catch {}
+    if (!video?.path) {
+      step(`${labels[id]}: chưa có video`);
+      continue;
+    }
+    const out = path.join(outDir, `aidancing-${slug(wf.name)}-${fileTags[id]}-${stamp}.mp4`);
+    fs.copyFileSync(video.path, out);
+    step(`${labels[id]}: ✓ ${out}`);
+  }
+  if (r.status !== 'done') {
+    throw new Error(`Run ${r.runId} kết thúc với trạng thái ${r.status}${r.errors.length ? `: ${r.errors.join(' | ')}` : ''}`);
+  }
+}
+
+// --doan <ảnh>:<clip> ...: mỗi cặp là 1 job AI Dancing, ảnh đã sẵn (ảnh ghép, hoặc khung lấy từ clip có sẵn bộ đồ).
+// Dùng cho cách chạy theo đoạn của bien-hinh.mjs cat-mau. Không qua ChatGPT. Tốn credit: Claude báo và chờ đồng ý trước.
+async function runSegments(opts) {
+  const wf = { id: randomUUID(), name: opts.name ?? `Đoạn · ${new Date().toLocaleString('sv-SE').slice(0, 16)}`, nodes: [], edges: [] };
+  const labels = {};
+  const fileTags = {};
+  for (const [i, { image, clip }] of opts.doan.entries()) {
+    const img = node('image', 0, ROW * i, { content: await uploadAsset(image) });
+    const vid = node('video', 520, ROW * i, { content: await uploadAsset(clip) });
+    const d = node('aidancing', 1040, ROW * i, { quality: opts.quality });
+    wf.nodes.push(img, vid, d);
+    wf.edges.push(edge(img.id, d.id, 'image'), edge(vid.id, d.id, 'video'));
+    fileTags[d.id] = `doan${i + 1}`;
+    labels[d.id] = `Đoạn ${i + 1} · AI Dancing`;
+  }
+  await api('PUT', `/api/workflows/${wf.id}`, wf);
+  step(`Workflow "${wf.name}": http://localhost:5173/editor/${wf.id}`);
+  const r = await runAndWait(wf, null, labels);
+  const stamp = new Date().toLocaleString('sv-SE').slice(0, 16).replace(/[ :]/g, '');
+  const outDir = opts.out ?? path.resolve(APP_DIR, '..', 'videos', 'aidancing');
   fs.mkdirSync(outDir, { recursive: true });
   for (const id of Object.keys(labels)) {
     let video = null;
@@ -297,5 +343,6 @@ const opts = parseArgs(process.argv.slice(2));
 if (!(await fetch(`${SERVER}/health`).then((r) => r.ok, () => false))) {
   throw new Error('Server video-flow chưa chạy. Chạy: cd ~/video-flow/app && npm run dev:server');
 }
-if (opts.aidancing) await addAndRunAiDancing(opts);
+if (opts.doan) await runSegments(opts);
+else if (opts.aidancing) await addAndRunAiDancing(opts);
 else await buildAndRunTryon(opts);

@@ -354,6 +354,18 @@ Sau khi thử một cách viết, Claude ghi kết quả vào mục 4.2. Cách v
 
 Có 2 cách tạo clip. Cách 6.1: người dùng tạo clip trong Flow, Claude chuẩn bị file và kiểm tra kết quả. Cách 6.2: `flow.mjs` tự tạo clip qua Chrome CDP, viết lại ngày 2026-10-18 theo giao diện `flow.google.com`. Hỏi người dùng muốn cách nào. Cách 6.2 cần Chrome CDP đăng nhập tài khoản có gói Flow.
 
+### 6.0. Tài khoản Flow và credit
+
+Chrome CDP có 2 profile và nhiều tài khoản Google, mỗi tài khoản có credit Flow riêng. Chủ máy yêu cầu ngày 2026-11-08: tạo clip bằng tài khoản còn credit, và ghi credit sau mỗi lần dùng.
+
+- `flow.mjs` tự dò mọi tài khoản ở mọi profile trong `scripts/kenh.json`, chọn tài khoản còn nhiều credit nhất và đủ cho clip, mở tab trong profile đó. Không tài khoản nào đủ thì dừng trước khi tạo project.
+- Chọn tay: `chain.mjs gen ... --account <email>`, hoặc `"flowAccount": "<email>"` trong `plan.json`. `flow.mjs --flow-profile <oliver|my>` chỉ dò 1 profile.
+- Sổ credit: `app/data/flow-credits.json`. Mỗi clip ghi credit trước, sau và số đã dùng.
+- Xem credit: `node <skill>/scripts/flow-tai-khoan.mjs` dò lại và ghi sổ. `--so` in sổ, không mở Chrome.
+- Flow chọn tài khoản theo URL `flow.google.com/u/<n>/`. Credit nằm trong menu avatar: "1.050 tín dụng Google Flow", "Đặt lại lúc 13:03 vào 8 thg 12".
+- Tài khoản hết credit: Flow hiện banner "Bạn sắp dùng hết tín dụng", nút tạo thành icon cảnh báo cam, script cũ kẹt ở bước bấm tạo (bánh mì 2026-11-08).
+- Profile phải có ít nhất 1 cửa sổ đang mở trong Chrome CDP thì script mới dò được. Chi tiết: `scripts/chrome-profile.mjs`.
+
 ### 6.1. Người dùng tạo clip trong Flow
 
 Cảnh báo trước khi làm:
@@ -507,12 +519,14 @@ Subscribe for more life cycles.
 
 ## Bước 10 — Đăng lên YouTube và Facebook
 
-Người dùng đăng video lên 2 nơi, cùng tên "Life Cycle Lab". Chrome CDP đã đăng nhập cả hai.
+Kênh đăng tuỳ người yêu cầu, ghi trong `scripts/kenh.json`. Chủ máy đặt ngày 2026-11-08: Claude xác định profile trước khi đăng.
 
-| Nơi | Dạng bài | Địa chỉ |
-|---|---|---|
-| YouTube | Shorts | Kênh `UCyVJDSNhxgezvgYuf82wi6Q`, đăng qua YouTube Studio |
-| Facebook | Thước phim | https://www.facebook.com/profile.php?id=61595556214345, đăng qua `facebook.com/reels/create` |
+| `--profile` | Người yêu cầu (Telegram) | YouTube | Facebook (Thước phim) |
+|---|---|---|---|
+| `oliver` | nntruong96 | Life Cycle Lab `UCyVJDSNhxgezvgYuf82wi6Q` | Life Cycle Lab 61595556214345 (mặc định), Aurevella 61594230160348 (`--fb-page`) |
+| `my` | Diễm My (9060990194) | Từ Hạt Đến Mâm `UCc0xdhR9R-W7ksx23jvybLQ` | Từ Hạt Đến Mâm 61596364020370 |
+
+Script mở tab trong đúng profile Chrome của kênh. Facebook đăng qua `facebook.com/reels/create`, YouTube qua YouTube Studio.
 
 Cảnh báo trước khi chạy:
 - Chỉ đăng khi người dùng yêu cầu. Bài công khai hiện ngay cho mọi người.
@@ -521,8 +535,10 @@ Cảnh báo trước khi chạy:
 Lệnh:
 
 ```bash
-node <skill>/scripts/dang-bai.mjs <thư mục video> [--youtube] [--facebook] [--video file.mp4] [--dry-run]
+node <skill>/scripts/dang-bai.mjs <thư mục video> --profile <oliver|my> [--youtube] [--facebook] [--fb-page <id>] [--video file.mp4] [--dry-run]
 ```
+
+- `--profile` bắt buộc.
 
 - Không ghi `--youtube`, `--facebook` thì script đăng cả hai.
 - Script lấy tiêu đề và mô tả từ `dang-bai.md`, mục "## Tiêu đề" và "## Mô tả".

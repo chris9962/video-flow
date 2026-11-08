@@ -3,11 +3,14 @@
 // Không chạy khi flow.mjs đang tải video: kết nối Playwright mới đổi thư mục tải của Chrome và làm hỏng file tải.
 //
 // CLI:
-//   node dang-tiktok.mjs <video.mp4> --caption "Mô tả #hashtag" [--dry-run]
+//   node dang-tiktok.mjs <video.mp4> --caption "Mô tả #hashtag" --profile <oliver|my> [--dry-run]
 //   --dry-run tải video lên và điền mô tả, nhưng không bấm Post. Tab để mở cho người dùng xem.
+//   --profile bắt buộc (chủ máy dặn 2026-11-08): tab mở trong profile Chrome của kênh, tài khoản TikTok lấy từ
+//   flow-chain-video/scripts/kenh.json. Trang TikTok Studio không chứa đúng tài khoản thì dừng, không đăng.
 
 import fs from 'node:fs';
 import { chromium } from 'playwright-core';
+import { profileInfo, newPageInProfile } from '../../flow-chain-video/scripts/chrome-profile.mjs';
 
 const CHROME_CDP_URL = process.env.CHROME_CDP_URL || 'http://127.0.0.1:9222';
 const UPLOAD_URL = 'https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=video';
@@ -17,10 +20,11 @@ const step = (s) => console.log(`[${((Date.now() - t0) / 1000).toFixed(1)}s] ${s
 const normalize = (s) => s.replace(/\s+/g, ' ').trim();
 
 function parseArgs(argv) {
-  const opts = { video: null, caption: null, dryRun: false };
+  const opts = { video: null, caption: null, dryRun: false, profile: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--dry-run') opts.dryRun = true;
+    else if (a === '--profile') opts.profile = argv[++i];
     else if (a === '--caption') opts.caption = argv[++i];
     else if (!opts.video) opts.video = a;
     else throw new Error(`Không hiểu tham số: ${a}`);
@@ -79,7 +83,18 @@ try {
 } catch {
   throw new Error(`Không kết nối được Chrome tại ${CHROME_CDP_URL}. Chạy: node ~/.claude/skills/flow-chain-video/scripts/launch-chrome.mjs`);
 }
-const page = await newBackgroundPage(browser.contexts()[0], UPLOAD_URL);
+const prof = profileInfo(opts.profile);
+step(`Profile ${prof.key} (${prof.dir}): TikTok @${prof.tiktok}`);
+const page = await newPageInProfile(browser, prof.key, UPLOAD_URL);
+// HTML của TikTok Studio chứa handle của tài khoản đang đăng nhập (đo 2026-11-08 với @linh_dan_20x).
+let okAccount = false;
+for (let i = 0; i < 20 && !okAccount; i++) {
+  okAccount = (await page.content()).includes(prof.tiktok);
+  if (!okAccount) await page.waitForTimeout(1_000);
+}
+if (!okAccount) {
+  throw new Error(`TikTok Studio trong profile ${prof.key} không phải tài khoản @${prof.tiktok}. Chưa đăng. Tab để mở: ${page.url()}`);
+}
 const fileInput = page.locator('input[type="file"][accept="video/*"]');
 await fileInput.waitFor({ state: 'attached', timeout: 60_000 }).catch(() => {
   throw new Error(`Trang tải lên không có ô chọn video (${page.url()}). Đăng nhập TikTok trong cửa sổ Chrome CDP rồi chạy lại.`);

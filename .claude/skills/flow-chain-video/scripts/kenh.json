@@ -1,0 +1,22 @@
+{
+  "_ghichu": "Profile Chrome CDP và kênh đăng video. Chủ máy đặt ngày 2026-11-08. Script đăng bài đọc file này qua --profile. Thứ tự facebook: trang đầu là mặc định.",
+  "oliver": {
+    "dir": "Profile 1",
+    "google": "oliver1990ax@gmail.com",
+    "telegram": "nntruong96 (chat 5065235131)",
+    "tiktok": "linh_dan_20x",
+    "youtube": { "channel": "UCyVJDSNhxgezvgYuf82wi6Q", "handle": "@LifeCycleLabTV", "name": "Life Cycle Lab" },
+    "facebook": [
+      { "id": "61595556214345", "name": "Life Cycle Lab" },
+      { "id": "61594230160348", "name": "Aurevella", "ghichu": "Sau này đổi tên thành Life Cycle Lab" }
+    ]
+  },
+  "my": {
+    "dir": "Profile 2",
+    "google": "mi.nguyen97mi@gmail.com",
+    "telegram": "Diễm My (chat 9060990194)",
+    "tiktok": "t.ht.n.mm",
+    "youtube": { "channel": "UCc0xdhR9R-W7ksx23jvybLQ", "handle": "@TừHạtĐếnMâm", "name": "Từ Hạt Đến Mâm" },
+    "facebook": [{ "id": "61596364020370", "name": "Từ Hạt Đến Mâm" }]
+  }
+}
