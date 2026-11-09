@@ -10,6 +10,7 @@
 
 import fs from 'node:fs';
 import { chromium } from 'playwright-core';
+import { typeCaption } from './tiktok-caption.mjs';
 import { profileInfo, newPageInProfile } from '../../flow-chain-video/scripts/chrome-profile.mjs';
 
 const CHROME_CDP_URL = process.env.CHROME_CDP_URL || 'http://127.0.0.1:9222';
@@ -118,13 +119,24 @@ await dismissPopups(page);
 
 // insertText rồi Escape sau mỗi hashtag làm mất hashtag (đo 2026-11-03). Gõ từng phím thì danh sách gợi ý hashtag tự đóng ở dấu cách.
 const editor = page.locator('[contenteditable="true"]').first();
-await editor.click();
-await page.keyboard.press('Meta+A');
-await page.keyboard.press('Backspace');
-await page.keyboard.type(`${opts.caption.trim()} `, { delay: 60 });
-await page.waitForTimeout(1_000);
-await page.getByText('Who can see this post', { exact: true }).click();
-const caption = await editor.innerText();
+// Gõ lại tối đa 3 lần: ngày 2026-11-08 trên Windows, con trỏ nhảy về đầu ô giữa lúc gõ, mô tả bị đảo đoạn.
+let caption = '';
+for (let attempt = 1; attempt <= 3; attempt++) {
+  await page.waitForTimeout(2_000);
+  await editor.click();
+  // ControlOrMeta: Meta+A trên Windows không chọn hết, ô mô tả còn tên file (đo 2026-11-08).
+  await page.keyboard.press('ControlOrMeta+A');
+  await page.keyboard.press('Backspace');
+  await page.keyboard.press('End');
+  const tagInfo = await typeCaption(page, opts.caption);
+  step(`Hashtag thành link: ${tagInfo.linked}/${tagInfo.total}`);
+  await page.waitForTimeout(1_000);
+  await page.getByText('Who can see this post', { exact: true }).click();
+  caption = await editor.innerText();
+  if (normalize(caption) === normalize(opts.caption)) break;
+  step(`Mô tả lần ${attempt} sai, gõ lại: ${normalize(caption).slice(0, 60)}`);
+  await dismissPopups(page);
+}
 if (normalize(caption) !== normalize(opts.caption)) {
   throw new Error(`Mô tả trên trang khác mô tả cần đăng: ${JSON.stringify(caption)}. Tab để mở, không bấm Post.`);
 }

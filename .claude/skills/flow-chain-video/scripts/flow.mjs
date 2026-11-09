@@ -8,7 +8,7 @@
 //   node flow.mjs --prompt "..." --out out.mp4 [--image start.png] [--end-image end.png]
 //                 [--model omni-flash] [--duration 6] [--aspect 9:16] [--quality 720p] [--download 1080p] [--account <email|auto>] [--dry-run]
 //   node flow.mjs --project <url> --out out.mp4 [--download 1080p]   (tải video từ project đã tạo xong)
-//   Thêm --account <email|auto> để chọn tài khoản Google. auto (mặc định) = tài khoản còn nhiều credit nhất, đủ cho clip.
+//   Thêm --account <email|auto> để chọn tài khoản Google. auto (mặc định) = điều phối "vừa đủ" trong flow-tai-khoan.mjs: dùng tài khoản ít credit nhất mà còn đủ (credit ngày 50) trước.
 //   Credit trước/sau mỗi clip ghi vào app/data/flow-credits.json (xem flow-tai-khoan.mjs).
 
 import fs from 'node:fs/promises';
@@ -416,7 +416,7 @@ async function newBackgroundPage(ctx) {
 // Đọc lại credit sau khi tạo clip và ghi sổ. Lỗi đọc credit không được làm hỏng clip đã tải.
 async function recordUse(page, acc, extra) {
   try {
-    const after = await openAccount(page, acc.n);
+    const after = { ...(await openAccount(page, acc.n)), profile: acc.profile };
     if (after.email !== acc.email) return;
     logCredit(after, extra.error ? 'loi' : 'tao', { before: acc.credits, used: acc.credits - after.credits, ...extra });
     step(`Credit ${acc.email}: ${acc.credits} → ${after.credits}`);
@@ -479,8 +479,24 @@ export async function generateFlowVideo({
   try {
     if (project) {
       await page.goto(project, { waitUntil: 'domcontentloaded', timeout: 60_000 });
-      await page.locator(COMPOSER).first().waitFor({ timeout: 45_000 });
-      const doneId = await waitVideo(page, statuses, null, GEN_TIMEOUT_MS);
+      let found = false;
+      // Project thuộc tài khoản ở profile khác thì tab mặc định không mở được (2026-11-09) → thử từng profile.
+      if (!(await page.locator(COMPOSER).first().waitFor({ timeout: 20_000 }).then(() => true, () => false))) {
+        const { KENH, newPageInProfile } = await import('./chrome-profile.mjs');
+        for (const key of Object.keys(KENH).filter((k) => !k.startsWith('_'))) {
+          const p = await newPageInProfile(browser, key, project).catch(() => null);
+          if (p && (await p.locator(COMPOSER).first().waitFor({ timeout: 20_000 }).then(() => true, () => false))) {
+            await page.close().catch(() => {});
+            page = p;
+            found = true;
+            step(`Mở project trong profile ${key}`);
+            break;
+          }
+          await p?.close().catch(() => {});
+        }
+        if (!found) throw new Error('Không mở được project ở profile nào. Kiểm tra link project.');
+      }
+      const doneId = await waitVideo(page, found ? watchRpc(page).statuses : statuses, null, GEN_TIMEOUT_MS);
       step(`Video trong project: ${doneId}`);
       await downloadResult(page, download, outFile);
       step(`✓ Đã lưu video: ${outFile}`);

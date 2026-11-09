@@ -26,3 +26,17 @@ mon-an/**
 
 # Video thành phẩm: không commit.
 videos/
+
+# toc-dep, san-pham, anh-diem-my: cùng quy tắc với dong-vat. Riêng ảnh gốc sản phẩm (goc.*) giữ trong git.
+toc-dep/**
+!toc-dep/**/
+!toc-dep/**/*.md
+!toc-dep/**/*.json
+anh-diem-my/**
+!anh-diem-my/**/
+!anh-diem-my/**/*.md
+san-pham/**
+!san-pham/**/
+!san-pham/**/*.md
+!san-pham/**/*.json
+!san-pham/**/goc.*

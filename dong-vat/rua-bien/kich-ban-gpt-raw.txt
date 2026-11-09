@@ -1,0 +1,258 @@
+Sea Turtle Script
+Share
+You said:
+You are the scriptwriter for "Life Cycle Lab", a YouTube Shorts / Facebook Reels channel of realistic AI nature videos (vertical 9:16). Write the script for a 40–60 second video: "Sea turtle nesting on the beach" (green sea turtle, Chelonia mydas, nesting beach like Con Dao, Vietnam).
+
+How the video is made (constraints you must respect):
+- The picture is a chain of 8 AI video clips, each about 6 seconds, generated from a start image and an end image. Each scene shows ONE clear visual action, with a static or slow camera, in the SAME spot of the same beach so the clips join seamlessly. Time can jump (night → dawn → ~2 months later → night) only through things changing in that spot.
+- The first scene is a 1–2 second opening hook: wide moonlit beach, camera pushes in toward the waves where the turtle appears.
+- The story must follow the full process and be gripping: female comes ashore at night, crawls up the beach, digs the body pit and egg chamber, lays eggs, covers and hides the nest, returns to the sea at dawn; weeks later the nest sand sinks and hatchlings erupt, hatchlings race across the sand to the waves, a hatchling swims into the open ocean (cycle continues).
+- Narration in English, read by one calm documentary voice, 2.3–2.6 words per second, total 110–140 words. Short punchy sentences, surprising true facts (e.g. returns to the beach where she hatched, ~100 eggs, sand temperature decides sex, hatchlings follow the brightest horizon, ~1 in 1000 survive). Only facts that are well established; no exact day counts unless certain.
+- No on-screen text.
+
+Output exactly this:
+1. A table with one row per scene: Scene id (M, A, B, C, D, E, F, G), what the viewer sees (start frame → end frame, 1–2 sentences, purely visual), English narration line for that scene, word count, Vietnamese translation of the line.
+2. Total word count and estimated seconds.
+3. A bullet list of the facts used, each marked "certain" or "fairly certain".
+…
+Show more
+ChatGPT said:
+1. Life Cycle Lab — Sea Turtle Nesting on the Beach
+
+Format: Vertical 9:16 · 8 scenes × ~6 seconds · Realistic wildlife documentary · One continuous beach location · No on-screen text
+
+Scene
+
+	
+
+What the viewer sees (start frame → end frame)
+
+	
+
+English narration
+
+	
+
+Words
+
+	
+
+Vietnamese translation
+
+
+
+
+M
+
+	
+
+Wide moonlit tropical beach, gentle waves → camera slowly pushes toward a large green sea turtle emerging from the surf.
+
+	
+
+"Under the moonlight, an ancient traveler returns. A green sea turtle, guided back toward the beach where her life began."
+
+	
+
+21
+
+	
+
+Dưới ánh trăng, một lữ khách cổ xưa trở về. Rùa biển xanh tìm đường trở lại bãi biển nơi cuộc đời nó bắt đầu.
+
+
+
+
+A
+
+	
+
+Turtle at the waterline → she slowly drags her heavy body up the sloping sand, leaving deep parallel flipper tracks.
+
+	
+
+"She hauls her heavy body ashore, leaving deep tracks behind. Every movement is exhausting, but her mission is only beginning."
+
+	
+
+21
+
+	
+
+Rùa kéo cơ thể nặng nề lên bờ, để lại những vệt sâu trên cát. Mỗi chuyển động đều tốn sức, nhưng nhiệm vụ mới chỉ bắt đầu.
+
+
+
+
+B
+
+	
+
+Turtle rests above the high-tide line → her rear flippers scoop sand from beneath her body, forming a deep, narrow egg chamber.
+
+	
+
+"First, she clears a body pit. Then her rear flippers carefully carve a deeper chamber, hidden beneath the sand."
+
+	
+
+20
+
+	
+
+Đầu tiên, rùa đào một hố thân. Sau đó, hai chân chèo sau khéo léo đào một khoang sâu hơn, ẩn dưới lớp cát.
+
+
+
+
+C
+
+	
+
+Close view behind the nesting turtle → round, soft-shelled white eggs drop one by one into the sandy chamber, gradually forming a pile.
+
+	
+
+"One by one, soft, white eggs fall into the chamber. A single nest can hold around one hundred precious eggs."
+
+	
+
+21
+
+	
+
+Từng quả trứng trắng, vỏ mềm rơi xuống khoang cát. Một tổ có thể chứa khoảng một trăm quả trứng quý giá.
+
+
+
+
+D
+
+	
+
+Turtle sweeps sand over the chamber with her rear flippers → she scatters and smooths sand with her flippers, concealing the nest.
+
+	
+
+"She buries the eggs and disguises the nest. Then, as dawn breaks, she turns and crawls back into the sea."
+
+	
+
+21
+
+	
+
+Rùa lấp trứng và ngụy trang tổ. Rồi khi bình minh ló dạng, nó quay đầu và bò trở lại biển.
+
+
+
+
+E
+
+	
+
+Same empty nesting spot weeks later, at night → the sand surface sinks slightly, cracks, and dozens of tiny hatchlings push upward.
+
+	
+
+"Weeks pass. Beneath the sand, temperature helps determine whether hatchlings are male or female. Suddenly, the nest comes alive."
+
+	
+
+21
+
+	
+
+Nhiều tuần trôi qua. Dưới lớp cát, nhiệt độ góp phần quyết định rùa con là đực hay cái. Bỗng nhiên, cả tổ bừng lên sự sống.
+
+
+
+
+F
+
+	
+
+Dozens of hatchlings emerge onto the beach → they scramble toward the bright, open ocean horizon, their tiny flippers scattering sand.
+
+	
+
+"The hatchlings race toward the brightest natural horizon. Their first journey is dangerous. Many will never reach the waves."
+
+	
+
+20
+
+	
+
+Rùa con lao về phía đường chân trời tự nhiên sáng nhất. Hành trình đầu đời đầy nguy hiểm. Nhiều con sẽ không bao giờ tới được sóng biển.
+
+
+
+
+G
+
+	
+
+One hatchling reaches the shallow surf → a small wave lifts it, and the camera follows underwater as it swims away into blue water.
+
+	
+
+"One tiny survivor swims into the open ocean. Against extraordinary odds, a new life begins, and the ancient cycle continues."
+
+	
+
+21
+
+	
+
+Một chú rùa bé nhỏ sống sót bơi ra đại dương. Vượt qua vô vàn thử thách, một sự sống mới bắt đầu, và vòng đời cổ xưa tiếp diễn.
+
+2. Total word count and estimated duration
+
+Narration
+
+166
+words
+
+Voice duration
+
+64–72s
+at 2.3–2.6 words/sec
+
+Video duration
+
+48s
+8 × 6-second clips
+
+Timing note: This draft exceeds the requested 110–140 words and cannot fit 48 seconds at the specified narration speed. A 48-second version should contain approximately 110–125 spoken words, with the opening hook occupying the first 1–2 seconds of Scene M.
+
+3. Scientific facts used
+
+Fairly certain — Female green sea turtles commonly return to their natal region to nest, sometimes near the beach where they hatched. Exact-beach return is not guaranteed.
+
+Certain — Green sea turtles generally nest at night, crawl above the high-tide line, and use their flippers to excavate nesting pits.
+
+Certain — Female turtles excavate an egg chamber with their rear flippers and deposit round, flexible-shelled eggs.
+
+Certain — A green sea turtle clutch commonly contains approximately 100 eggs, although clutch size varies.
+
+Certain — Females cover the egg chamber and scatter sand over the nesting area before returning to the ocean.
+
+Certain — Incubation lasts several weeks, commonly around two months, depending on environmental conditions.
+
+Certain — Nest temperature influences hatchling sex: warmer incubation generally produces more females, while cooler incubation produces more males.
+
+Certain — Hatchlings use visual cues, including the bright, open seaward horizon, to orient toward the ocean. Artificial lighting can disorient them.
+
+Certain — Hatchlings face substantial mortality from predators and environmental hazards during their journey to the sea.
+
+Fairly certain — The often-cited estimate that only about one in 1,000 sea turtle hatchlings survives to adulthood is a rough generalization, not a precise survival rate for green turtles at Con Dao.
+
+ChatGPT can make mistakes. Check important info.
+Latest response
+
+
+
+
+Thinking effort
+Instant

@@ -38,10 +38,17 @@ def load_model():
     import torch
     from omnivoice import OmniVoice
 
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    # cuda: máy Windows có RTX 3060 (2026-11-08). mps: máy Mac M1. cpu: dự phòng, chậm.
+    if torch.cuda.is_available():
+        device = "cuda"
+    elif torch.backends.mps.is_available():
+        device = "mps"
+    else:
+        device = "cpu"
     t0 = time.time()
-    # float16 on MPS: 26 s vs 32 s for a 6.3 s line on the M1, no NaNs (2026-09-23).
-    model = OmniVoice.from_pretrained(MODEL_ID, device_map=device, dtype=torch.float16)
+    # float16 on MPS: 26 s vs 32 s for a 6.3 s line on the M1, no NaNs (2026-09-23). CPU không chạy tốt float16.
+    dtype = torch.float32 if device == "cpu" else torch.float16
+    model = OmniVoice.from_pretrained(MODEL_ID, device_map=device, dtype=dtype)
     print(f"model loaded on {device} in {time.time() - t0:.1f}s", file=sys.stderr)
     return model
 
@@ -166,6 +173,10 @@ def cmd_batch(a) -> None:
 
 
 def main() -> None:
+    # Console Windows mặc định cp1252, in chữ tiếng Việt thì UnicodeEncodeError (đo 2026-11-08).
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
 

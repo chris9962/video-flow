@@ -134,8 +134,24 @@ export async function scanAllProfiles(browser, { log = () => {}, only = null } =
   return all;
 }
 
+// Bộ điều phối credit. Chủ máy báo ngày 2026-11-09: mỗi tài khoản Google được cộng 50 credit Flow mỗi ngày,
+// kể cả tài khoản đã hết credit tháng (oliver1990ax). Để không bỏ phí 50 credit ngày, 'auto' chọn kiểu "vừa đủ":
+// trong các tài khoản đủ credit cho clip, lấy tài khoản còn ÍT credit nhất. Tài khoản chỉ có credit ngày (~50)
+// bị dùng trước, tài khoản credit tháng lớn để dành. Bằng nhau thì lấy tài khoản có mốc đặt lại sớm hơn.
+// FLOW_PICK=most: quay về cách cũ, chọn tài khoản còn nhiều credit nhất.
+export function routeAccounts(accounts, cost, mode = process.env.FLOW_PICK || 'fit') {
+  const ok = accounts.filter((a) => a.credits != null && a.credits >= cost);
+  const resetAt = (a) => {
+    const m = a.reset?.match(/(\d{1,2}):(\d{2}).*?(\d{1,2}) thg (\d{1,2})/);
+    if (!m) return Infinity; // Không có mốc đặt lại tháng: chỉ có credit ngày.
+    const d = new Date(new Date().getFullYear(), Number(m[4]) - 1, Number(m[3]), Number(m[1]), Number(m[2]));
+    return d < Date.now() - 864e5 ? d.setFullYear(d.getFullYear() + 1) : d.getTime();
+  };
+  return ok.sort((a, b) => (mode === 'most' ? b.credits - a.credits : a.credits - b.credits || resetAt(a) - resetAt(b)));
+}
+
 // Chọn tài khoản Google để tạo clip và mở sẵn trang chủ Flow của tài khoản đó trong đúng profile.
-// want: email cụ thể, hoặc 'auto' = tài khoản còn nhiều credit nhất, đủ cho clip. profile: chỉ dò profile này.
+// want: email cụ thể, hoặc 'auto' = theo routeAccounts (vừa đủ, dùng credit ngày trước). profile: chỉ dò profile này.
 // Trả { page, acc }.
 export async function openFlowAccount(browser, { want = 'auto', cost, profile = null, log = () => {} }) {
   const accounts = await scanAllProfiles(browser, { log, only: profile });
@@ -147,7 +163,7 @@ export async function openFlowAccount(browser, { want = 'auto', cost, profile = 
       throw new Error(`Tài khoản ${pick.email} còn ${pick.credits} credit, clip cần khoảng ${cost}. ${pick.reset ?? ''}`);
     }
   } else {
-    const ok = accounts.filter((a) => a.credits != null && a.credits >= cost).sort((a, b) => b.credits - a.credits);
+    const ok = routeAccounts(accounts, cost);
     if (!ok.length) {
       throw new Error(
         `Không tài khoản Flow nào đủ ${cost} credit: ${accounts.map((a) => `${a.email} ${a.credits ?? '?'}`).join(', ')}.`,
@@ -170,6 +186,13 @@ function printBook() {
   console.log(`Sổ credit: ${CREDIT_FILE}`);
   for (const [email, a] of Object.entries(book.accounts)) {
     console.log(`- ${email} [${a.profile ?? '?'}]: ${a.credits ?? '?'} credit, đo ${a.checkedAt}${a.reset ? `, ${a.reset}` : ''}`);
+  }
+  // Thứ tự điều phối theo số credit đã ghi, với clip 6 giây (10 credit).
+  const accs = Object.entries(book.accounts).map(([email, a]) => ({ email, ...a }));
+  const order = routeAccounts(accs, estimateCost());
+  if (order.length) {
+    console.log('Thứ tự dùng cho clip 6 giây (vừa đủ, credit ngày trước):');
+    order.forEach((a, i) => console.log(`  ${i + 1}. ${a.email} [${a.profile ?? '?'}] ${a.credits} credit ≈ ${Math.floor(a.credits / estimateCost())} clip`));
   }
   const used = book.log.filter((l) => l.event === 'tao').slice(-10);
   if (used.length) {

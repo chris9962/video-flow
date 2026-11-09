@@ -1,0 +1,20 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    { "file": "SP.jpg" },
+    { "file": "K01.png", "prompt": "Use the yellow cheese-shaped squishy toy cube from this product image (the real product, same color, same holes, same size as a 5 cm cube). Create a new vertical 2:3 photorealistic ASMR close-up photo: the single yellow cheese squishy cube sits alone in the center of a warm light oak wooden table, seen from a slightly high front angle. Soft warm window light from the left, gentle shadows, cozy blurred beige background. No hands, no packaging, no text, no logo, no watermark. Keep the cube inside the middle 60 percent of the width." },
+    { "file": "K02.png", "prompt": "Edit this image. Keep the same table, camera angle and light. A woman's hand with short natural nails now squeezes the yellow cheese squishy cube from above: the soft cube is pressed down and bulges out at the sides, the fingers sink deep into it, the holes are stretched. No text, no watermark." },
+    { "file": "K03.png", "prompt": "Edit this image. Keep the same table, camera angle and light. The hand has let go and rests at the right edge of the frame. The yellow cheese squishy stays deformed and keeps its new shape: it is now a flattened, lumpy round disc with deep finger dents and stretched holes, lying in the center of the table. No text, no watermark." },
+    { "file": "K04.png", "prompt": "Edit this image. Keep the same table, camera angle and light. Both hands have rolled and pressed the yellow cheese squishy back into a neat cube shape, similar to the first image, with a few soft finger dents on top. The hands rest beside it on the table. No text, no watermark." }
+  ],
+  "clips": [
+    { "id": "A", "start": "K01.png", "end": "K02.png", "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. A hand enters from the top and slowly, softly squeezes the yellow cheese squishy cube; the squishy sinks and bulges under the fingers. Nothing else changes. ASMR: soft squishy squeezing sounds, no music, no dialogue." },
+    { "id": "B", "start": "@prev", "end": "K03.png", "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The hand slowly presses and kneads the squishy flatter, then lets go; the squishy does not spring back and keeps its flattened dented shape. Nothing else changes. ASMR: soft squishy sounds, no music, no dialogue." },
+    { "id": "C", "start": "@prev", "end": "K04.png", "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Two hands slowly roll and press the soft flattened squishy back into a cube shape, then rest beside it. Nothing else changes. ASMR: soft squishy kneading sounds, no music, no dialogue." }
+  ],
+  "output": { "file": "squishy-pho-mai.mp4", "speed": 1.0, "crossfade": 0.1 }
+}

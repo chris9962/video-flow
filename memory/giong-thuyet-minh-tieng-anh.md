@@ -13,7 +13,7 @@ Mọi bản thuyết minh tiếng Anh dùng giọng của chính người dùng.
 | Mục | Giá trị |
 |---|---|
 | Tên giọng | `giong-toi-eng` |
-| Thư mục | `~/voice-clone/voices/giong-toi-eng/` |
+| Thư mục | `~/voice-clone/voices/giong-toi-eng/` (máy Mac; máy Windows tạo lại ngày 2026-11-08 từ `C:SERSADMINDESKTOPOICE-MAU-ENG.MP3`) |
 | File gốc | `~/video-flow/voice-mau-eng.mp3`, 16,8 giây, người dùng tự đọc câu A, B, C của thuyết minh cá thòi lòi |
 | Đoạn cắt làm giọng mẫu | Giây 0–11,0, gồm câu A và câu B. Lời chép do người dùng gửi, không qua Whisper. |
 | Công cụ | OmniVoice qua `~/voice-studio/vc.py`, ngôn ngữ `en` |

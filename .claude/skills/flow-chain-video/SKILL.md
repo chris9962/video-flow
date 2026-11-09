@@ -362,7 +362,9 @@ Có 2 cách tạo clip. Cách 6.1: người dùng tạo clip trong Flow, Claude 
 
 Chrome CDP có 2 profile và nhiều tài khoản Google, mỗi tài khoản có credit Flow riêng. Chủ máy yêu cầu ngày 2026-11-08: tạo clip bằng tài khoản còn credit, và ghi credit sau mỗi lần dùng.
 
-- `flow.mjs` tự dò mọi tài khoản ở mọi profile trong `scripts/kenh.json`, chọn tài khoản còn nhiều credit nhất và đủ cho clip, mở tab trong profile đó. Không tài khoản nào đủ thì dừng trước khi tạo project.
+- Mỗi tài khoản Google được cộng 50 credit Flow mỗi ngày, kể cả tài khoản đã hết credit tháng. Chủ máy báo ngày 2026-11-09 và yêu cầu tận dụng 50 credit này.
+- `flow.mjs` tự dò mọi tài khoản ở mọi profile trong `scripts/kenh.json`, rồi điều phối theo kiểu "vừa đủ" (`routeAccounts` trong `flow-tai-khoan.mjs`): trong các tài khoản đủ credit cho clip, chọn tài khoản còn ít credit nhất. Tài khoản chỉ có credit ngày bị dùng trước, tài khoản credit tháng lớn để dành. Script mở tab trong profile của tài khoản đó, kể cả khi video thuộc kênh của profile khác. Không tài khoản nào đủ thì dừng trước khi tạo project. `FLOW_PICK=most` quay về cách cũ: chọn tài khoản nhiều credit nhất.
+- `flow-tai-khoan.mjs --so` in thứ tự điều phối và số clip 6 giây mỗi tài khoản còn tạo được.
 - Chọn tay: `chain.mjs gen ... --account <email>`, hoặc `"flowAccount": "<email>"` trong `plan.json`. `flow.mjs --flow-profile <oliver|my>` chỉ dò 1 profile.
 - Sổ credit: `app/data/flow-credits.json`. Mỗi clip ghi credit trước, sau và số đã dùng.
 - Xem credit: `node <skill>/scripts/flow-tai-khoan.mjs` dò lại và ghi sổ. `--so` in sổ, không mở Chrome.
@@ -443,7 +445,7 @@ Script cho cách chạy này nằm ở `scripts/song-song/`. Mỗi script nhận
 
 Video gián 2026-11-05 chạy theo cách này: 9 ảnh K và 8 clip xong trong khoảng 15 phút.
 
-`gpt-image.mjs` lưu ảnh không qua cơ chế tải của Chrome, nên tạo ảnh K song song với Flow không làm lỗi ảnh.
+`gpt-image.mjs` lưu ảnh không qua cơ chế tải của Chrome, nên tạo ảnh K song song với Flow không làm lỗi ảnh. Nhưng kết nối Playwright của `gpt-image.mjs` vẫn đổi thư mục tải của Chrome, nên `flow.mjs` báo `download.saveAs: ENOENT` (bánh xèo 2026-11-09, 4 clip). Video vẫn còn trong project: tải bằng `flow.mjs --project <url>`. Không chạy lại `chain.mjs gen` khi chưa có `clips/<id>.mp4`, vì lệnh đó tạo clip mới và tốn thêm 10 credit (bánh xèo 2026-11-09 tốn thừa 10 credit vì lỗi này). `--project` tự thử từng profile nếu project thuộc tài khoản ở profile khác.
 
 Thời gian: 5 clip song song xong trong khoảng 6 phút. Tạo tuần tự mất khoảng 12–13 phút.
 

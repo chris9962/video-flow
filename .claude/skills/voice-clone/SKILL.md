@@ -7,6 +7,9 @@ description: Clone a voice from a short sample with OmniVoice (~/voice-studio/vc
 
 Tool: `~/voice-studio/vc.py`, run with the Voice Studio venv `~/voice-studio/.venv` (OmniVoice on MPS). `~/voice-studio` is a symlink to `~/video-flow/voice-studio`. Full usage in `~/voice-studio/README.md`. Never install into OpenMontage's venv. OpenMontage still calls the older copy `~/voice-clone/vc.py`; leave `~/voice-clone` in place.
 
+**Windows (máy RTX 3060, cài ngày 2026-11-08):** không có symlink `~/voice-studio`. Gọi thẳng `D:\Github\video-flow\voice-studio`, python là `.venv/Scripts/python.exe` (không phải `.venv/bin/python`). Torch 2.8.0 bản CUDA cu128, model chạy `cuda` float16: nạp 4,5 s, đọc 3,1 s âm thanh mất 2,2 s. Model OmniVoice lưu ở `HF_HOME=D:\hf-cache` (biến môi trường người dùng). Mở website bằng `voice-studio\start.cmd`. Ví dụ:
+`cd /d/Github/video-flow/voice-studio && .venv/Scripts/python.exe vc.py say --voice <tên> --text "..." --out out.wav`
+
 Voice library: `~/voice-clone/voices/<voice-id>/` (override with `VOICES_DIR`), shared with the Voice Studio website in the same folder (http://localhost:8765, start with `Mo Voice Studio.command`). Voices the user added on the website are ready to use: the voice id is the folder name, a slug of the display name (shown as "Mã" under "Chi tiết" on the site; `vc.py list` also prints it).
 
 ## When the user gives a voice sample

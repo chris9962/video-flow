@@ -122,7 +122,10 @@ async function waitNewImage(page, beforeButtons, beforeSizes) {
       step('ChatGPT hỏi chọn 1 trong 2 ảnh: chọn ảnh 1');
       continue;
     }
-    if ((await doneButtons(page)) > beforeButtons) {
+    // Lần chạy 2026-11-09 (bún bò): cuộc chat dài 6+ ảnh thì số nút "ảnh xong" không tăng dù ảnh đã xong,
+    // script chờ hết 10 phút. Sau 2 phút, chấp nhận ảnh mới (kích thước byte chưa từng có) mà không cần nút.
+    const late = Date.now() > deadline - IMAGE_TIMEOUT_MS + 120_000;
+    if (late || (await doneButtons(page)) > beforeButtons) {
       const sizes = await imageSizes(page);
       const idx = sizes.findLastIndex((n) => n > 0 && !beforeSizes.includes(n));
       if (idx >= 0 && candidate?.idx === idx && candidate.size === sizes[idx]) return idx;
@@ -159,10 +162,13 @@ export async function generateGptImage({ prompt, outFile, chatUrl, refImage, sav
   const browser = await connect();
   // Không gọi browser.close(): với Chrome của người dùng, lệnh này đóng luôn cửa sổ đã đăng nhập.
   const ctx = browser.contexts()[0] ?? (await browser.newContext());
-  const page = await newBackgroundPage(ctx);
+  // GPT_PROFILE=oliver|my: mở tab trong profile Chrome của kênh. Không đặt thì mở trong context mặc định (thêm ngày 2026-11-08).
+  const page = process.env.GPT_PROFILE
+    ? await (await import('./chrome-profile.mjs')).newPageInProfile(browser, process.env.GPT_PROFILE, chatUrl || CHAT_HOME)
+    : await newBackgroundPage(ctx);
   let keepTab = false;
   try {
-    await page.goto(chatUrl || CHAT_HOME, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    if (!process.env.GPT_PROFILE) await page.goto(chatUrl || CHAT_HOME, { waitUntil: 'domcontentloaded', timeout: 60_000 });
     step(`Mở ${page.url()}`);
     const composer = page.locator(COMPOSER).first();
     await composer.waitFor({ timeout: 30_000 }).catch(() => {

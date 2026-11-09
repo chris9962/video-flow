@@ -121,6 +121,19 @@ async function typeLines(page, lines, newline) {
   }
 }
 
+// Kênh YouTube mới hiện hộp thoại chào mừng (ytcp-warm-welcome-dialog) che ô tiêu đề (đo 2026-11-08, kênh Từ Hạt Đến Mâm).
+async function closeWarmWelcome(page) {
+  for (let i = 0; i < 5; i++) {
+    const open = await page.locator('ytcp-warm-welcome-dialog').filter({ visible: true }).count().catch(() => 0);
+    if (!open) return;
+    const btn = page.locator('ytcp-warm-welcome-dialog').locator('ytcp-button, button, #dismiss-button').filter({ visible: true }).last();
+    if (await btn.count()) await btn.click({ timeout: 5_000 }).catch(() => {});
+    else await page.keyboard.press('Escape');
+    step('YouTube: đóng hộp thoại chào mừng');
+    await page.waitForTimeout(1_500);
+  }
+}
+
 async function youtube(ctx, video, title, desc, dryRun) {
   const page = await newBackgroundPage(ctx);
   await page.goto(`https://studio.youtube.com/channel/${YT_CHANNEL}/videos/upload?d=ud`, { waitUntil: 'domcontentloaded', timeout: 60_000 });
@@ -132,6 +145,7 @@ async function youtube(ctx, video, title, desc, dryRun) {
   const titleBox = page.locator('#title-textarea #textbox').first();
   await titleBox.waitFor({ timeout: 60_000 });
   await page.waitForTimeout(2_000);
+  await closeWarmWelcome(page);
   await titleBox.click();
   await page.keyboard.press('ControlOrMeta+A');
   await page.keyboard.insertText(title);
@@ -251,6 +265,13 @@ async function facebook(ctx, video, caption, dryRun) {
   await page.getByRole('button', { name: /^(Đăng|Post|Share)$/ }).first().click();
   await page.waitForURL((u) => !u.href.includes('/reels/create'), { timeout: 120_000 });
   step('Facebook: đã bấm Đăng');
+  // 2026-11-08 trang Aurevella: bấm Đăng xong mà thước phim không lên. Chụp màn hình và đọc hộp thoại để thấy lỗi.
+  for (const s of [5, 20]) {
+    await page.waitForTimeout(s === 5 ? 5_000 : 15_000);
+    await page.screenshot({ path: path.join(process.env.TEMP || '.', `fb-sau-dang-${s}s.png`), timeout: 15_000 }).catch(() => {});
+    const dialogs = await page.evaluate(() => [...document.querySelectorAll('[role="dialog"], [role="alert"]')].map((d) => d.innerText.replace(/\s+/g, ' ').slice(0, 300)).filter(Boolean));
+    step(`Facebook sau ${s}s: ${page.url()} | hộp thoại: ${JSON.stringify(dialogs)}`);
+  }
   for (let i = 0; i < 3; i++) {
     const id = (await fbReelIds(page)).find((x) => !before.includes(x));
     if (id) {

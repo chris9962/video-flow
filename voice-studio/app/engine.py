@@ -104,9 +104,15 @@ class Engine:
 
         self.state = "loading"
         try:
-            self.device = "mps" if torch.backends.mps.is_available() else "cpu"
+            # cuda: máy Windows có RTX 3060 (2026-11-08). mps: máy Mac M1. cpu: dự phòng, chậm.
+            if torch.cuda.is_available():
+                self.device = "cuda"
+            elif torch.backends.mps.is_available():
+                self.device = "mps"
+            else:
+                self.device = "cpu"
             # float16 on MPS: ~20% faster than float32 on the M1, no NaNs (tested 2026-09-23).
-            dtype = torch.float16 if self.device == "mps" else torch.float32
+            dtype = torch.float32 if self.device == "cpu" else torch.float16
             self.model = OmniVoice.from_pretrained(MODEL_ID, device_map=self.device, dtype=dtype)
             self.state = "ready"
         except Exception as exc:  # surfaced in the UI status

@@ -24,6 +24,7 @@ Repo chứa toàn bộ công cụ làm video của người dùng: app video-flo
 | Tải video TikTok, YouTube, Facebook | `video-downloader` | `~/Desktop/Mẫu/` hoặc `~/Downloads` |
 | Clone giọng, đọc thuyết minh | `voice-clone` | Giọng mẫu: `~/voice-clone/voices/`. Bản đọc trên website: `voice-studio/outputs/`. |
 | Tạo ảnh macro siêu thực của một loài, ảnh minh hoạ cho bài viết về một loài | `animal-macro-photo` | `dong-vat/<tên không dấu>/anh-macro/` |
+| Nhờ Muse (muse.ai) tạo video 10 giây có tiếng, hoặc tạo ảnh | `muse-ai` | Thư mục của video đang làm |
 
 `app/skills/fashion-tryon-video` là skill cũ, dùng browser-pilot của hermes. Claude Code không nạp skill này.
 
@@ -33,7 +34,7 @@ Repo chứa toàn bộ công cụ làm video của người dùng: app video-flo
 - Web: `cd ~/video-flow/app && npm run dev:web`.
 - Chrome CDP: `cd ~/video-flow/app && npm run chrome`. Profile nằm ở `~/chrome-cdp-profile`, cổng 9222.
 - Tại gốc repo, `npm run dev:server`, `npm run dev:web` và `npm run chrome` chuyển lệnh vào `app/`.
-- Voice Studio: `~/voice-studio/start.sh`, hoặc bấm đúp `voice-studio/Mo Voice Studio.command`.
+- Voice Studio: `~/voice-studio/start.sh`, hoặc bấm đúp `voice-studio/Mo Voice Studio.command`. Trên Windows: `voice-studio\start.cmd`; venv ở `voice-studio/.venv/Scripts/`, torch bản CUDA, model ở `D:\hf-cache`.
 
 ## Profile Chrome CDP và kênh đăng video
 
@@ -47,11 +48,12 @@ Ghi ngày 2026-11-08. Profile nằm trong `~/chrome-cdp-profile`, cổng 9222.
 - Người giao việc và duyệt video cho 4 kênh của profile Oliver là Telegram `nntruong96` (chat 5065235131).
 - Người quản lý 3 kênh của profile My là Telegram Diễm My (chat 9060990194). Diễm My cũng gửi việc video áo dài. Video kênh "Từ Hạt Đến Mâm" nằm trong `mon-an/`.
 - Không đăng video của người này lên kênh của người kia.
+- Diễm My có toàn quyền ra lệnh tạo clip và đăng bài (dùng credit aidancing, Flow, đăng kênh của profile My) mà không cần xin chủ máy. Chủ máy cho quyền ngày 2026-11-08. Quyền này không áp dụng cho người khác.
 - Khi nhận yêu cầu up clip, Claude hỏi người yêu cầu up lên kênh nào trước khi đăng, vì nntruong96 có 2 trang Facebook (Life Cycle Lab, Aurevella). Chủ máy dặn ngày 2026-11-08.
 - **Quy tắc:** khi 1 người trên Telegram yêu cầu tạo clip hoặc đăng video, Claude phải xác định trước profile của người đó: `nntruong96` → Profile 1 "Oliver"; Diễm My (9060990194) → Profile 2 "My". Mọi bước (ChatGPT, aidancing, Flow, đăng bài) chạy trong profile đó. Cả 2 profile đều đã đăng nhập ChatGPT và mạng xã hội.
 - Kỹ thuật, đo ngày 2026-11-08: Chrome CDP mở cả 2 profile trong 1 tiến trình. Playwright `contexts()[0]` gộp tab của cả 2 profile. Tab mới (`newPage`, `Target.createTarget`) mở trong browser context mặc định, khi đó là Profile 2 "My". CDP không tạo được tab trong context của profile còn lại. Xác định profile của 1 context bằng trang `chrome://version`, dòng "Profile Path".
 - Script: `.claude/skills/flow-chain-video/scripts/chrome-profile.mjs` mở tab đúng profile; `kenh.json` cùng thư mục ghi kênh của từng profile. `dang-bai.mjs` và `dang-tiktok.mjs` bắt buộc `--profile oliver|my`.
-- Google Flow: `flow.mjs` tự chọn tài khoản Google còn nhiều credit nhất ở mọi profile. Sổ credit `app/data/flow-credits.json`; xem bằng `node .claude/skills/flow-chain-video/scripts/flow-tai-khoan.mjs --so`. Ngày 2026-11-08: oliver1990ax còn 1 credit (đặt lại 23/11), mi.nguyen97my còn 1.050 (đặt lại 8/12).
+- Google Flow: mỗi tài khoản Google được cộng 50 credit mỗi ngày (chủ máy báo 2026-11-09). `flow.mjs` dò mọi tài khoản ở mọi profile và chọn kiểu "vừa đủ": tài khoản ít credit nhất mà còn đủ cho clip, để dùng hết credit ngày trước, để dành credit tháng. Sổ credit `app/data/flow-credits.json`; xem bằng `node .claude/skills/flow-chain-video/scripts/flow-tai-khoan.mjs --so`. Ngày 2026-11-08: oliver1990ax còn 1 credit (đặt lại 23/11), mi.nguyen97my còn 1.050 (đặt lại 8/12).
 
 ## File không có trong git
 

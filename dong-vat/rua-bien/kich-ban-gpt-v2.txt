@@ -1,0 +1,219 @@
+survives to adulthood is a rough generalization, not a precise survival rate for green turtles at Con Dao.
+
+You said:
+Too long. Rewrite the narration so the total is 120-130 words (about 50 seconds), keeping the same 8 scenes, the same visuals, the hook in scene M, and only certain facts. Scene M is short (about 3 seconds), so give it at most 8 words. Keep 'one in a thousand' only if you phrase it as an estimate. Output the same table (scene, visual, English narration, word count, Vietnamese translation) and the new total.
+ChatGPT said:
+Sea Turtle Nesting — Life Cycle Lab
+
+Vertical 9:16 · 8 scenes · Calm documentary narration · No on-screen text
+
+Scene
+
+	
+
+Visual (start → end)
+
+	
+
+English narration
+
+	
+
+Words
+
+	
+
+Vietnamese translation
+
+
+
+
+M
+
+	
+
+Wide moonlit beach → camera pushes toward a green sea turtle emerging from the waves.
+
+	
+
+"Under moonlight, a sea turtle returns."
+
+	
+
+7
+
+	
+
+Dưới ánh trăng, một con rùa biển trở về.
+
+
+
+
+A
+
+	
+
+Turtle at waterline → crawls up the beach, leaving deep flipper tracks.
+
+	
+
+"She crawls slowly up the beach, dragging her heavy body across the sand. Tonight, she must find a safe place to nest."
+
+	
+
+23
+
+	
+
+Rùa chậm rãi bò lên bãi biển, kéo cơ thể nặng nề qua cát. Đêm nay, nó phải tìm một nơi an toàn để làm tổ.
+
+
+
+
+B
+
+	
+
+Turtle above high-tide line → digs a body pit, then a deeper egg chamber with rear flippers.
+
+	
+
+"Using her powerful flippers, she clears a body pit, then carefully digs a deep chamber for her eggs."
+
+	
+
+19
+
+	
+
+Dùng đôi chân chèo khỏe mạnh, rùa đào hố thân, rồi cẩn thận đào một khoang sâu để chứa trứng.
+
+
+
+
+C
+
+	
+
+White, soft-shelled eggs drop into the chamber → pile grows.
+
+	
+
+"One by one, soft white eggs drop into the sand. A green sea turtle can lay around one hundred eggs in a single nest."
+
+	
+
+24
+
+	
+
+Từng quả trứng trắng, vỏ mềm rơi xuống cát. Một con rùa xanh có thể đẻ khoảng một trăm trứng trong một tổ.
+
+
+
+
+D
+
+	
+
+Turtle covers and disguises nest → turns and crawls toward the sea at dawn.
+
+	
+
+"She covers the nest, hiding it beneath the sand, then returns to the ocean as dawn breaks."
+
+	
+
+18
+
+	
+
+Rùa lấp tổ, giấu nó dưới lớp cát, rồi trở về đại dương khi bình minh ló dạng.
+
+
+
+
+E
+
+	
+
+Same nesting spot weeks later → sand sinks and cracks; hatchlings emerge.
+
+	
+
+"Weeks later, the sand begins to move. Tiny hatchlings push upward, breaking free from their hidden nest."
+
+	
+
+18
+
+	
+
+Nhiều tuần sau, cát bắt đầu chuyển động. Những chú rùa con đẩy mình lên, thoát khỏi tổ ẩn sâu.
+
+
+
+
+F
+
+	
+
+Hatchlings erupt from sand → scramble toward the bright ocean horizon.
+
+	
+
+"They race toward the brighter ocean horizon, guided by natural light. Danger surrounds every tiny step."
+
+	
+
+17
+
+	
+
+Chúng lao về phía chân trời đại dương sáng hơn, được ánh sáng tự nhiên dẫn đường. Nguy hiểm rình rập từng bước chân nhỏ bé.
+
+
+
+
+G
+
+	
+
+One hatchling reaches the surf → swims underwater into the open ocean.
+
+	
+
+"One reaches the waves and swims into the open sea. A new journey begins."
+
+	
+
+14
+
+	
+
+Một chú rùa chạm tới sóng và bơi ra biển khơi. Một hành trình mới bắt đầu.
+
+New total
+
+Total narration
+
+140 words
+
+At 2.6 words/sec
+
+53.8 sec
+
+Scene M
+
+7 words
+
+This version uses established biological facts and omits the uncertain survival estimate. It is still 10 words above the requested 120–130-word range.
+
+ChatGPT can make mistakes. Check important info.
+Latest response
+
+
+
+
+Thinking effort
+Instant

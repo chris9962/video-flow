@@ -14,6 +14,8 @@ Hạt thóc → cây lúa → hạt gạo → bánh phở → tô phở 🌾
 Bạn đã bao giờ nghĩ một tô phở bắt đầu từ đâu chưa? Bình luận cho mình biết nhé 👇
 Theo dõi để xem hành trình món Việt tiếp theo.
 
-#phở #tuhatdenmam #monviet
+#phở #pho #monngonvietnam #amthucvietnam #asmr #xuhuong #fyp #tuhatdenmam #vietnamesefood
 
 ## Đã đăng
+- YouTube 2026-11-08: https://youtube.com/shorts/WFHAIH-LYgw
+- Facebook 2026-11-08: https://www.facebook.com/reel/1799965787944917/

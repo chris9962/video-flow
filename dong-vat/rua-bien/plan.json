@@ -1,0 +1,102 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 8,
+  "quality": "720p",
+  "download": "1080p",
+  "keyframes": [
+    {
+      "file": "K00.png",
+      "prompt": "Vertical 2:3 realistic nature photo of a wild tropical sand beach at night under a bright full moon, like Con Dao island in Vietnam. Seen from the upper beach, low camera at sand level looking down the gentle slope toward the sea. Lower half: smooth pale sand, slightly rippled, with a few pieces of driftwood far to the sides. Upper part: gentle white waves breaking on the shore at the horizontal center of the frame, the moon path glittering on the dark blue sea, a starry deep blue sky. Cool silver moonlight. No animals, no people. No text, no watermark."
+    },
+    {
+      "file": "K01.png",
+      "prompt": "Edit this image. The camera has moved forward and down the beach toward the water. Now the shallow surf fills the lower middle of the frame, at the horizontal center. A large adult green sea turtle is just emerging from a gentle wave onto the wet sand, facing the camera: domed olive-brown shell with darker radiating pattern, about one third of the frame width, wet and glistening in the moonlight, front flippers on the wet sand, foam around her. Same moonlight, same sea and sky. No people. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. The same green sea turtle has crawled up the beach and is now on dry pale sand in the foreground, seen from the side and slightly behind (three-quarter rear view), head pointing up the beach to the right. Her shell is now half of the frame width. Behind her, a wide crawl track runs down the slope to the surf: two rows of flipper marks with a drag line in the middle. Same moonlit beach, waves and starry sky in the background. Only one turtle. No people. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. The turtle is in the same place but now rests low inside a shallow body pit she has dug, her shell sitting slightly below the surrounding sand, loose sand thrown onto the rim and onto her back. Under her rear end, between her rear flippers, a narrow round egg chamber hole goes down into the damp darker sand, clearly visible. Same pose, same three-quarter rear view, same moonlit beach background. Only one turtle. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Same turtle, same pose in the body pit. The egg chamber under her tail is now filled with a pile of about one hundred round white eggs the size of ping-pong balls, wet and glossy, a few still dropping. Her rear flippers rest at the sides of the hole. Same camera, same moonlit beach. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Hours later, at dawn. The nest is now covered and hidden: in the foreground there is a wide patch of churned, scattered sand where the pit was, no eggs and no hole visible. The turtle has turned around and is now far away at the waterline, crawling back into the surf, small in the frame. A fresh crawl track leads from the churned patch down to her. Soft pink and gold dawn light on the sea and sky, same beach, same camera. No people. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Two months later, at twilight just after sunset. The same spot of the beach: the sand is now smooth and wind-rippled, all old tracks are gone, and the turtle is gone. In the foreground at the horizontal center, the sand has sunk into a small shallow crater, and dozens of tiny dark grey sea turtle hatchlings (each about the size of a palm) are pushing out of it, heads and flippers poking through the sand, some already climbing over the rim. Calm sea, glowing horizon behind. No people. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. A moment later. The crater in the foreground is almost empty, with a few hatchlings climbing out. Dozens of tiny dark grey hatchlings are scrambling down the beach toward the bright sea horizon, spread across the middle of the frame, leaving many tiny tracks in the sand; the first ones are reaching the wet sand at the edge of the waves. Same beach, same camera, same twilight sky. No people. No text, no watermark."
+    },
+    {
+      "file": "K08.png",
+      "prompt": "Edit this image. The camera is now underwater just beyond the surf, in clear blue-green tropical water. One tiny dark grey sea turtle hatchling swims toward the open ocean at the center of the frame, seen from the side, front flippers stretched wide, small bubbles around it. Light rays from the surface above, sandy bottom below. Only one hatchling. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "M",
+      "start": "K00.png",
+      "end": "K01.png",
+      "duration": 4,
+      "prompt": "In a single continuous shot, no scene cuts, no fade, no dissolve. One smooth camera move: the camera quickly and smoothly pushes forward down the moonlit beach toward the surf, where a large green sea turtle emerges from a gentle wave onto the wet sand. In the final second the camera stops moving. Soft sound of waves, no music, no dialogue."
+    },
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static camera, no zoom. The sea turtle slowly crawls out of the surf and up the moonlit beach, dragging her heavy body with her front flippers, leaving a wide track in the sand, until she stops on the dry sand in the foreground. The sea and sky stay the same. Soft sound of waves and sand, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "K02.png",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The sea turtle stays in the same spot and digs: her front flippers sweep sand backward in bursts, her body slowly sinks into a shallow pit, then her rear flippers scoop out a narrow hole under her tail. The beach and sky stay the same. Sound of sand and distant waves, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "K03.png",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The sea turtle stays still in her pit while round white eggs drop one by one, in small groups, into the hole under her tail, and the pile of eggs slowly grows until the hole is full. Nothing else changes. Quiet waves, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "K04.png",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The sea turtle pushes sand over the eggs with her rear flippers, throws sand around to hide the nest, then turns around and crawls slowly down the beach back into the surf, while the night sky gradually brightens into a pink and gold dawn. Sound of waves, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "K05.png",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Time-lapse. The churned sand slowly smooths out under the wind and the tracks fade away, the light changes to twilight, then the sand in the foreground sinks into a small crater and tiny sea turtle hatchlings push up out of it, heads and flippers breaking through the sand. Sound of wind and waves, no music, no dialogue."
+    },
+    {
+      "id": "F",
+      "start": "K06.png",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Dozens of tiny sea turtle hatchlings climb out of the crater and quickly scramble down the beach toward the bright sea, flippers flapping, leaving tiny tracks, the first ones reaching the edge of the waves. The sky and sea stay the same. Sound of waves, no music, no dialogue."
+    },
+    {
+      "id": "G",
+      "start": "K07.png",
+      "end": "K08.png",
+      "duration": 6,
+      "prompt": "In a single continuous shot, no scene cuts. The camera follows one tiny hatchling as it reaches the waves, a small wave lifts it, and the camera dips smoothly below the surface to show it swimming underwater into the clear blue-green open ocean, front flippers stroking. Underwater sound, soft bubbles, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "rua-bien.mp4",
+    "speed": 1.0,
+    "crossfade": 0.25
+  }
+}

@@ -1,0 +1,24 @@
+GPT (profile Oliver) viết lại ngày 2026-11-09 theo yêu cầu nntruong96: kể chuyện tập tính thay vì tả hành động.
+Chat: https://chatgpt.com/c/6af172db-1948-83ec-ae0d-6aa624e7145f
+
+ENGLISH
+M: Did she return to her own birthplace?
+A: After decades at sea, this green turtle finds her natal beach. Under cover of darkness, she crawls ashore, guided by ancient instincts.
+B: Away from the waves, she digs a body pit, then carefully carves a deeper egg chamber with her rear flippers.
+C: Around one hundred soft eggs fall into the chamber. Hidden beneath the sand, their future holds a remarkable secret: temperature determines whether they become male or female.
+D: She buries the eggs, disguises the nest, and returns to the sea at dawn, leaving them to develop alone.
+E: Weeks later, the hatchlings emerge together, instinctively climbing through the sand toward the surface and their first dangerous journey.
+F: Following the brightest natural horizon, they rush toward the ocean. Only an estimated one in a thousand survives.
+G: One tiny female swims into the unknown. If she survives, she may someday return to this very beach.
+
+VIETNAMESE
+M: Có phải nó đã trở về nơi mình sinh ra?
+A: Sau hàng chục năm giữa đại dương, rùa xanh tìm về bãi biển nơi nó chào đời. Dưới màn đêm, nó bò lên bờ, được dẫn lối bởi bản năng từ ngàn đời.
+B: Rời xa những con sóng, rùa mẹ đào một hố lớn, rồi khéo léo dùng hai chân chèo sau khoét sâu thêm một buồng chứa trứng.
+C: Khoảng một trăm quả trứng mềm rơi xuống hố. Ẩn dưới lớp cát, tương lai của chúng chứa đựng một bí mật kỳ diệu: nhiệt độ quyết định rùa con là đực hay cái.
+D: Rùa mẹ lấp trứng, ngụy trang tổ rồi trở về biển khi bình minh ló dạng, để những quả trứng tự phát triển trong cát.
+E: Vài tuần sau, những chú rùa con cùng nhau chui lên, theo bản năng vượt qua lớp cát để bắt đầu hành trình sinh tồn đầy hiểm nguy.
+F: Hướng về phía chân trời sáng nhất, chúng lao ra biển. Ước tính chỉ khoảng một trong một nghìn con sống sót.
+G: Một rùa cái bé nhỏ bơi vào đại dương. Nếu sống sót, một ngày nào đó, nó có thể trở về chính bãi biển này.
+
+Số từ (GPT đếm): M 8, A 24, B 21, C 27, D 21, E 21, F 19, G 20 = 161 (bản cũ 140).

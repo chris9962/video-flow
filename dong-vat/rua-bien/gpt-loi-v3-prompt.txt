@@ -1,0 +1,23 @@
+Rewrite the narration of this 8-scene sea turtle video (same scenes, same visuals, same order). The current narration only describes what the turtle is doing, so it feels flat. Make it a story about sea turtle behaviour that hooks viewers in the first 3 seconds.
+
+Rules:
+- Scene M (about 3 seconds, at most 9 words) must be a hook question or surprising fact, for example: "Did you know she returns to the very beach where she was born?"
+- Scenes A-G: tell the story and the behaviour behind what we see (natal homing after decades at sea, nesting only at night, ~100 eggs, sand temperature decides the sex of the hatchlings, hatchlings emerge together and follow the brightest horizon, only about 1 in 1000 survive as an estimate, the surviving females will one day come back to this same beach). It is fine to also mention what she is doing on screen.
+- Only well-established facts. No exact day counts.
+- Each scene line should have about the same word count as now: M 7, A 23, B 19, C 24, D 18, E 18, F 17, G 14. Total 125-140 words. Short, punchy, calm documentary voice.
+- End with a line that closes the loop (one day she will return here too).
+
+Current scenes and narration:
+M: wide moonlit beach, camera pushes toward a turtle emerging from the waves. "Under moonlight, a sea turtle returns."
+A: turtle crawls up the beach leaving flipper tracks. "She crawls slowly up the beach, dragging her heavy body across the sand. Tonight, she must find a safe place to nest."
+B: digs a body pit, then an egg chamber with rear flippers. "Using her powerful flippers, she clears a body pit, then carefully digs a deep chamber for her eggs."
+C: white eggs drop into the chamber. "One by one, soft white eggs drop into the sand. A green sea turtle can lay around one hundred eggs in a single nest."
+D: covers the nest and crawls back to the sea at dawn. "She covers the nest, hiding it beneath the sand, then returns to the ocean as dawn breaks."
+E: weeks later the sand sinks, hatchlings emerge. "Weeks later, the sand begins to move. Tiny hatchlings push upward, breaking free from their hidden nest."
+F: hatchlings race across the sand toward the waves. "They race toward the brighter ocean horizon, guided by natural light. Danger surrounds every tiny step."
+G: one hatchling reaches the waves and swims into the open sea. "One reaches the waves and swims into the open sea. A new journey begins."
+
+Output exactly 3 parts, no table:
+ENGLISH: 8 lines, one per scene, each line starts with the scene letter and a colon.
+VIETNAMESE: 8 lines, natural spoken Vietnamese translation, same format.
+WORDS: word count per scene and total.
