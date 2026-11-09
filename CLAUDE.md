@@ -23,6 +23,7 @@ Repo chứa toàn bộ công cụ làm video của người dùng: app video-flo
 | Gửi link TikTok kèm link Shopee hoặc ảnh quần áo. Nhắc aidancing, ghép mẫu, đăng TikTok. | `aidancing-tiktok` | Ảnh: `~/Desktop/Mẫu/Ảnh/`. Video: `~/Desktop/Mẫu/Videos/`. |
 | Tải video TikTok, YouTube, Facebook | `video-downloader` | `~/Desktop/Mẫu/` hoặc `~/Downloads` |
 | Clone giọng, đọc thuyết minh | `voice-clone` | Giọng mẫu: `~/voice-clone/voices/`. Bản đọc trên website: `voice-studio/outputs/`. |
+| Tạo ảnh macro siêu thực của một loài, ảnh minh hoạ cho bài viết về một loài | `animal-macro-photo` | `dong-vat/<tên không dấu>/anh-macro/` |
 
 `app/skills/fashion-tryon-video` là skill cũ, dùng browser-pilot của hermes. Claude Code không nạp skill này.
 
