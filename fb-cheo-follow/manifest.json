@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Follow chéo nhóm Facebook",
+  "version": "1.5.0",
+  "description": "Theo dõi người bình luận trong các bài của một nhóm Facebook và trả lời bình luận của họ, có tag tên.",
+  "permissions": ["storage", "sidePanel"],
+  "host_permissions": ["https://www.facebook.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Mở thanh bên Follow chéo" },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "content_scripts": [
+    { "matches": ["https://www.facebook.com/*"], "js": ["content.js"], "run_at": "document_idle" }
+  ]
+}

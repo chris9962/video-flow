@@ -12,6 +12,7 @@ Repo chứa toàn bộ công cụ làm video của người dùng: app video-flo
 | `memory/` | Memory của Claude. `MEMORY.md` là mục lục. |
 | `dong-vat/` | Project video vòng đời động vật. Mỗi video có 1 thư mục. |
 | `voice-studio/` | Voice Studio: website nhái giọng ở `localhost:8765` và script `vc.py` cho skill `voice-clone`. `setup.sh` tạo symlink `~/voice-studio` về đây. |
+| `fb-cheo-follow/` | Extension Chrome follow chéo trong nhóm Facebook: theo dõi người bình luận và trả lời có tag tên. Cách cài nằm trong `fb-cheo-follow/README.md`. |
 | `claude-config/` | Bản sao `~/.claude/CLAUDE.md`, quy tắc văn phong và hook văn phong. `setup.sh` chép các file này sang máy mới. |
 | `setup.sh` | Script cài máy mới. |
 
