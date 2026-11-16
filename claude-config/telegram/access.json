@@ -1,0 +1,9 @@
+{
+  "dmPolicy": "allowlist",
+  "allowFrom": [
+    "5065235131",
+    "9060990194"
+  ],
+  "groups": {},
+  "pending": {}
+}

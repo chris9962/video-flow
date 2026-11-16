@@ -63,6 +63,16 @@ else
   warn "Thiếu jq, chưa thêm hook văn phong. Cài jq rồi chạy lại."
 fi
 
+echo "== 4b. Telegram channel =="
+tg="$HOME/.claude/channels/telegram"
+mkdir -p "$tg"
+if [ -f "$tg/access.json" ]; then
+  echo "  $tg/access.json đã có, giữ nguyên"
+else
+  cp claude-config/telegram/access.json "$tg/access.json" && echo "  chép allowlist Telegram sang $tg/access.json"
+fi
+[ -f "$tg/.env" ] || warn "Thiếu $tg/.env (TELEGRAM_BOT_TOKEN). Chép từ máy cũ hoặc chạy /telegram:configure trong Claude Code."
+
 echo "== 5. Thư mục ảnh và video =="
 mkdir -p "$HOME/Desktop/Mẫu/Videos" "$HOME/Desktop/Mẫu/Clip mẫu" "$HOME/Desktop/Mẫu/Ảnh"
 echo "  ~/Desktop/Mẫu/{Videos,Clip mẫu,Ảnh}"
@@ -94,4 +104,5 @@ cat <<'EOF'
 3. Nếu cần ảnh và video cũ, chép dong-vat/<tên-video>/ và ~/Desktop/Mẫu từ máy cũ.
 4. Nếu cần giọng mẫu, chép ~/voice-clone/voices từ máy cũ. Lần chạy Voice Studio đầu tiên tải mô hình OmniVoice 2,46 GB.
 5. Mở Claude Code tại ~/video-flow. Khi Claude Code hỏi, chọn trust folder để setting memory có hiệu lực.
+6. Telegram: cài plugin telegram@claude-plugins-official (/plugin), rồi chép ~/.claude/channels/telegram/.env từ máy cũ hoặc chạy /telegram:configure. Chỉ 1 máy chạy bot tại 1 thời điểm.
 EOF
