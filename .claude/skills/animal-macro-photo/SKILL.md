@@ -99,3 +99,15 @@ Lỗi nhỏ thì Claude giữ ảnh, không tạo lại. Claude báo lỗi lớn
 4. Claude tạo mọi ảnh của 1 bài trong cùng 1 cuộc chat, để màu và ánh sáng giống nhau.
 
 Nếu người dùng chưa nói ai viết lời bài, Claude hỏi người dùng trước khi viết.
+
+## Đăng bài viết có ảnh lên Facebook
+
+Script `flow-chain-video/scripts/dang-anh-fb.mjs` (viết 2026-11-14) đăng bài viết nhiều ảnh lên fanpage, lời bài lấy từ mục `## Bài viết` của `dang-bai.md` trong thư mục loài:
+
+```bash
+node ~/.claude/skills/flow-chain-video/scripts/dang-anh-fb.mjs dong-vat/<loài> --profile oliver --anh anh-macro/01.png anh-macro/02.png --dry-run
+```
+
+Bỏ `--dry-run` để đăng thật. Script bật nhãn AI, bấm "Tiếp" rồi "Đăng", chụp màn hình từng bước vào `fb-shots/`. Khi không tìm được link bài, mở ảnh mới nhất ở tab Ảnh của trang và bấm "Xem bài viết".
+
+Bài châu chấu sa mạc 2026-11-14: nntruong96 chê ảnh pha màu hồng ("1 con mà nhiều góc chứ tạo còn màu đỏ làm gì"). Với bài về một loài, Claude chụp 1 cá thể ở nhiều góc (toàn thân, đầu, chi tiết), không tạo thêm biến thể màu hay pha khác trừ khi người dùng yêu cầu.

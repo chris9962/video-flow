@@ -5,10 +5,21 @@
     "google": "oliver1990ax@gmail.com",
     "telegram": "nntruong96 (chat 5065235131)",
     "tiktok": "linh_dan_20x",
-    "youtube": { "channel": "UCyVJDSNhxgezvgYuf82wi6Q", "handle": "@LifeCycleLabTV", "name": "Life Cycle Lab" },
+    "youtube": {
+      "channel": "UCyVJDSNhxgezvgYuf82wi6Q",
+      "handle": "@LifeCycleLabTV",
+      "name": "Life Cycle Lab"
+    },
     "facebook": [
-      { "id": "61595556214345", "name": "Life Cycle Lab" },
-      { "id": "61594230160348", "name": "Aurevella", "ghichu": "Sau này đổi tên thành Life Cycle Lab" }
+      {
+        "id": "61595556214345",
+        "name": "Life Cycle Lab"
+      },
+      {
+        "id": "61594230160348",
+        "name": "Aurevella",
+        "ghichu": "Sau này đổi tên thành Life Cycle Lab"
+      }
     ]
   },
   "my": {
@@ -16,7 +27,35 @@
     "google": "mi.nguyen97mi@gmail.com",
     "telegram": "Diễm My (chat 9060990194)",
     "tiktok": "t.ht.n.mm",
-    "youtube": { "channel": "UCc0xdhR9R-W7ksx23jvybLQ", "handle": "@TừHạtĐếnMâm", "name": "Từ Hạt Đến Mâm" },
-    "facebook": [{ "id": "61596364020370", "name": "Từ Hạt Đến Mâm" }]
+    "youtube": {
+      "channel": "UCc0xdhR9R-W7ksx23jvybLQ",
+      "handle": "@TừHạtĐếnMâm",
+      "name": "Từ Hạt Đến Mâm"
+    },
+    "facebook": [
+      {
+        "id": "61596364020370",
+        "name": "Từ Hạt Đến Mâm"
+      },
+      {
+        "id": "61596086948776",
+        "name": "Derpy AI",
+        "ghichu": "Video AI lỗi của Diễm My. Chỉ đăng khi có --fb-page 61596086948776."
+      }
+    ]
+  },
+  "derpy": {
+    "_ghichu": "Kênh Derpy AI của Diễm My (video AI lỗi, làm bằng Muse). Tạo 2026-11-09. Chỉ TikTok ở Profile 3, vì TikTok web không cho 2 tài khoản trong 1 profile. Trang Facebook Derpy AI 61596086948776 do tài khoản Facebook của profile my quản lý: đăng bằng --profile my --facebook --fb-page 61596086948776.",
+    "dir": "Profile 3",
+    "telegram": "Diễm My (chat 9060990194)",
+    "tiktok": "derpy.ai",
+    "facebook": []
+  },
+  "khoaikai": {
+    "_ghichu": "Kênh Khoai Kai của Diễm My (em bé Khoai Kai và chó con trắng, làm bằng Muse). Tạo 2026-11-12. Chỉ TikTok ở Profile 4, đăng nhập bằng QR ngày 2026-11-12. Đăng bằng dang-tiktok.mjs --profile khoaikai.",
+    "dir": "Profile 4",
+    "telegram": "Diễm My (chat 9060990194)",
+    "tiktok": "khoai.kai",
+    "facebook": []
   }
 }

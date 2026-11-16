@@ -3,7 +3,7 @@
 // Không chạy khi flow.mjs đang tải video: kết nối Playwright mới đổi thư mục tải của Chrome và làm hỏng file tải.
 //
 // CLI:
-//   node dang-tiktok.mjs <video.mp4> --caption "Mô tả #hashtag" --profile <oliver|my> [--dry-run]
+//   node dang-tiktok.mjs <video.mp4> --caption "Mô tả #hashtag" --profile <oliver|my|derpy> [--dry-run]
 //   --dry-run tải video lên và điền mô tả, nhưng không bấm Post. Tab để mở cho người dùng xem.
 //   --profile bắt buộc (chủ máy dặn 2026-11-08): tab mở trong profile Chrome của kênh, tài khoản TikTok lấy từ
 //   flow-chain-video/scripts/kenh.json. Trang TikTok Studio không chứa đúng tài khoản thì dừng, không đăng.
@@ -158,6 +158,12 @@ if (opts.dryRun) {
 
 await dismissPopups(page);
 await page.getByRole('button', { name: 'Post', exact: true }).click();
+// 2026-11-10 @derpy.ai: TikTok hỏi "Continue to post?" khi chưa kiểm tra xong video. Bấm "Post now".
+const postNow = page.getByRole('button', { name: 'Post now', exact: true });
+if (await postNow.waitFor({ timeout: 8_000 }).then(() => true).catch(() => false)) {
+  await postNow.click();
+  step('Bấm "Post now" ở hộp thoại Continue to post?');
+}
 await page.waitForURL(/tiktokstudio\/content/, { timeout: 90_000 }).catch(async () => {
   const dialogs = await page.evaluate(() => [...document.querySelectorAll('[role="dialog"]')].map((d) => d.innerText.slice(0, 200)));
   throw new Error(`Đã bấm Post nhưng trang không chuyển sang danh sách bài. Hộp thoại: ${JSON.stringify(dialogs)}`);

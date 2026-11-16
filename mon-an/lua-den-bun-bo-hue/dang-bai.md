@@ -15,3 +15,7 @@ Theo dõi để xem hành trình món Việt tiếp theo.
 #bunbohue #bunbo #monngonhue #monngonvietnam #amthucvietnam #asmr #xuhuong #fyp #tuhatdenmam #vietnamesefood
 
 ## Đã đăng
+- YouTube 2026-11-09: https://youtube.com/shorts/pcTzVUVvIXI
+- Facebook 2026-11-09: https://www.facebook.com/reel/1468762315191566/
+- TikTok 2026-11-09 20:15: https://www.tiktok.com/@t.ht.n.mm (link bài chưa đọc được)
+- Tin Facebook 2026-11-09: đăng video đầy đủ qua stories/create

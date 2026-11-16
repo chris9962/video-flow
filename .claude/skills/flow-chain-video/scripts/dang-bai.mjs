@@ -4,7 +4,8 @@
 // Không chạy khi flow.mjs đang tải video: kết nối Playwright mới đổi thư mục tải của Chrome và làm hỏng file tải.
 //
 // CLI:
-//   node dang-bai.mjs <thư mục video> --profile <oliver|my> [--youtube] [--facebook] [--fb-page <id>] [--video file.mp4] [--dry-run]
+//   node dang-bai.mjs <thư mục video> --profile <oliver|my> [--youtube] [--facebook] [--fb-page <id>] [--video file.mp4] [--khong-tin] [--dry-run]
+//   --khong-tin: tắt chia sẻ thước phim lên tin (kênh của Diễm My, từ 2026-11-10).
 //   Không ghi --youtube, --facebook thì đăng cả hai. --dry-run điền mọi trường nhưng không bấm Xuất bản / Đăng.
 //   --profile bắt buộc (chủ máy dặn 2026-11-08): kênh YouTube, trang Facebook và profile Chrome lấy từ kenh.json.
 //   --fb-page chọn trang Facebook khác trang đầu của profile, ví dụ Aurevella của profile oliver.
@@ -70,7 +71,7 @@ async function newBackgroundPage(ctx) {
 }
 
 function parseArgs(argv) {
-  const opts = { dir: null, youtube: false, facebook: false, video: null, dryRun: false, profile: null, fbPage: null };
+  const opts = { dir: null, youtube: false, facebook: false, video: null, dryRun: false, profile: null, fbPage: null, khongTin: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--profile') opts.profile = argv[++i];
@@ -78,6 +79,7 @@ function parseArgs(argv) {
     else if (a === '--youtube') opts.youtube = true;
     else if (a === '--facebook') opts.facebook = true;
     else if (a === '--dry-run') opts.dryRun = true;
+    else if (a === '--khong-tin') opts.khongTin = true;
     else if (a === '--video') opts.video = argv[++i];
     else if (!opts.dir) opts.dir = a;
   }
@@ -205,6 +207,7 @@ async function fbReelIds(page) {
   return page.locator('a[href*="/reel/"]').evaluateAll((els) => [...new Set(els.map((a) => a.href.match(/\/reel\/(\d+)/)?.[1]).filter(Boolean))]);
 }
 
+let KHONG_TIN = false;
 async function facebook(ctx, video, caption, dryRun) {
   const page = await newBackgroundPage(ctx);
   const before = await fbReelIds(page);
@@ -212,9 +215,27 @@ async function facebook(ctx, video, caption, dryRun) {
   const add = page.getByRole('button', { name: /Thêm video|Add video/ }).first();
   await add.waitFor({ timeout: 30_000 });
   // reels/create đăng dưới tên đang dùng. Nếu Facebook đang ở trang cá nhân, video lên trang cá nhân thay vì fanpage.
-  const actor = await page.evaluate((name) => document.body.innerText.includes(`${name} ơi`) || document.body.innerText.includes(`, ${name}?`), FB_PAGE_NAME);
-  if (!actor) {
-    throw new Error(`Facebook đang không dùng tên trang "${FB_PAGE_NAME}". Mở https://www.facebook.com/profile.php?id=${FB_PAGE_ID} và chuyển sang trang, rồi chạy lại.`);
+  const isActor = () => page.evaluate((name) => document.body.innerText.includes(`${name} ơi`) || document.body.innerText.includes(`, ${name}?`), FB_PAGE_NAME);
+  if (!(await isActor())) {
+    // Profile my quản lý 2 trang. Tự chuyển sang trang cần đăng: nút "Chuyển" trên trang, rồi nút "Chuyển" trong hộp thoại
+    // "Chuyển trang cá nhân" (đo 2026-11-13). Trước đây script dừng ở đây và để lại tab, mỗi lần chạy lại thêm 1 tab.
+    step(`Facebook đang không dùng tên trang "${FB_PAGE_NAME}", tự chuyển trang...`);
+    await page.goto(`https://www.facebook.com/profile.php?id=${FB_PAGE_ID}`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(6_000);
+    const chuyen = page.getByRole('button', { name: /^(Chuyển|Switch)$/ }).first();
+    if (await chuyen.count()) {
+      await chuyen.click();
+      const trongHop = page.getByRole('dialog').getByRole('button', { name: /^(Chuyển|Switch)$/ }).first();
+      if (await trongHop.waitFor({ timeout: 8_000 }).then(() => true).catch(() => false)) await trongHop.click();
+      await page.waitForTimeout(10_000);
+    }
+    await page.goto('https://www.facebook.com/reels/create/', { waitUntil: 'domcontentloaded' });
+    await add.waitFor({ timeout: 30_000 });
+    if (!(await isActor())) {
+      await page.close().catch(() => {});
+      throw new Error(`Facebook đang không dùng tên trang "${FB_PAGE_NAME}" và tự chuyển không được. Mở https://www.facebook.com/profile.php?id=${FB_PAGE_ID} trong profile, bấm Chuyển, rồi chạy lại.`);
+    }
+    step(`Facebook: đã chuyển sang trang "${FB_PAGE_NAME}"`);
   }
   const chooser = page.waitForEvent('filechooser', { timeout: 15_000 });
   await add.click();
@@ -249,15 +270,40 @@ async function facebook(ctx, video, caption, dryRun) {
   step('Facebook: nhãn AI bật, đối tượng Công khai');
   // "Luôn chia sẻ" là cài đặt của trang: chọn 1 lần thì các thước phim sau tự lên tin, kể cả khi đăng tay.
   const storyRow = page.getByRole('button').filter({ has: page.getByText(/^(Chia sẻ lên tin|Share to story)$/) }).last();
-  if (/^(Tắt|Off)$/m.test(await storyRow.innerText())) {
-    await storyRow.click();
-    await page.locator('label').filter({ hasText: /^(Luôn chia sẻ thước phim lên tin|Always share)/ }).locator('input[type="radio"]').check({ force: true });
-    await page.getByRole('button', { name: /^(Lưu|Save)$/ }).click();
-    await page.waitForTimeout(1_500);
+  if (KHONG_TIN) {
+    // --khong-tin: Diễm My dặn 2026-11-10 bỏ đăng tin. Chọn lựa chọn không chia sẻ trong hộp thoại cài đặt của trang.
+    if (!/^(Tắt|Off)$/m.test(await storyRow.innerText())) {
+      await storyRow.click();
+      await page.waitForTimeout(1_000);
+      const labels = page.locator('label').filter({ has: page.locator('input[type="radio"]') });
+      const texts = (await labels.allInnerTexts()).map((t) => t.replace(/\s+/g, ' ').trim());
+      step(`Facebook: lựa chọn tin: ${texts.join(' | ')}`);
+      const idx = texts.findIndex((t) => /^(Không|Never|Don't|Do not|Tắt|Off)/i.test(t));
+      if (idx < 0) throw new Error(`Facebook: không thấy lựa chọn tắt chia sẻ lên tin, chưa đăng. Lựa chọn: ${texts.join(' | ')}`);
+      await labels.nth(idx).locator('input[type="radio"]').check({ force: true });
+      await page.getByRole('button', { name: /^(Lưu|Save)$/ }).click();
+      await page.waitForTimeout(1_500);
+      // Đo 2026-11-10: Facebook hỏi thêm "Dừng chia sẻ lên tin?" với nút Xác nhận / Hủy.
+      const xacNhan = page.getByRole('dialog').filter({ hasText: /Dừng chia sẻ lên tin|Stop sharing/ }).getByRole('button', { name: /^(Xác nhận|Confirm)$/ });
+      if (await xacNhan.count()) {
+        await xacNhan.first().click();
+        await page.waitForTimeout(1_500);
+      }
+    }
+    const story = (await storyRow.innerText()).replace(/\s+/g, ' ');
+    if (!/(Tắt|Off)$/.test(story)) throw new Error(`Facebook: chưa tắt chia sẻ lên tin, chưa đăng. Dòng cài đặt: "${story}"`);
+    step(`Facebook: ${story}`);
+  } else {
+    if (/^(Tắt|Off)$/m.test(await storyRow.innerText())) {
+      await storyRow.click();
+      await page.locator('label').filter({ hasText: /^(Luôn chia sẻ thước phim lên tin|Always share)/ }).locator('input[type="radio"]').check({ force: true });
+      await page.getByRole('button', { name: /^(Lưu|Save)$/ }).click();
+      await page.waitForTimeout(1_500);
+    }
+    const story = (await storyRow.innerText()).replace(/\s+/g, ' ');
+    if (/(Tắt|Off)$/.test(story)) throw new Error(`Facebook: chưa bật chia sẻ lên tin, chưa đăng. Dòng cài đặt: "${story}"`);
+    step(`Facebook: ${story}`);
   }
-  const story = (await storyRow.innerText()).replace(/\s+/g, ' ');
-  if (/(Tắt|Off)$/.test(story)) throw new Error(`Facebook: chưa bật chia sẻ lên tin, chưa đăng. Dòng cài đặt: "${story}"`);
-  step(`Facebook: ${story}`);
   if (dryRun) {
     step('Facebook: --dry-run, dừng trước nút Đăng. Tab Tạo thước phim để mở.');
     return null;
@@ -317,6 +363,7 @@ async function main() {
     if (link) recordPost(dir, 'YouTube', link);
   }
   if (opts.facebook) {
+    KHONG_TIN = opts.khongTin;
     const link = await facebook(ctx, video, caption, opts.dryRun);
     if (link) recordPost(dir, 'Facebook', link);
   }

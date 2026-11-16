@@ -1,0 +1,140 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "flowAccount": "mi.nguyen97my@gmail.com",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 photorealistic photo of a ripe rice field in the countryside of southern Vietnam, at golden hour. Close-up of several heavy golden rice panicles bending down in the center of the frame, ripe grains clearly visible. Blurred background: golden rice field, coconut palms and a distant old tiled roof. Warm sunlight from the left. Shallow depth of field. No people. Keep the panicles inside the middle 70 percent of the width. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. The rice has been harvested and milled. Show a top-down view of a large round dented aluminum basin filled with clear water, with many white rice grains soaking at the bottom, sitting in the center of a rustic dark wooden table. A few dry rice stalks lie on the table at the top edge. Same warm golden light from the left. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the same basin, the same top-down camera, the same table and the same light. The rice grains and clear water are gone: the basin is now filled with smooth milky white rice batter. At the top edge of the frame, the lower part of a traditional grey stone hand mill is visible, with a thin stream of white rice batter flowing from it into the basin. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the basin is now only partly visible at the left edge. In the center is a round traditional steamer pot with a white cloth stretched tightly over its mouth, and one thin round translucent sheet of steamed rice paper lies on the cloth, a little steam rising, a ladle resting next to it. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the steamer pot is now only partly visible at the left edge. In the center is a flat woven bamboo drying rack with four round thin rice paper sheets drying side by side in the sun, the crisscross bamboo pattern pressed into them. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the drying rack is now only partly visible at the left edge. In the center is a large white ceramic bowl with spring roll filling ingredients in separate neat piles: pink minced pork, chopped shrimp, shredded taro, shredded orange carrot, soaked glass noodles and chopped black wood ear mushroom, with one raw egg cracked on top. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. Keep the same bowl, the same top-down camera, the same table and the same light. The separate piles are gone: all the ingredients and the egg are now mixed evenly together into one filling, with bits of orange carrot and black mushroom visible, a spoon resting in the bowl. No text, no watermark."
+    },
+    {
+      "file": "K08.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the filling bowl is now only partly visible at the left edge. In the center is a wooden cutting board with one round rice paper sheet, and on it one tightly rolled raw Vietnamese spring roll (cha gio), pale and neat, about the length of a finger. No text, no watermark."
+    },
+    {
+      "file": "K09.png",
+      "prompt": "Edit this image. Keep the same wooden board, the same top-down camera, the same table and the same light. The board is now covered with about twelve tightly rolled raw spring rolls lined up in neat rows, all the same size, no loose rice paper left. No text, no watermark."
+    },
+    {
+      "file": "K10.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the board of raw rolls is now only partly visible at the left edge. In the center is a black frying pan with hot bubbling oil, with six spring rolls frying in it, turning light golden, small bubbles around them. No text, no watermark."
+    },
+    {
+      "file": "K11.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the frying pan is now only partly visible at the left edge. In the center is a round woven bamboo basket lined with paper, full of deep golden crispy fried spring rolls with blistered skin, glistening, a little steam rising. No text, no watermark."
+    },
+    {
+      "file": "K12.png",
+      "prompt": "Edit this image. Keep the same wooden table and the same warm light. The camera is a little higher and wider. In the center is a white plate of golden crispy spring rolls, some cut diagonally showing the filling, with fresh lettuce, Vietnamese herbs and cucumber slices beside them, and a small bowl of sweet and sour fish sauce with carrot and chili slices next to the plate, a pair of wooden chopsticks. No text, no watermark."
+    },
+    {
+      "file": "K00.png",
+      "prompt": "Edit this image. Same plate of spring rolls, same table, same warm light, but now a close-up seen from a low 45-degree side angle. In the center, two hands break one golden crispy spring roll in half, showing the hot juicy filling of pork, shrimp, carrot and noodles, steam rising, a few crispy crumbs falling. The plate and herbs are softly blurred behind. Keep the hands and the roll inside the middle 70 percent of the width. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "H",
+      "start": "K00.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The hands slowly pull the two halves of the crispy spring roll further apart, steam rising from the filling and crumbs falling. Nothing else changes. Loud crispy crunch sound, no music, no dialogue."
+    },
+    {
+      "id": "A",
+      "start": "K01.png",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. White rice grains slowly pour down from above into a large basin of clear water, while the camera smoothly tilts down to look straight down at the grains sinking and soaking. Nothing else changes. Pouring rice and water sounds, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "@prev",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. A thin stream of white rice batter flows from the stone mill at the top into the basin, and the water turns little by little into smooth milky batter. The basin stays still. Nothing else changes. Stone grinding and flowing sounds, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "@prev",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a steamer pot covered with a white cloth and stops. [1.5-6s] Static camera. A ladle spreads a thin round layer of batter on the cloth and it slowly turns into a translucent rice paper sheet in the steam. Nothing else changes. Soft steaming sound, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "@prev",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a woven bamboo drying rack and stops. [1.5-6s] Static camera. Round rice paper sheets are laid on the rack one by one and slowly dry in the sun. Nothing else changes. Gentle outdoor breeze and birds, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "@prev",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a large white bowl and stops. [1.5-6s] Static camera. Minced pork, shrimp, taro, carrot, glass noodles and wood ear mushroom are added into the bowl one by one, then an egg is cracked on top. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    },
+    {
+      "id": "F",
+      "start": "@prev",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. A spoon slowly mixes all the ingredients and the egg together in the bowl until the filling is even. The bowl stays still. Nothing else changes. Soft mixing sounds, no music, no dialogue."
+    },
+    {
+      "id": "G",
+      "start": "@prev",
+      "end": "K08.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a wooden board with a rice paper sheet and stops. [1.5-6s] Static camera. A spoonful of filling is placed on the rice paper, which slowly rolls up tightly into one neat spring roll. Nothing else changes. Soft paper rustling sounds, no music, no dialogue."
+    },
+    {
+      "id": "I",
+      "start": "@prev",
+      "end": "K09.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. More tightly rolled spring rolls are placed on the board one by one, little by little, forming neat rows. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    },
+    {
+      "id": "J",
+      "start": "@prev",
+      "end": "K10.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a black frying pan of hot oil and stops. [1.5-6s] Static camera. Spring rolls are placed into the gently bubbling oil one by one and slowly turn light golden. Nothing else changes. Sizzling oil sound, no music, no dialogue."
+    },
+    {
+      "id": "K",
+      "start": "@prev",
+      "end": "K11.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a bamboo basket lined with paper and stops. [1.5-6s] Static camera. Deep golden crispy spring rolls are placed into the basket one by one, glistening with a little steam. Nothing else changes. Crispy crackling sounds, no music, no dialogue."
+    },
+    {
+      "id": "L",
+      "start": "@prev",
+      "end": "K12.png",
+      "prompt": "In a single continuous shot, no scene cuts. The golden spring rolls are arranged on a white plate with lettuce and herbs, then the camera slowly and smoothly pulls back and up, revealing the bowl of fish sauce next to the plate. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "cha-gio.mp4",
+    "speed": 1.4,
+    "crossfade": 0.1
+  }
+}

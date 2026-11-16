@@ -1,0 +1,152 @@
+{
+  "aspect": "9:16",
+  "model": "omni-flash",
+  "duration": 6,
+  "quality": "720p",
+  "download": "1080p",
+  "flowAccount": "mi.nguyen97my@gmail.com",
+  "keyframes": [
+    {
+      "file": "K01.png",
+      "prompt": "Vertical 2:3 photorealistic photo, top-down view of a rustic dark wooden table in a countryside kitchen in southern Vietnam, at golden hour. In the center is a round woven bamboo basket full of fresh raw tiger prawns, grey-blue with dark stripes, wet and glistening, shells and heads on, with a few drops of water on the table. A few green banana leaves lie at the top edge. Warm golden sunlight from the left. No people. Keep the basket inside the middle 70 percent of the width. No text, no watermark."
+    },
+    {
+      "file": "K02.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the bamboo basket is now empty and only partly visible at the left edge. In the center is a round aluminum pot of gently boiling water with the prawns inside, now cooked bright orange-red and curled, a little steam rising. No text, no watermark."
+    },
+    {
+      "file": "K03.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the pot is now only partly visible at the left edge. In the center is a wooden cutting board with about twelve cooked prawns, peeled, heads removed and sliced in half lengthwise, lined up in neat rows showing their orange-red striped side, with a small pile of empty prawn shells at the top corner of the board. No text, no watermark."
+    },
+    {
+      "file": "K04.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the board of prawn halves is now only partly visible at the left edge. In the center is a second wooden cutting board with a piece of boiled pork belly, pale with layers of fat and lean meat, half of it cut into thin even slices fanned out, a kitchen knife resting beside it. No text, no watermark."
+    },
+    {
+      "file": "K05.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the pork board is now only partly visible at the left edge. In the center is a flat round woven bamboo tray with neat piles of fresh white rice vermicelli noodles, green lettuce leaves, Thai basil, mint and a bundle of long green garlic chives. No text, no watermark."
+    },
+    {
+      "file": "K06.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the bamboo tray of herbs is now only partly visible at the left edge. In the center is a large flat round white plate with one round thin translucent wet rice paper sheet lying flat on it. At the top edge of the frame is a wide shallow bowl of clear water. No text, no watermark."
+    },
+    {
+      "file": "K07.png",
+      "prompt": "Edit this image. Keep the same plate, the same rice paper sheet, the same top-down camera, the same table and the same light. On the lower half of the rice paper there is now a neat pile of lettuce, herbs and white rice vermicelli, with three thin slices of boiled pork on top, and on the upper half of the rice paper a row of three orange-red prawn halves and two long green garlic chives. No text, no watermark."
+    },
+    {
+      "file": "K08.png",
+      "prompt": "Edit this image. Keep the same plate, the same top-down camera, the same table and the same light. The flat rice paper and loose ingredients are gone: in their place is one tightly rolled fresh Vietnamese spring roll (goi cuon), translucent, with the three orange-red prawn halves clearly visible through the rice paper and the green chive tips sticking out of one end. No text, no watermark."
+    },
+    {
+      "file": "K09.png",
+      "prompt": "Edit this image. Keep the same plate, the same top-down camera, the same table and the same light. The plate now holds six tightly rolled fresh spring rolls lined up side by side, all the same size, orange-red prawn halves visible through the translucent rice paper, green chive tips sticking out. No text, no watermark."
+    },
+    {
+      "file": "K10.png",
+      "prompt": "Edit this image. Keep the same top-down camera, the same wooden table and the same warm light. The camera has moved a little to the right: the plate of spring rolls is now only partly visible at the left edge. In the center is a small ceramic bowl of thick glossy brown peanut hoisin dipping sauce, topped with crushed roasted peanuts and a little red chili paste, with a small dish of crushed peanuts and a spoon beside it. No text, no watermark."
+    },
+    {
+      "file": "K11.png",
+      "prompt": "Edit this image. Keep the same wooden table and the same warm light. The camera is a little higher and wider. In the center is the white plate of six fresh spring rolls with prawns visible through the rice paper, the small bowl of brown peanut dipping sauce next to it, fresh lettuce and herbs beside the plate, and a pair of wooden chopsticks. No text, no watermark."
+    },
+    {
+      "file": "K00.png",
+      "prompt": "Edit this image. Same plate of six fresh spring rolls, same bowl of thick brown peanut dipping sauce, same table, same warm light, but now a close-up seen from a low 45-degree side angle. The full plate of spring rolls and the bowl of peanut sauce are both clearly visible and sharp, orange-red prawns showing through the translucent rice paper. A hand holds one spring roll just above the bowl of peanut sauce, about to dip it. Keep the plate, the bowl and the hand inside the middle 70 percent of the width. No text, no watermark."
+    }
+  ],
+  "clips": [
+    {
+      "id": "H",
+      "start": "K00.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The hand slowly dips the tip of the fresh spring roll into the thick brown peanut sauce, then slowly lifts it up, coated with glossy sauce. The plate of spring rolls stays still. Nothing else changes. Soft kitchen ambience, no music, no dialogue."
+    },
+    {
+      "id": "P",
+      "start": "P01.png",
+      "end": "P02.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The two hands slowly lift the net up out of the pond water, full of live jumping grey prawns, water dripping and splashing. The pond and the trees stay still. Nothing else changes. Water splashing sounds, no music, no dialogue."
+    },
+    {
+      "id": "Q",
+      "start": "@prev",
+      "end": "K01.png",
+      "prompt": "In a single continuous shot, no scene cuts. The live prawns are poured from the net down into a round bamboo basket on a wooden table, while the camera smoothly tilts down to look straight down at the basket full of fresh prawns. Nothing else changes. Wet prawns and water sounds, no music, no dialogue."
+    },
+    {
+      "id": "A",
+      "start": "@prev",
+      "end": "K02.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a pot of gently boiling water and stops. [1.5-6s] Static camera. The raw grey prawns drop into the boiling water and slowly turn bright orange-red and curl. Nothing else changes. Bubbling water sound, no music, no dialogue."
+    },
+    {
+      "id": "B",
+      "start": "@prev",
+      "end": "K03.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a wooden cutting board and stops. [1.5-6s] Static camera. Peeled cooked prawns sliced in half lengthwise are laid on the board one by one, forming neat rows. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    },
+    {
+      "id": "C",
+      "start": "@prev",
+      "end": "K04.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a second cutting board with a piece of boiled pork belly and stops. [1.5-6s] Static camera. A knife slowly cuts the pork belly into thin even slices that fan out. Nothing else changes. Soft knife on wood sounds, no music, no dialogue."
+    },
+    {
+      "id": "D",
+      "start": "@prev",
+      "end": "K05.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a flat woven bamboo tray and stops. [1.5-6s] Static camera. Rice vermicelli, lettuce, fresh herbs and garlic chives are placed on the tray one by one in neat piles. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    },
+    {
+      "id": "E",
+      "start": "@prev",
+      "end": "K06.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a white plate and a bowl of water and stops. [1.5-6s] Static camera. A round rice paper sheet is dipped into the water, then slowly laid flat on the plate, soft and translucent. Nothing else changes. Gentle water sounds, no music, no dialogue."
+    },
+    {
+      "id": "F",
+      "start": "@prev",
+      "end": "K07.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. Lettuce, herbs, rice vermicelli, pork slices, prawn halves and garlic chives are placed on the rice paper one by one. The plate stays still. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    },
+    {
+      "id": "G",
+      "start": "@prev",
+      "end": "K08.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. The rice paper slowly folds over the filling and rolls up tightly into one neat fresh spring roll, the prawns showing through. The plate stays still. Nothing else changes. Soft rice paper sounds, no music, no dialogue."
+    },
+    {
+      "id": "I",
+      "start": "@prev",
+      "end": "K09.png",
+      "prompt": "In a single continuous shot, no scene cuts. Static locked-off camera, no camera movement, no zoom. More fresh spring rolls are placed on the plate one by one, little by little, lining up side by side. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    },
+    {
+      "id": "J",
+      "start": "@prev",
+      "end": "K10.png",
+      "prompt": "In a single continuous shot, no scene cuts. [0-1.5s] The camera smoothly slides to the right to a small bowl of brown peanut sauce and stops. [1.5-6s] Static camera. A spoon slowly sprinkles crushed roasted peanuts on top of the sauce. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    },
+    {
+      "id": "L",
+      "start": "@prev",
+      "end": "K11.png",
+      "prompt": "In a single continuous shot, no scene cuts. The camera slowly and smoothly pulls back and up, revealing the plate of fresh spring rolls next to the bowl of peanut sauce, with lettuce, herbs and chopsticks. Nothing else changes. Soft kitchen sounds, no music, no dialogue."
+    }
+  ],
+  "output": {
+    "file": "goi-cuon.mp4",
+    "speed": 1.4,
+    "crossfade": 0.1
+  },
+  "pondKeyframes": [
+    {
+      "file": "P01.png",
+      "prompt": "Vertical 2:3 photorealistic photo of a traditional earthen shrimp pond (vuong tom) in the Mekong Delta of southern Vietnam, at golden hour. Seen from the pond bank at a slightly high angle. In the center, two tanned hands hold the bamboo frame of a square lift net that is lowered just under the calm brown-green water surface. Background: the pond bank with nipa palms and mangrove trees, softly blurred. Warm golden sunlight from the left. Keep the net and hands inside the middle 70 percent of the width. No face visible. No text, no watermark."
+    },
+    {
+      "file": "P02.png",
+      "prompt": "Edit this image. Keep the same camera, the same pond, the same trees and the same warm light. The two hands have now lifted the square net up out of the water: the net is full of many live tiger prawns, grey-blue with dark stripes, wet and glistening, some jumping, water dripping from the net back into the pond. No text, no watermark."
+    }
+  ]
+}

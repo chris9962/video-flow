@@ -78,4 +78,4 @@ Kết luận: Muse làm tốt kiểu "ảnh → video" (1 ảnh đầu). Không 
 
 ## Việc chưa thử
 
-Tạo ảnh (`--expect image`) chưa chạy thử. Selector ảnh trong script là `[data-testid*="presentation-image"] img`, đoán theo selector video `hatch-chat-attachment-presentation-video`. Lần đầu dùng, kiểm tra lại selector và sửa script nếu cần.
+Tạo ảnh (`--expect image`) đã chạy được ngày 2026-11-09: ảnh đại diện robot cho kênh AI Xàm Xí, khoảng 85 giây, ra file PNG 1600×1600 khi prompt ghi "ảnh vuông 1:1".

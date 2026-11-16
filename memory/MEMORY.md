@@ -21,3 +21,32 @@
 - [Kịch bản đủ quy trình, cuốn hút](kich-ban-du-quy-trinh-cuon-hut.md) — đánh giá kịch bản theo quy trình sống và hành động (chui ra hang, ăn mồi, lớn dần, nhảy, di chuyển); cỡ vây sai là lỗi nhỏ (2026-11-08)
 - [Giọng thuyết minh tiếng Anh](giong-thuyet-minh-tieng-anh.md) — bản tiếng Anh dùng giọng clone của người dùng `giong-toi-eng`, tạo từ voice-mau-eng.mp3 (2026-11-08)
 - [Chia việc kịch bản và thuyết minh](chia-viec-kich-ban-thuyet-minh.md) — Claude thu thập tài liệu và tạo giọng; GPT (Codex) viết lời thuyết minh và bản dịch; Claude không tự dịch; giọng cuối bằng tiếng Anh (2026-11-08)
+
+- [Việc từ Telegram: review qua Telegram](telegram-chi-gui-khi-duoc-hoi.md) — yêu cầu từ Telegram thì gửi kết quả qua Telegram, không mở localhost
+- [Trả lời ngắn gọn](tra-loi-ngan-gon.md) — hỏi 1 câu rõ, báo cáo ngắn; người dùng mệt khi đọc dài
+- [Kênh Từ Hạt Đến Mâm](kenh-tu-hat-den-mam.md) — kênh món Việt của người nhờ Telegram; video phở #1 chờ đăng khi họ đăng nhập tài khoản
+- [Profile Chrome và kênh](chrome-profile-tai-khoan.md) — Oliver: Linh Đan, Life Cycle Lab FB+YouTube, Aurevella (nntruong96); My: Từ Hạt Đến Mâm (Diễm My)
+- [Quyền Diễm My](quyen-diem-my.md) — Diễm My toàn quyền tạo clip, đăng bài, không xin chủ máy
+- [Việc Diễm My: xong là gửi](diem-my-xong-la-gui.md) — làm xong, kiểm tra đạt thì gửi thẳng Diễm My, không hỏi chủ máy
+- [Không đăng tin Facebook](tin-facebook-du-thoi-luong.md) — từ 2026-11-10 Diễm My bảo bỏ đăng tin, chỉ đăng clip; nhắc lại 2026-11-15, áp dụng cả Derpy AI, luôn --khong-tin
+- [Diễm My: xác nhận trước khi đăng](diem-my-xac-nhan-truoc-khi-dang.md) — mọi lần đăng/sửa bài trên kênh của Diễm My phải chờ Diễm My xác nhận
+- [Từ Hạt Đến Mâm: câu móc đầu video](tu-hat-den-mam-cau-moc-dau-video.md) — mở đầu 2-3 giây bằng câu hỏi gây tò mò
+- [Túi móc len vàng của Diễm My](tui-moc-len-vang-diem-my.md) — ảnh gốc + mô tả ở san-pham/tui-moc-len-vang/, luôn dùng ảnh gốc làm tham chiếu
+- [Túi móc len hoa hồng của Diễm My](tui-moc-hoa-hong-diem-my.md) — ảnh gốc + mô tả ở san-pham/tui-moc-hoa-hong/, bao bì không thuộc túi
+- [nntruong96: chỉ gửi nội dung copy](nntruong96-noi-dung-copy.md) — xin caption để tự đăng thì gửi đúng nội dung, mỗi phần 1 tin, không ghi thêm
+- [Lịch đăng Diễm My](tu-hat-den-mam-gio-dang.md) — Từ Hạt Đến Mâm 1 clip/ngày 19h; Derpy AI 2 clip/ngày 11h + 19h; vẫn chờ xác nhận
+- [Lệnh không rõ: hỏi người ra lệnh](lenh-khong-ro-hoi-nguoi-ra-lenh.md) — yêu cầu Telegram mơ hồ thì hỏi lại người gửi, không hỏi chủ máy
+- [Diễm My: kênh tóc đẹp dùng Muse](diem-my-kenh-toc-dep-muse.md) — video tóc tạo bằng Muse (từ 2026-11-14 đồ ăn cũng Muse); cô gái quay lưng chải tóc
+- [Diễm My: video AI lỗi hài hước](diem-my-video-ai-loi.md) — Muse, lỗi đời thường rõ ràng; từ 2026-11-15 mỗi clip 2 cảnh 10 giây ghép thành 20 giây
+- [Diễm My: kênh và công cụ](diem-my-kenh-va-cong-cu.md) — từ 2026-11-14 mọi clip làm bằng Muse, không Flow; món ăn → 3 kênh Từ Hạt Đến Mâm; video lỗi → Derpy AI
+- [Clip AI lỗi: bản làm lại](ai-loi-ban-lam-lai.md) — bản Muse làm lại nằm ở clip-NN mới; xem muse.log mọi clip chưa đăng trước khi chọn
+- [Từ Hạt Đến Mâm: mở đầu món hoàn thành](tu-hat-den-mam-mo-dau-mon-hoan-thanh.md) — mở bằng món xong + nước chấm, rồi nguyên liệu chính tận nguồn; không bắt đầu từ hạt gạo
+- [Diễm My: em bé Khoai Kai và chó con trắng](diem-my-em-be-va-cho-con.md) — nhân vật cố định, kênh TikTok @khoai.kai (--profile khoaikai), đăng phải gắn nhạc trend; ảnh mẫu ở em-be/mau/
+- [Diễm My: bối cảnh miền Nam](diem-my-boi-canh-mien-nam.md) — video/ảnh tạo sau này ghi rõ bối cảnh miền Nam Việt Nam
+- [Script dừng thì chụp màn hình](script-dung-thi-chup-man-hinh.md) — giao diện web khác mong đợi: chụp màn hình rồi sửa 1 lần, không chạy lại mù
+- [Đổi nền ảnh người thật](doi-nen-anh-nguoi-that.md) — Muse --ref vẽ lại, hoặc rembg cắt người + ghép nền Muse; gửi cả 2 cho người yêu cầu chọn
+- [Diễm My: trả lời trước rồi làm](diem-my-tra-loi-truoc-roi-lam.md) — nhận lệnh Telegram thì reply xác nhận 1 câu ngay, rồi mới làm
+- [Mở Chrome CDP bằng tay](chrome-cdp-mo-tay.md) — dùng bash, không PowerShell Start-Process (dấu cách tách tham số → tạo profile rác)
+- [nntruong96: ảnh macro 1 con nhiều góc](nntruong96-anh-macro-mot-con-nhieu-goc.md) — không tạo biến thể màu/pha khác; dry-run rồi gửi ảnh duyệt trước khi đăng
+- [Đăng bài tuần tự, --video bản nén](dang-bai-tuan-tu-va-video.md) — script đăng chạy song song thì TikTok mất Chrome; dang-bai.mjs cần --video đường dẫn từ gốc repo
+- [Diễm My: phim ngắn tâm linh](diem-my-phim-ngan-tam-linh.md) — page phim nhiều tập 60-90 giây, 4 series tâm linh lưu ở phim-ngan/y-tuong.md; chuyện dài "Bến Cô Ba" 15 tập ở phim-ngan/chuyen-ke-ben-song/ben-co-ba-15-tap.md, Diễm My tự viết kịch bản; 6 nhân vật đã chốt ảnh ở mau/ (đọc mau/README.md), bối cảnh làng quê thanh bình sáng sủa không nghèo quá; chưa có kênh

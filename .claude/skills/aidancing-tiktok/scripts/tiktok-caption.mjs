@@ -13,10 +13,16 @@ export async function typeCaption(page, text) {
       // Chọn gợi ý thì TikTok tự thêm 1 dấu cách sau hashtag.
       if (justLinked) part = part.replace(/^ /, '');
       justLinked = false;
-      if (part) await page.keyboard.type(part, { delay: 40 });
+      // Chữ thường chèn 1 lần, không gõ từng phím: trên Windows con trỏ hay nhảy về đầu ô giữa lúc gõ (2026-11-10).
+      if (part) {
+        await page.keyboard.press('ControlOrMeta+End');
+        await page.keyboard.insertText(part);
+        await page.waitForTimeout(300);
+      }
       continue;
     }
     tags.push(part);
+    await page.keyboard.press('ControlOrMeta+End');
     await page.keyboard.type(part, { delay: 120 });
     const want = part.toLowerCase();
     let item = null;

@@ -8,7 +8,7 @@ Repo chứa toàn bộ công cụ làm video của người dùng: app video-flo
 |---|---|
 | `app/` | App video-flow: server `127.0.0.1:3001`, web `localhost:5173`. Chi tiết kỹ thuật nằm trong `app/CLAUDE.md`. |
 | `.claude/skills/` | Skill của repo. `setup.sh` tạo symlink từ `~/.claude/skills/` về đây, để skill dùng được ở mọi thư mục. |
-| `.claude/settings.json` | `autoMemoryDirectory` trỏ memory về `~/video-flow/memory`. |
+| `.claude/settings.json` | `autoMemoryDirectory` trỏ memory về `~/video-flow/memory`. Claude Code không nhận đường dẫn tương đối, nên repo phải nằm ở `~/video-flow`, hoặc `~/video-flow` là junction/symlink trỏ vào repo (Windows: `cmd /c mklink /J %USERPROFILE%ideo-flow D:Githubideo-flow`). |
 | `memory/` | Memory của Claude. `MEMORY.md` là mục lục. |
 | `dong-vat/` | Project video vòng đời động vật. Mỗi video có 1 thư mục. |
 | `voice-studio/` | Voice Studio: website nhái giọng ở `localhost:8765` và script `vc.py` cho skill `voice-clone`. `setup.sh` tạo symlink `~/voice-studio` về đây. |
