@@ -79,6 +79,8 @@ Git theo dõi workflow mẫu `app/data/workflows/b45b8398-7002-47a1-86e0-5aaa4c6
 
 ## Cài máy mới
 
+Hướng dẫn đầy đủ ở `SETUP.md`. Tóm tắt:
+
 1. `git clone git@github.com:chris9962/video-flow.git ~/video-flow`
 2. `cd ~/video-flow && ./setup.sh`
 3. Làm các việc tay mà `setup.sh` in ra ở cuối.
